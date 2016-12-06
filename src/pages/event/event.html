@@ -1,0 +1,94 @@
+<ion-header>
+    <ion-navbar>
+
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+
+        <ion-title text-center>
+            {{event.name}}
+        </ion-title>
+
+        <ion-buttons right>
+            <button ion-button icon-only>
+                <ion-icon name="cog"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+
+    <ion-toolbar no-border-top>
+        <ion-searchbar color="primary" placeholder="Nom de l'équipe">
+        </ion-searchbar>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+    <ion-col width-100><h2>Equipe <b>Les Poneys</b></h2></ion-col>
+    <ion-card>
+        <ion-card-content>
+
+            <ion-grid text-center>
+                <ion-row>
+                    <ion-col width-25>Quentin</ion-col>
+                    <ion-col width-25>Malorie</ion-col>
+                    <ion-col width-25>Stéphane</ion-col>
+                    <ion-col width-25>Alexandre</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col width-25>George</ion-col>
+                    <ion-col width-25>Ginette</ion-col>
+                    <ion-col width-25>Roger</ion-col>
+                    <ion-col width-25>Daniel</ion-col>
+                </ion-row>
+            </ion-grid>
+
+        </ion-card-content>
+    </ion-card>
+
+    <ion-col width-100><h2>Liste des <b>matchs</b></h2></ion-col>
+    <ion-card>
+        <ion-card-content no-padding>
+
+            <ion-list>
+
+                <ion-item class="border-win">
+                    <ion-icon name="git-network" item-left></ion-icon>
+                    Les Warriors
+                    <ion-note item-right>
+                        3 - 2
+                    </ion-note>
+                </ion-item>
+
+                <ion-item class="border-inc">
+                    <ion-icon name="git-network" item-left></ion-icon>
+                    Tchitchi ou la mort
+                    <ion-note item-right>
+                        16:00
+                    </ion-note>
+                </ion-item>
+
+                <ion-item class="border-lose">
+                    <ion-icon name="git-network" item-left></ion-icon>
+                    Les Orcs
+                    <ion-note item-right>
+                        0 - 4
+                    </ion-note>
+                </ion-item>
+
+                <ion-item class="border-win">
+                    <ion-icon name="grid"></ion-icon>
+                    Le monde des bisousnours
+                    <ion-note item-right>
+                        21 - 13
+                    </ion-note>
+                </ion-item>
+
+            </ion-list>
+
+
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>

@@ -1,0 +1,23 @@
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
+
+
+/*
+  Generated class for the EventService provider.
+
+  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
+  for more info on providers and Angular 2 DI.
+*/
+@Injectable()
+export class EventService {
+    events: any;
+    constructor(public http: Http)
+    {
+        this.http = http;
+    }
+
+    All(): any {
+        return this.http.get('http://172.17.102.188/Joutes/public/api/events').map(res => res.json());
+    }
+}
