@@ -30,6 +30,7 @@ export class EventsPage {
     GoToEvent(event) {
         this.sharedDataProvider.setCurrentEvent(event);
         this.navCtrl.push(EventPage);
+
     }
 
 
