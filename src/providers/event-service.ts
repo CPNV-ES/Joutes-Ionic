@@ -10,14 +10,20 @@ import 'rxjs/add/operator/map';
   for more info on providers and Angular 2 DI.
 */
 @Injectable()
-export class EventService {
-    events: any;
+export class EventService
+{
+    public events: any;
+
     constructor(public http: Http)
     {
-        this.http = http;
+
     }
 
-    All(): any {
+    getData()
+    {
         return this.http.get('http://172.17.102.188/Joutes/public/api/events').map(res => res.json());
     }
+
+
+
 }

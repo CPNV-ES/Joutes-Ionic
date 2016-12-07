@@ -15,26 +15,31 @@ import {EventPage} from "../event/event";
     templateUrl: 'events.html'
 })
 export class EventsPage {
-    public events: any;
-    public sharedDataProvider: any;
+    private events: any;
+    public returnValue: any;
+    public filteredEvents: any;
+    searchTerm: string = '';
 
-    constructor(public navCtrl: NavController, eventProvider: EventService, sharedDataProvider: SharedDataService) {
-        this.sharedDataProvider = sharedDataProvider;
-        eventProvider.All().subscribe(
-            data => {
-                this.events = data.events
-            }
-        );
+    constructor(public navCtrl: NavController, public sharedDataProvider: SharedDataService, public eventProvider: EventService)
+    {
+        this.eventProvider.getData().subscribe(data => {this.events = data.events; this.filteredEvents = data.events}, this.filterItems)
     }
 
-    GoToEvent(event) {
+    GoToEvent(event)
+    {
         this.sharedDataProvider.setCurrentEvent(event);
         this.navCtrl.push(EventPage);
-
     }
 
+    filterItems()
+    {
+         this.filteredEvents = this.events.filter((event) => {
+             return event.name.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+        });
+    }
 
-    ionViewDidLoad() {
+    ionViewDidLoad()
+    {
     }
 
 }

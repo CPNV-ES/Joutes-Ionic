@@ -11,13 +11,19 @@
         </button>
         <ion-title text-center>Evènements</ion-title>
     </ion-navbar>
+
+    <ion-toolbar no-border-top>
+        <ion-searchbar color="primary" placeholder="Joutes 2014..." [(ngModel)]="searchTerm" (ionInput)="filterItems()">
+        </ion-searchbar>
+    </ion-toolbar>
+
 </ion-header>
 
 
 <ion-content>
     <ion-list>
-        <button *ngFor="let event of events" ion-item (click)="GoToEvent(event)">
-            <h3>{{event.name}}</h3>
+        <button ion-item *ngFor="let filteredEvent of filteredEvents" (click)="GoToEvent(filteredEvent)">
+            <h3>{{filteredEvent.name}}</h3>
         </button>
     </ion-list>
 </ion-content>
