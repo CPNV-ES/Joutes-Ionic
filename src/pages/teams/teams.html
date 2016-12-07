@@ -6,20 +6,25 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>teams</ion-title>
-  </ion-navbar>
+    <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-navbar>
+        <ion-title text-center>Teams</ion-title>
+    </ion-navbar>
+
+    <ion-toolbar no-border-top>
+        <ion-searchbar color="primary" placeholder="Nom de l'équipe.." [(ngModel)]="searchTerm" (ionInput)="filterTeams()">
+        </ion-searchbar>
+    </ion-toolbar>
 
 </ion-header>
 
-
-<ion-content padding>
-  <ion-list no-padding no-margin>
-      <ion-item no-padding no-margin *ngFor="let team of teams">
-          <button ion-item click="GoToTeam(team)">
-              <h3>{{team.name}} ({{team.sport}})</h3>
-          </button>
-      </ion-item>
-  </ion-list>
-
+<ion-content>
+    <ion-list>
+        <button ion-item *ngFor="let team of filteredTeams">
+            <h3>{{team.name}} ({{team.sport}})</h3>
+        </button>
+    </ion-list>
 </ion-content>

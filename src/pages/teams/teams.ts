@@ -15,17 +15,27 @@ import {SharedDataService} from '../../providers/sharedData-service';
 })
 export class TeamsPage {
     public event: any;
-    public teams: any;
+    private teams: any;
+    public filteredTeams: any;
+    public searchTerm: string = '';
 
-    constructor(public navCtrl: NavController, teamProvider: TeamService, sharedDataProvider: SharedDataService) {
-        this.event = sharedDataProvider.getCurrentEvent();
-        teamProvider.getByEvent(this.event.id).subscribe(
-            data => {this.teams = data.teams}
-        );
+
+    constructor(public navCtrl: NavController, public teamProvider: TeamService, public sharedDataProvider: SharedDataService)
+    {
+        this.event = this.sharedDataProvider.getCurrentEvent();
+
+        this.teamProvider.getByEvent(this.event.id).subscribe(data => {this.teams = data.teams; this.filteredTeams = data.teams}, this.filterTeams)
+
+    }
+
+    filterTeams()
+    {
+        this.filteredTeams = this.teams.filter((team) => {
+            return team.name.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+        });
     }
 
     ionViewDidLoad() {
-        console.log('Hello TeamsPage Page');
     }
 
 }

@@ -18,20 +18,20 @@ export class EventsPage {
     private events: any;
     public returnValue: any;
     public filteredEvents: any;
-    searchTerm: string = '';
+    public searchTerm: string = '';
 
     constructor(public navCtrl: NavController, public sharedDataProvider: SharedDataService, public eventProvider: EventService)
     {
-        this.eventProvider.getData().subscribe(data => {this.events = data.events; this.filteredEvents = data.events}, this.filterItems)
+        this.eventProvider.getEvents().subscribe(data => {this.events = data.events; this.filteredEvents = data.events}, this.filterEvents)
     }
 
-    GoToEvent(event)
+    goToEvent(event)
     {
         this.sharedDataProvider.setCurrentEvent(event);
         this.navCtrl.push(EventPage);
     }
 
-    filterItems()
+    filterEvents()
     {
          this.filteredEvents = this.events.filter((event) => {
              return event.name.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
