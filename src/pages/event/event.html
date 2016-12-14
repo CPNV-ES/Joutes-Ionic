@@ -16,31 +16,23 @@
         </ion-buttons>
     </ion-navbar>
 
-    <ion-toolbar no-border-top>
-        <ion-searchbar color="primary" placeholder="Nom de l'équipe">
-        </ion-searchbar>
-    </ion-toolbar>
+    <!--<ion-toolbar no-border-top>-->
+        <!--<ion-searchbar color="primary" placeholder="Nom de l'équipe">-->
+        <!--</ion-searchbar>-->
+    <!--</ion-toolbar>-->
 </ion-header>
 
 <ion-content>
 
-
-    <ion-col width-100><h2>Equipe <b>Les Poneys</b></h2></ion-col>
+    <ion-col width-100><h2>Equipe <b> {{ team.name }}</b></h2></ion-col>
     <ion-card>
         <ion-card-content>
 
             <ion-grid text-center>
-                <ion-row>
-                    <ion-col width-25>Quentin</ion-col>
-                    <ion-col width-25>Malorie</ion-col>
-                    <ion-col width-25>Stéphane</ion-col>
-                    <ion-col width-25>Alexandre</ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col width-25>George</ion-col>
-                    <ion-col width-25>Ginette</ion-col>
-                    <ion-col width-25>Roger</ion-col>
-                    <ion-col width-25>Daniel</ion-col>
+                <ion-row style="flex-wrap: wrap;">
+                    <ion-col width-25 *ngFor="let participant of team.participants">
+                        {{ participant.firstname }}
+                    </ion-col>
                 </ion-row>
             </ion-grid>
 
@@ -51,37 +43,35 @@
     <ion-card>
         <ion-card-content no-padding>
 
-            <ion-list>
+            <ion-list *ngFor="let match of team.matchs">
 
-                <ion-item class="border-win">
+
+                <!-- *********************************** -->
+                <!-- FIND BETTER SOLUTION FOR THIS !!!!! -->
+                <!-- *********************************** -->
+
+
+                <ion-item class="border-win" *ngIf="match.ownScore > match.team2Score">
                     <ion-icon name="git-network" item-left></ion-icon>
-                    Les Warriors
-                    <ion-note item-right>
-                        3 - 2
+                    {{ match.team2 }}
+                    <ion-note item-right >
+                        {{ match.ownScore }} - {{ match.team2Score }}
                     </ion-note>
                 </ion-item>
 
-                <ion-item class="border-inc">
+                <ion-item class="border-lose" *ngIf="match.ownScore < match.team2Score">
                     <ion-icon name="git-network" item-left></ion-icon>
-                    Tchitchi ou la mort
-                    <ion-note item-right>
-                        16:00
+                    {{ match.team2 }}
+                    <ion-note item-right >
+                        {{ match.ownScore }} - {{ match.team2Score }}
                     </ion-note>
                 </ion-item>
 
-                <ion-item class="border-lose">
+                <ion-item class="border-inc" *ngIf="match.status == 'incoming' ">
                     <ion-icon name="git-network" item-left></ion-icon>
-                    Les Orcs
-                    <ion-note item-right>
-                        0 - 4
-                    </ion-note>
-                </ion-item>
-
-                <ion-item class="border-win">
-                    <ion-icon name="grid"></ion-icon>
-                    Le monde des bisousnours
-                    <ion-note item-right>
-                        21 - 13
+                    {{ match.team2 }}
+                    <ion-note item-right >
+                        {{ match.start }}
                     </ion-note>
                 </ion-item>
 

@@ -24,7 +24,7 @@ export class TeamsPage {
     {
         this.event = this.sharedDataProvider.getCurrentEvent();
 
-        this.teamProvider.getByEvent(this.event.id).subscribe(data => {this.teams = data.teams; this.filteredTeams = data.teams}, this.filterTeams)
+        this.teamProvider.getTeamsByEvent(this.event.id).subscribe(data => {this.teams = data.teams; this.filteredTeams = data.teams}, this.filterTeams)
 
     }
 

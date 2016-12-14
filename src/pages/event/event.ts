@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import {SharedDataService} from '../../providers/sharedData-service';
+import { SharedDataService } from '../../providers/sharedData-service';
+import { TeamService } from '../../providers/team-service';
 
 @Component({
   selector: 'page-event',
@@ -10,9 +11,18 @@ import {SharedDataService} from '../../providers/sharedData-service';
 export class EventPage
 {
     event: any;
-    constructor(public navCtrl: NavController, public navParam: NavParams, sharedDataProvider: SharedDataService)
+    team:  any = {};
+
+
+    constructor(public navCtrl: NavController, public navParam: NavParams, public sharedDataProvider: SharedDataService, public eventProvider: TeamService)
     {
-        this.event = sharedDataProvider.getCurrentEvent();
+        this.event  = sharedDataProvider.getCurrentEvent();
+        this.eventProvider.getTeamByEvent(this.event.id, 1).subscribe(data => this.team = data);
+    }
+
+
+    ionViewDidLoad()
+    {
     }
 
 }
