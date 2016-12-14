@@ -10,9 +10,8 @@ import {SharedDataService} from '../../providers/sharedData-service';
 export class EventPage
 {
     event: any;
-    constructor(public navCtrl: NavController, public navParam: NavParams, sharedDataProvider: SharedDataService)
+    constructor(public navCtrl: NavController, public navParam: NavParams, public sharedDataProvider: SharedDataService)
     {
         this.event = sharedDataProvider.getCurrentEvent();
     }
-
 }

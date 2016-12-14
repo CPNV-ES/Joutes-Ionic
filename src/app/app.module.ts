@@ -1,4 +1,5 @@
 import {NgModule} from '@angular/core';
+import {Storage} from '@ionic/storage';
 import {IonicApp, IonicModule} from 'ionic-angular';
 import {MyApp} from './app.component';
 import {EventPage} from '../pages/event/event';
@@ -26,6 +27,7 @@ import {SharedDataService} from "../providers/sharedData-service";
         TeamsPage
     ],
     providers: [
+        Storage,
         EventService,
         TeamService,
         SharedDataService

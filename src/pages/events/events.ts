@@ -3,6 +3,7 @@ import {NavController} from 'ionic-angular';
 import {EventService} from '../../providers/event-service';
 import {SharedDataService} from '../../providers/sharedData-service';
 import {EventPage} from "../event/event";
+import {TeamsPage} from "../teams/teams";
 
 /*
  Generated class for the Events page.
@@ -28,7 +29,7 @@ export class EventsPage {
     goToEvent(event)
     {
         this.sharedDataProvider.setCurrentEvent(event);
-        this.navCtrl.push(EventPage);
+        this.navCtrl.push(TeamsPage);
     }
 
     filterEvents()
