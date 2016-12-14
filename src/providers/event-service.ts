@@ -24,9 +24,4 @@ export class EventService
         return this.http.get('http://172.17.102.188/Joutes/public/api/events').map(res => res.json());
     }
 
-    getEvent(eventId, teamId)
-    {
-        return this.http.get('http://172.17.102.188/Joutes/public/api/' + eventId + '/teams/' + teamId).map(res => res.json());
-    }
-
 }

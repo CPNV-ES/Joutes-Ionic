@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
+import {SharedDataService} from "./sharedData-service";
 
 /*
  Generated class for the TeamService provider.
@@ -11,16 +12,20 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class TeamService {
     teams: any;
-    constructor(public http: Http) {
+    event: any;
+    constructor(public http: Http,  public sharedDataProvider: SharedDataService) {
         this.http = http;
+
     }
 
     getTeamsByEvent(eventId): any {
         return this.http.get(`http://172.17.102.188/Joutes/public/api/${eventId}/teams`).map(res => res.json());
     }
 
-    getTeamByEvent(eventId, teamId)
+    getTeam(teamId, eventId)
     {
+        console.log("Team" + teamId);
+        console.log("Event" + eventId);
         return this.http.get(`http://172.17.102.188/Joutes/public/api/${eventId}/team/${teamId}`).map(res => res.json());
     }
 }

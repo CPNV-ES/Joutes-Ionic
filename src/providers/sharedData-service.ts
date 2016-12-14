@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 @Injectable()
 export class SharedDataService {
     currentEvent: any;
+    currentTeam: any;
     constructor(public storage: Storage) {}
 
     getCurrentEvent(): any {
@@ -24,5 +25,14 @@ export class SharedDataService {
 
     setCurrentEventFavoritesTeams(favoritesTeams) {
         this.storage.set('event'+this.currentEvent.id, favoritesTeams);
+    }
+
+    setCurrentTeam(team)
+    {
+        this.currentTeam = team;
+    }
+
+    getCurrentTeam(): any {
+        return this.currentTeam;
     }
 }

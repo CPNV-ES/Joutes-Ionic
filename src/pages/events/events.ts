@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {EventService} from '../../providers/event-service';
 import {SharedDataService} from '../../providers/sharedData-service';
-import {EventPage} from "../event/event";
+import {TeamsPage} from "../teams/teams";
 
 /*
  Generated class for the Events page.
@@ -25,10 +25,10 @@ export class EventsPage {
         this.eventProvider.getEvents().subscribe(data => {this.events = data.events; this.filteredEvents = data.events}, this.filterEvents)
     }
 
-    goToEvent(event)
+    goToTeams(event)
     {
         this.sharedDataProvider.setCurrentEvent(event);
-        this.navCtrl.push(EventPage);
+        this.navCtrl.push(TeamsPage);
     }
 
     filterEvents()

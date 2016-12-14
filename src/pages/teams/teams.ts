@@ -3,6 +3,7 @@ import {NavController} from 'ionic-angular';
 import {TeamService} from "../../providers/team-service";
 import {SharedDataService} from '../../providers/sharedData-service';
 import { Storage } from '@ionic/storage';
+import {TeamPage} from "../team/team";
 
 /*
  Generated class for the Teams page.
@@ -87,6 +88,12 @@ export class TeamsPage {
         }).catch(e => {
            console.log(e);
         });
+    }
+
+    goToTeam(team)
+    {
+        this.sharedDataProvider.setCurrentTeam(team);
+        this.navCtrl.push(TeamPage);
     }
 
     ionViewDidLoad() {

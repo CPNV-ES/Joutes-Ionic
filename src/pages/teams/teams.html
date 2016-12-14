@@ -23,8 +23,22 @@
 
 <ion-content>
     <ion-list>
-        <button ion-item *ngFor="let team of filteredTeams">
-            <h3>{{team.name}} ({{team.sport}})</h3>
-        </button>
+        <ion-item *ngFor="let team of filteredTeams">
+            <button (click)="goToTeam(team)">
+                <h3>{{team.name}} ({{team.sport}})</h3>
+            </button>
+
+            <button item-right (click)="toggleFavoriteTeam(team)">
+                <span *ngIf="team.favorite">
+                    <ion-icon name="star"></ion-icon>
+                </span>
+                <span *ngIf="!team.favorite">
+                    <ion-icon name="star-outline"></ion-icon>
+                </span>
+                <!--<ion-icon name="star-outline"></ion-icon>-->
+            </button>
+        </ion-item>
+
+
     </ion-list>
 </ion-content>
