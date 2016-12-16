@@ -4,6 +4,7 @@ import {TeamService} from "../../providers/team-service";
 import {SharedDataService} from '../../providers/sharedData-service';
 import { Storage } from '@ionic/storage';
 import {TeamPage} from "../team/team";
+import {document} from "@angular/platform-browser/src/facade/browser";
 
 /*
  Generated class for the Teams page.
@@ -75,14 +76,17 @@ export class TeamsPage {
                 var index = this.userFavoritesTeamsIds.indexOf(team.id);
                 if(index != -1) {
                     this.userFavoritesTeamsIds.splice(index, 1);
+                    team.favorite = false;
                 }
                 else {
                     this.userFavoritesTeamsIds.push(team.id);
+                    team.favorite = true;
                 }
             }
             else {
                 //If we have no value, set the first one
                 this.userFavoritesTeamsIds = [team.id];
+                team.favorite = true;
             }
             this.sharedDataProvider.setCurrentEventFavoritesTeams(this.userFavoritesTeamsIds.toString());
         }).catch(e => {
