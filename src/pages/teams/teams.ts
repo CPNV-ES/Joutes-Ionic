@@ -4,7 +4,6 @@ import {TeamService} from "../../providers/team-service";
 import {SharedDataService} from '../../providers/sharedData-service';
 import { Storage } from '@ionic/storage';
 import {TeamPage} from "../team/team";
-import {document} from "@angular/platform-browser/src/facade/browser";
 
 /*
  Generated class for the Teams page.
