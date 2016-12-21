@@ -17,10 +17,11 @@ export class EventService
     constructor(public http: Http)
     {
 
-    }
+    } 
 
     getEvents()
     {
+        // return this.http.get('http://192.168.0.51/Joutes/public/api/events').map(res => res.json());
         return this.http.get('http://172.17.102.188/Joutes/public/api/events').map(res => res.json());
     }
 }

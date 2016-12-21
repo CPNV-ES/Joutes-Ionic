@@ -2,7 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {Platform, Nav} from 'ionic-angular';
 import {StatusBar, Splashscreen} from 'ionic-native';
 import {EventsPage} from '../pages/events/events';
-import {TeamsPage} from "../pages/teams/teams";
+import {EventPage} from "../pages/event/event";
 import {SharedDataService} from '../providers/sharedData-service';
 
 
@@ -28,7 +28,7 @@ export class MyApp {
         // the login page disables the left menu
         this.pages = [
             {title: 'Evènements', component: EventsPage, icon: 'person'},
-            {title: 'Equipes', component: TeamsPage, icon: 'person'}
+            {title: 'Liste', component: EventPage, icon: 'person'}
         ];
 
         platform.ready().then(() => {

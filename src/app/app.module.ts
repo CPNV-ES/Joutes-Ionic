@@ -5,15 +5,15 @@ import {MyApp} from './app.component';
 import {EventsPage} from '../pages/events/events';
 import {EventService} from '../providers/event-service';
 import {TeamService} from "../providers/team-service";
-import {TeamsPage} from "../pages/teams/teams";
 import {SharedDataService} from "../providers/sharedData-service";
 import {TeamPage} from "../pages/team/team";
+import {EventPage} from "../pages/event/event";
 
 @NgModule({
     declarations: [
         MyApp,
         EventsPage,
-        TeamsPage,
+        EventPage,
         TeamPage
     ],
     imports: [
@@ -23,7 +23,7 @@ import {TeamPage} from "../pages/team/team";
     entryComponents: [
         MyApp,
         EventsPage,
-        TeamsPage,
+        EventPage,
         TeamPage
     ],
     providers: [
