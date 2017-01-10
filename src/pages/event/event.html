@@ -7,34 +7,52 @@
 <ion-header>
 
 
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title text-center>{{ event.name }}</ion-title>
+    </ion-navbar>
 
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title text-center>{{ event.name }}</ion-title>
-  </ion-navbar>
 
-  <ion-toolbar no-border-top>
-    <ion-searchbar color="primary" placeholder="Nom de l'équipe.." [(ngModel)]="searchTerm" (ionInput)="filterTeams()">
-    </ion-searchbar>
-  </ion-toolbar>
 
 </ion-header>
 
 <ion-content>
 
-  <ion-list>
-    <ion-item *ngFor="let team of filteredTeams">
-      <button ion-item  (click)="goToTeam(team)">
-        <h3>{{team.name}} ({{team.sport}})</h3>
-      </button>
+    <ion-slides>
+        <!-- List of teams -->
+        <ion-slide pager>
+            <ion-toolbar no-border-top>
+                <ion-searchbar color="primary" placeholder="Nom de l'équipe.." [(ngModel)]="searchTerm"
+                               (ionInput)="filterTeams()">
+                </ion-searchbar>
+            </ion-toolbar>
+            <ion-list>
+                <ion-item *ngFor="let team of filteredTeams">
+                    <button ion-item (click)="goToTeam(team)">
+                        <h3>{{team.name}} ({{team.sport}})</h3>
+                    </button>
 
-      <button item-right (click)="toggleFavoriteTeam(team)" ng-click="">
-        <ion-icon name="star" *ngIf="team.favorite"></ion-icon>
-        <ion-icon name="star-outline" *ngIf="!team.favorite"></ion-icon>
-      </button>
-    </ion-item>
-  </ion-list>
+                    <button item-right (click)="toggleFavoriteTeam(team)" ng-click="">
+                        <ion-icon name="star" *ngIf="team.favorite"></ion-icon>
+                        <ion-icon name="star-outline" *ngIf="!team.favorite"></ion-icon>
+                    </button>
+                </ion-item>
+            </ion-list>
+        </ion-slide>
+
+        <!-- List of tournaments -->
+        <ion-slide>
+            <ion-list>
+                <ion-item *ngFor="let tournament of tournaments">
+                    <button ion-item (click)="goToTournament(tournament)">
+                        <h3>{{tournament.name}} ({{tournament.sport}})</h3>
+                    </button>
+                </ion-item>
+            </ion-list>
+        </ion-slide>
+    </ion-slides>
+
 
 </ion-content>

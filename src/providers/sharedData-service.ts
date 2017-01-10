@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 export class SharedDataService {
     currentEvent: any;
     currentTeam: any;
+    currentTournament: any;
     constructor(public storage: Storage) {}
 
     getCurrentEvent(): any {
@@ -34,5 +35,14 @@ export class SharedDataService {
 
     getCurrentTeam(): any {
         return this.currentTeam;
+    }
+
+    setCurrentTournament(tournament)
+    {
+        this.currentTournament = tournament;
+    }
+
+    getCurrentTournament(): any {
+        return this.currentTournament;
     }
 }

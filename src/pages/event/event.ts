@@ -1,9 +1,11 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {TeamService} from "../../providers/team-service";
+import {TournamentService} from "../../providers/tournament-service";
 import {SharedDataService} from '../../providers/sharedData-service';
-import { Storage } from '@ionic/storage';
+import {Storage} from '@ionic/storage';
 import {TeamPage} from "../team/team";
+import {TournamentPage} from "../tournament/tournament";
 
 
 /*
@@ -13,95 +15,108 @@ import {TeamPage} from "../team/team";
  Ionic pages and navigation.
  */
 @Component({
-  selector: 'page-event',
-  templateUrl: 'event.html'
+    selector: 'page-event',
+    templateUrl: 'event.html'
 })
 export class EventPage {
-  public event: any;
-  private teams: any;
-  public filteredTeams: any;
-  public searchTerm: string = '';
-  public userFavoritesTeamsPromise: any;
-  public userFavoritesTeamsIds: any;
+    public event: any;
+    private teams: any;
+    public tournaments: any;
+    public filteredTeams: any;
+    public searchTerm: string = '';
+    public userFavoritesTeamsPromise: any;
+    public userFavoritesTeamsIds: any;
 
-  constructor(public navCtrl: NavController, public storage: Storage, public teamProvider: TeamService, public sharedDataProvider: SharedDataService)
-  {
-    this.event = this.sharedDataProvider.getCurrentEvent();
-    this.userFavoritesTeamsPromise = this.sharedDataProvider.getCurrentEventFavoritesTeams();
+    constructor(public navCtrl: NavController, public storage: Storage, public teamProvider: TeamService, public tournamentProvider: TournamentService, public sharedDataProvider: SharedDataService) {
+        this.event = this.sharedDataProvider.getCurrentEvent();
+        this.userFavoritesTeamsPromise = this.sharedDataProvider.getCurrentEventFavoritesTeams();
 
-    this.userFavoritesTeamsPromise.then(val => {
-      if(val) {
-        this.userFavoritesTeamsIds = val.split(',');
-      }
-      this.teamProvider.getTeamsByEvent(this.event.id).subscribe(data => {this.teams = data.teams; this.filteredTeams = data.teams; this.filterTeams();});
-    }).catch(e => {
-      console.log(e);
-    });
-  }
+        this.userFavoritesTeamsPromise.then(val => {
+            if (val) {
+                this.userFavoritesTeamsIds = val.split(',');
+            }
+            this.teamProvider.getTeamsByEvent(this.event.id).subscribe(data => {
+                this.teams = data.teams;
+                this.filteredTeams = data.teams;
+                this.filterTeams();
+            });
+        }).catch(e => {
+            console.log(e);
+        });
 
-  filterTeams()
-  {
-    var self = this;
-    this.filteredTeams = this.teams.filter((team) => {
-      return team.name.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
-    });
-    //Put the favorites in front of the array
-    var temp = [];
+        this.tournamentProvider.getTournamentsByEvent(this.event.id).subscribe(data => {
+            this.tournaments = data.tournaments;
+            // this.filteredTeams = data.teams;
+            // this.filterTeams();
+        });
+    }
 
-    this.filteredTeams.forEach(function(team) {
-      //If we have no favorite, do nothing
-      if(self.userFavoritesTeamsIds) {
-        if(self.userFavoritesTeamsIds.indexOf(team.id) != -1) {
-          //Add the favorite in front of the array
-          team.favorite = true;
-          temp.unshift(team);
-        }
-        else {
-          //If it's not a favorite add it at the end
-          team.favorite = false;
-          temp.push(team)
-        }
-        self.filteredTeams = temp;
-      }
-    });
-  }
+    filterTeams() {
+        var self = this;
+        this.filteredTeams = this.teams.filter((team) => {
+            return team.name.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+        });
+        //Put the favorites in front of the array
+        var temp = [];
 
-  toggleFavoriteTeam(team) {
-    this.userFavoritesTeamsPromise = this.sharedDataProvider.getCurrentEventFavoritesTeams();
+        this.filteredTeams.forEach(function (team) {
+            //If we have no favorite, do nothing
+            if (self.userFavoritesTeamsIds) {
+                if (self.userFavoritesTeamsIds.indexOf(team.id) != -1) {
+                    //Add the favorite in front of the array
+                    team.favorite = true;
+                    temp.unshift(team);
+                }
+                else {
+                    //If it's not a favorite add it at the end
+                    team.favorite = false;
+                    temp.push(team)
+                }
+                self.filteredTeams = temp;
+            }
+        });
+    }
 
-    this.userFavoritesTeamsPromise.then(val => {
-      if(val) {
-        this.userFavoritesTeamsIds = val.split(',');
-        var index = this.userFavoritesTeamsIds.indexOf(team.id);
-        if(index != -1) {
-          this.userFavoritesTeamsIds.splice(index, 1);
-          team.favorite = false;
-        }
-        else {
-          this.userFavoritesTeamsIds.push(team.id);
-          team.favorite = true;
-        }
-      }
-      else {
-        //If we have no value, set the first one
-        this.userFavoritesTeamsIds = [team.id];
-        team.favorite = true;
-      }
-      this.sharedDataProvider.setCurrentEventFavoritesTeams(this.userFavoritesTeamsIds.toString());
-    }).catch(e => {
-      console.log(e);
-    });
-  }
+    toggleFavoriteTeam(team) {
+        this.userFavoritesTeamsPromise = this.sharedDataProvider.getCurrentEventFavoritesTeams();
 
-  goToTeam(team)
-  {
-    this.sharedDataProvider.setCurrentTeam(team);
-    this.navCtrl.push(TeamPage);
-  }
+        this.userFavoritesTeamsPromise.then(val => {
+            if (val) {
+                this.userFavoritesTeamsIds = val.split(',');
+                var index = this.userFavoritesTeamsIds.indexOf(team.id);
+                if (index != -1) {
+                    this.userFavoritesTeamsIds.splice(index, 1);
+                    team.favorite = false;
+                }
+                else {
+                    this.userFavoritesTeamsIds.push(team.id);
+                    team.favorite = true;
+                }
+            }
+            else {
+                //If we have no value, set the first one
+                this.userFavoritesTeamsIds = [team.id];
+                team.favorite = true;
+            }
+            this.sharedDataProvider.setCurrentEventFavoritesTeams(this.userFavoritesTeamsIds.toString());
+        }).catch(e => {
+            console.log(e);
+        });
+    }
 
-  ionViewDidLoad() {
+    goToTeam(team) {
+        this.sharedDataProvider.setCurrentTeam(team);
+        this.navCtrl.push(TeamPage);
+    }
 
-  }
+    goToTournament(tournament) {
+        this.sharedDataProvider.setCurrentTournament(tournament);
+        this.navCtrl.push(TournamentPage);
+    }
+
+    ionViewDidLoad() {
+
+    }
 
 }
 

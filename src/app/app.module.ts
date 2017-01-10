@@ -3,8 +3,10 @@ import {Storage} from '@ionic/storage';
 import {IonicApp, IonicModule} from 'ionic-angular';
 import {MyApp} from './app.component';
 import {EventsPage} from '../pages/events/events';
+import {TournamentPage} from '../pages/tournament/tournament';
 import {EventService} from '../providers/event-service';
 import {TeamService} from "../providers/team-service";
+import {TournamentService} from "../providers/tournament-service";
 import {SharedDataService} from "../providers/sharedData-service";
 import {TeamPage} from "../pages/team/team";
 import {EventPage} from "../pages/event/event";
@@ -14,7 +16,8 @@ import {EventPage} from "../pages/event/event";
         MyApp,
         EventsPage,
         EventPage,
-        TeamPage
+        TeamPage,
+        TournamentPage
     ],
     imports: [
         IonicModule.forRoot(MyApp)
@@ -24,12 +27,14 @@ import {EventPage} from "../pages/event/event";
         MyApp,
         EventsPage,
         EventPage,
-        TeamPage
+        TeamPage,
+        TournamentPage
     ],
     providers: [
         Storage,
         EventService,
         TeamService,
+        TournamentService,
         SharedDataService
     ]
 })
