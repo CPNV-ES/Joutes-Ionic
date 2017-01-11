@@ -10,7 +10,7 @@
     </ion-navbar>
 
     <ion-toolbar no-border-top>
-        <ion-searchbar color="primary" placeholder="Evènement.." [(ngModel)]="searchTerm" (ionInput)="filterEvents()">
+        <ion-searchbar color="primary" placeholder="Nom de l'évènement.." [(ngModel)]="searchTerm" (ionInput)="filterEvents()">
         </ion-searchbar>
     </ion-toolbar>
 
@@ -20,7 +20,7 @@
 <ion-content>
     <ion-list>
         <button ion-item *ngFor="let event of filteredEvents" (click)="goToEvent(event)">
-            <h3>{{event.name}}</h3>
+            <div class="items">{{event.name}}</div>
         </button>
     </ion-list>
 </ion-content>

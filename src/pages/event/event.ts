@@ -26,6 +26,7 @@ export class EventPage {
     public searchTerm: string = '';
     public userFavoritesTeamsPromise: any;
     public userFavoritesTeamsIds: any;
+    public eventContent: any;
 
     constructor(public navCtrl: NavController, public storage: Storage, public teamProvider: TeamService, public tournamentProvider: TournamentService, public sharedDataProvider: SharedDataService) {
         this.event = this.sharedDataProvider.getCurrentEvent();
@@ -49,6 +50,8 @@ export class EventPage {
             // this.filteredTeams = data.teams;
             // this.filterTeams();
         });
+
+        this.eventContent = "teams";
     }
 
     filterTeams() {

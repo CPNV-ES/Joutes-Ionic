@@ -5,54 +5,47 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-
-    <ion-navbar>
-        <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-        </button>
-        <ion-title text-center>{{ event.name }}</ion-title>
+    <ion-navbar no-border-bottom>
+        <ion-title>
+            {{ event.name }}
+        </ion-title>
     </ion-navbar>
 
-
-
+    <ion-toolbar no-border-top>
+        <ion-segment [(ngModel)]="eventContent">
+            <ion-segment-button value="teams">
+                Equipes
+            </ion-segment-button>
+            <ion-segment-button value="tournaments">
+                Tournois
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
 </ion-header>
 
+<!-- IL FAUT RAJOUTER LA BAR DE RECHERCHE DANS LA LISTE DES EQUIPES-->
 <ion-content>
+    <div [ngSwitch]="eventContent">
 
-    <ion-slides>
-        <!-- List of teams -->
-        <ion-slide pager>
+        <ion-list *ngSwitchCase="'teams'">
             <ion-toolbar no-border-top>
                 <ion-searchbar color="primary" placeholder="Nom de l'équipe.." [(ngModel)]="searchTerm"
                                (ionInput)="filterTeams()">
                 </ion-searchbar>
             </ion-toolbar>
-            <ion-list>
-                <ion-item *ngFor="let team of filteredTeams">
-                    <button ion-item (click)="goToTeam(team)">
-                        <h3>{{team.name}} ({{team.sport}})</h3>
-                    </button>
+            <ion-item *ngFor="let team of filteredTeams">
 
-                    <button item-right (click)="toggleFavoriteTeam(team)" ng-click="">
-                        <ion-icon name="star" *ngIf="team.favorite"></ion-icon>
-                        <ion-icon name="star-outline" *ngIf="!team.favorite"></ion-icon>
-                    </button>
-                </ion-item>
-            </ion-list>
-        </ion-slide>
+                <div class="items" (click)="goToTeam(team)">{{team.name}} ({{team.sport}})</div>
 
-        <!-- List of tournaments -->
-        <ion-slide>
-            <ion-list>
-                <ion-item *ngFor="let tournament of tournaments">
-                    <button ion-item (click)="goToTournament(tournament)">
-                        <h3>{{tournament.name}} ({{tournament.sport}})</h3>
-                    </button>
-                </ion-item>
-            </ion-list>
-        </ion-slide>
-    </ion-slides>
+                <ion-icon item-right name="star" (click)="toggleFavoriteTeam(team)" *ngIf="team.favorite"></ion-icon>
+                <ion-icon item-right name="star-outline" (click)="toggleFavoriteTeam(team)" *ngIf="!team.favorite"></ion-icon>
+            </ion-item>
+        </ion-list>
 
-
+        <ion-list *ngSwitchCase="'tournaments'">
+            <ion-item *ngFor="let tournament of tournaments">
+                <div class="items" (click)="goToTournament(tournament)">{{tournament.name}} ({{tournament.sport}})</div>
+            </ion-item>
+        </ion-list>
+    </div>
 </ion-content>
