@@ -1,79 +1,79 @@
 <ion-header>
-  <ion-navbar>
+    <ion-navbar>
 
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
 
-    <ion-title text-center>
-      {{ event.name}}
-    </ion-title>
+        <ion-title text-center>
+            {{ event.name }}
+        </ion-title>
 
-    <ion-buttons right>
-      <button ion-button icon-only>
-        <ion-icon name="cog"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
+        <ion-buttons right>
+            <button ion-button icon-only>
+                <ion-icon name="cog"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-col width-100><h2>Equipe <b> {{ teamData.name }}</b></h2></ion-col>
-  <ion-card>
-    <ion-card-content>
+    <ion-col width-100><h2>Equipe <b> {{ teamData.name }}</b></h2></ion-col>
+    <ion-card>
+        <ion-card-content>
 
-      <ion-grid text-center>
-        <ion-row style="flex-wrap: wrap;">
-          <ion-col width-25 *ngFor="let participant of teamData.participants">
-            {{ participant.firstname }}
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+            <ion-grid text-center>
+                <ion-row style="flex-wrap: wrap;">
+                    <ion-col width-25 *ngFor="let participant of teamData.participants">
+                        {{ participant.firstname }}
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
 
-    </ion-card-content>
-  </ion-card>
+        </ion-card-content>
+    </ion-card>
 
-  <ion-col width-100><h2>Liste des <b>matchs</b></h2></ion-col>
-  <ion-card>
-    <ion-card-content no-padding>
+    <ion-col width-100><h2>Liste des <b>matchs</b></h2></ion-col>
+    <ion-card>
+        <ion-card-content no-padding>
 
-      <ion-list *ngFor="let match of teamData.matchs">
-
-
-        <!-- *********************************** -->
-        <!-- FIND BETTER SOLUTION FOR THIS !!!!! -->
-        <!-- *********************************** -->
+            <ion-list *ngFor="let match of teamData.matchs">
 
 
-        <ion-item class="border-win" *ngIf="match.ownScore > match.team2Score">
-          <ion-icon name="git-network" item-left></ion-icon>
-          {{ match.team2 }}
-          <ion-note item-right >
-            {{ match.ownScore }} - {{ match.team2Score }}
-          </ion-note>
-        </ion-item>
-
-        <ion-item class="border-lose" *ngIf="match.ownScore < match.team2Score">
-          <ion-icon name="git-network" item-left></ion-icon>
-          {{ match.team2 }}
-          <ion-note item-right >
-            {{ match.ownScore }} - {{ match.team2Score }}
-          </ion-note>
-        </ion-item>
-
-        <ion-item class="border-inc" *ngIf="match.status == 'incoming' ">
-          <ion-icon name="git-network" item-left></ion-icon>
-          {{ match.team2 }}
-          <ion-note item-right >
-            {{ match.start }}
-          </ion-note>
-        </ion-item>
-
-      </ion-list>
+                <!-- *********************************** -->
+                <!-- FIND BETTER SOLUTION FOR THIS !!!!! -->
+                <!-- *********************************** -->
 
 
-    </ion-card-content>
-  </ion-card>
+                <ion-item class="border-win" *ngIf="match.ownScore > match.team2Score">
+                    <ion-icon name="git-network" item-left></ion-icon>
+                    {{ match.team2 }}
+                    <ion-note item-right>
+                        {{ match.ownScore }} - {{ match.team2Score }}
+                    </ion-note>
+                </ion-item>
+
+                <ion-item class="border-lose" *ngIf="match.ownScore < match.team2Score">
+                    <ion-icon name="git-network" item-left></ion-icon>
+                    {{ match.team2 }}
+                    <ion-note item-right>
+                        {{ match.ownScore }} - {{ match.team2Score }}
+                    </ion-note>
+                </ion-item>
+
+                <ion-item class="border-inc" *ngIf="match.status == 'incoming' ">
+                    <ion-icon name="git-network" item-left></ion-icon>
+                    {{ match.team2 }}
+                    <ion-note item-right>
+                        {{ match.start }}
+                    </ion-note>
+                </ion-item>
+
+            </ion-list>
+
+
+        </ion-card-content>
+    </ion-card>
 
 </ion-content>

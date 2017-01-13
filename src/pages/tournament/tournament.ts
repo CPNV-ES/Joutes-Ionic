@@ -14,18 +14,20 @@ import {TournamentService} from '../../providers/tournament-service';
     templateUrl: 'tournament.html'
 })
 export class TournamentPage {
-    event: any;
-    tournament: any;
-    tournamentData: any = {};
 
-    constructor(public navCtrl: NavController, public navParam: NavParams, public sharedDataProvider: SharedDataService, public tournamentProvider: TournamentService) {
+    public event: any;
+    public tournament: any;
+    public tournamentData: any = {};
+
+    constructor(public navCtrl: NavController, public navParam: NavParams, public tournamentProvider: TournamentService, public sharedDataProvider: SharedDataService) {
         this.event = sharedDataProvider.getCurrentEvent();
         this.tournament = sharedDataProvider.getCurrentTournament();
-        console.log(this.tournament);
+
         this.tournamentProvider.getTournament(this.tournament.id, this.event.id).subscribe(data => this.tournamentData = data);
     }
 
     ionViewDidLoad() {
+        console.log('Hello TournamentPage Page');
     }
 
 }

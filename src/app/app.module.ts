@@ -18,6 +18,7 @@ import {EventPage} from "../pages/event/event";
         EventPage,
         TeamPage,
         TournamentPage
+
     ],
     imports: [
         IonicModule.forRoot(MyApp)
