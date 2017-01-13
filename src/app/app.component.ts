@@ -28,7 +28,7 @@ export class MyApp {
         // the login page disables the left menu
         this.pages = [
             {title: 'Evènements', component: EventsPage, icon: 'person'},
-            {title: 'Liste', component: EventPage, icon: 'person'}
+            {title: 'Listes', component: EventPage, icon: 'person'}
         ];
 
         platform.ready().then(() => {
