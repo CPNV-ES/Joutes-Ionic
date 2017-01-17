@@ -15,24 +15,50 @@
             {{ tournamentData.name }}
         </ion-title>
 
-        <ion-buttons right>
-            <button ion-button icon-only>
-                <ion-icon name="cog"></ion-icon>
-            </button>
-        </ion-buttons>
     </ion-navbar>
 </ion-header>
 
 <ion-content>
 
-    <ion-col width-100><h4><b>Type</b> {{ tournamentData.type }} </h4></ion-col>
-    <ion-col width-100><h4><b>Lieu</b> {{ tournamentData.place }} </h4></ion-col>
+    <ion-card>
+        <ion-card-content>
 
-    <ion-col width-100><h2>Liste des <b>poules</b></h2></ion-col>
-    <ion-list>
-        <button ion-item *ngFor="let poule of tournamentData.poules">
-            <h3>{{ poule.name }}</h3>
-        </button>
-    </ion-list>
+            <ion-grid text-center>
+                <ion-row style="flex-wrap: wrap;">
+                    <ion-col width-50>
+                        <ion-icon name="grid" class="info"></ion-icon><br/>
+                        {{ tournamentData.type }}
+                    </ion-col>
+                    <ion-col width-50>
+                        <ion-icon name="pin" class="info"></ion-icon><br/>
+                        {{ tournamentData.place }}
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+        </ion-card-content>
+    </ion-card>
+
+    <ion-col width-100><h2>Liste des <b>Participants</b></h2></ion-col>
+    <ion-card>
+        <ion-card-content no-padding>
+            <ion-list>
+                <ion-item *ngFor="let team of tournamentData.teams">
+                    <h3>{{ team.name }}</h3>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-col width-100><h2>Liste des <b>Poules</b> / <b>Eliminations</b></h2></ion-col>
+    <ion-card>
+        <ion-card-content no-padding>
+            <ion-list>
+                <ion-item *ngFor="let group of tournamentData.group_matchs" (click)="goToPool(group)">
+                    <h3>{{ group.name }}</h3>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
 
 </ion-content>

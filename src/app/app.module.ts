@@ -7,9 +7,11 @@ import {TournamentPage} from '../pages/tournament/tournament';
 import {EventService} from '../providers/event-service';
 import {TeamService} from "../providers/team-service";
 import {TournamentService} from "../providers/tournament-service";
+import {PoolService} from "../providers/pool-service";
 import {SharedDataService} from "../providers/sharedData-service";
 import {TeamPage} from "../pages/team/team";
 import {EventPage} from "../pages/event/event";
+import {PoolPage} from "../pages/pool/pool";
 
 @NgModule({
     declarations: [
@@ -17,7 +19,8 @@ import {EventPage} from "../pages/event/event";
         EventsPage,
         EventPage,
         TeamPage,
-        TournamentPage
+        TournamentPage,
+        PoolPage
 
     ],
     imports: [
@@ -29,13 +32,15 @@ import {EventPage} from "../pages/event/event";
         EventsPage,
         EventPage,
         TeamPage,
-        TournamentPage
+        TournamentPage,
+        PoolPage
     ],
     providers: [
         Storage,
         EventService,
         TeamService,
         TournamentService,
+        PoolService,
         SharedDataService
     ]
 })

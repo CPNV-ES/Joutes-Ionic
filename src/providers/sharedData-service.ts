@@ -6,6 +6,7 @@ export class SharedDataService {
     currentEvent: any;
     currentTeam: any;
     currentTournament: any;
+    currentPool: any;
     constructor(public storage: Storage) {}
 
     getCurrentEvent(): any {
@@ -18,8 +19,6 @@ export class SharedDataService {
 
     getCurrentEventFavoritesTeams() {
         return this.storage.get('event'+this.currentEvent.id).then(val => {
-            // if(val) return val;
-            // else return Promise.reject('');
             return val;
         });
     }
@@ -44,5 +43,14 @@ export class SharedDataService {
 
     getCurrentTournament(): any {
         return this.currentTournament;
+    }
+
+    setCurrentPool(currentPool)
+    {
+        this.currentPool = currentPool;
+    }
+
+    getCurrentPool(): any {
+        return this.currentPool;
     }
 }

@@ -24,7 +24,7 @@ export class TournamentService {
         return this.http.get(`http://172.17.102.188/Joutes/public/api/${eventId}/tournaments`).map(res => res.json());
     }
 
-    getTournament(tournamentId, eventId) {
+    getTournament(eventId, tournamentId) {
         // return this.http.get(`http://192.168.0.51/Joutes/public/api/${eventId}/tournament/${tournamentId}`).map(res => res.json());
         return this.http.get(`http://172.17.102.188/Joutes/public/api/${eventId}/tournament/${tournamentId}`).map(res => res.json());
     }
