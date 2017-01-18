@@ -3,6 +3,7 @@ import {NavController, NavParams} from 'ionic-angular';
 import {SharedDataService} from '../../providers/sharedData-service';
 import {TournamentService} from '../../providers/tournament-service';
 import {TeamPage} from "../team/team";
+import {PoolPage} from "../pool/pool";
 
 /*
  Generated class for the Tournament page.
@@ -24,7 +25,13 @@ export class TournamentPage {
         this.event = sharedDataProvider.getCurrentEvent();
         this.tournament = sharedDataProvider.getCurrentTournament();
 
-        this.tournamentProvider.getTournament(this.tournament.id, this.event.id).subscribe(data => this.tournamentData = data);
+        this.tournamentProvider.getTournament(this.event.id, this.tournament.id).subscribe(data => this.tournamentData = data);
+    }
+
+    goToPool(pool)
+    {
+        this.sharedDataProvider.setCurrentPool(pool);
+        this.navCtrl.push(PoolPage);
     }
 
     goToTeam(team) {
@@ -33,7 +40,6 @@ export class TournamentPage {
     }
 
     ionViewDidLoad() {
-        console.log('Hello TournamentPage Page');
     }
 
 }

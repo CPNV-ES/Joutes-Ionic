@@ -65,7 +65,7 @@ export class EventPage {
         this.filteredTeams.forEach(function (team) {
             //If we have no favorite, do nothing
             if (self.userFavoritesTeamsIds) {
-                if (self.userFavoritesTeamsIds.indexOf(team.id) != -1) {
+                if (self.userFavoritesTeamsIds.indexOf(team.id.toString()) != -1) {
                     //Add the favorite in front of the array
                     team.favorite = true;
                     temp.unshift(team);
@@ -86,7 +86,7 @@ export class EventPage {
         this.userFavoritesTeamsPromise.then(val => {
             if (val) {
                 this.userFavoritesTeamsIds = val.split(',');
-                var index = this.userFavoritesTeamsIds.indexOf(team.id);
+                var index = this.userFavoritesTeamsIds.indexOf(team.id.toString());
                 if (index != -1) {
                     this.userFavoritesTeamsIds.splice(index, 1);
                     team.favorite = false;

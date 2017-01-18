@@ -54,7 +54,7 @@
     <ion-card>
         <ion-card-content no-padding>
             <ion-list>
-                <ion-item *ngFor="let group of tournamentData.group_matchs">
+                <ion-item *ngFor="let group of tournamentData.group_matchs" (click)="goToPool(group)">
                     <h3>{{ group.name }}</h3>
                 </ion-item>
             </ion-list>

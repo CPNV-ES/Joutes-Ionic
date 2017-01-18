@@ -1,0 +1,123 @@
+<!--
+  Generated template for the Pool page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+
+        <ion-title text-center>
+            {{ tournament.name }} - {{ poolData.name }}
+        </ion-title>
+
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+    <ion-card>
+        <ion-card-content>
+
+            <ion-grid text-center>
+                <ion-row style="flex-wrap: wrap;">
+                    <ion-col width-50>
+                        <ion-icon name="grid" class="info"></ion-icon>
+                        <br/>
+                        {{ poolData.type }}
+                    </ion-col>
+                    <ion-col width-50>
+                        <ion-icon name="pin" class="info"></ion-icon>
+                        <br/>
+                        {{ tournament.place }}
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+        </ion-card-content>
+    </ion-card>
+
+
+    <ion-col width-100><h2>Classement et <b>Résultats</b></h2></ion-col>
+    <ion-card>
+        <ion-card-content no-padding>
+            <ion-row>
+                <ion-col>
+                    <strong>W</strong>
+                </ion-col>
+                <ion-col>
+                    <strong>L</strong>
+                </ion-col>
+                <ion-col>
+                    <strong>D</strong>
+                </ion-col>
+                <ion-col>
+                    <strong>G</strong>
+                </ion-col>
+                <ion-col>
+                    <strong>P</strong>
+                </ion-col>
+            </ion-row>
+            <ion-list>
+                <ion-item *ngFor="let team of poolData.teams">
+                    <h3>{{ team.name }}</h3>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-col width-100><h2>Liste des <b>Matchs</b></h2></ion-col>
+    <ion-card>
+        <ion-card-content no-padding>
+
+            <ion-list *ngFor="let match of poolData.matches">
+
+
+                <!-- *********************************** -->
+                <!-- PAS UTILISER DE COULEUR, INUTILE TROUVER AUTRE CHOSE !!!! -->
+                <!-- *********************************** -->
+
+                <ion-item class="border-win" *ngIf="match.team1Score > match.team2Score">
+                    {{ match.name }}
+                    {{ match.team1 }} - {{ match.team2 }}
+                    <ion-note item-right>
+                        {{ match.team1Score }} - {{ match.team2Score }}
+                    </ion-note>
+                </ion-item>
+
+                <ion-item class="border-lose" *ngIf="match.team1Score < match.team2Score">
+                    {{ match.name }}
+                    {{ match.team1 }} - {{ match.team2 }}
+                    <ion-note item-right>
+                        {{ match.team1Score }} - {{ match.team2Score }}
+                    </ion-note>
+                </ion-item>
+
+                <ion-item class="border-draw" *ngIf="(match.team1Score == match.team2Score) && (match.start == '')">
+                    {{ match.name }}
+                    {{ match.team1 }} - {{ match.team2 }}
+                    <ion-note item-right>
+                        {{ match.team1Score }} - {{ match.team2Score }}
+                    </ion-note>
+                </ion-item>
+
+                <ion-item class="border-inc" *ngIf="match.status == 'incoming' ">
+                    {{ match.name }}
+                    {{ match.team1 }} - {{ match.team2 }}
+                    <ion-note item-right>
+                        {{ match.start }}
+                    </ion-note>
+                </ion-item>
+
+            </ion-list>
+
+
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>
