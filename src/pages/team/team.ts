@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {SharedDataService} from '../../providers/sharedData-service';
 import {TeamService} from '../../providers/team-service';
+import {PoolPage} from "../pool/pool";
 
 @Component({
     selector: 'page-team',
@@ -10,6 +11,7 @@ import {TeamService} from '../../providers/team-service';
 export class TeamPage {
     event: any;
     team: any;
+    pool: any = {id:''};
     teamData: any = {};
 
 
@@ -20,6 +22,13 @@ export class TeamPage {
         this.teamProvider.getTeam(this.team.id, this.event.id).subscribe(data => this.teamData = data);
     }
 
+    goToPool(tournament, pool_id)
+    {
+        this.sharedDataProvider.setCurrentTournament(tournament)
+        this.pool.id = pool_id;
+        this.sharedDataProvider.setCurrentPool(this.pool);
+        this.navCtrl.push(PoolPage);
+    }
 
     ionViewDidLoad() {
     }
