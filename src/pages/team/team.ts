@@ -3,6 +3,7 @@ import {NavController, NavParams} from 'ionic-angular';
 import {SharedDataService} from '../../providers/sharedData-service';
 import {TeamService} from '../../providers/team-service';
 import {PoolPage} from "../pool/pool";
+import {TournamentPage} from "../tournament/tournament";
 
 @Component({
     selector: 'page-team',
@@ -28,6 +29,12 @@ export class TeamPage {
         this.pool.id = pool_id;
         this.sharedDataProvider.setCurrentPool(this.pool);
         this.navCtrl.push(PoolPage);
+    }
+
+    goToTournament(tournament)
+    {
+        this.sharedDataProvider.setCurrentTournament(tournament)
+        this.navCtrl.push(TournamentPage);
     }
 
     ionViewDidLoad() {

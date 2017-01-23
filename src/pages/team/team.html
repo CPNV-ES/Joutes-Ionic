@@ -6,7 +6,7 @@
         </button>
 
         <ion-title>
-            {{ event.name }}
+            {{ teamData.name }}
         </ion-title>
 
     </ion-navbar>
@@ -26,6 +26,28 @@
                 <ion-row style="flex-wrap: wrap;">
                     <ion-col width-25 *ngFor="let participant of teamData.participants">
                         {{ participant.firstname }}
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+        </ion-card-content>
+    </ion-card>
+
+    <ion-col width-100 *ngFor="let tournament of teamData.tournament">
+        <h2>Tournoi <b> {{  tournament.name }}</b></h2>
+    </ion-col>
+    <ion-card *ngFor="let tournament of teamData.tournament" (click)="goToTournament(tournament)">
+        <ion-card-content>
+
+            <ion-grid text-center>
+                <ion-row style="flex-wrap: wrap;">
+                    <ion-col width-50>
+                        <ion-icon name="game-controller-b" class="info"></ion-icon><br/>
+                        <div class="items">{{ teamData.sport }}</div>
+                    </ion-col>
+                    <ion-col width-50>
+                        <ion-icon name="pin" class="info"></ion-icon><br/>
+                        <div class="items">{{ tournament.place }}</div>
                     </ion-col>
                 </ion-row>
             </ion-grid>
