@@ -3,6 +3,7 @@ import {NavController} from 'ionic-angular';
 import {EventService} from '../../providers/event-service';
 import {SharedDataService} from '../../providers/sharedData-service';
 import {EventPage} from "../event/event";
+import {Splashscreen} from "ionic-native";
 
 /*
  Generated class for the Events page.
@@ -40,6 +41,7 @@ export class EventsPage {
 
     ionViewDidLoad()
     {
+        Splashscreen.hide();
     }
 
 }

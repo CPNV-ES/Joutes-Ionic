@@ -36,7 +36,6 @@
     <ion-col width-100><h2>Liste des <b>Matchs</b></h2></ion-col>
     <ion-card>
         <ion-card-content no-padding>
-
             <ion-list *ngFor="let match of teamData.matches" (click)="goToPool(teamData.tournament, match.group_match_id)">
                 <ion-item class="border-win" *ngIf="match.ownScore > match.team2Score">
                     {{ match.team2 }}
@@ -66,8 +65,6 @@
                     </ion-note>
                 </ion-item>
             </ion-list>
-
-
         </ion-card-content>
     </ion-card>
 
