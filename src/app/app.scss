@@ -91,13 +91,19 @@ h2
 
 .border-inc
 {
-  border-right: 5px solid #fff;
+  border-right: 5px solid #c5c5c5;
 }
 
 .border-draw
 {
   border-right: 5px solid #ff9800;
 }
+
+.border-finish
+{
+  border-right: 5px solid color($colors, secondary);
+}
+
 
 .bottom_bar
 {
@@ -115,4 +121,14 @@ h2
 {
   font-size: 30px;
   color: color($colors, secondary);
+}
+
+.border-table
+{
+  border-bottom:1px solid #c5c5c5;
+}
+
+.white-background
+{
+  background-color:#fff;
 }

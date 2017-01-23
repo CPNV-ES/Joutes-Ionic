@@ -21,101 +21,111 @@
 
 <ion-content>
 
+    <ion-grid text-center class="white-background">
+        <ion-row style="flex-wrap: wrap;">
+            <ion-col width-50>
+                <ion-icon name="grid" class="info"></ion-icon><br/>
+                <div class="items">{{ poolData.type }}</div>
+            </ion-col>
+            <ion-col width-50>
+                <ion-icon name="pin" class="info"></ion-icon><br/>
+                <div class="items">{{ tournament.place }}</div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-col width-100><h2>Le <b>Classement</b></h2></ion-col>
     <ion-card>
-        <ion-card-content>
-
-            <ion-grid text-center>
-                <ion-row style="flex-wrap: wrap;">
-                    <ion-col width-50>
-                        <ion-icon name="grid" class="info"></ion-icon>
-                        <br/>
-                        {{ poolData.type }}
-                    </ion-col>
-                    <ion-col width-50>
-                        <ion-icon name="pin" class="info"></ion-icon>
-                        <br/>
-                        {{ tournament.place }}
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-
-        </ion-card-content>
-    </ion-card>
-
-
-    <ion-col width-100><h2>Classement et <b>Résultats</b></h2></ion-col>
-    <ion-card>
-        <ion-card-content no-padding>
-            <ion-row>
-                <ion-col>
-                    <strong>W</strong>
+        <ion-card-content no-padding padding-top padding-bottom>
+            <ion-row class="border-table results-head">
+                <ion-col width-10>
+                    <strong>#</strong>
                 </ion-col>
-                <ion-col>
-                    <strong>L</strong>
+                <ion-col width-50>
+                    <strong>Equipes</strong>
                 </ion-col>
-                <ion-col>
-                    <strong>D</strong>
+                <ion-col width-10 text-center>
+                    <strong>Pts</strong>
                 </ion-col>
-                <ion-col>
+                <ion-col width-10 text-center>
                     <strong>G</strong>
                 </ion-col>
-                <ion-col>
+                <ion-col width-10 text-center>
                     <strong>P</strong>
+                </ion-col>
+                <ion-col width-10 text-center>
+                    <strong>+/-</strong>
                 </ion-col>
             </ion-row>
             <ion-list>
-                <ion-item *ngFor="let team of poolData.teams">
-                    <h3>{{ team.name }}</h3>
-                </ion-item>
+                <ion-row class="results" (click)="goToTeam(team)" *ngFor="let team of poolData.teams; let i = index;">
+                    <ion-col width-10>
+                        <strong>{{ i+1 }}</strong>
+                    </ion-col>
+                    <ion-col width-50 class="items">
+                        {{ team.name }}
+                    </ion-col>
+                    <ion-col width-10 text-center  class="items">
+                        {{ team.points }}
+                    </ion-col>
+                    <ion-col width-10 text-center  class="items">
+                        {{ team.matchesWin }}
+                    </ion-col>
+                    <ion-col width-10 text-center  class="items">
+                        {{ team.matchesLost }}
+                    </ion-col>
+                    <ion-col width-10 text-center  class="items">
+                        {{ team.goalsFor - team.goalsAgainst }}
+                    </ion-col>
+                </ion-row>
             </ion-list>
         </ion-card-content>
     </ion-card>
 
-    <ion-col width-100><h2>Liste des <b>Matchs</b></h2></ion-col>
+    <ion-col width-100><h2>Matchs et <b>Résultats</b></h2></ion-col>
     <ion-card>
-        <ion-card-content no-padding>
+        <ion-card-content>
 
             <ion-list *ngFor="let match of poolData.matches">
+                    <!--<ion-list-header>-->
+                        <!--{{ match.name }}-->
+                    <!--</ion-list-header>-->
+                    <!--<ion-item>-->
+                        <!--<ion-row>-->
+                        <!--<ion-col class="items" text-left>-->
+                            <!--{{ match.team1 }}-->
+                        <!--</ion-col>-->
+                        <!--<ion-col class="items" text-center *ngIf="match.status == 'A venir' ">-->
+                            <!--<strong>{{ match.start }}</strong>-->
+                        <!--</ion-col>-->
+                        <!--<ion-col class="items" text-center *ngIf="match.status != 'A venir' ">-->
+                            <!--<strong>{{ match.team1Score }} - {{ match.team2Score }}</strong>-->
+                        <!--</ion-col>-->
+                        <!--<ion-col class="items" text-right>-->
+                            <!--{{ match.team2 }}-->
+                        <!--</ion-col>-->
+                        <!--</ion-row>-->
+                    <!--</ion-item>-->
 
 
-                <!-- *********************************** -->
-                <!-- PAS UTILISER DE COULEUR, INUTILE TROUVER AUTRE CHOSE !!!! -->
-                <!-- *********************************** -->
-
-                <ion-item class="border-win" *ngIf="match.team1Score > match.team2Score">
-                    {{ match.name }}
-                    {{ match.team1 }} - {{ match.team2 }}
-                    <ion-note item-right>
-                        {{ match.team1Score }} - {{ match.team2Score }}
-                    </ion-note>
-                </ion-item>
-
-                <ion-item class="border-lose" *ngIf="match.team1Score < match.team2Score">
-                    {{ match.name }}
-                    {{ match.team1 }} - {{ match.team2 }}
-                    <ion-note item-right>
-                        {{ match.team1Score }} - {{ match.team2Score }}
-                    </ion-note>
-                </ion-item>
-
-                <ion-item class="border-draw" *ngIf="(match.team1Score == match.team2Score) && (match.start == '')">
-                    {{ match.name }}
-                    {{ match.team1 }} - {{ match.team2 }}
-                    <ion-note item-right>
-                        {{ match.team1Score }} - {{ match.team2Score }}
-                    </ion-note>
-                </ion-item>
-
-                <ion-item class="border-inc" *ngIf="match.status == 'incoming' ">
-                    {{ match.name }}
-                    {{ match.team1 }} - {{ match.team2 }}
-                    <ion-note item-right>
-                        {{ match.start }}
-                    </ion-note>
-                </ion-item>
-
+                <ion-row>
+                    <!--<ion-col width-10>-->
+                        <!--{{ match.name }}-->
+                    <!--</ion-col>-->
+                    <ion-col class="items" text-left>
+                        {{ match.team1 }}
+                    </ion-col>
+                    <ion-col class="items" text-center *ngIf="match.status == 'A venir' ">
+                        <strong>{{ match.start }}</strong>
+                    </ion-col>
+                    <ion-col class="items" text-center *ngIf="match.status != 'A venir' ">
+                        <strong>{{ match.team1Score }} - {{ match.team2Score }}</strong>
+                    </ion-col>
+                    <ion-col class="items" text-right>
+                        {{ match.team2 }}
+                    </ion-col>
+                </ion-row>
             </ion-list>
-
 
         </ion-card-content>
     </ion-card>
