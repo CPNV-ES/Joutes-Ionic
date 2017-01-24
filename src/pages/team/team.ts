@@ -25,7 +25,7 @@ export class TeamPage {
 
     goToPool(tournament, pool_id)
     {
-        this.sharedDataProvider.setCurrentTournament(tournament)
+        this.sharedDataProvider.setCurrentTournament(tournament);
         this.pool.id = pool_id;
         this.sharedDataProvider.setCurrentPool(this.pool);
         this.navCtrl.push(PoolPage);
@@ -33,7 +33,7 @@ export class TeamPage {
 
     goToTournament(tournament)
     {
-        this.sharedDataProvider.setCurrentTournament(tournament)
+        this.sharedDataProvider.setCurrentTournament(tournament);
         this.navCtrl.push(TournamentPage);
     }
 
