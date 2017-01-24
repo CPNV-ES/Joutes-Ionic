@@ -12,4 +12,12 @@ page-pool {
     padding-left:13px;
     padding-right:13px;
   }
+
+  .pool-name
+  {
+    background: repeating-linear-gradient( -55deg, #f7f7f7, #f7f7f7 5px, #fff 5px, #fff 10px );
+    color: color($colors, secondary);
+    text-transform: uppercase;
+    font-weight: bold;
+  }
 }
