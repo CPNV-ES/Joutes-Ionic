@@ -87,31 +87,12 @@
         <ion-card-content>
 
             <ion-list *ngFor="let match of poolData.matches">
-                    <!--<ion-list-header>-->
-                        <!--{{ match.name }}-->
-                    <!--</ion-list-header>-->
-                    <!--<ion-item>-->
-                        <!--<ion-row>-->
-                        <!--<ion-col class="items" text-left>-->
-                            <!--{{ match.team1 }}-->
-                        <!--</ion-col>-->
-                        <!--<ion-col class="items" text-center *ngIf="match.status == 'A venir' ">-->
-                            <!--<strong>{{ match.start }}</strong>-->
-                        <!--</ion-col>-->
-                        <!--<ion-col class="items" text-center *ngIf="match.status != 'A venir' ">-->
-                            <!--<strong>{{ match.team1Score }} - {{ match.team2Score }}</strong>-->
-                        <!--</ion-col>-->
-                        <!--<ion-col class="items" text-right>-->
-                            <!--{{ match.team2 }}-->
-                        <!--</ion-col>-->
-                        <!--</ion-row>-->
-                    <!--</ion-item>-->
-
-
+                <ion-row *ngIf="poolData.type == 'Elimination' ">
+                    <ion-col width-100 class="items pool-name" text-center>
+                        {{ match.name }}
+                    </ion-col>
+                </ion-row>
                 <ion-row>
-                    <!--<ion-col width-10>-->
-                        <!--{{ match.name }}-->
-                    <!--</ion-col>-->
                     <ion-col class="items" text-left>
                         {{ match.team1 }}
                     </ion-col>
