@@ -6,6 +6,7 @@ import {SharedDataService} from '../../providers/sharedData-service';
 import {Storage} from '@ionic/storage';
 import {TeamPage} from "../team/team";
 import {TournamentPage} from "../tournament/tournament";
+import {SpinnerDialog} from "ionic-native";
 
 
 /*
@@ -108,18 +109,18 @@ export class EventPage {
     }
 
     goToTeam(team) {
+        document.getElementById('spinnerContent').style.visibility = 'visible';
         this.sharedDataProvider.setCurrentTeam(team);
         this.navCtrl.push(TeamPage);
     }
 
     goToTournament(tournament) {
+        document.getElementById('spinnerContent').style.visibility = 'visible';
         this.sharedDataProvider.setCurrentTournament(tournament);
         this.navCtrl.push(TournamentPage);
     }
 
     ionViewDidLoad() {
-
+        document.getElementById('spinnerContent').style.visibility = 'hidden';
     }
-
 }
-

@@ -28,18 +28,20 @@ export class TournamentPage {
         this.tournamentProvider.getTournament(this.event.id, this.tournament.id).subscribe(data => this.tournamentData = data);
     }
 
-    goToPool(pool)
-    {
+    goToPool(pool) {
+        document.getElementById('spinnerContent').style.visibility = 'visible';
         this.sharedDataProvider.setCurrentPool(pool);
         this.navCtrl.push(PoolPage);
     }
 
     goToTeam(team) {
+        document.getElementById('spinnerContent').style.visibility = 'visible';
         this.sharedDataProvider.setCurrentTeam(team);
         this.navCtrl.push(TeamPage);
     }
 
     ionViewDidLoad() {
+        document.getElementById('spinnerContent').style.visibility = 'hidden';
     }
 
 }

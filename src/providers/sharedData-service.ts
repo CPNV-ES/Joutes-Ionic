@@ -9,6 +9,11 @@ export class SharedDataService {
     currentPool: any;
     constructor(public storage: Storage) {}
 
+    getCurrentIp() {
+        return "http://192.168.0.51";
+        // return "http://172.17.102.188";
+    }
+
     getCurrentEvent(): any {
         return this.currentEvent;
     }

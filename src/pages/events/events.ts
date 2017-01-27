@@ -3,7 +3,8 @@ import {NavController} from 'ionic-angular';
 import {EventService} from '../../providers/event-service';
 import {SharedDataService} from '../../providers/sharedData-service';
 import {EventPage} from "../event/event";
-import {Splashscreen} from "ionic-native";
+import {Splashscreen, SpinnerDialog} from "ionic-native";
+import {document} from "@angular/platform-browser/src/facade/browser";
 
 /*
  Generated class for the Events page.
@@ -21,27 +22,27 @@ export class EventsPage {
     public filteredEvents: any;
     public searchTerm: string = '';
 
-    constructor(public navCtrl: NavController, public sharedDataProvider: SharedDataService, public eventProvider: EventService)
-    {
-        this.eventProvider.getEvents().subscribe(data => {this.events = data.events; this.filteredEvents = data.events}, this.filterEvents)
+    constructor(public navCtrl: NavController, public sharedDataProvider: SharedDataService, public eventProvider: EventService) {
+        this.eventProvider.getEvents().subscribe(data => {
+            this.events = data.events;
+            this.filteredEvents = data.events
+        }, this.filterEvents)
     }
 
-    goToEvent(event)
-    {
+    goToEvent(event) {
+        document.getElementById('spinnerContent').style.visibility = 'visible';
         this.sharedDataProvider.setCurrentEvent(event);
         this.navCtrl.push(EventPage);
     }
 
-    filterEvents()
-    {
-         this.filteredEvents = this.events.filter((event) => {
-             return event.name.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+    filterEvents() {
+        this.filteredEvents = this.events.filter((event) => {
+            return event.name.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
         });
     }
 
-    ionViewDidLoad()
-    {
+    ionViewDidLoad() {
         Splashscreen.hide();
+        document.getElementById('spinnerContent').style.visibility = 'hidden';
     }
-
 }

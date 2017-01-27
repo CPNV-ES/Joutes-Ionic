@@ -12,7 +12,7 @@ import {TournamentPage} from "../tournament/tournament";
 export class TeamPage {
     event: any;
     team: any;
-    pool: any = {id:''};
+    pool: any = {id: ''};
     teamData: any = {};
 
 
@@ -23,20 +23,21 @@ export class TeamPage {
         this.teamProvider.getTeam(this.team.id, this.event.id).subscribe(data => this.teamData = data);
     }
 
-    goToPool(tournament, pool_id)
-    {
+    goToPool(tournament, pool_id) {
+        document.getElementById('spinnerContent').style.visibility = 'visible';
         this.sharedDataProvider.setCurrentTournament(tournament);
         this.pool.id = pool_id;
         this.sharedDataProvider.setCurrentPool(this.pool);
         this.navCtrl.push(PoolPage);
     }
 
-    goToTournament(tournament)
-    {
+    goToTournament(tournament) {
+        document.getElementById('spinnerContent').style.visibility = 'visible';
         this.sharedDataProvider.setCurrentTournament(tournament);
         this.navCtrl.push(TournamentPage);
     }
 
     ionViewDidLoad() {
+        document.getElementById('spinnerContent').style.visibility = 'hidden';
     }
 }

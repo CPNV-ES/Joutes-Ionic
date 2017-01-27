@@ -18,14 +18,13 @@ export class TeamService {
 
     }
 
-    getTeamsByEvent(eventId): any {
-        // return this.http.get(`http://192.168.0.51/Joutes/public/api/${eventId}/teams`).map(res => res.json());
-        return this.http.get(`http://172.17.102.188/Joutes/public/api/${eventId}/teams`).map(res => res.json());
+    getTeamsByEvent(eventId): any
+    {
+        return this.http.get(this.sharedDataProvider.getCurrentIp()+`/Joutes/public/api/${eventId}/teams`).map(res => res.json());
     }
 
     getTeam(teamId, eventId)
     {
-        // return this.http.get(`http://192.168.0.51/Joutes/public/api/${eventId}/team/${teamId}`).map(res => res.json());
-        return this.http.get(`http://172.17.102.188/Joutes/public/api/${eventId}/team/${teamId}`).map(res => res.json());
+        return this.http.get(this.sharedDataProvider.getCurrentIp()+`/Joutes/public/api/${eventId}/team/${teamId}`).map(res => res.json());
     }
 }

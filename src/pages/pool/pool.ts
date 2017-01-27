@@ -30,12 +30,13 @@ export class PoolPage {
     }
 
     goToTeam(team) {
+        document.getElementById('spinnerContent').style.visibility = 'visible';
         this.sharedDataProvider.setCurrentTeam(team);
         this.navCtrl.push(TeamPage);
     }
 
-  ionViewDidLoad() {
-
+    ionViewDidLoad() {
+        document.getElementById('spinnerContent').style.visibility = 'hidden';
     }
 
 }

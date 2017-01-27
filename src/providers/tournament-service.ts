@@ -19,14 +19,14 @@ export class TournamentService {
 
     }
 
-    getTournamentsByEvent(eventId): any {
-        // return this.http.get(`http://192.168.0.51/Joutes/public/api/${eventId}/tournaments`).map(res => res.json());
-        return this.http.get(`http://172.17.102.188/Joutes/public/api/${eventId}/tournaments`).map(res => res.json());
+    getTournamentsByEvent(eventId): any
+    {
+        return this.http.get(this.sharedDataProvider.getCurrentIp()+`/Joutes/public/api/${eventId}/tournaments`).map(res => res.json());
     }
 
-    getTournament(eventId, tournamentId) {
-        // return this.http.get(`http://192.168.0.51/Joutes/public/api/${eventId}/tournament/${tournamentId}`).map(res => res.json());
-        return this.http.get(`http://172.17.102.188/Joutes/public/api/${eventId}/tournament/${tournamentId}`).map(res => res.json());
+    getTournament(eventId, tournamentId)
+    {
+        return this.http.get(this.sharedDataProvider.getCurrentIp()+`/Joutes/public/api/${eventId}/tournament/${tournamentId}`).map(res => res.json());
     }
 
 }
