@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {Platform, Nav} from 'ionic-angular';
-import {StatusBar, Splashscreen} from 'ionic-native';
+import {StatusBar} from 'ionic-native';
 import {EventsPage} from '../pages/events/events';
 import {EventPage} from "../pages/event/event";
 import {SharedDataService} from '../providers/sharedData-service';

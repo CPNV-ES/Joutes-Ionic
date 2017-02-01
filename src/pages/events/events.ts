@@ -3,7 +3,7 @@ import {NavController} from 'ionic-angular';
 import {EventService} from '../../providers/event-service';
 import {SharedDataService} from '../../providers/sharedData-service';
 import {EventPage} from "../event/event";
-import {Splashscreen, SpinnerDialog} from "ionic-native";
+import {Splashscreen} from "ionic-native";
 import {document} from "@angular/platform-browser/src/facade/browser";
 
 /*

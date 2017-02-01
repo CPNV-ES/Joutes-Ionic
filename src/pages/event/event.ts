@@ -6,7 +6,6 @@ import {SharedDataService} from '../../providers/sharedData-service';
 import {Storage} from '@ionic/storage';
 import {TeamPage} from "../team/team";
 import {TournamentPage} from "../tournament/tournament";
-import {SpinnerDialog} from "ionic-native";
 
 
 /*

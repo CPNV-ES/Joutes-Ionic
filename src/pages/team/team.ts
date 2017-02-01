@@ -38,6 +38,7 @@ export class TeamPage {
     }
 
     ionViewDidLoad() {
+        console.log("vue chargée");
         document.getElementById('spinnerContent').style.visibility = 'hidden';
     }
 }
