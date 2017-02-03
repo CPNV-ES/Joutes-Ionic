@@ -19,6 +19,12 @@
             <ion-segment-button value="tournaments">
                 Tournois
             </ion-segment-button>
+            <ion-segment-button value="participants">
+                Participants
+            </ion-segment-button>
+            <ion-segment-button value="resultats">
+                Résultats
+            </ion-segment-button>
         </ion-segment>
     </ion-toolbar>
 </ion-header>
@@ -28,7 +34,7 @@
 
         <ion-list *ngSwitchCase="'teams'">
             <ion-toolbar no-border-top>
-                <ion-searchbar color="primary" placeholder="Nom de l'équipe.." [(ngModel)]="searchTerm"
+                <ion-searchbar color="primary" placeholder="Nom de l'équipe.." [(ngModel)]="searchTermTeam"
                                (ionInput)="filterTeams()">
                 </ion-searchbar>
             </ion-toolbar>
@@ -42,6 +48,24 @@
         </ion-list>
 
         <ion-list *ngSwitchCase="'tournaments'">
+            <ion-item *ngFor="let tournament of tournaments">
+                <div class="items" (click)="goToTournament(tournament)">{{tournament.name}} ({{tournament.sport}})</div>
+            </ion-item>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'participants'">
+            <ion-toolbar no-border-top>
+                <ion-searchbar color="primary" placeholder="Nom du participant" [(ngModel)]="searchTermParticipant"
+                               (ionInput)="filterParticipants()">
+                </ion-searchbar>
+            </ion-toolbar>
+
+            <ion-item *ngFor="let participant of filteredParticipants">
+                <div class="items" (click)="goToParticipant(participant)">{{participant.lastname}} {{participant.firstname}}</div>
+            </ion-item>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'resultats'">
             <ion-item *ngFor="let tournament of tournaments">
                 <div class="items" (click)="goToTournament(tournament)">{{tournament.name}} ({{tournament.sport}})</div>
             </ion-item>
