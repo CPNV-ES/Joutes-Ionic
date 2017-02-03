@@ -10,6 +10,7 @@ export class SharedDataService {
     constructor(public storage: Storage) {}
 
     getCurrentIp() {
+
         //Rasberry address
         // return "https://markal.servehttp.com/Joutes/api";
 
@@ -18,6 +19,7 @@ export class SharedDataService {
 
         //LAN IP
         return "http://172.17.102.188/Joutes/public/api";
+
     }
 
     getCurrentEvent(): any {

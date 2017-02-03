@@ -79,32 +79,6 @@ h2
   font-weight: bold;
 }
 
-.border-win
-{
-  border-right: 5px solid #4caf50;
-}
-
-.border-lose
-{
-  border-right: 5px solid #f44336;
-}
-
-.border-inc
-{
-  border-right: 5px solid #c5c5c5;
-}
-
-.border-draw
-{
-  border-right: 5px solid #ff9800;
-}
-
-.border-finish
-{
-  border-right: 5px solid color($colors, secondary);
-}
-
-
 .bottom_bar
 {
   position: fixed;
@@ -131,6 +105,20 @@ h2
 .white-background
 {
   background-color:#fff;
+}
+
+.no-padding-bottom
+{
+  padding-bottom:0px;
+}
+
+.tabbar{
+  opacity:1;
+  fixed:bottom;
+}
+ion-label{
+  white-space: normal;
+
 }
 
 //div.spinner {
