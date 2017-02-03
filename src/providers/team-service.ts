@@ -20,11 +20,12 @@ export class TeamService {
 
     getTeamsByEvent(eventId): any
     {
-        return this.http.get(this.sharedDataProvider.getCurrentIp()+`/Joutes/public/api/${eventId}/teams`).map(res => res.json());
+        return this.http.get(this.sharedDataProvider.getCurrentIp()+`/${eventId}/teams`).map(res => res.json());
     }
 
     getTeam(teamId, eventId)
     {
-        return this.http.get(this.sharedDataProvider.getCurrentIp()+`/Joutes/public/api/${eventId}/team/${teamId}`).map(res => res.json());
+        console.log(this.sharedDataProvider.getCurrentIp()+`/${eventId}/team/${teamId}`);
+        return this.http.get(this.sharedDataProvider.getCurrentIp()+`/${eventId}/team/${teamId}`).map(res => res.json());
     }
 }

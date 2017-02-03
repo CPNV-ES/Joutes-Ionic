@@ -22,6 +22,6 @@ export class EventService
 
     getEvents()
     {
-        return this.http.get(this.sharedDataProvider.getCurrentIp()+`/Joutes/public/api/events`).map(res => res.json());
+        return this.http.get(this.sharedDataProvider.getCurrentIp()+`/events`).map(res => res.json());
     }
 }
