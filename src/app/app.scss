@@ -133,6 +133,20 @@ h2
   background-color:#fff;
 }
 
+.no-padding-bottom
+{
+  padding-bottom:0px;
+}
+
+.tabbar{
+  opacity:1;
+  fixed:bottom;
+}
+ion-label{
+  white-space: normal;
+
+}
+
 //div.spinner {
 //  margin: auto;
 //  position: absolute;

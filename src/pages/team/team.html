@@ -16,7 +16,7 @@
     <div *ngFor="let tournament of teamData.tournament">
 
         <ion-col width-100>
-            <h2>Equipe <b> {{ teamData.name }}</b>
+            <h2>Equipe <b>{{ teamData.name }}</b>
                 <ion-icon name="trophy" *ngIf="teamData.status == 'Vainqueur'"></ion-icon>
             </h2>
         </ion-col>
@@ -34,8 +34,9 @@
             </ion-card-content>
         </ion-card>
 
-        <ion-col width-100>
-            <h2>Tournoi <b> {{  tournament.name }}</b></h2>
+        <ion-col width-100 class="no-padding-bottom"><h2>Tournoi <b>{{ tournament.name }}</b></h2></ion-col>
+        <ion-col width-100 no-padding>
+            <div style="font-weight: 100; margin-left:11px;">Cliquez pour plus de détails</div>
         </ion-col>
         <ion-card (click)="goToTournament(tournament)">
             <ion-card-content no-padding>
@@ -43,11 +44,13 @@
                 <ion-grid text-center>
                     <ion-row style="flex-wrap: wrap;">
                         <ion-col width-50>
-                            <ion-icon name="football" class="info"></ion-icon><br/>
+                            <ion-icon name="game-controller-a" class="info"></ion-icon>
+                            <br/>
                             <div class="items">{{ teamData.sport }}</div>
                         </ion-col>
                         <ion-col width-50>
-                            <ion-icon name="pin" class="info"></ion-icon><br/>
+                            <ion-icon name="pin" class="info"></ion-icon>
+                            <br/>
                             <div class="items">{{ tournament.place }}</div>
                         </ion-col>
                     </ion-row>
@@ -56,7 +59,10 @@
             </ion-card-content>
         </ion-card>
 
-        <ion-col width-100><h2>Liste des <b>Matchs</b></h2></ion-col>
+        <ion-col width-100 class="no-padding-bottom"><h2>Liste des <b>Matchs</b></h2></ion-col>
+        <ion-col width-100 no-padding>
+            <div style="font-weight: 100; margin-left:11px;">Cliquez pour plus de détails</div>
+        </ion-col>
         <ion-card>
             <ion-card-content no-padding>
                 <ion-list *ngFor="let match of teamData.matches" (click)="goToPool(tournament, match.group_match_id)">
@@ -93,7 +99,22 @@
 
     </div>
 
+
+
 </ion-content>
+
+<!--<ion-footer>-->
+    <!--<ion-toolbar>-->
+        <!--<ion-tabs class="tabs-basic">-->
+            <!--<ion-tab tabTitle="Son tournoi"></ion-tab>-->
+            <!--<ion-tab tabTitle="Ses pools"></ion-tab>-->
+        <!--</ion-tabs>-->
+    <!--</ion-toolbar>-->
+<!--</ion-footer>-->
+
+
+
+
 
 
 

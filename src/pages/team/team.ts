@@ -9,6 +9,7 @@ import {TournamentPage} from "../tournament/tournament";
     selector: 'page-team',
     templateUrl: 'team.html'
 })
+
 export class TeamPage {
     event: any;
     team: any;
@@ -41,3 +42,4 @@ export class TeamPage {
         document.getElementById('spinnerContent').style.visibility = 'hidden';
     }
 }
+
