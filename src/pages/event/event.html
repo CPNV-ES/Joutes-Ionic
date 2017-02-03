@@ -36,7 +36,7 @@
 
                 <div class="items" (click)="goToTeam(team)">{{team.name}} ({{team.sport}})</div>
 
-                <ion-icon item-right name="star" (click)="toggleFavoriteTeam(team)" *ngIf="team.favorite"></ion-icon>
+                <ion-icon item-right name="star" class="color-star" (click)="toggleFavoriteTeam(team)" *ngIf="team.favorite"></ion-icon>
                 <ion-icon item-right name="star-outline" (click)="toggleFavoriteTeam(team)" *ngIf="!team.favorite"></ion-icon>
             </ion-item>
         </ion-list>
