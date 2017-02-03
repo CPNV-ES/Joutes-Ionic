@@ -63,40 +63,121 @@
         <ion-col width-100 no-padding>
             <div style="font-weight: 100; margin-left:11px;">Cliquez pour plus de détails</div>
         </ion-col>
+        <!--<ion-card>-->
+            <!--<ion-card-content no-padding>-->
+                <!--<ion-list *ngFor="let match of teamData.matches" (click)="goToPool(tournament, match.group_match_id)">-->
+                    <!--<ion-item class="border-win" *ngIf="match.ownScore > match.team2Score">-->
+                        <!--<span class="items">{{ match.team2 }}</span>-->
+                        <!--<ion-note item-right>-->
+                            <!--<span class="items">{{ match.ownScore }} - {{ match.team2Score }}</span>-->
+                        <!--</ion-note>-->
+                    <!--</ion-item>-->
+
+                    <!--<ion-item class="border-lose" *ngIf="match.ownScore < match.team2Score">-->
+                        <!--<span class="items">{{ match.team2 }}</span>-->
+                        <!--<ion-note item-right>-->
+                            <!--<span class="items">{{ match.ownScore }} - {{ match.team2Score }}</span>-->
+                        <!--</ion-note>-->
+                    <!--</ion-item>-->
+
+                    <!--<ion-item class="border-draw" *ngIf="(match.team1Score == match.team2Score) && (match.start == '')">-->
+                        <!--<span class="items">{{ match.team2 }}</span>-->
+                        <!--<ion-note item-right>-->
+                            <!--<span class="items">{{ match.ownScore }} - {{ match.team2Score }}</span>-->
+                        <!--</ion-note>-->
+                    <!--</ion-item>-->
+
+                    <!--<ion-item class="border-inc" *ngIf="match.status == 'A venir' ">-->
+                        <!--<span class="items">{{ match.team2 }}</span>-->
+                        <!--<ion-note item-right>-->
+                            <!--<span class="items">{{ match.start }}</span>-->
+                        <!--</ion-note>-->
+                    <!--</ion-item>-->
+                <!--</ion-list>-->
+            <!--</ion-card-content>-->
+        <!--</ion-card>-->
+
+
+
+
+
+
+
         <ion-card>
             <ion-card-content no-padding>
-                <ion-list *ngFor="let match of teamData.matches" (click)="goToPool(tournament, match.group_match_id)">
-                    <ion-item class="border-win" *ngIf="match.ownScore > match.team2Score">
-                        <span class="items">{{ match.team2 }}</span>
-                        <ion-note item-right>
-                            <span class="items">{{ match.ownScore }} - {{ match.team2Score }}</span>
-                        </ion-note>
-                    </ion-item>
+                <ion-list >
+                    <ion-item *ngFor="let match of teamData.matches" (click)="goToPool(tournament, match.group_match_id)">
 
-                    <ion-item class="border-lose" *ngIf="match.ownScore < match.team2Score">
-                        <span class="items">{{ match.team2 }}</span>
-                        <ion-note item-right>
-                            <span class="items">{{ match.ownScore }} - {{ match.team2Score }}</span>
-                        </ion-note>
-                    </ion-item>
+                        <!-- WIN -->
+                        <ion-row class="border-win" *ngIf="match.ownScore > match.team2Score">
+                            <ion-col width-33 class="items">
+                                {{ teamData.name }}
+                            </ion-col>
 
-                    <ion-item class="border-draw" *ngIf="(match.team1Score == match.team2Score) && (match.start == '')">
-                        <span class="items">{{ match.team2 }}</span>
-                        <ion-note item-right>
-                            <span class="items">{{ match.ownScore }} - {{ match.team2Score }}</span>
-                        </ion-note>
-                    </ion-item>
+                            <ion-col text-center>
+                                <ion-note class="items">{{ match.ownScore }} - {{ match.team2Score }}</ion-note>
+                            </ion-col>
 
-                    <ion-item class="border-inc" *ngIf="match.status == 'A venir' ">
-                        <span class="items">{{ match.team2 }}</span>
-                        <ion-note item-right>
-                            <span class="items">{{ match.start }}</span>
-                        </ion-note>
+                            <ion-col width-33 class="items" text-right>
+                                {{ match.team2 }}
+                            </ion-col>
+                        </ion-row>
+                        <!-- END - WIN -->
+
+
+                        <!-- LOSE -->
+                        <ion-row class="border-lose" *ngIf="match.ownScore < match.team2Score">
+                            <ion-col width-33 class="items">
+                                {{ teamData.name }}
+                            </ion-col>
+
+                            <ion-col text-center>
+                                <ion-note class="items">{{ match.ownScore }} - {{ match.team2Score }}</ion-note>
+                            </ion-col>
+
+                            <ion-col width-33 class="items" text-right>
+                                {{ match.team2 }}
+                            </ion-col>
+                        </ion-row>
+                        <!-- END - LOSE -->
+
+
+                        <!-- DRAW -->
+                        <ion-row class="border-draw" *ngIf="(match.team1Score == match.team2Score) && (match.start == '')">
+                            <ion-col width-33 class="items">
+                                {{ teamData.name }}
+                            </ion-col>
+
+                            <ion-col text-center>
+                                <ion-note class="items">{{ match.ownScore }} - {{ match.team2Score }}</ion-note>
+                            </ion-col>
+
+                            <ion-col width-33 class="items" text-right>
+                                {{ match.team2 }}
+                            </ion-col>
+                        </ion-row>
+                        <!-- END - DRAW -->
+
+                        <!-- INC -->
+                        <ion-row class="border-inc" *ngIf="match.status == 'A venir' ">
+                            <ion-col width-33 class="items">
+                                {{ teamData.name }}
+                            </ion-col>
+
+                            <ion-col text-center>
+                                <ion-note class="items">{{ match.start }}</ion-note>
+                            </ion-col>
+
+                            <ion-col width-33 class="items" text-right>
+                                {{ match.team2 }}
+                            </ion-col>
+                        </ion-row>
+                        <!-- END - INC -->
+
                     </ion-item>
                 </ion-list>
             </ion-card-content>
         </ion-card>
-
     </div>
 
 
