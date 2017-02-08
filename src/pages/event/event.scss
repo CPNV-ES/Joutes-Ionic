@@ -4,6 +4,13 @@ page-event {
   }
 
   .color-star{
-    color:yellow;
+    color:#F9A825;
+  }
+  .ion-md-star-outline:before {
+    color:#F9A825;
+  }
+
+  .header-md::after{
+    background-image: none;
   }
 }
