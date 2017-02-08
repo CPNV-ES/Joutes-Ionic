@@ -42,5 +42,28 @@ export class TeamPage {
         console.log("vue chargée");
         document.getElementById('spinnerContent').style.visibility = 'hidden';
     }
+
+    setIconSports(sport)
+    {
+        switch (sport)
+        {
+            case 'Badminton':
+                return 'badminton.png';
+            case 'Basketball':
+                return 'basketball.png';
+            case 'Football':
+                return 'football.png';
+            case 'Pétanque':
+                return 'petanque.png';
+            case 'Unihockey':
+                return 'unihockey.png';
+            case 'Volley':
+                return 'volley.png';
+            case 'Marche':
+                return 'walking.png';
+            default:
+                return 'default.png'
+        }
+    }
 }
 
