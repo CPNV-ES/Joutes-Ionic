@@ -6,6 +6,7 @@ import {SharedDataService} from '../../providers/sharedData-service';
 import {Storage} from '@ionic/storage';
 import {TeamPage} from "../team/team";
 import {TournamentPage} from "../tournament/tournament";
+import {ParticipantService} from "../../providers/participant-service";
 
 
 /*
@@ -22,13 +23,16 @@ export class EventPage {
     public event: any;
     private teams: any;
     public tournaments: any;
+    public participants: any;
+    public filteredParticipants: any;
     public filteredTeams: any;
-    public searchTerm: string = '';
+    public searchTermTeam: string = '';
+    public searchTermParticipant: string = '';
     public userFavoritesTeamsPromise: any;
     public userFavoritesTeamsIds: any;
     public eventContent: any;
 
-    constructor(public navCtrl: NavController, public storage: Storage, public teamProvider: TeamService, public tournamentProvider: TournamentService, public sharedDataProvider: SharedDataService) {
+    constructor(public navCtrl: NavController, public storage: Storage, public teamProvider: TeamService, public tournamentProvider: TournamentService, public participantProvider: ParticipantService, public sharedDataProvider: SharedDataService) {
         this.event = this.sharedDataProvider.getCurrentEvent();
         this.userFavoritesTeamsPromise = this.sharedDataProvider.getCurrentEventFavoritesTeams();
 
@@ -47,8 +51,11 @@ export class EventPage {
 
         this.tournamentProvider.getTournamentsByEvent(this.event.id).subscribe(data => {
             this.tournaments = data.tournaments;
-            // this.filteredTeams = data.teams;
-            // this.filterTeams();
+        });
+
+        this.participantProvider.getParticipantsByEvent(this.event.id).subscribe(data => {
+            this.participants = data.participants;
+            this.filteredParticipants = this.participants;
         });
 
         this.eventContent = "teams";
@@ -57,7 +64,7 @@ export class EventPage {
     filterTeams() {
         var self = this;
         this.filteredTeams = this.teams.filter((team) => {
-            return team.name.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+            return team.name.toLowerCase().indexOf(this.searchTermTeam.toLowerCase()) > -1;
         });
         //Put the favorites in front of the array
         var temp = [];
@@ -77,6 +84,13 @@ export class EventPage {
                 }
                 self.filteredTeams = temp;
             }
+        });
+    }
+
+    filterParticipants() {
+        this.filteredParticipants = this.participants.filter((participant) => {
+            var participantFullName = participant.lastname + ' ' + participant.firstname;
+            return participantFullName.toLowerCase().indexOf(this.searchTermParticipant.toLowerCase()) > -1;
         });
     }
 
