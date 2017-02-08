@@ -53,9 +53,9 @@ export class ParticipantPage {
         this.navCtrl.push(TeamPage);
     }
 
-    goToPool(tournament, pool_id) {
+    goToPool(pool_id) {
         document.getElementById('spinnerContent').style.visibility = 'visible';
-        this.sharedDataProvider.setCurrentTournament(tournament);
+        this.sharedDataProvider.setCurrentTournament(this.participantData.tournament[0]);
         this.pool.id = pool_id;
         this.sharedDataProvider.setCurrentPool(this.pool);
         this.navCtrl.push(PoolPage);

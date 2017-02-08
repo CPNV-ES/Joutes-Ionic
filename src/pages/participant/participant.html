@@ -99,7 +99,7 @@
         <ion-card>
             <ion-card-content no-padding>
                 <ion-list >
-                    <ion-item *ngFor="let match of teamData.matches" (click)="goToPool(tournament, match.group_match_id)">
+                    <ion-item *ngFor="let match of teamData.matches" (click)="goToPool(match.group_match_id)">
 
                         <!-- WIN -->
                         <ion-row class="border-win" *ngIf="match.ownScore > match.team2Score">
