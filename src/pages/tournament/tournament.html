@@ -49,8 +49,15 @@
     <ion-card>
         <ion-card-content no-padding>
             <ion-list>
-                <ion-item *ngFor="let group of tournamentData.group_matchs" (click)="goToPool(group)">
-                    <div class="items">{{ group.name }}</div>
+                <ion-item *ngFor="let group of tournamentData.group_matchs" (click)="goToPool(group)" class="items">
+                    <ion-row>
+                        <ion-col width-50 text-left no-padding>
+                            {{ group.name }}
+                        </ion-col>
+                        <ion-col width-50 text-right no-padding>
+                            <ion-note>4 / 5</ion-note>
+                        </ion-col>
+                    </ion-row>
                 </ion-item>
             </ion-list>
         </ion-card-content>

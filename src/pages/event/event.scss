@@ -6,4 +6,8 @@ page-event {
   .color-star{
     color:yellow;
   }
+
+  .header-md::after{
+    background-image: none;
+  }
 }
