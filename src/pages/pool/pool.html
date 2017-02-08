@@ -24,11 +24,13 @@
     <ion-grid text-center class="white-background">
         <ion-row style="flex-wrap: wrap;">
             <ion-col width-50>
-                <ion-icon name="grid" class="info"></ion-icon><br/>
+                <ion-icon name="grid" class="info"></ion-icon>
+                <br/>
                 <div class="items">{{ poolData.type }}</div>
             </ion-col>
             <ion-col width-50>
-                <ion-icon name="pin" class="info"></ion-icon><br/>
+                <ion-icon name="pin" class="info"></ion-icon>
+                <br/>
                 <div class="items">{{ tournament.place }}</div>
             </ion-col>
         </ion-row>
@@ -66,27 +68,47 @@
     <ion-col width-100><h2>Le <b>Classement</b></h2></ion-col>
     <ion-card>
         <ion-card-content no-padding padding-top padding-bottom>
-            <ion-row class="border-table results-head">
-                <ion-col width-10>
-                    <strong>#</strong>
-                </ion-col>
-                <ion-col width-50>
-                    <strong>Equipes</strong>
-                </ion-col>
-                <ion-col width-10 text-center>
-                    <strong>Pts</strong>
-                </ion-col>
-                <ion-col width-10 text-center>
-                    <strong>G</strong>
-                </ion-col>
-                <ion-col width-10 text-center>
-                    <strong>P</strong>
-                </ion-col>
-                <ion-col width-10 text-center>
-                    <strong>+/-</strong>
-                </ion-col>
-            </ion-row>
-            <ion-list>
+            <!-- DISPLAY THE INFORMATION FOR ELIMINATION -->
+            <ion-list *ngIf="poolData.type == 'Elimination' ">
+                <ion-row class="border-table results-head">
+                    <ion-col width-20>
+                        <strong>#</strong>
+                    </ion-col>
+                    <ion-col width-80>
+                        <strong>Equipes</strong>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="results" (click)="goToTeam(team)" *ngFor="let team of poolData.teams; let i = index;">
+                    <ion-col width-20>
+                        <strong>{{ i+1 }}</strong>
+                    </ion-col>
+                    <ion-col width-80 class="items">
+                        {{ team.name }}
+                    </ion-col>
+                </ion-row>
+            </ion-list>
+            <!-- DISPLAY THE INFORMATION FOR POOL-->
+            <ion-list *ngIf="poolData.type == 'Poule' ">
+                <ion-row class="border-table results-head">
+                    <ion-col width-10>
+                        <strong>#</strong>
+                    </ion-col>
+                    <ion-col width-50>
+                        <strong>Equipes</strong>
+                    </ion-col>
+                    <ion-col width-10 text-center>
+                        <strong>Pts</strong>
+                    </ion-col>
+                    <ion-col width-10 text-center>
+                        <strong>G</strong>
+                    </ion-col>
+                    <ion-col width-10 text-center>
+                        <strong>P</strong>
+                    </ion-col>
+                    <ion-col width-10 text-center>
+                        <strong>+/-</strong>
+                    </ion-col>
+                </ion-row>
                 <ion-row class="results" (click)="goToTeam(team)" *ngFor="let team of poolData.teams; let i = index;">
                     <ion-col width-10>
                         <strong>{{ i+1 }}</strong>
@@ -94,16 +116,16 @@
                     <ion-col width-50 class="items">
                         {{ team.name }}
                     </ion-col>
-                    <ion-col width-10 text-center  class="items">
+                    <ion-col width-10 text-center class="items">
                         {{ team.points }}
                     </ion-col>
-                    <ion-col width-10 text-center  class="items">
+                    <ion-col width-10 text-center class="items">
                         {{ team.matchesWin }}
                     </ion-col>
-                    <ion-col width-10 text-center  class="items">
+                    <ion-col width-10 text-center class="items">
                         {{ team.matchesLost }}
                     </ion-col>
-                    <ion-col width-10 text-center  class="items">
+                    <ion-col width-10 text-center class="items">
                         {{ team.goalsFor - team.goalsAgainst }}
                     </ion-col>
                 </ion-row>
