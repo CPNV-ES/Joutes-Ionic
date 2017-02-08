@@ -7,6 +7,7 @@ import {Storage} from '@ionic/storage';
 import {TeamPage} from "../team/team";
 import {TournamentPage} from "../tournament/tournament";
 import {ParticipantService} from "../../providers/participant-service";
+import {ParticipantPage} from "../participant/participant";
 
 
 /*
@@ -131,6 +132,12 @@ export class EventPage {
         document.getElementById('spinnerContent').style.visibility = 'visible';
         this.sharedDataProvider.setCurrentTournament(tournament);
         this.navCtrl.push(TournamentPage);
+    }
+
+    goToParticipant(participant) {
+        document.getElementById('spinnerContent').style.visibility = 'visible';
+        this.sharedDataProvider.setCurrentParticipant(participant);
+        this.navCtrl.push(ParticipantPage);
     }
 
     ionViewDidLoad() {

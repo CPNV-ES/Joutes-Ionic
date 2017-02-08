@@ -25,7 +25,6 @@ export class TeamService {
 
     getTeam(teamId, eventId)
     {
-        console.log(this.sharedDataProvider.getCurrentIp()+`/${eventId}/team/${teamId}`);
         return this.http.get(this.sharedDataProvider.getCurrentIp()+`/${eventId}/team/${teamId}`).map(res => res.json());
     }
 }

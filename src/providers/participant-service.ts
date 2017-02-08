@@ -24,9 +24,8 @@ export class ParticipantService {
         return this.http.get(this.sharedDataProvider.getCurrentIp()+`/${eventId}/participants`).map(res => res.json());
     }
 
-    getParticipant(participantId, eventId)
+    getParticipant(eventId, participantId)
     {
-        console.log(this.sharedDataProvider.getCurrentIp()+`/${eventId}/participants/${participantId}`);
-        return this.http.get(this.sharedDataProvider.getCurrentIp()+`/${eventId}/participants/${participantId}`).map(res => res.json());
+        return this.http.get(this.sharedDataProvider.getCurrentIp()+`/${eventId}/participant/${participantId}`).map(res => res.json());
     }
 }
