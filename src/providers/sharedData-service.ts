@@ -7,6 +7,7 @@ export class SharedDataService {
     currentTeam: any;
     currentTournament: any;
     currentPool: any;
+    currentParticipant: any;
     constructor(public storage: Storage) {}
 
     getCurrentIp() {
@@ -68,5 +69,14 @@ export class SharedDataService {
 
     getCurrentPool(): any {
         return this.currentPool;
+    }
+
+    setCurrentParticipant(participant)
+    {
+        this.currentParticipant = participant;
+    }
+
+    getCurrentParticipant(): any {
+        return this.currentParticipant;
     }
 }
