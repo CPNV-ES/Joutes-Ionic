@@ -52,6 +52,7 @@ export class EventPage {
 
         this.tournamentProvider.getTournamentsByEvent(this.event.id).subscribe(data => {
             this.tournaments = data.tournaments;
+            console.log(this.tournaments);
         });
 
         this.participantProvider.getParticipantsByEvent(this.event.id).subscribe(data => {
