@@ -36,7 +36,7 @@
 
         <ion-list *ngSwitchCase="'teams'">
             <ion-toolbar no-border-top>
-                <ion-searchbar color="primary" placeholder="Nom de l'équipe.." [(ngModel)]="searchTermTeam"
+                <ion-searchbar color="primary" placeholder="Nom de l'équipe" [(ngModel)]="searchTermTeam"
                                (ionInput)="filterTeams()">
                 </ion-searchbar>
             </ion-toolbar>
@@ -51,7 +51,7 @@
 
         <ion-list *ngSwitchCase="'tournaments'">
             <ion-item *ngFor="let tournament of tournaments">
-                <div class="items" (click)="goToTournament(tournament)">{{tournament.name}} ({{tournament.sport}})</div>
+                <div class="items" (click)="goToTournament(tournament)">{{tournament.name}}</div>
             </ion-item>
         </ion-list>
 

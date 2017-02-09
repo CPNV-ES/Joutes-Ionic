@@ -20,6 +20,9 @@ export class SharedDataService {
         //LAN IP
         return "http://172.17.102.188/Joutes/public/api";
 
+        //LAN IP REAL
+        // return "http://172.17.102.188/Joutes-real/Joutes/public/api";
+
     }
 
     getCurrentEvent(): any {
