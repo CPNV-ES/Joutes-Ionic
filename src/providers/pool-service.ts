@@ -22,7 +22,7 @@ export class PoolService {
 
     getPool(tournamentId, eventId, poolId)
     {
-        return this.http.get(this.sharedDataProvider.getCurrentIp()+`/${eventId}/tournament/${tournamentId}/${poolId}`).map(res => res.json());
+        return this.http.get(this.sharedDataProvider.getCurrentIp()+`/events/${eventId}/tournament/${tournamentId}/${poolId}`).map(res => res.json());
     }
 
 }

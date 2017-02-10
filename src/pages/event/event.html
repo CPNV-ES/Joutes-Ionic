@@ -67,12 +67,6 @@
             </ion-item>
         </ion-list>
 
-        <!--<ion-list *ngSwitchCase="'resultats'">-->
-            <!--<ion-item *ngFor="let tournament of tournaments">-->
-                <!--<div class="items" (click)="goToTournament(tournament)">{{tournament.name}} ({{tournament.sport}})</div>-->
-            <!--</ion-item>-->
-        <!--</ion-list>-->
-
         <ion-item-group *ngSwitchCase="'resultats'">
             <div *ngFor="let tournament of tournaments">
                 <ion-item-divider class="tournament-name items" (click)="goToTournament(tournament)"><b>{{tournament.name}}</b></ion-item-divider>
@@ -81,21 +75,21 @@
                         <ion-row class="items">
                             <ion-col class="items" width-25> 1er</ion-col>
                             <ion-col class="items" width-75 (click)="goToTeam(tournament.winner)" *ngIf="tournament.winner.name != ''">{{tournament.winner.name}}</ion-col>
-                            <ion-col class="items" width-75 *ngIf="tournament.winner.name == ''">Tournois en cours</ion-col>
+                            <ion-col class="items" width-75 *ngIf="tournament.winner.name == ''">En cours</ion-col>
                         </ion-row>
                     </ion-item>
                     <ion-item class="classement">
                         <ion-row class="items">
                             <ion-col class="items" width-25> 2ème</ion-col>
                             <ion-col class="items" width-75 (click)="goToTeam(tournament.second)" *ngIf="tournament.second.name != ''">{{tournament.second.name}}</ion-col>
-                            <ion-col class="items" width-75 *ngIf="tournament.second.name == ''">Tournois en cours</ion-col>
+                            <ion-col class="items" width-75 *ngIf="tournament.second.name == ''">En cours</ion-col>
                         </ion-row>
                     </ion-item>
                     <ion-item class="classement">
                         <ion-row class="items">
                             <ion-col class="items" width-25> 3ème</ion-col>
                             <ion-col class="items" width-75 (click)="goToTeam(tournament.third)" *ngIf="tournament.third.name != ''">{{tournament.third.name}}</ion-col>
-                            <ion-col class="items" width-75 *ngIf="tournament.third.name == ''">Tournois en cours</ion-col>
+                            <ion-col class="items" width-75 *ngIf="tournament.third.name == ''">En cours</ion-col>
                         </ion-row>
                     </ion-item>
                 </ion-grid>

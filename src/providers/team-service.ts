@@ -20,11 +20,11 @@ export class TeamService {
 
     getTeamsByEvent(eventId): any
     {
-        return this.http.get(this.sharedDataProvider.getCurrentIp()+`/${eventId}/teams`).map(res => res.json());
+        return this.http.get(this.sharedDataProvider.getCurrentIp()+`/events/${eventId}/teams`).map(res => res.json());
     }
 
     getTeam(teamId, eventId)
     {
-        return this.http.get(this.sharedDataProvider.getCurrentIp()+`/${eventId}/team/${teamId}`).map(res => res.json());
+        return this.http.get(this.sharedDataProvider.getCurrentIp()+`/events/${eventId}/team/${teamId}`).map(res => res.json());
     }
 }

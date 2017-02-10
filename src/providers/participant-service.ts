@@ -21,11 +21,11 @@ export class ParticipantService {
 
     getParticipantsByEvent(eventId): any
     {
-        return this.http.get(this.sharedDataProvider.getCurrentIp()+`/${eventId}/participants`).map(res => res.json());
+        return this.http.get(this.sharedDataProvider.getCurrentIp()+`/events/${eventId}/participants`).map(res => res.json());
     }
 
     getParticipant(eventId, participantId)
     {
-        return this.http.get(this.sharedDataProvider.getCurrentIp()+`/${eventId}/participant/${participantId}`).map(res => res.json());
+        return this.http.get(this.sharedDataProvider.getCurrentIp()+`/events/${eventId}/participant/${participantId}`).map(res => res.json());
     }
 }

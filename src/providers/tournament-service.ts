@@ -21,11 +21,11 @@ export class TournamentService {
 
     getTournamentsByEvent(eventId): any
     {
-        return this.http.get(this.sharedDataProvider.getCurrentIp()+`/${eventId}/tournaments`).map(res => res.json());
+        return this.http.get(this.sharedDataProvider.getCurrentIp()+`/events/${eventId}/tournaments`).map(res => res.json());
     }
 
     getTournament(eventId, tournamentId)
     {
-        return this.http.get(this.sharedDataProvider.getCurrentIp()+`/${eventId}/tournament/${tournamentId}`).map(res => res.json());
+        return this.http.get(this.sharedDataProvider.getCurrentIp()+`/events/${eventId}/tournament/${tournamentId}`).map(res => res.json());
     }
 }
