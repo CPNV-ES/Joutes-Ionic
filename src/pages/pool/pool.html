@@ -50,8 +50,8 @@
                         <ion-col width-33 class="items">
                             {{ match.team1 }}
                         </ion-col>
-                        <ion-col width-33 class="items" text-center *ngIf="match.status == 'A venir' ">
-                            <ion-note>{{ match.start }}</ion-note>
+                        <ion-col width-33 class="items" text-center *ngIf="match.status == 'A venir'">
+                        <ion-note>{{ match.start }}</ion-note>
                         </ion-col>
                         <ion-col width-33 class="items" text-center *ngIf="match.status != 'A venir' ">
                             <ion-note>{{ match.team1Score }} - {{ match.team2Score }}</ion-note>
@@ -78,14 +78,27 @@
                         <strong>Equipes</strong>
                     </ion-col>
                 </ion-row>
-                <ion-row class="results" (click)="goToTeam(team)" *ngFor="let team of poolData.teams; let i = index;">
-                    <ion-col width-20>
-                        <strong>{{ i+1 }}</strong>
-                    </ion-col>
-                    <ion-col width-80 class="items">
-                        {{ team.name }}
-                    </ion-col>
-                </ion-row>
+                <div *ngIf="finish">
+                    <ion-row class="results" (click)="goToTeam(team)"
+                             *ngFor="let team of poolData.teams; let i = index;">
+                        <ion-col width-20>
+                            <strong>{{ i+1 }}</strong>
+                        </ion-col>
+                        <ion-col width-80 class="items">
+                            {{ team.name }}
+                        </ion-col>
+                    </ion-row>
+                </div>
+                <div *ngIf="!finish">
+                    <ion-row class="results" >
+                        <ion-col width-20>
+                            <strong></strong>
+                        </ion-col>
+                        <ion-col width-80 class="items">
+                            Tournoi en cours
+                        </ion-col>
+                    </ion-row>
+                </div>
             </ion-list>
             <!-- DISPLAY THE INFORMATION FOR POOL-->
             <ion-list *ngIf="poolData.type == 'Poule' ">
@@ -109,6 +122,7 @@
                         <strong>+/-</strong>
                     </ion-col>
                 </ion-row>
+
                 <ion-row class="results" (click)="goToTeam(team)" *ngFor="let team of poolData.teams; let i = index;">
                     <ion-col width-10>
                         <strong>{{ i+1 }}</strong>

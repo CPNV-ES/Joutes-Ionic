@@ -20,13 +20,26 @@ export class PoolPage {
     public tournament: any;
     public pool: any;
     public poolData: any = {};
+    public finish: boolean = true;
 
     constructor(public navCtrl: NavController, public navParam: NavParams, public poolProvider: PoolService, public sharedDataProvider: SharedDataService) {
         this.event = sharedDataProvider.getCurrentEvent();
         this.tournament = sharedDataProvider.getCurrentTournament();
         this.pool = sharedDataProvider.getCurrentPool();
 
-        this.poolProvider.getPool(this.event.id, this.tournament.id, this.pool.id).subscribe(data => this.poolData = data);
+        this.poolProvider.getPool(this.event.id, this.tournament.id, this.pool.id).subscribe(data => {
+            this.poolData = data;
+            this.isFinished();
+        });
+    }
+
+    isFinished() {
+        var self = this;
+        this.poolData.matches.forEach(function (match) {
+            if(match.status == 'A venir') {
+                self.finish = false;
+            }
+        });
     }
 
     goToTeam(team) {
