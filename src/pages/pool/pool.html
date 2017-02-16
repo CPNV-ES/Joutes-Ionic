@@ -67,18 +67,10 @@
 
     <ion-col width-100><h2>Le <b>Classement</b></h2></ion-col>
     <ion-card>
-        <ion-card-content no-padding padding-top padding-bottom>
+        <ion-card-content no-padding padding-bottom>
             <!-- DISPLAY THE INFORMATION FOR ELIMINATION -->
             <ion-list *ngIf="poolData.type == 'Elimination' ">
-                <ion-row class="border-table results-head">
-                    <ion-col width-20>
-                        <strong>#</strong>
-                    </ion-col>
-                    <ion-col width-80>
-                        <strong>Equipes</strong>
-                    </ion-col>
-                </ion-row>
-                <div *ngIf="finish">
+                <ion-item *ngIf="finish">
                     <ion-row class="results" (click)="goToTeam(team)"
                              *ngFor="let team of poolData.teams; let i = index;">
                         <ion-col width-20>
@@ -88,17 +80,17 @@
                             {{ team.name }}
                         </ion-col>
                     </ion-row>
-                </div>
-                <div *ngIf="!finish">
+                </ion-item>
+                <ion-item *ngIf="!finish">
                     <ion-row class="results" >
                         <ion-col width-20>
-                            <strong></strong>
+
                         </ion-col>
                         <ion-col width-80 class="items">
                             Tournoi en cours
                         </ion-col>
                     </ion-row>
-                </div>
+                </ion-item>
             </ion-list>
             <!-- DISPLAY THE INFORMATION FOR POOL-->
             <ion-list *ngIf="poolData.type == 'Poule' ">

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.joutesionic753953" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>Joutes-Ionic</name>
-  <description>An awesome Ionic/Cordova app.</description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+  <name>Joutes</name>
+  <description>Application permettant de visualiser les évènements sportifs du CPNV</description>
+  <author email="malorie.genoud@cpnv.ch;quentin.girard@cpnv.ch;stephane.martignier@cpnv.ch" href="http://ionicframework.com/">Malorie GENOUD, Quentin GIRARD, Stéphane MARTIGNIER</author>
   <content src="index.html"/>
   <access origin="*"/>
   <allow-intent href="http://*/*"/>

@@ -128,3 +128,11 @@ ion-label{
   white-space: normal;
 
 }
+
+.color-star{
+  color: color($colors, success);
+}
+
+.ion-md-star-outline:before {
+  color: color($colors, success);
+}

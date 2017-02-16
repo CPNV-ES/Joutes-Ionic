@@ -26,6 +26,7 @@ export class TournamentPage {
         this.tournament = sharedDataProvider.getCurrentTournament();
 
         this.tournamentProvider.getTournament(this.event.id, this.tournament.id).subscribe(data => this.tournamentData = data);
+
     }
 
     goToPool(pool) {
