@@ -29,6 +29,7 @@ export class TournamentPage {
 
         // Get the tournament
         this.tournamentProvider.getTournament(this.event.id, this.tournament.id).subscribe(data => this.tournamentData = data);
+
     }
 
     // Go to page detail pool

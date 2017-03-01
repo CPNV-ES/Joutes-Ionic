@@ -76,7 +76,7 @@
                     </ion-col>
                 </ion-row>
                 <!-- Display the classmate -->
-                <div *ngIf="finish">
+                <ion-item *ngIf="finish">
                     <ion-row class="results" (click)="goToTeam(team)"
                              *ngFor="let team of poolData.teams; let i = index;">
                         <ion-col width-20>
@@ -86,18 +86,17 @@
                             {{ team.name }}
                         </ion-col>
                     </ion-row>
-                </div>
                 <!-- Display nothing if no matches are finished -->
-                <div *ngIf="!finish">
+                <ion-item *ngIf="!finish">
                     <ion-row class="results" >
                         <ion-col width-20>
-                            <strong></strong>
+
                         </ion-col>
                         <ion-col width-80 class="items">
                             Tournoi en cours
                         </ion-col>
                     </ion-row>
-                </div>
+                </ion-item>
             </ion-list>
             <!-- Display the information for pool-->
             <ion-list *ngIf="poolData.type == 'Poule' ">

@@ -71,16 +71,16 @@
         <!-- Display the name of team and display a icon trophy if the team have a status "Vainqueur" -->
         <ion-col width-100>
             <h2>Equipe <b>{{ teamData.name }}</b>
-                <ion-icon name="trophy" *ngIf="teamData.status == 'Vainqueur'"></ion-icon>
+                <ion-icon name="trophy" class="color-star" *ngIf="teamData.status == 'Vainqueur'"></ion-icon>
             </h2>
         </ion-col>
-        <!-- Display the name of participants -->
+        <!-- Display the name of members -->
         <ion-card>
-            <ion-card-content>
+            <ion-card-content no-padding>
                 <ion-grid text-center>
                     <ion-row style="flex-wrap: wrap;">
-                        <ion-col width-33 *ngFor="let participant of teamData.participants">
-                            <span class="items">{{ participant.firstname }}</span>
+                        <ion-col width-33 *ngFor="let member of teamData.members">
+                            <span class="items">{{ member.firstname }}</span>
                         </ion-col>
                     </ion-row>
                 </ion-grid>

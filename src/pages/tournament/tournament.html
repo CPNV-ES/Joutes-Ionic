@@ -42,6 +42,32 @@
             </ion-list>
         </ion-card-content>
     </ion-card>
+    <ion-col width-100><h2>Le <b>Classement</b></h2></ion-col>
+    <ion-card>
+        <ion-card-content no-padding padding-bottom>
+            <!-- Display "En cours" if there is no winner -->
+            <ion-list no-padding>
+                <!-- When we click on the name of the team -> go to detail team -->
+                <ion-item no-padding>
+                    <ion-row class="results">
+                        <ion-col width-20><strong>1</strong></ion-col>
+                        <ion-col width-80 class="items" *ngIf="tournamentData.winner" (click)="goToTeam(tournamentData.winner)">{{tournamentData.winner.name}}</ion-col>
+                        <ion-col width-80 class="items" *ngIf="!tournamentData.winner">En cours</ion-col>
+                    </ion-row>
+                    <ion-row class="results">
+                        <ion-col width-20><strong>2</strong></ion-col>
+                        <ion-col width-80 class="items" *ngIf="tournamentData.second" (click)="goToTeam(tournamentData.second)">{{tournamentData.second.name}}</ion-col>
+                        <ion-col width-80 class="items" *ngIf="!tournamentData.second">En cours</ion-col>
+                    </ion-row>
+                    <ion-row class="results">
+                        <ion-col width-20><strong>3</strong></ion-col>
+                        <ion-col width-80 class="items" *ngIf="tournamentData.third" (click)="goToTeam(tournamentData.third)">{{tournamentData.third.name}}</ion-col>
+                        <ion-col width-80 class="items" *ngIf="!tournamentData.third">En cours</ion-col>
+                    </ion-row>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
     <ion-col width-100><h2>Liste des <b>Poules</b> / <b>Eliminations</b></h2></ion-col>
     <ion-card>
         <ion-card-content no-padding>
@@ -63,3 +89,4 @@
     </ion-card>
 
 </ion-content>
+
