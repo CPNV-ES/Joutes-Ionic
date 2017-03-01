@@ -15,13 +15,12 @@ export class EventService
 {
     public events: any;
 
-    constructor(public http: Http, public sharedDataProvider: SharedDataService)
-    {
+    constructor(public http: Http, public sharedDataProvider: SharedDataService) {
         this.http = http;
     } 
 
-    getEvents()
-    {
+    // Get the json for events
+    getEvents() {
         return this.http.get(this.sharedDataProvider.getCurrentIp()+`/events`).map(res => res.json());
     }
 }

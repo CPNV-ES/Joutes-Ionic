@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import { Storage } from '@ionic/storage';
+import {Storage} from '@ionic/storage';
 
 @Injectable()
 export class SharedDataService {
@@ -8,11 +8,13 @@ export class SharedDataService {
     currentTournament: any;
     currentPool: any;
     currentParticipant: any;
-    constructor(public storage: Storage) {}
 
+    constructor(public storage: Storage) {
+    }
+
+    // Get current IP
     getCurrentIp() {
-
-        //Rasberry address
+        //Raspberry address
         // return "https://markal.servehttp.com/Joutes/api";
 
         //Wifi IP
@@ -23,60 +25,68 @@ export class SharedDataService {
 
         //LAN IP REAL
         // return "http://172.17.102.188/Joutes-real/Joutes/public/api";
-
     }
 
+    // Get current event
     getCurrentEvent(): any {
         return this.currentEvent;
     }
 
+    // Set current event
     setCurrentEvent(event): any {
         this.currentEvent = event;
     }
 
+    // Get current favorite teams
     getCurrentEventFavoritesTeams() {
-        return this.storage.get('event'+this.currentEvent.id).then(val => {
+        return this.storage.get('event' + this.currentEvent.id).then(val => {
             return val;
         });
     }
 
+    // Set current favorite teams
     setCurrentEventFavoritesTeams(favoritesTeams) {
-        this.storage.set('event'+this.currentEvent.id, favoritesTeams);
+        this.storage.set('event' + this.currentEvent.id, favoritesTeams);
     }
 
-    setCurrentTeam(team)
-    {
-        this.currentTeam = team;
-    }
-
+    // Get current team
     getCurrentTeam(): any {
         return this.currentTeam;
     }
 
-    setCurrentTournament(tournament)
-    {
-        this.currentTournament = tournament;
+    // Set current team
+    setCurrentTeam(team) {
+        this.currentTeam = team;
     }
 
+    // Get current tournament
     getCurrentTournament(): any {
         return this.currentTournament;
     }
 
-    setCurrentPool(currentPool)
-    {
-        this.currentPool = currentPool;
+    // Set current tournament
+    setCurrentTournament(tournament) {
+        this.currentTournament = tournament;
     }
 
+    // Get current pool
     getCurrentPool(): any {
         return this.currentPool;
     }
 
-    setCurrentParticipant(participant)
-    {
-        this.currentParticipant = participant;
+    // Set current pool
+    setCurrentPool(currentPool) {
+        this.currentPool = currentPool;
     }
 
+    // Get current participant
     getCurrentParticipant(): any {
         return this.currentParticipant;
     }
+
+    // Set current participant
+    setCurrentParticipant(participant) {
+        this.currentParticipant = participant;
+    }
+
 }

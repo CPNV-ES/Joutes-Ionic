@@ -19,11 +19,13 @@ export class TournamentService {
 
     }
 
+    // Get the json for tournaments by event
     getTournamentsByEvent(eventId): any
     {
         return this.http.get(this.sharedDataProvider.getCurrentIp()+`/events/${eventId}/tournaments`).map(res => res.json());
     }
 
+    // Get the json for tournament
     getTournament(eventId, tournamentId)
     {
         return this.http.get(this.sharedDataProvider.getCurrentIp()+`/events/${eventId}/tournament/${tournamentId}`).map(res => res.json());

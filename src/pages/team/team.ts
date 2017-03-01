@@ -16,32 +16,37 @@ export class TeamPage {
     pool: any = {id: ''};
     teamData: any = {};
 
-
     constructor(public navCtrl: NavController, public navParam: NavParams, public sharedDataProvider: SharedDataService, public teamProvider: TeamService) {
+        // Get the current event
         this.event = sharedDataProvider.getCurrentEvent();
+        // Get the current team
         this.team = sharedDataProvider.getCurrentTeam();
 
+        // Get the team
         this.teamProvider.getTeam(this.team.id, this.event.id).subscribe(data => this.teamData = data);
     }
 
+    // Go to page detail pool
     goToPool(tournament, pool_id) {
+        // Add a spinner when the view is loaded
         document.getElementById('spinnerContent').style.visibility = 'visible';
+
         this.sharedDataProvider.setCurrentTournament(tournament);
         this.pool.id = pool_id;
         this.sharedDataProvider.setCurrentPool(this.pool);
         this.navCtrl.push(PoolPage);
     }
 
+    // Go to page detail tournament
     goToTournament(tournament) {
+        // Add a spinner when the view is loaded
         document.getElementById('spinnerContent').style.visibility = 'visible';
+
         this.sharedDataProvider.setCurrentTournament(tournament);
         this.navCtrl.push(TournamentPage);
     }
 
-    ionViewDidLoad() {
-        document.getElementById('spinnerContent').style.visibility = 'hidden';
-    }
-
+    // Set different icons for the sport
     setIconSports(sport)
     {
         switch (sport)
@@ -63,6 +68,11 @@ export class TeamPage {
             default:
                 return 'default.png'
         }
+    }
+
+    // Add a spinner when the view is loading
+    ionViewDidLoad() {
+        document.getElementById('spinnerContent').style.visibility = 'hidden';
     }
 }
 

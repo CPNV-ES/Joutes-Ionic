@@ -4,19 +4,18 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-
-
 <ion-header >
+    <!-- Display the event name -->
     <ion-navbar no-border-bottom>
         <ion-title>
             {{ event.name }}
         </ion-title>
     </ion-navbar>
-
+    <!-- Display the toolbar -->
     <ion-toolbar no-border-top>
         <ion-segment [(ngModel)]="eventContent">
             <ion-segment-button value="teams">
-                Equipes
+                Équipes
             </ion-segment-button>
             <ion-segment-button value="tournaments">
                 Tournois
@@ -24,7 +23,7 @@
             <ion-segment-button value="participants">
                 Participants
             </ion-segment-button>
-            <ion-segment-button value="resultats">
+            <ion-segment-button value="results">
                 Résultats
             </ion-segment-button>
         </ion-segment>
@@ -32,60 +31,64 @@
 </ion-header>
 
 <ion-content>
+    <!-- Display the content according to the toolbar -->
     <div [ngSwitch]="eventContent">
-
         <ion-list *ngSwitchCase="'teams'">
+            <!-- Filter teams and display the list teams -->
             <ion-toolbar no-border-top>
-                <ion-searchbar color="primary" placeholder="Nom de l'équipe" [(ngModel)]="searchTermTeam"
-                               (ionInput)="filterTeams()">
+                <ion-searchbar color="primary" placeholder="Nom de l'équipe" [(ngModel)]="searchTermTeam" (ionInput)="filterTeams()">
                 </ion-searchbar>
             </ion-toolbar>
+            <!-- When we click on the name of the team -> go to detail team -->
             <ion-item *ngFor="let team of filteredTeams">
-
                 <div class="items" (click)="goToTeam(team)">{{team.name}} ({{team.sport}})</div>
-
-                <ion-icon item-right name="star" class="color-star" (click)="toggleFavoriteTeam(team)" *ngIf="team.favorite"></ion-icon>
-                <ion-icon item-right name="star-outline" (click)="toggleFavoriteTeam(team)" *ngIf="!team.favorite"></ion-icon>
+                <ion-icon item-right name="star" class="color-star" (click)="toggleFavoriteTeam(team)" *ngIf="team.favorite"></ion-icon><!-- When we click on the star -> add the team in favorite -->
+                <ion-icon item-right name="star-outline" (click)="toggleFavoriteTeam(team)" *ngIf="!team.favorite"></ion-icon><!-- When we click on the star -> remove the team in favorite -->
             </ion-item>
         </ion-list>
-
+        <!-- Display the list tournaments -->
         <ion-list *ngSwitchCase="'tournaments'">
+            <!-- When we click on the name of the tournament -> go to detail tournament -->
             <ion-item *ngFor="let tournament of tournaments">
                 <div class="items" (click)="goToTournament(tournament)">{{tournament.name}}</div>
             </ion-item>
         </ion-list>
 
         <ion-list *ngSwitchCase="'participants'">
+            <!-- Filter participant and display the list participants -->
             <ion-toolbar no-border-top>
-                <ion-searchbar color="primary" placeholder="Nom du participant" [(ngModel)]="searchTermParticipant"
-                               (ionInput)="filterParticipants()">
+                <ion-searchbar color="primary" placeholder="Nom du participant" [(ngModel)]="searchTermParticipant" (ionInput)="filterParticipants()">
                 </ion-searchbar>
             </ion-toolbar>
-
+            <!-- When we click on the name of the participant-> go to detail participant -->
             <ion-item *ngFor="let participant of filteredParticipants">
                 <div class="items" (click)="goToParticipant(participant)">{{participant.lastname}} {{participant.firstname}}</div>
             </ion-item>
         </ion-list>
-
-        <ion-item-group *ngSwitchCase="'resultats'">
+        <!-- Display the list results -->
+        <ion-item-group *ngSwitchCase="'results'">
+            <!-- Display the ranking for each tournament -->
             <div *ngFor="let tournament of tournaments">
+                <!-- When we click on the name of the tournament -> go to detail tournament -->
                 <ion-item-divider class="tournament-name items" (click)="goToTournament(tournament)"><b>{{tournament.name}}</b></ion-item-divider>
+                <!-- Display "En cours" if there is no winner -->
                 <ion-grid class="no-margin-padding">
-                    <ion-item class="classement">
+                    <!-- When we click on the name of the team -> go to detail team -->
+                    <ion-item class="ranking">
                         <ion-row class="items">
                             <ion-col class="items" width-25> 1er</ion-col>
                             <ion-col class="items" width-75 (click)="goToTeam(tournament.winner)" *ngIf="tournament.winner.name != ''">{{tournament.winner.name}}</ion-col>
                             <ion-col class="items" width-75 *ngIf="tournament.winner.name == ''">En cours</ion-col>
                         </ion-row>
                     </ion-item>
-                    <ion-item class="classement">
+                    <ion-item class="ranking">
                         <ion-row class="items">
                             <ion-col class="items" width-25> 2ème</ion-col>
                             <ion-col class="items" width-75 (click)="goToTeam(tournament.second)" *ngIf="tournament.second.name != ''">{{tournament.second.name}}</ion-col>
                             <ion-col class="items" width-75 *ngIf="tournament.second.name == ''">En cours</ion-col>
                         </ion-row>
                     </ion-item>
-                    <ion-item class="classement">
+                    <ion-item class="ranking">
                         <ion-row class="items">
                             <ion-col class="items" width-25> 3ème</ion-col>
                             <ion-col class="items" width-75 (click)="goToTeam(tournament.third)" *ngIf="tournament.third.name != ''">{{tournament.third.name}}</ion-col>

@@ -20,6 +20,7 @@ export class PoolService {
         this.http = http;
     }
 
+    // Get the json for pool
     getPool(tournamentId, eventId, poolId)
     {
         return this.http.get(this.sharedDataProvider.getCurrentIp()+`/events/${eventId}/tournament/${tournamentId}/${poolId}`).map(res => res.json());

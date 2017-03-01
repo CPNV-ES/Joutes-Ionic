@@ -18,11 +18,13 @@ export class TeamService {
 
     }
 
+    // Get the json for teams by event
     getTeamsByEvent(eventId): any
     {
         return this.http.get(this.sharedDataProvider.getCurrentIp()+`/events/${eventId}/teams`).map(res => res.json());
     }
 
+    // Get the json for team
     getTeam(teamId, eventId)
     {
         return this.http.get(this.sharedDataProvider.getCurrentIp()+`/events/${eventId}/team/${teamId}`).map(res => res.json());

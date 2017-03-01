@@ -22,25 +22,32 @@ export class EventsPage {
     public filteredEvents: any;
     public searchTerm: string = '';
 
-    constructor(public navCtrl: NavController, public sharedDataProvider: SharedDataService, public eventProvider: EventService) {
+    constructor(public navCtrl: NavController, public sharedDataProvider: SharedDataService,
+                public eventProvider: EventService) {
+        // Get events
         this.eventProvider.getEvents().subscribe(data => {
             this.events = data.events;
             this.filteredEvents = data.events
         }, this.filterEvents)
     }
 
-    goToEvent(event) {
-        document.getElementById('spinnerContent').style.visibility = 'visible';
-        this.sharedDataProvider.setCurrentEvent(event);
-        this.navCtrl.push(EventPage);
-    }
-
+    // Filter events
     filterEvents() {
         this.filteredEvents = this.events.filter((event) => {
             return event.name.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
         });
     }
 
+    // Go to page detail event
+    goToEvent(event) {
+        // Add a spinner when the view is loaded
+        document.getElementById('spinnerContent').style.visibility = 'visible';
+
+        this.sharedDataProvider.setCurrentEvent(event);
+        this.navCtrl.push(EventPage);
+    }
+
+    // Load the splashscreen and add a spinner when the view is loading
     ionViewDidLoad() {
         Splashscreen.hide();
         document.getElementById('spinnerContent').style.visibility = 'hidden';

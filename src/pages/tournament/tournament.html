@@ -6,20 +6,18 @@
 -->
 <ion-header>
     <ion-navbar>
-
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-
+        <!-- Display the name of tournament -->
         <ion-title>
             {{ tournamentData.name }}
         </ion-title>
-
     </ion-navbar>
 </ion-header>
 
 <ion-content>
-
+    <!-- Display the type and the place of tournament -->
     <ion-grid text-center class="white-background">
         <ion-row style="flex-wrap: wrap;">
             <ion-col width-50>
@@ -32,24 +30,25 @@
             </ion-col>
         </ion-row>
     </ion-grid>
-
-
     <ion-col width-100><h2>Liste des <b>Participants</b></h2></ion-col>
     <ion-card>
         <ion-card-content no-padding>
             <ion-list>
+                <!-- When we click on the name of the team -> go to detail team -->
                 <ion-item *ngFor="let team of tournamentData.teams" (click)="goToTeam(team)">
+                    <!-- Display the name of team -->
                     <div class="items">{{ team.name }}</div>
                 </ion-item>
             </ion-list>
         </ion-card-content>
     </ion-card>
-
     <ion-col width-100><h2>Liste des <b>Poules</b> / <b>Eliminations</b></h2></ion-col>
     <ion-card>
         <ion-card-content no-padding>
             <ion-list>
+                <!-- When we click on the name of the match -> go to detail pool -->
                 <ion-item *ngFor="let group of tournamentData.group_matchs" (click)="goToPool(group)" class="items">
+                    <!-- Display the name of group and display the number of match playd on the total of matchs to be played -->
                     <ion-row>
                         <ion-col width-50 text-left no-padding>
                             {{ group.name }}

@@ -8,18 +8,18 @@
     <ion-navbar>
         <ion-title text-center>Evènements</ion-title>
     </ion-navbar>
-
+    <!-- Filter events -->
     <ion-toolbar no-border-top>
         <ion-searchbar color="primary" placeholder="Nom de l'évènement.." [(ngModel)]="searchTerm" (ionInput)="filterEvents()">
         </ion-searchbar>
     </ion-toolbar>
-
 </ion-header>
 
 <ion-content>
     <ion-list>
+        <!-- When we click on the name of the event -> go to detail event -->
         <button ion-item *ngFor="let event of filteredEvents" (click)="goToEvent(event)">
-            <div class="items">{{event.name}}</div>
+            <div class="items">{{event.name}}</div><!-- Display the name events -->
         </button>
     </ion-list>
 </ion-content>

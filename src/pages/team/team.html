@@ -1,28 +1,26 @@
 <ion-header>
     <ion-navbar>
-
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-
+        <!-- Display the name of event -->
         <ion-title>
             {{ event.name }}
         </ion-title>
-
     </ion-navbar>
 </ion-header>
 
 <ion-content>
     <div *ngFor="let tournament of teamData.tournament">
-
+        <!-- Display the name of team and display a icon trophy if the team have a status "Vainqueur" -->
         <ion-col width-100>
             <h2>Equipe <b>{{ teamData.name }}</b>
                 <ion-icon name="trophy" *ngIf="teamData.status == 'Vainqueur'"></ion-icon>
             </h2>
         </ion-col>
+        <!-- Display the name of participants -->
         <ion-card>
             <ion-card-content no-padding>
-
                 <ion-grid text-center>
                     <ion-row style="flex-wrap: wrap;">
                         <ion-col width-33 *ngFor="let participant of teamData.participants">
@@ -30,17 +28,15 @@
                         </ion-col>
                     </ion-row>
                 </ion-grid>
-
             </ion-card-content>
         </ion-card>
-
+        <!-- Display the name of tournament -->
         <ion-col width-100 class="no-padding-bottom"><h2>Tournoi <b>{{ tournament.name }}</b></h2></ion-col>
         <ion-col width-100 no-padding>
             <div style="font-weight: 100; margin-left:11px;">Cliquez pour plus de détails</div>
         </ion-col>
         <ion-card (click)="goToTournament(tournament)">
             <ion-card-content no-padding>
-
                 <ion-grid text-center>
                     <ion-row style="flex-wrap: wrap;">
                         <ion-col width-50>
@@ -54,21 +50,18 @@
                         </ion-col>
                     </ion-row>
                 </ion-grid>
-
             </ion-card-content>
         </ion-card>
-
         <ion-col width-100 class="no-padding-bottom"><h2>Liste des <b>Matchs</b></h2></ion-col>
         <ion-col width-100 no-padding>
             <div style="font-weight: 100; margin-left:11px;">Cliquez pour plus de détails</div>
         </ion-col>
-
         <ion-card>
             <ion-card-content no-padding>
                 <ion-list >
+                    <!-- When we click on the name of the match -> go to detail pool -->
                     <ion-item *ngFor="let match of teamData.matches" (click)="goToPool(tournament, match.group_match_id)">
-
-                        <!-- WIN -->
+                        <!-- Display a border green if the team win and display the score -->
                         <ion-row class="border-win" *ngIf="match.ownScore > match.team2Score">
                             <ion-col width-33 class="items">
                                 {{ teamData.name }}
@@ -82,10 +75,7 @@
                                 {{ match.team2 }}
                             </ion-col>
                         </ion-row>
-                        <!-- END - WIN -->
-
-
-                        <!-- LOSE -->
+                        <!-- Display a border red if the team lose and display the score -->
                         <ion-row class="border-lose" *ngIf="match.ownScore < match.team2Score">
                             <ion-col width-33 class="items">
                                 {{ teamData.name }}
@@ -99,10 +89,7 @@
                                 {{ match.team2 }}
                             </ion-col>
                         </ion-row>
-                        <!-- END - LOSE -->
-
-
-                        <!-- DRAW -->
+                        <!-- Display a border orange if teams have tied and display the score -->
                         <ion-row class="border-draw" *ngIf="(match.team1Score == match.team2Score) && (match.start == '')">
                             <ion-col width-33 class="items">
                                 {{ teamData.name }}
@@ -116,9 +103,7 @@
                                 {{ match.team2 }}
                             </ion-col>
                         </ion-row>
-                        <!-- END - DRAW -->
-
-                        <!-- INC -->
+                        <!-- Display a border grey if the match didn't begin -->
                         <ion-row class="border-inc" *ngIf="match.status == 'A venir' ">
                             <ion-col width-33 class="items">
                                 {{ teamData.name }}
@@ -132,26 +117,13 @@
                                 {{ match.team2 }}
                             </ion-col>
                         </ion-row>
-                        <!-- END - INC -->
-
                     </ion-item>
                 </ion-list>
             </ion-card-content>
         </ion-card>
     </div>
 
-
-
 </ion-content>
-
-<!--<ion-footer>-->
-    <!--<ion-toolbar>-->
-        <!--<ion-tabs class="tabs-basic">-->
-            <!--<ion-tab tabTitle="Son tournoi"></ion-tab>-->
-            <!--<ion-tab tabTitle="Ses pools"></ion-tab>-->
-        <!--</ion-tabs>-->
-    <!--</ion-toolbar>-->
-<!--</ion-footer>-->
 
 
 

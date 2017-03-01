@@ -26,41 +26,55 @@ export class ParticipantPage {
     public pool: any = {id: ''};
 
     constructor(public navCtrl: NavController, public navParam: NavParams, public teamProvider: TeamService, public participantProvider: ParticipantService, public sharedDataProvider: SharedDataService) {
+        // Get the current event
         this.event = sharedDataProvider.getCurrentEvent();
+        // Get the current participant
         this.participant = sharedDataProvider.getCurrentParticipant();
 
+        // Get the participant
         this.participantProvider.getParticipant(this.event.id, this.participant.id).subscribe(data => {
             this.participantData = data;
             this.getTeamInfos();
         });
     }
 
+    // Get infos for the team
     getTeamInfos() {
         if(this.participantData.team.length > 0) {
             this.teamProvider.getTeam(this.participantData.team[0].id, this.event.id).subscribe(data => this.teamData = data);
         }
     }
 
+    // Go the page detail tournament
     goToTournament(tournament) {
+        // Add a spinner when the view is loaded
         document.getElementById('spinnerContent').style.visibility = 'visible';
+
         this.sharedDataProvider.setCurrentTournament(tournament);
         this.navCtrl.push(TournamentPage);
     }
 
+    // Go to page detail team
     goToTeam(team) {
+        // Add a spinner when the view is loaded
         document.getElementById('spinnerContent').style.visibility = 'visible';
+
         this.sharedDataProvider.setCurrentTeam(team);
         this.navCtrl.push(TeamPage);
     }
 
+    // Go to page detail pool
     goToPool(pool_id) {
+        // Add a spinner when the view is loaded
         document.getElementById('spinnerContent').style.visibility = 'visible';
+
         this.sharedDataProvider.setCurrentTournament(this.participantData.tournament[0]);
         this.pool.id = pool_id;
         this.sharedDataProvider.setCurrentPool(this.pool);
         this.navCtrl.push(PoolPage);
     }
 
+    // Set different icons for the sport
     setIconSports(sport)
     {
         switch (sport)
@@ -84,6 +98,7 @@ export class ParticipantPage {
         }
     }
 
+    // Add a spinner when the view is loading
     ionViewDidLoad() {
         document.getElementById('spinnerContent').style.visibility = 'hidden';
     }

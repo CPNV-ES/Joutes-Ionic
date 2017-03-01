@@ -22,24 +22,34 @@ export class TournamentPage {
     public tournamentData: any = {};
 
     constructor(public navCtrl: NavController, public navParam: NavParams, public tournamentProvider: TournamentService, public sharedDataProvider: SharedDataService) {
+        // Get the current event
         this.event = sharedDataProvider.getCurrentEvent();
+        // get the current tournament
         this.tournament = sharedDataProvider.getCurrentTournament();
 
+        // Get the tournament
         this.tournamentProvider.getTournament(this.event.id, this.tournament.id).subscribe(data => this.tournamentData = data);
     }
 
+    // Go to page detail pool
     goToPool(pool) {
+        // Add a spinner when the view is loaded
         document.getElementById('spinnerContent').style.visibility = 'visible';
+
         this.sharedDataProvider.setCurrentPool(pool);
         this.navCtrl.push(PoolPage);
     }
 
+    // Go to page detail team
     goToTeam(team) {
+        // Add a spinner when the view is loaded
         document.getElementById('spinnerContent').style.visibility = 'visible';
+
         this.sharedDataProvider.setCurrentTeam(team);
         this.navCtrl.push(TeamPage);
     }
 
+    // Add a spinner when the view is loading
     ionViewDidLoad() {
         document.getElementById('spinnerContent').style.visibility = 'hidden';
     }
