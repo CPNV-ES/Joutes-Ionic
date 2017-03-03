@@ -61,8 +61,9 @@
             </ion-list>
         </ion-card-content>
     </ion-card>
-
-    <ion-col width-100><h2>Le <b>Classement</b></h2></ion-col>
+    <!-- Display different text if the tournament is finished or not -->
+    <ion-col *ngIf="finish" width-100><h2>Le <b>Classement final</b></h2></ion-col>
+    <ion-col *ngIf="!finish" width-100><h2>Le <b>Classement actuel</b></h2></ion-col>
     <ion-card>
         <ion-card-content no-padding padding-top padding-bottom>
             <!-- Display the information for elimination -->
