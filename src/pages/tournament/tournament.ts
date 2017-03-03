@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams, Refresher} from 'ionic-angular';
 import {SharedDataService} from '../../providers/sharedData-service';
 import {TournamentService} from '../../providers/tournament-service';
 import {TeamPage} from "../team/team";
@@ -22,14 +22,23 @@ export class TournamentPage {
     public tournamentData: any = {};
 
     constructor(public navCtrl: NavController, public navParam: NavParams, public tournamentProvider: TournamentService, public sharedDataProvider: SharedDataService) {
+        this.loadData();
+    }
+
+    loadData() {
         // Get the current event
-        this.event = sharedDataProvider.getCurrentEvent();
+        this.event = this.sharedDataProvider.getCurrentEvent();
         // get the current tournament
-        this.tournament = sharedDataProvider.getCurrentTournament();
+        this.tournament = this.sharedDataProvider.getCurrentTournament();
 
         // Get the tournament
         this.tournamentProvider.getTournament(this.event.id, this.tournament.id).subscribe(data => this.tournamentData = data);
+    }
 
+    refresh(refresher: Refresher) {
+        this.loadData();
+
+        refresher.complete();
     }
 
     // Go to page detail pool

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import {NavController, Refresher} from 'ionic-angular';
 import {TeamService} from "../../providers/team-service";
 import {TournamentService} from "../../providers/tournament-service";
 import {SharedDataService} from '../../providers/sharedData-service';
@@ -36,6 +36,11 @@ export class EventPage {
     constructor(public navCtrl: NavController, public storage: Storage,
                 public teamProvider: TeamService, public tournamentProvider: TournamentService,
                 public participantProvider: ParticipantService, public sharedDataProvider: SharedDataService) {
+        this.loadData();
+        this.eventContent = "teams";
+    }
+
+    loadData() {
         // Get the current event
         this.event = this.sharedDataProvider.getCurrentEvent();
         // Get the current favorite teams
@@ -66,8 +71,11 @@ export class EventPage {
             this.participants = data.participants;
             this.filteredParticipants = this.participants;
         });
+    }
 
-        this.eventContent = "teams";
+    refresh(refresher: Refresher) {
+        this.loadData();
+        refresher.complete();
     }
 
     // Filter teams
@@ -137,6 +145,10 @@ export class EventPage {
         }).catch(e => {
             console.log(e);
         });
+    }
+
+    setSegment(segment) {
+        this.eventContent = segment;
     }
 
     // Go to page detail team
