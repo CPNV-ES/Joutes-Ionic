@@ -40,7 +40,9 @@ export class TournamentPage {
     refresh(refresher: Refresher) {
         this.loadData();
 
-        refresher.complete();
+        setTimeout(() => {
+            refresher.complete();
+        }, 1000);
     }
 
     // Go to page detail pool

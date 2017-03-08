@@ -44,7 +44,9 @@ export class PoolPage {
     refresh(refresher: Refresher) {
         this.loadData();
 
-        refresher.complete();
+        setTimeout(() => {
+            refresher.complete();
+        }, 1000);
     }
 
     // Verify if the match is finished

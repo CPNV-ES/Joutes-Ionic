@@ -38,7 +38,9 @@ export class EventsPage {
     refresh(refresher: Refresher) {
         this.loadData();
 
-        refresher.complete();
+        setTimeout(() => {
+            refresher.complete();
+        }, 1000);
     }
 
     // Filter events
