@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams, Refresher} from 'ionic-angular';
 import {ParticipantService} from "../../providers/participant-service";
 import {SharedDataService} from "../../providers/sharedData-service";
 import {TournamentPage} from "../tournament/tournament";
@@ -26,16 +26,26 @@ export class ParticipantPage {
     public pool: any = {id: ''};
 
     constructor(public navCtrl: NavController, public navParam: NavParams, public teamProvider: TeamService, public participantProvider: ParticipantService, public sharedDataProvider: SharedDataService) {
+        this.loadData()
+    }
+
+    loadData() {
         // Get the current event
-        this.event = sharedDataProvider.getCurrentEvent();
+        this.event = this.sharedDataProvider.getCurrentEvent();
         // Get the current participant
-        this.participant = sharedDataProvider.getCurrentParticipant();
+        this.participant = this.sharedDataProvider.getCurrentParticipant();
 
         // Get the participant
         this.participantProvider.getParticipant(this.event.id, this.participant.id).subscribe(data => {
             this.participantData = data;
             this.getTeamInfos();
         });
+    }
+
+    refresh(refresher: Refresher) {
+        this.loadData();
+
+        refresher.complete();
     }
 
     // Get infos for the team

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import {NavController, Refresher} from 'ionic-angular';
 import {EventService} from '../../providers/event-service';
 import {SharedDataService} from '../../providers/sharedData-service';
 import {EventPage} from "../event/event";
@@ -24,11 +24,21 @@ export class EventsPage {
 
     constructor(public navCtrl: NavController, public sharedDataProvider: SharedDataService,
                 public eventProvider: EventService) {
+        this.loadData();
+    }
+
+    loadData() {
         // Get events
         this.eventProvider.getEvents().subscribe(data => {
             this.events = data.events;
             this.filteredEvents = data.events
         }, this.filterEvents)
+    }
+
+    refresh(refresher: Refresher) {
+        this.loadData();
+
+        refresher.complete();
     }
 
     // Filter events
