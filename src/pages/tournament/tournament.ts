@@ -21,8 +21,10 @@ export class TournamentPage {
     public tournament: any;
     public tournamentData: any = {};
 
+
     constructor(public navCtrl: NavController, public navParam: NavParams, public tournamentProvider: TournamentService, public sharedDataProvider: SharedDataService) {
         this.loadData();
+
     }
 
     loadData() {

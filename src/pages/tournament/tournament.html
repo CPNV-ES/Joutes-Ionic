@@ -75,20 +75,36 @@
     <ion-col width-100><h2>Liste des <b>Poules</b> / <b>Eliminations</b></h2></ion-col>
     <ion-card>
         <ion-card-content no-padding>
-            <ion-list>
-                <!-- When we click on the name of the match -> go to detail pool -->
-                <ion-item *ngFor="let group of tournamentData.group_matchs" (click)="goToPool(group)" class="items">
-                    <!-- Display the name of group and display the number of match playd on the total of matchs to be played -->
+
+
+            <ion-slides [options]="{pager:true}">
+                <ion-slide *ngFor="let stage of tournamentData.stages" class="items">
                     <ion-row>
-                        <ion-col width-50 text-left no-padding>
-                            {{ group.name }}
-                        </ion-col>
-                        <ion-col width-50 text-right no-padding>
-                            <ion-note>{{group.playedMatchs}} / {{group.totalMatchs}}</ion-note>
+                        <ion-col width-100>
+                            <h1>{{stage.name}}</h1>
                         </ion-col>
                     </ion-row>
-                </ion-item>
-            </ion-list>
+                    <hr/>
+
+                    <ion-list>
+                        <!-- When we click on the name of the match -> go to detail pool -->
+                        <ion-item *ngFor="let pool of stage.pools" (click)="goToPool(pool)">
+                            <!-- Display the name of group and display the number of match playd on the total of matchs to be played -->
+                            <ion-row>
+                                <ion-col width-100 no-padding>
+                                    {{ pool.name }}
+                                </ion-col>
+                            </ion-row>
+                        </ion-item>
+                    </ion-list>
+
+                </ion-slide>
+            </ion-slides>
+
+
+
+
+
         </ion-card-content>
     </ion-card>
 
