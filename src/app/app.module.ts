@@ -14,6 +14,7 @@ import {TeamPage} from "../pages/team/team";
 import {EventPage} from "../pages/event/event";
 import {PoolPage} from "../pages/pool/pool";
 import {ParticipantPage} from "../pages/participant/participant";
+import {HttpService} from "../providers/http-service";
 
 @NgModule({
     declarations: [
@@ -41,12 +42,13 @@ import {ParticipantPage} from "../pages/participant/participant";
     ],
     providers: [
         Storage,
+        SharedDataService,
+        HttpService,
         EventService,
         TeamService,
         TournamentService,
         PoolService,
-        ParticipantService,
-        SharedDataService
+        ParticipantService
     ]
 })
 export class AppModule {

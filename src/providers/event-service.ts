@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import {SharedDataService} from "./sharedData-service";
+import {HttpService} from "./http-service";
+
 
 
 /*
@@ -13,14 +13,12 @@ import {SharedDataService} from "./sharedData-service";
 @Injectable()
 export class EventService
 {
-    public events: any;
-
-    constructor(public http: Http, public sharedDataProvider: SharedDataService) {
-        this.http = http;
-    } 
+    constructor(private httpService: HttpService) {
+        this.httpService = httpService;
+    }
 
     // Get the json for events
     getEvents() {
-        return this.http.get(this.sharedDataProvider.getCurrentIp()+`/events`).map(res => res.json());
+        return this.httpService.getJson('/events');
     }
 }

@@ -27,6 +27,7 @@ export class PoolPage {
     }
 
     loadData() {
+        this.sharedDataProvider.httpError = false;
         // Get the current event
         this.event = this.sharedDataProvider.getCurrentEvent();
         // Get the current tournament
@@ -41,10 +42,13 @@ export class PoolPage {
         });
     }
 
+    // Refresh the current page
     refresh(refresher: Refresher) {
         this.loadData();
 
-        refresher.complete();
+        setTimeout(() => {
+            refresher.complete();
+        }, 1000);
     }
 
     // Verify if the match is finished

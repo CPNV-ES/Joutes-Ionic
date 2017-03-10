@@ -18,7 +18,6 @@ import {document} from "@angular/platform-browser/src/facade/browser";
 })
 export class EventsPage {
     private events: any;
-    public returnValue: any;
     public filteredEvents: any;
     public searchTerm: string = '';
 
@@ -28,6 +27,7 @@ export class EventsPage {
     }
 
     loadData() {
+        this.sharedDataProvider.httpError = false;
         // Get events
         this.eventProvider.getEvents().subscribe(data => {
             this.events = data.events;
@@ -35,10 +35,13 @@ export class EventsPage {
         }, this.filterEvents)
     }
 
+    // Refresh the current page
     refresh(refresher: Refresher) {
         this.loadData();
 
-        refresher.complete();
+        setTimeout(() => {
+            refresher.complete();
+        }, 1000);
     }
 
     // Filter events

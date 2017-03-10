@@ -11,7 +11,7 @@
             {{ event.name }}
         </ion-title>
     </ion-navbar>
-    <!-- Display the toolbar -->
+    <!-- Content de different segments for a event - Display the toolbar -->
     <ion-toolbar no-border-top>
         <ion-segment [(ngModel)]="eventContent">
             <ion-segment-button value="teams" (click)="setSegment('teams')">
@@ -31,10 +31,10 @@
 </ion-header>
 
 <ion-content>
+    <!-- Refresh the current page -->
     <ion-refresher (ionRefresh)="refresh($event)">
         <ion-refresher-content refreshingText="Chargement"></ion-refresher-content>
     </ion-refresher>
-
     <!-- Display the content according to the toolbar -->
     <div [ngSwitch]="eventContent">
         <ion-list *ngSwitchCase="'teams'">

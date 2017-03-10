@@ -17,10 +17,10 @@
 </ion-header>
 
 <ion-content>
+    <!-- Refresh the current page -->
     <ion-refresher (ionRefresh)="refresh($event)">
         <ion-refresher-content refreshingText="Chargement"></ion-refresher-content>
     </ion-refresher>
-
     <!-- Display the type of pool et the place of tournament -->
     <ion-grid text-center class="white-background">
         <ion-row style="flex-wrap: wrap;">
@@ -65,8 +65,9 @@
             </ion-list>
         </ion-card-content>
     </ion-card>
-
-    <ion-col width-100><h2>Le <b>Classement</b></h2></ion-col>
+    <!-- Display different text if the tournament is finished or not -->
+    <ion-col *ngIf="finish" width-100><h2>Le <b>Classement final</b></h2></ion-col>
+    <ion-col *ngIf="!finish" width-100><h2>Le <b>Classement actuel</b></h2></ion-col>
     <ion-card>
         <ion-card-content no-padding padding-top padding-bottom>
             <!-- Display the information for elimination -->

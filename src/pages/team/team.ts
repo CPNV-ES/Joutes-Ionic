@@ -21,6 +21,7 @@ export class TeamPage {
     }
 
     loadData() {
+        this.sharedDataProvider.httpError = false;
         // Get the current event
         this.event = this.sharedDataProvider.getCurrentEvent();
         // Get the current team
@@ -30,10 +31,13 @@ export class TeamPage {
         this.teamProvider.getTeam(this.team.id, this.event.id).subscribe(data => this.teamData = data);
     }
 
+    // Refresh the current page
     refresh(refresher: Refresher) {
         this.loadData();
 
-        refresher.complete();
+        setTimeout(() => {
+            refresher.complete();
+        }, 1000);
     }
 
     // Go to page detail pool

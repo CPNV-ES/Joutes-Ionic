@@ -41,6 +41,7 @@ export class EventPage {
     }
 
     loadData() {
+        this.sharedDataProvider.httpError = false;
         // Get the current event
         this.event = this.sharedDataProvider.getCurrentEvent();
         // Get the current favorite teams
@@ -73,9 +74,13 @@ export class EventPage {
         });
     }
 
+    // Refresh the current page
     refresh(refresher: Refresher) {
         this.loadData();
-        refresher.complete();
+
+        setTimeout(() => {
+            refresher.complete();
+        }, 1000);
     }
 
     // Filter teams
@@ -147,6 +152,7 @@ export class EventPage {
         });
     }
 
+    // Content de different segments for a event
     setSegment(segment) {
         this.eventContent = segment;
     }
