@@ -22,7 +22,7 @@ export class PoolPage {
     public poolData: any = {};
     public finish: boolean = true;
 
-    constructor(public navCtrl: NavController, public navParam: NavParams, public poolProvider: PoolService, public sharedDataProvider: SharedDataService) {
+    constructor(private navCtrl: NavController, private navParam: NavParams, private poolProvider: PoolService, private sharedDataProvider: SharedDataService) {
         this.loadData();
     }
 

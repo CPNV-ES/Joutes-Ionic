@@ -22,7 +22,7 @@ export class TournamentPage {
     public tournamentData: any = {};
     public finish: boolean = true;
 
-    constructor(public navCtrl: NavController, public navParam: NavParams, public tournamentProvider: TournamentService, public sharedDataProvider: SharedDataService) {
+    constructor(private navCtrl: NavController, private navParam: NavParams, private tournamentProvider: TournamentService, private sharedDataProvider: SharedDataService) {
         this.loadData();
     }
 

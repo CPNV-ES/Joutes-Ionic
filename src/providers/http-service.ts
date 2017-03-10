@@ -16,7 +16,7 @@ export class HttpService {
 
     serverUrl : string;
 
-    constructor(public http: Http, private alertCtrl: AlertController, public sharedDataProvider: SharedDataService) {
+    constructor(private http: Http, private alertCtrl: AlertController, private sharedDataProvider: SharedDataService) {
         //Raspberry address
         // this.serverUrl = "https://markal.servehttp.com/Joutes/api";
 

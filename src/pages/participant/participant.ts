@@ -25,7 +25,7 @@ export class ParticipantPage {
     public teamData: any = {};
     public pool: any = {id: ''};
 
-    constructor(public navCtrl: NavController, public navParam: NavParams, public teamProvider: TeamService, public participantProvider: ParticipantService, public sharedDataProvider: SharedDataService) {
+    constructor(private navCtrl: NavController, private navParam: NavParams, private teamProvider: TeamService, private participantProvider: ParticipantService, private sharedDataProvider: SharedDataService) {
         this.loadData()
     }
 

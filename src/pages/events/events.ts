@@ -21,8 +21,8 @@ export class EventsPage {
     public filteredEvents: any;
     public searchTerm: string = '';
 
-    constructor(public navCtrl: NavController, public sharedDataProvider: SharedDataService,
-                public eventProvider: EventService) {
+    constructor(private navCtrl: NavController, private sharedDataProvider: SharedDataService,
+                private eventProvider: EventService) {
         this.loadData();
     }
 

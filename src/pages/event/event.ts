@@ -33,9 +33,9 @@ export class EventPage {
     public userFavoritesTeamsIds: any;
     public eventContent: any;
 
-    constructor(public navCtrl: NavController, public storage: Storage,
-                public teamProvider: TeamService, public tournamentProvider: TournamentService,
-                public participantProvider: ParticipantService, public sharedDataProvider: SharedDataService) {
+    constructor(private navCtrl: NavController, private storage: Storage,
+                private teamProvider: TeamService, private tournamentProvider: TournamentService,
+                private participantProvider: ParticipantService, private sharedDataProvider: SharedDataService) {
         this.loadData();
         this.eventContent = "teams";
     }

@@ -10,7 +10,7 @@ export class SharedDataService {
     currentParticipant: any;
     private _httpError: boolean = false;
 
-    constructor(public storage: Storage) {
+    constructor(private storage: Storage) {
     }
 
     get httpError() {

@@ -16,7 +16,7 @@ export class TeamPage {
     pool: any = {id: ''};
     teamData: any = {};
 
-    constructor(public navCtrl: NavController, public navParam: NavParams, public sharedDataProvider: SharedDataService, public teamProvider: TeamService) {
+    constructor(private navCtrl: NavController, private navParam: NavParams, private sharedDataProvider: SharedDataService, private teamProvider: TeamService) {
         this.loadData();
     }
 
