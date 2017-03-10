@@ -20,11 +20,10 @@ export class TournamentPage {
     public event: any;
     public tournament: any;
     public tournamentData: any = {};
-
+    public finish: boolean = true;
 
     constructor(public navCtrl: NavController, public navParam: NavParams, public tournamentProvider: TournamentService, public sharedDataProvider: SharedDataService) {
         this.loadData();
-
     }
 
     loadData() {
@@ -38,6 +37,7 @@ export class TournamentPage {
         this.tournamentProvider.getTournament(this.event.id, this.tournament.id).subscribe(data => this.tournamentData = data);
     }
 
+    // Refresh the current page
     refresh(refresher: Refresher) {
         this.loadData();
 

@@ -17,10 +17,10 @@
 </ion-header>
 
 <ion-content>
+    <!-- Refresh the current page -->
     <ion-refresher (ionRefresh)="refresh($event)">
         <ion-refresher-content refreshingText="Chargement"></ion-refresher-content>
     </ion-refresher>
-
     <!-- Display the type of pool et the place of tournament -->
     <ion-grid text-center class="white-background">
         <ion-row style="flex-wrap: wrap;">

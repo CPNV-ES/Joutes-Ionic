@@ -74,6 +74,7 @@ export class EventPage {
         });
     }
 
+    // Refresh the current page
     refresh(refresher: Refresher) {
         this.loadData();
 
@@ -151,6 +152,7 @@ export class EventPage {
         });
     }
 
+    // Content de different segments for a event
     setSegment(segment) {
         this.eventContent = segment;
     }

@@ -43,6 +43,7 @@ export class ParticipantPage {
         });
     }
 
+    // Refresh the current page
     refresh(refresher: Refresher) {
         this.loadData();
 
