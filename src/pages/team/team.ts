@@ -21,6 +21,7 @@ export class TeamPage {
     }
 
     loadData() {
+        this.sharedDataProvider.httpError = false;
         // Get the current event
         this.event = this.sharedDataProvider.getCurrentEvent();
         // Get the current team

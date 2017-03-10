@@ -28,6 +28,7 @@ export class TournamentPage {
     }
 
     loadData() {
+        this.sharedDataProvider.httpError = false;
         // Get the current event
         this.event = this.sharedDataProvider.getCurrentEvent();
         // get the current tournament

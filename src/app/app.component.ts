@@ -7,8 +7,7 @@ import {SharedDataService} from '../providers/sharedData-service';
 
 
 @Component({
-    templateUrl: 'app.template.html',
-    providers: [SharedDataService]
+    templateUrl: 'app.template.html'
 })
 
 export class MyApp {

@@ -27,6 +27,7 @@ export class PoolPage {
     }
 
     loadData() {
+        this.sharedDataProvider.httpError = false;
         // Get the current event
         this.event = this.sharedDataProvider.getCurrentEvent();
         // Get the current tournament
