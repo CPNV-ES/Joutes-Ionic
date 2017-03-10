@@ -30,6 +30,7 @@ export class TeamPage {
         this.teamProvider.getTeam(this.team.id, this.event.id).subscribe(data => this.teamData = data);
     }
 
+    // Refresh the current page
     refresh(refresher: Refresher) {
         this.loadData();
 

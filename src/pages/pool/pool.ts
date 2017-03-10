@@ -41,6 +41,7 @@ export class PoolPage {
         });
     }
 
+    // Refresh the current page
     refresh(refresher: Refresher) {
         this.loadData();
 
