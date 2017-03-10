@@ -1,16 +1,16 @@
 page-team {
-  .item-md, .item-inner
+  .item-md, .item-inner, .item-ios
   {
     padding:0px;
   }
 
-  .item-md.item-block .item-inner {
+  .item-md.item-block .item-inner, .item-ios.item-block .item-inner {
     border-bottom: 1px solid #dedede;
   }
 
-  .label-md
+  .label-md, .label-ios
   {
-    margin:0px;
+    margin:2px;
   }
 
   .border-win

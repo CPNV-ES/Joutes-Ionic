@@ -22,16 +22,37 @@
   color:#fff;
 }
 
+.toolbar-background-ios {
+  border: 0px;
+}
+
+.toolbar .searchbar-ios .searchbar-input {
+  background: #fff;
+}
+
+.bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default {
+  color: #fff;
+  background-color: transparent;
+}
+
 .segment-md .segment-button
 {
   color:#fff;
+}
+
+.segment-ios .segment-button{
+  color: #fff;
+  opacity: 0.7;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 1.18rem;
 }
 
 .segment-md .segment-button.segment-activated {
   border-color: #fff;
 }
 
-.toolbar-title-md, .bar-button-default-md
+.toolbar-title-md, .bar-button-default-md, .toolbar-title-ios
 {
   color:#fff;
 }
@@ -69,7 +90,7 @@ h2
   background-color: #fff;
 }
 
-.md ion-list > .item:last-child{
+.md ion-list > .item:last-child, .ios ion-list > .item:last-child {
   border-bottom: none;
 }
 
@@ -133,10 +154,11 @@ ion-label{
   color: color($colors, success);
 }
 
-.ion-md-star-outline:before {
+.ion-md-star-outline:before, .ion-ios-star-outline:before {
   color: color($colors, success);
 }
 
 .item-md ion-note {
   color: #9e9e9e;
 }
+

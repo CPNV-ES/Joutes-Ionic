@@ -5,10 +5,12 @@ page-tournament {
     padding-top:10px;
   }
 
-  .label-md {
+  .label-md, .label-ios {
     margin: 0px;
   }
 
-
+  .swiper-container-horizontal > .swiper-pagination {
+    bottom:5px;
+  }
 
 }

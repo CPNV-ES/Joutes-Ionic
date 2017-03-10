@@ -12,6 +12,9 @@ page-pool {
     padding-left:13px;
     padding-right:13px;
   }
+  .card-content-ios {
+    font-size: 1.3rem;
+  }
 
   .pool-name
   {
@@ -21,7 +24,7 @@ page-pool {
     font-weight: bold;
   }
 
-  .label-md
+  .label-md, .label-ios
   {
     margin:0px;
   }
