@@ -21,10 +21,10 @@ export class HttpService {
         // this.serverUrl = "https://markal.servehttp.com/Joutes/api";
 
         //Wifi IP
-        this.serverUrl = "http://192.168.0.51/Joutes/public/api";
+        // this.serverUrl = "http://192.168.0.51/Joutes/public/api";
 
         //LAN IP
-        // this.serverUrl = "http://172.17.102.188/Joutes/public/api";
+        this.serverUrl = "http://172.17.102.188/Joutes/public/api";
 
         //LAN IP REAL
         // this.serverUrl = "http://172.17.102.188/Joutes-real/Joutes/public/api";

@@ -21,21 +21,6 @@ export class SharedDataService {
         this._httpError = value;
     }
 
-    // Get current IP
-    getCurrentIp() {
-        //Raspberry address
-        // return "https://markal.servehttp.com/Joutes/api";
-
-        //Wifi IP
-        return "http://192.168.0.51/Joutes/public/api";
-
-        //LAN IP
-        // return "http://172.17.102.188/Joutes/public/api";
-
-        //LAN IP REAL
-        // return "http://172.17.102.188/Joutes-real/Joutes/public/api";
-    }
-
     // Get current event
     getCurrentEvent(): any {
         return this.currentEvent;
