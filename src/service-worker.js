@@ -40,13 +40,13 @@ self.addEventListener('fetch', (event) => {
     caches.open(CURRENT_CACHES['read-through']).then((cache) => {
       return cache.match(event.request).then((response) => {
         if (response) {
-          // If there is an entry in the cache for event.request, then response will be defined
+          // If there is an entry in the cache for _event.request, then response will be defined
           // and we can just return it.
 
           return response;
         }
 
-        // Otherwise, if there is no entry in the cache for event.request, response will be
+        // Otherwise, if there is no entry in the cache for _event.request, response will be
         // undefined, and we need to fetch() the resource.
         console.log(' No response for %s found in cache. ' +
           'About to fetch from network...', event.request.url);

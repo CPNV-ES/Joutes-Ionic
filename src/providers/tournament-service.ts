@@ -15,13 +15,13 @@ export class TournamentService {
         this.httpService = httpService;
     }
 
-    // Get the json for tournaments by event
+    // Get the json for tournaments by _event
     getTournamentsByEvent(eventId): any
     {
         return this.httpService.getJson(`/events/${eventId}/tournaments`);
     }
 
-    // Get the json for tournament
+    // Get the json for _tournament
     getTournament(eventId, tournamentId)
     {
         return this.httpService.getJson(`/events/${eventId}/tournament/${tournamentId}`);

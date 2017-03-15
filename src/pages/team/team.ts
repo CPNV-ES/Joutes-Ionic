@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams, Refresher} from 'ionic-angular';
+import {NavController, Refresher} from 'ionic-angular';
 import {SharedDataService} from '../../providers/sharedData-service';
 import {TeamService} from '../../providers/team-service';
 import {PoolPage} from "../pool/pool";
@@ -11,24 +11,24 @@ import {TournamentPage} from "../tournament/tournament";
 })
 
 export class TeamPage {
-    event: any;
-    team: any;
-    pool: any = {id: ''};
-    teamData: any = {};
+    private _event;
+    private _team;
+    private _pool: any = {id: ''};
+    private _teamData: any = {};
 
-    constructor(private navCtrl: NavController, private navParam: NavParams, private sharedDataProvider: SharedDataService, private teamProvider: TeamService) {
+    constructor(private navCtrl: NavController, private sharedDataProvider: SharedDataService, private teamProvider: TeamService) {
         this.loadData();
     }
 
     loadData() {
         this.sharedDataProvider.httpError = false;
-        // Get the current event
-        this.event = this.sharedDataProvider.getCurrentEvent();
+        // Get the current _event
+        this._event = this.sharedDataProvider.currentEvent;
         // Get the current team
-        this.team = this.sharedDataProvider.getCurrentTeam();
+        this._team = this.sharedDataProvider.currentTeam;
 
         // Get the team
-        this.teamProvider.getTeam(this.team.id, this.event.id).subscribe(data => this.teamData = data);
+        this.teamProvider.getTeam(this._team.id, this._event.id).subscribe(data => this._teamData = data);
     }
 
     // Refresh the current page
@@ -40,14 +40,14 @@ export class TeamPage {
         }, 1000);
     }
 
-    // Go to page detail pool
+    // Go to page detail _pool
     goToPool(tournament, pool_id) {
         // Add a spinner when the view is loaded
         document.getElementById('spinnerContent').style.visibility = 'visible';
 
-        this.sharedDataProvider.setCurrentTournament(tournament);
-        this.pool.id = pool_id;
-        this.sharedDataProvider.setCurrentPool(this.pool);
+        this.sharedDataProvider.currentTournament = tournament;
+        this._pool.id = pool_id;
+        this.sharedDataProvider.currentPool = this._pool;
         this.navCtrl.push(PoolPage);
     }
 
@@ -56,7 +56,7 @@ export class TeamPage {
         // Add a spinner when the view is loaded
         document.getElementById('spinnerContent').style.visibility = 'visible';
 
-        this.sharedDataProvider.setCurrentTournament(tournament);
+        this.sharedDataProvider.currentTournament = tournament;
         this.navCtrl.push(TournamentPage);
     }
 

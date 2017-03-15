@@ -17,9 +17,9 @@ import {document} from "@angular/platform-browser/src/facade/browser";
     templateUrl: 'events.html'
 })
 export class EventsPage {
-    private events: any;
-    public filteredEvents: any;
-    public searchTerm: string = '';
+    private _events;
+    private _filteredEvents;
+    private _searchTerm: string = '';
 
     constructor(private navCtrl: NavController, private sharedDataProvider: SharedDataService,
                 private eventProvider: EventService) {
@@ -30,8 +30,8 @@ export class EventsPage {
         this.sharedDataProvider.httpError = false;
         // Get events
         this.eventProvider.getEvents().subscribe(data => {
-            this.events = data.events;
-            this.filteredEvents = data.events
+            this._events = data.events;
+            this._filteredEvents = data.events
         }, this.filterEvents)
     }
 
@@ -46,17 +46,17 @@ export class EventsPage {
 
     // Filter events
     filterEvents() {
-        this.filteredEvents = this.events.filter((event) => {
-            return event.name.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+        this._filteredEvents = this._events.filter((event) => {
+            return event.name.toLowerCase().indexOf(this._searchTerm.toLowerCase()) > -1;
         });
     }
 
-    // Go to page detail event
+    // Go to page detail _event
     goToEvent(event) {
         // Add a spinner when the view is loaded
         document.getElementById('spinnerContent').style.visibility = 'visible';
 
-        this.sharedDataProvider.setCurrentEvent(event);
+        this.sharedDataProvider.currentEvent = event;
         this.navCtrl.push(EventPage);
     }
 

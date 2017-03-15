@@ -3,11 +3,11 @@ import {Storage} from '@ionic/storage';
 
 @Injectable()
 export class SharedDataService {
-    currentEvent: any;
-    currentTeam: any;
-    currentTournament: any;
-    currentPool: any;
-    currentParticipant: any;
+    private _currentEvent;
+    private _currentTeam;
+    private _currentTournament;
+    private _currentPool;
+    private _currentParticipant;
     private _httpError: boolean = false;
 
     constructor(private storage: Storage) {
@@ -21,65 +21,65 @@ export class SharedDataService {
         this._httpError = value;
     }
 
-    // Get current event
-    getCurrentEvent(): any {
-        return this.currentEvent;
+    // Get current _event
+    get currentEvent() {
+        return this._currentEvent;
     }
 
-    // Set current event
-    setCurrentEvent(event): any {
-        this.currentEvent = event;
+    // Set current _event
+    set currentEvent(value) {
+        this._currentEvent = value;
+    }
+
+    // Get current team
+    get currentTeam() {
+        return this._currentTeam;
+    }
+
+    // Set current team
+    set currentTeam(value) {
+        this._currentTeam = value;
+    }
+
+    // Get current _tournament
+    get currentTournament() {
+        return this._currentTournament;
+    }
+
+    // Set current _tournament
+    set currentTournament(value) {
+        this._currentTournament = value;
+    }
+
+    // Get current _pool
+    get currentPool() {
+        return this._currentPool;
+    }
+
+    // Set current _pool
+    set currentPool(value) {
+        this._currentPool = value;
+    }
+
+    // Get current _participant
+    get currentParticipant() {
+        return this._currentParticipant;
+    }
+
+    // Set current _participant
+    set currentParticipant(value) {
+        this._currentParticipant = value;
     }
 
     // Get current favorite teams
-    getCurrentEventFavoritesTeams() {
-        return this.storage.get('event' + this.currentEvent.id).then(val => {
+    get currentEventFavoritesTeams() {
+        return this.storage.get('event' + this._currentEvent.id).then(val => {
             return val;
         });
     }
 
     // Set current favorite teams
-    setCurrentEventFavoritesTeams(favoritesTeams) {
-        this.storage.set('event' + this.currentEvent.id, favoritesTeams);
-    }
-
-    // Get current team
-    getCurrentTeam(): any {
-        return this.currentTeam;
-    }
-
-    // Set current team
-    setCurrentTeam(team) {
-        this.currentTeam = team;
-    }
-
-    // Get current tournament
-    getCurrentTournament(): any {
-        return this.currentTournament;
-    }
-
-    // Set current tournament
-    setCurrentTournament(tournament) {
-        this.currentTournament = tournament;
-    }
-
-    // Get current pool
-    getCurrentPool(): any {
-        return this.currentPool;
-    }
-
-    // Set current pool
-    setCurrentPool(currentPool) {
-        this.currentPool = currentPool;
-    }
-
-    // Get current participant
-    getCurrentParticipant(): any {
-        return this.currentParticipant;
-    }
-
-    // Set current participant
-    setCurrentParticipant(participant) {
-        this.currentParticipant = participant;
+    set currentEventFavoritesTeams(value) {
+        this.storage.set('event' + this._currentEvent.id, value);
     }
 }

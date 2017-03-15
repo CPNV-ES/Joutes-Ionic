@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams, Refresher} from 'ionic-angular';
+import {NavController, Refresher} from 'ionic-angular';
 import {ParticipantService} from "../../providers/participant-service";
 import {SharedDataService} from "../../providers/sharedData-service";
 import {TournamentPage} from "../tournament/tournament";
@@ -19,26 +19,26 @@ import {PoolPage} from "../pool/pool";
 })
 export class ParticipantPage {
 
-    public event: any;
-    public participant: any;
-    public participantData: any = {};
-    public teamData: any = {};
-    public pool: any = {id: ''};
+    private _event;
+    private _participant;
+    private _participantData: any = {};
+    private _teamData: any = {};
+    private _pool: any = {id: ''};
 
-    constructor(private navCtrl: NavController, private navParam: NavParams, private teamProvider: TeamService, private participantProvider: ParticipantService, private sharedDataProvider: SharedDataService) {
+    constructor(private navCtrl: NavController, private teamProvider: TeamService, private participantProvider: ParticipantService, private sharedDataProvider: SharedDataService) {
         this.loadData()
     }
 
     loadData() {
         this.sharedDataProvider.httpError = false;
-        // Get the current event
-        this.event = this.sharedDataProvider.getCurrentEvent();
-        // Get the current participant
-        this.participant = this.sharedDataProvider.getCurrentParticipant();
+        // Get the current _event
+        this._event = this.sharedDataProvider.currentEvent;
+        // Get the current _participant
+        this._participant = this.sharedDataProvider.currentParticipant;
 
-        // Get the participant
-        this.participantProvider.getParticipant(this.event.id, this.participant.id).subscribe(data => {
-            this.participantData = data;
+        // Get the _participant
+        this.participantProvider.getParticipant(this._event.id, this._participant.id).subscribe(data => {
+            this._participantData = data;
             this.getTeamInfos();
         });
     }
@@ -54,17 +54,17 @@ export class ParticipantPage {
 
     // Get infos for the team
     getTeamInfos() {
-        if(this.participantData.team.length > 0) {
-            this.teamProvider.getTeam(this.participantData.team[0].id, this.event.id).subscribe(data => this.teamData = data);
+        if(this._participantData.team.length > 0) {
+            this.teamProvider.getTeam(this._participantData.team[0].id, this._event.id).subscribe(data => this._teamData = data);
         }
     }
 
-    // Go the page detail tournament
+    // Go the page detail _tournament
     goToTournament(tournament) {
         // Add a spinner when the view is loaded
         document.getElementById('spinnerContent').style.visibility = 'visible';
 
-        this.sharedDataProvider.setCurrentTournament(tournament);
+        this.sharedDataProvider.currentTournament = tournament;
         this.navCtrl.push(TournamentPage);
     }
 
@@ -73,18 +73,18 @@ export class ParticipantPage {
         // Add a spinner when the view is loaded
         document.getElementById('spinnerContent').style.visibility = 'visible';
 
-        this.sharedDataProvider.setCurrentTeam(team);
+        this.sharedDataProvider.currentTeam = team;
         this.navCtrl.push(TeamPage);
     }
 
-    // Go to page detail pool
+    // Go to page detail _pool
     goToPool(pool_id) {
         // Add a spinner when the view is loaded
         document.getElementById('spinnerContent').style.visibility = 'visible';
 
-        this.sharedDataProvider.setCurrentTournament(this.participantData.tournament[0]);
-        this.pool.id = pool_id;
-        this.sharedDataProvider.setCurrentPool(this.pool);
+        this.sharedDataProvider.currentTournament(this._participantData._tournament[0]);
+        this._pool.id = pool_id;
+        this.sharedDataProvider.currentPool = this._pool;
         this.navCtrl.push(PoolPage);
     }
 

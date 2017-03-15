@@ -3,7 +3,6 @@ import {NavController, Refresher} from 'ionic-angular';
 import {TeamService} from "../../providers/team-service";
 import {TournamentService} from "../../providers/tournament-service";
 import {SharedDataService} from '../../providers/sharedData-service';
-import {Storage} from '@ionic/storage';
 import {TeamPage} from "../team/team";
 import {TournamentPage} from "../tournament/tournament";
 import {ParticipantService} from "../../providers/participant-service";
@@ -21,56 +20,57 @@ import {ParticipantPage} from "../participant/participant";
     templateUrl: 'event.html'
 })
 export class EventPage {
-    public event: any;
-    private teams: any;
-    public tournaments: any;
-    public participants: any;
-    public filteredParticipants: any;
-    public filteredTeams: any;
-    public searchTermTeam: string = '';
-    public searchTermParticipant: string = '';
-    public userFavoritesTeamsPromise: any;
-    public userFavoritesTeamsIds: any;
-    public eventContent: any;
+    private _event;
+    private _teams;
+    private _tournaments;
+    private _participants;
+    private _filteredParticipants;
+    private _filteredTeams;
+    private _searchTermTeam: string = '';
+    private _searchTermParticipant: string = '';
+    private _userFavoritesTeamsPromise;
+    private _userFavoritesTeamsIds;
+    private _eventContent;
 
-    constructor(private navCtrl: NavController, private storage: Storage,
+
+    constructor(private navCtrl: NavController,
                 private teamProvider: TeamService, private tournamentProvider: TournamentService,
                 private participantProvider: ParticipantService, private sharedDataProvider: SharedDataService) {
         this.loadData();
-        this.eventContent = "teams";
+        this._eventContent = "teams";
     }
 
     loadData() {
         this.sharedDataProvider.httpError = false;
-        // Get the current event
-        this.event = this.sharedDataProvider.getCurrentEvent();
+        // Get the current _event
+        this._event = this.sharedDataProvider.currentEvent;
         // Get the current favorite teams
-        this.userFavoritesTeamsPromise = this.sharedDataProvider.getCurrentEventFavoritesTeams();
+        this._userFavoritesTeamsPromise = this.sharedDataProvider.currentEventFavoritesTeams;
 
-        this.userFavoritesTeamsPromise.then(val => {
+        this._userFavoritesTeamsPromise.then(val => {
             // If val contain something, add the favorite teams and separate different teams with a ","
             if (val) {
-                this.userFavoritesTeamsIds = val.split(',');
+                this._userFavoritesTeamsIds = val.split(',');
             }
-            // Get teams by event
-            this.teamProvider.getTeamsByEvent(this.event.id).subscribe(data => {
-                this.teams = data.teams;
-                this.filteredTeams = data.teams;
+            // Get teams by _event
+            this.teamProvider.getTeamsByEvent(this._event.id).subscribe(data => {
+                this._teams = data.teams;
+                this._filteredTeams = data.teams;
                 this.filterTeams();
             });
         }).catch(e => {
             console.log(e);
         });
 
-        // Get tournaments by event
-        this.tournamentProvider.getTournamentsByEvent(this.event.id).subscribe(data => {
-            this.tournaments = data.tournaments;
+        // Get tournaments by _event
+        this.tournamentProvider.getTournamentsByEvent(this._event.id).subscribe(data => {
+            this._tournaments = data.tournaments;
         });
 
-        // Get participants by event
-        this.participantProvider.getParticipantsByEvent(this.event.id).subscribe(data => {
-            this.participants = data.participants;
-            this.filteredParticipants = this.participants;
+        // Get participants by _event
+        this.participantProvider.getParticipantsByEvent(this._event.id).subscribe(data => {
+            this._participants = data.participants;
+            this._filteredParticipants = this._participants;
         });
     }
 
@@ -86,17 +86,17 @@ export class EventPage {
     // Filter teams
     filterTeams() {
         var self = this;
-        this.filteredTeams = this.teams.filter((team) => {
-            return team.name.toLowerCase().indexOf(this.searchTermTeam.toLowerCase()) > -1;
+        this._filteredTeams = this._teams.filter((team) => {
+            return team.name.toLowerCase().indexOf(this._searchTermTeam.toLowerCase()) > -1;
         });
         // Put the favorites in front of the array
         var temp = [];
 
-        this.filteredTeams.forEach(function (team) {
+        this._filteredTeams.forEach(function (team) {
             // If we have no favorite, do nothing
-            if (self.userFavoritesTeamsIds) {
+            if (self._userFavoritesTeamsIds) {
                 // Add the favorite in front of the array
-                if (self.userFavoritesTeamsIds.indexOf(team.id.toString()) != -1) {
+                if (self._userFavoritesTeamsIds.indexOf(team.id.toString()) != -1) {
                     team.favorite = true;
                     temp.unshift(team);
                 }
@@ -105,56 +105,56 @@ export class EventPage {
                     team.favorite = false;
                     temp.push(team)
                 }
-                self.filteredTeams = temp;
+                self._filteredTeams = temp;
             }
         });
     }
 
     // Filter participants
     filterParticipants() {
-        this.filteredParticipants = this.participants.filter((participant) => {
+        this._filteredParticipants = this._participants.filter((participant) => {
             var participantFullName = participant.lastname + ' ' + participant.firstname;
-            return participantFullName.toLowerCase().indexOf(this.searchTermParticipant.toLowerCase()) > -1;
+            return participantFullName.toLowerCase().indexOf(this._searchTermParticipant.toLowerCase()) > -1;
         });
     }
 
     // Toggle favorite teams
     toggleFavoriteTeam(team) {
         // Get the current favorite teams
-        this.userFavoritesTeamsPromise = this.sharedDataProvider.getCurrentEventFavoritesTeams();
+        this._userFavoritesTeamsPromise = this.sharedDataProvider.currentEventFavoritesTeams;
 
-        this.userFavoritesTeamsPromise.then(val => {
+        this._userFavoritesTeamsPromise.then(val => {
             // If val contain something, add the favorite teams and separate different teams with a ","
             if (val) {
-                this.userFavoritesTeamsIds = val.split(',');
-                var index = this.userFavoritesTeamsIds.indexOf(team.id.toString());
+                this._userFavoritesTeamsIds = val.split(',');
+                var index = this._userFavoritesTeamsIds.indexOf(team.id.toString());
 
                 // Set no favorite teams
                 if (index != -1) {
-                    this.userFavoritesTeamsIds.splice(index, 1);
+                    this._userFavoritesTeamsIds.splice(index, 1);
                     team.favorite = false;
                 }
                 // Set favorite teams
                 else {
-                    this.userFavoritesTeamsIds.push(team.id);
+                    this._userFavoritesTeamsIds.push(team.id);
                     team.favorite = true;
                 }
             }
             //If val contain nothing, set the first one
             else {
-                this.userFavoritesTeamsIds = [team.id];
+                this._userFavoritesTeamsIds = [team.id];
                 team.favorite = true;
             }
             // Set the current favorite teams
-            this.sharedDataProvider.setCurrentEventFavoritesTeams(this.userFavoritesTeamsIds.toString());
+            this.sharedDataProvider.currentEventFavoritesTeams = this._userFavoritesTeamsIds.toString();
         }).catch(e => {
             console.log(e);
         });
     }
 
-    // Content de different segments for a event
+    // Content de different segments for a _event
     setSegment(segment) {
-        this.eventContent = segment;
+        this._eventContent = segment;
     }
 
     // Go to page detail team
@@ -162,25 +162,25 @@ export class EventPage {
         // Add a spinner when the view is loaded
         document.getElementById('spinnerContent').style.visibility = 'visible';
 
-        this.sharedDataProvider.setCurrentTeam(team);
+        this.sharedDataProvider.currentTeam = team;
         this.navCtrl.push(TeamPage);
     }
 
-    // Go to page detail tournament
+    // Go to page detail _tournament
     goToTournament(tournament) {
         // Add a spinner when the view is loaded
         document.getElementById('spinnerContent').style.visibility = 'visible';
 
-        this.sharedDataProvider.setCurrentTournament(tournament);
+        this.sharedDataProvider.currentTournament = tournament;
         this.navCtrl.push(TournamentPage);
     }
 
-    // Go to page detail participant
+    // Go to page detail _participant
     goToParticipant(participant) {
         // Add a spinner when the view is loaded
         document.getElementById('spinnerContent').style.visibility = 'visible';
 
-        this.sharedDataProvider.setCurrentParticipant(participant);
+        this.sharedDataProvider.currentParticipant = participant;
         this.navCtrl.push(ParticipantPage);
     }
 

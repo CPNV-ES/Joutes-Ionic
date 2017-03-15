@@ -15,7 +15,7 @@ export class TeamService {
         this.httpService = httpService;
     }
 
-    // Get the json for teams by event
+    // Get the json for teams by _event
     getTeamsByEvent(eventId): any
     {
         return this.httpService.getJson(`/events/${eventId}/teams`);

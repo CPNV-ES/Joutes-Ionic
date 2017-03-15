@@ -15,13 +15,13 @@ export class ParticipantService {
         this.httpService = httpService;
     }
 
-    // Get the json for participants by event
+    // Get the json for participants by _event
     getParticipantsByEvent(eventId): any
     {
         return this.httpService.getJson(`/events/${eventId}/participants`);
     }
 
-    // Get the json for participant
+    // Get the json for _participant
     getParticipant(eventId, participantId)
     {
         return this.httpService.getJson(`/events/${eventId}/participant/${participantId}`);

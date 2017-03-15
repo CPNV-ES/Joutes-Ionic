@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams, Refresher} from 'ionic-angular';
+import {NavController, Refresher} from 'ionic-angular';
 import {PoolService} from "../../providers/pool-service";
 import {SharedDataService} from "../../providers/sharedData-service";
 import {TeamPage} from "../team/team";
@@ -16,28 +16,28 @@ import {TeamPage} from "../team/team";
 })
 export class PoolPage {
 
-    public event: any;
-    public tournament: any;
-    public pool: any;
-    public poolData: any = {};
-    public finish: boolean = true;
+    private _event;
+    private _tournament;
+    private _pool;
+    private _poolData: any = {};
+    private _finish: boolean = true;
 
-    constructor(private navCtrl: NavController, private navParam: NavParams, private poolProvider: PoolService, private sharedDataProvider: SharedDataService) {
+    constructor(private navCtrl: NavController, private poolProvider: PoolService, private sharedDataProvider: SharedDataService) {
         this.loadData();
     }
 
     loadData() {
         this.sharedDataProvider.httpError = false;
-        // Get the current event
-        this.event = this.sharedDataProvider.getCurrentEvent();
-        // Get the current tournament
-        this.tournament = this.sharedDataProvider.getCurrentTournament();
-        // Get the current pool
-        this.pool = this.sharedDataProvider.getCurrentPool();
+        // Get the current _event
+        this._event = this.sharedDataProvider.currentEvent;
+        // Get the current _tournament
+        this._tournament = this.sharedDataProvider.currentTournament;
+        // Get the current _pool
+        this._pool = this.sharedDataProvider.currentPool;
 
-        // Get the pool
-        this.poolProvider.getPool(this.event.id, this.tournament.id, this.pool.id).subscribe(data => {
-            this.poolData = data;
+        // Get the _pool
+        this.poolProvider.getPool(this._event.id, this._tournament.id, this._pool.id).subscribe(data => {
+            this._poolData = data;
             this.isFinished();
         });
     }
@@ -54,9 +54,9 @@ export class PoolPage {
     // Verify if the match is finished
     isFinished() {
         var self = this;
-        this.poolData.matches.forEach(function (match) {
+        this._poolData.matches.forEach(function (match) {
             if(match.status == 'A venir') {
-                self.finish = false;
+                self._finish = false;
             }
         });
     }
@@ -66,7 +66,7 @@ export class PoolPage {
         // Add a spinner when the view is loaded
         document.getElementById('spinnerContent').style.visibility = 'visible';
 
-        this.sharedDataProvider.setCurrentTeam(team);
+        this.sharedDataProvider.currentTeam = team;
         this.navCtrl.push(TeamPage);
     }
 

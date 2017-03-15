@@ -15,7 +15,7 @@ export class PoolService {
         this.httpService = httpService;
     }
 
-    // Get the json for pool
+    // Get the json for _pool
     getPool(tournamentId, eventId, poolId)
     {
         return this.httpService.getJson(`/events/${eventId}/tournament/${tournamentId}/${poolId}`);
