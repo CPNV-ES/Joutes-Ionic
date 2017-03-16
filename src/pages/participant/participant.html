@@ -99,26 +99,6 @@
 
     <!-- Display the detail for the team's participant -->
     <div *ngFor="let team of _participantData.team">
-        <!-- Display the name of team and display a icon trophy if the team have a status "Vainqueur" -->
-        <ion-col width-100>
-            <h2>Equipe <b>{{ _teamData.name }}</b>
-                <ion-icon name="trophy" class="color-star" *ngIf="_teamData.status == 'Vainqueur'"></ion-icon>
-            </h2>
-        </ion-col>
-
-        <!-- Display the name of members -->
-        <ion-card>
-            <ion-card-content no-padding>
-                <ion-grid text-center>
-                    <ion-row style="flex-wrap: wrap;">
-                        <ion-col width-33 *ngFor="let member of _teamData.members">
-                            <span class="items">{{ member.firstname }}</span>
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
-            </ion-card-content>
-        </ion-card>
-
         <!-- Display the name of _tournament -->
         <ion-col width-100 class="no-padding-bottom"><h2>Liste des <b>Matchs</b></h2></ion-col>
         <ion-col width-100 no-padding>
