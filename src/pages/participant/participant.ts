@@ -80,7 +80,7 @@ export class ParticipantPage {
         // Add a spinner when the view is loaded
         document.getElementById('spinnerContent').style.visibility = 'visible';
 
-        this.sharedDataProvider.currentTournament(this._participantData._tournament[0]);
+        this.sharedDataProvider.currentTournament = this._participantData.tournament[0];
         this._pool.id = pool_id;
         this.sharedDataProvider.currentPool = this._pool;
         this.navCtrl.push(PoolPage);
