@@ -33,7 +33,6 @@ export class EventPage {
     private _userFavoritesTeamsIds;
     private _eventContent;
 
-
     constructor(private navCtrl: NavController,
                 private teamProvider: TeamService, private tournamentProvider: TournamentService,
                 private participantProvider: ParticipantService, private sharedDataProvider: SharedDataService) {
