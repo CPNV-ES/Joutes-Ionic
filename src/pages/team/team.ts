@@ -11,6 +11,7 @@ import {TournamentPage} from "../tournament/tournament";
 })
 
 export class TeamPage {
+
     private _event;
     private _team;
     private _pool: any = {id: ''};

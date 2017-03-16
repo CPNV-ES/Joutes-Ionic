@@ -8,6 +8,7 @@
     <ion-navbar>
         <ion-title text-center>Evènements</ion-title>
     </ion-navbar>
+
     <!-- Filter events -->
     <ion-toolbar no-border-top>
         <ion-searchbar color="primary" placeholder="Nom de l'évènement.." [(ngModel)]="_searchTerm" (ionInput)="filterEvents()">
@@ -20,6 +21,7 @@
     <ion-refresher (ionRefresh)="refresh($event)">
         <ion-refresher-content refreshingText="Chargement"></ion-refresher-content>
     </ion-refresher>
+
     <ion-list>
         <!-- When we click on the name of the _event -> go to detail _event -->
         <button ion-item *ngFor="let event of _filteredEvents" (click)="goToEvent(event)">
