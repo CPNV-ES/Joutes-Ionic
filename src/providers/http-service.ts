@@ -30,8 +30,7 @@ export class HttpService {
         // this.serverUrl = "http://172.17.102.188/Joutes-real/Joutes/public/api";
     }
 
-    // Get the json
-    // URI must have a / before
+    // Get the JSON, URI must have a / before
     getJson(uri) {
         return this.http
             .get(this.serverUrl+uri)
@@ -42,8 +41,8 @@ export class HttpService {
             });
     }
 
+    // Display a error message if there is no connection
     displayError() {
-        //Do we already have display the error message?
         if(!this.sharedDataProvider.httpError) {
             let alert = this.alertCtrl.create({
                 title: 'Pas de données',

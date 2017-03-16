@@ -12,6 +12,7 @@ import {Observable} from "rxjs";
 })
 
 export class TeamPage {
+
     private _event;
     private _team;
     private _pool: any = {id: ''};

@@ -13,10 +13,12 @@ export class SharedDataService {
     constructor(private storage: Storage) {
     }
 
+    // Get the error http
     get httpError() {
         return this._httpError
     }
 
+    // Set the error htpp
     set httpError(value) {
         this._httpError = value;
     }
