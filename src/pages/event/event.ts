@@ -7,6 +7,7 @@ import {TeamPage} from "../team/team";
 import {TournamentPage} from "../tournament/tournament";
 import {ParticipantService} from "../../providers/participant-service";
 import {ParticipantPage} from "../participant/participant";
+import {Observable} from "rxjs";
 
 
 /*
@@ -36,7 +37,7 @@ export class EventPage {
     constructor(private navCtrl: NavController,
                 private teamProvider: TeamService, private tournamentProvider: TournamentService,
                 private participantProvider: ParticipantService, private sharedDataProvider: SharedDataService) {
-        this.loadData();
+        this.loadData().subscribe();
         this._eventContent = "teams";
     }
 
@@ -47,7 +48,7 @@ export class EventPage {
         // Get the current favorite teams
         this._userFavoritesTeamsPromise = this.sharedDataProvider.currentEventFavoritesTeams;
 
-        this._userFavoritesTeamsPromise.then(val => {
+        const o1 = Observable.fromPromise(this._userFavoritesTeamsPromise.then(val => {
             // If val contain something, add the favorite teams and separate different teams with a ","
             if (val) {
                 this._userFavoritesTeamsIds = val.split(',');
@@ -60,27 +61,24 @@ export class EventPage {
             });
         }).catch(e => {
             console.log(e);
-        });
+        }));
 
         // Get tournaments by _event
-        this.tournamentProvider.getTournamentsByEvent(this._event.id).subscribe(data => {
+        const o2 = this.tournamentProvider.getTournamentsByEvent(this._event.id).do(data => {
             this._tournaments = data.tournaments;
         });
 
         // Get participants by _event
-        this.participantProvider.getParticipantsByEvent(this._event.id).subscribe(data => {
+        const o3 = this.participantProvider.getParticipantsByEvent(this._event.id).do(data => {
             this._participants = data.participants;
             this._filteredParticipants = this._participants;
         });
+        return Observable.forkJoin(o1, o2, o3);
     }
 
     // Refresh the current page
     refresh(refresher: Refresher) {
-        this.loadData();
-
-        setTimeout(() => {
-            refresher.complete();
-        }, 1000);
+        this.loadData().subscribe(null, () => refresher.complete(), () => refresher.complete());
     }
 
     // Filter teams

@@ -4,6 +4,7 @@ import {SharedDataService} from '../../providers/sharedData-service';
 import {TeamService} from '../../providers/team-service';
 import {PoolPage} from "../pool/pool";
 import {TournamentPage} from "../tournament/tournament";
+import {Observable} from "rxjs";
 
 @Component({
     selector: 'page-team',
@@ -18,7 +19,7 @@ export class TeamPage {
     private _teamData: any = {};
 
     constructor(private navCtrl: NavController, private sharedDataProvider: SharedDataService, private teamProvider: TeamService) {
-        this.loadData();
+        this.loadData().subscribe();
     }
 
     loadData() {
@@ -29,16 +30,14 @@ export class TeamPage {
         this._team = this.sharedDataProvider.currentTeam;
 
         // Get the team
-        this.teamProvider.getTeam(this._team.id, this._event.id).subscribe(data => this._teamData = data);
+        const o1 = this.teamProvider.getTeam(this._team.id, this._event.id).do(data => this._teamData = data);
+
+        return Observable.forkJoin(o1);
     }
 
     // Refresh the current page
     refresh(refresher: Refresher) {
-        this.loadData();
-
-        setTimeout(() => {
-            refresher.complete();
-        }, 1000);
+        this.loadData().subscribe(null, () => refresher.complete(), () => refresher.complete());;
     }
 
     // Go to page detail _pool

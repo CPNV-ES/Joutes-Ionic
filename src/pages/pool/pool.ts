@@ -3,6 +3,7 @@ import {NavController, Refresher} from 'ionic-angular';
 import {PoolService} from "../../providers/pool-service";
 import {SharedDataService} from "../../providers/sharedData-service";
 import {TeamPage} from "../team/team";
+import {Observable} from "rxjs";
 
 /*
  Generated class for the Pool page.
@@ -23,7 +24,7 @@ export class PoolPage {
     private _finish: boolean = true;
 
     constructor(private navCtrl: NavController, private poolProvider: PoolService, private sharedDataProvider: SharedDataService) {
-        this.loadData();
+        this.loadData().subscribe();
     }
 
     loadData() {
@@ -36,19 +37,16 @@ export class PoolPage {
         this._pool = this.sharedDataProvider.currentPool;
 
         // Get the _pool
-        this.poolProvider.getPool(this._event.id, this._tournament.id, this._pool.id).subscribe(data => {
+        const o1 = this.poolProvider.getPool(this._event.id, this._tournament.id, this._pool.id).do(data => {
             this._poolData = data;
             this.isFinished();
         });
+        return Observable.forkJoin(o1);
     }
 
     // Refresh the current page
     refresh(refresher: Refresher) {
-        this.loadData();
-
-        setTimeout(() => {
-            refresher.complete();
-        }, 1000);
+        this.loadData().subscribe(null, () => refresher.complete(), () => refresher.complete());
     }
 
     // Verify if the match is finished

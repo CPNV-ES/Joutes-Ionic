@@ -6,6 +6,7 @@ import {TournamentPage} from "../tournament/tournament";
 import {TeamPage} from "../team/team";
 import {TeamService} from "../../providers/team-service";
 import {PoolPage} from "../pool/pool";
+import {Observable} from "rxjs";
 
 /*
  Generated class for the Participant page.
@@ -26,7 +27,7 @@ export class ParticipantPage {
     private _pool: any = {id: ''};
 
     constructor(private navCtrl: NavController, private teamProvider: TeamService, private participantProvider: ParticipantService, private sharedDataProvider: SharedDataService) {
-        this.loadData()
+        this.loadData().subscribe();
     }
 
     loadData() {
@@ -37,19 +38,16 @@ export class ParticipantPage {
         this._participant = this.sharedDataProvider.currentParticipant;
 
         // Get the _participant
-        this.participantProvider.getParticipant(this._event.id, this._participant.id).subscribe(data => {
+        const o1 = this.participantProvider.getParticipant(this._event.id, this._participant.id).do(data => {
             this._participantData = data;
             this.getTeamInfos();
         });
+        return Observable.forkJoin(o1);
     }
 
     // Refresh the current page
     refresh(refresher: Refresher) {
-        this.loadData();
-
-        setTimeout(() => {
-            refresher.complete();
-        }, 1000);
+        this.loadData().subscribe(null, () => refresher.complete(), () => refresher.complete());
     }
 
     // Get infos for the team

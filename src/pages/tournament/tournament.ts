@@ -4,6 +4,7 @@ import {SharedDataService} from '../../providers/sharedData-service';
 import {TournamentService} from '../../providers/tournament-service';
 import {TeamPage} from "../team/team";
 import {PoolPage} from "../pool/pool";
+import {Observable} from "rxjs";
 
 /*
  Generated class for the Tournament page.
@@ -22,7 +23,7 @@ export class TournamentPage {
     private _tournamentData: any = {};
 
     constructor(private navCtrl: NavController, private tournamentProvider: TournamentService, private sharedDataProvider: SharedDataService) {
-        this.loadData();
+        this.loadData().subscribe();;
     }
 
     loadData() {
@@ -33,16 +34,14 @@ export class TournamentPage {
         this._tournament = this.sharedDataProvider.currentTournament;
 
         // Get the _tournament
-        this.tournamentProvider.getTournament(this._event.id, this._tournament.id).subscribe(data => this._tournamentData = data);
+        const o1 = this.tournamentProvider.getTournament(this._event.id, this._tournament.id).do(data => this._tournamentData = data);
+
+        return Observable.forkJoin(o1);
     }
 
     // Refresh the current page
     refresh(refresher: Refresher) {
-        this.loadData();
-
-        setTimeout(() => {
-            refresher.complete();
-        }, 1000);
+        this.loadData().subscribe(null, () => refresher.complete(), () => refresher.complete());;
     }
 
     // Go to page detail _pool
