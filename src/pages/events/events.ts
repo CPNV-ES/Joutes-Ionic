@@ -5,6 +5,7 @@ import {SharedDataService} from '../../providers/sharedData-service';
 import {EventPage} from "../event/event";
 import {Splashscreen} from "ionic-native";
 import {document} from "@angular/platform-browser/src/facade/browser";
+import {Observable} from "rxjs";
 
 /*
  Generated class for the Events page.
@@ -23,25 +24,22 @@ export class EventsPage {
 
     constructor(private navCtrl: NavController, private sharedDataProvider: SharedDataService,
                 private eventProvider: EventService) {
-        this.loadData();
+        this.loadData().subscribe();
     }
 
     loadData() {
         this.sharedDataProvider.httpError = false;
         // Get events
-        this.eventProvider.getEvents().subscribe(data => {
+        const o1 = this.eventProvider.getEvents().do(data => {
             this._events = data.events;
             this._filteredEvents = data.events
         }, this.filterEvents)
+        return Observable.forkJoin(o1);
     }
 
     // Refresh the current page
     refresh(refresher: Refresher) {
-        this.loadData();
-
-        setTimeout(() => {
-            refresher.complete();
-        }, 1000);
+        this.loadData().subscribe(null, () => refresher.complete(), () => refresher.complete());
     }
 
     // Filter events
