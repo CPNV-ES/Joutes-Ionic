@@ -69,6 +69,10 @@ export class EventPage {
         return this._searchTermParticipant;
     }
 
+    set searchTermParticipant(value) {
+        this._searchTermParticipant = value;
+    }
+
     constructor(private navCtrl: NavController,
                 private teamProvider: TeamService, private tournamentProvider: TournamentService,
                 private participantProvider: ParticipantService, private sharedDataProvider: SharedDataService) {
