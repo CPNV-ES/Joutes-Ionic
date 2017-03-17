@@ -5,7 +5,7 @@
         </button>
         <!-- Display the name of _event -->
         <ion-title>
-            {{ _event.name }}
+            {{ event.name }}
         </ion-title>
     </ion-navbar>
 </ion-header>
@@ -16,11 +16,11 @@
         <ion-refresher-content refreshingText="Chargement"></ion-refresher-content>
     </ion-refresher>
 
-    <div *ngFor="let tournament of _teamData.tournament">
+    <div *ngFor="let tournament of teamData.tournament">
         <!-- Display the name of the team and display a icon trophy if the team have a status "Vainqueur" -->
         <ion-col width-100>
-            <h2>Equipe <b>{{ _teamData.name }}</b>
-                <ion-icon name="trophy" class="color-star" *ngIf="_teamData.status == 'Vainqueur'"></ion-icon>
+            <h2>Equipe <b>{{ teamData.name }}</b>
+                <ion-icon name="trophy" class="color-star" *ngIf="teamData.status == 'Vainqueur'"></ion-icon>
             </h2>
         </ion-col>
 
@@ -29,7 +29,7 @@
             <ion-card-content no-padding>
                 <ion-grid text-center>
                     <ion-row style="flex-wrap: wrap;">
-                        <ion-col width-33 *ngFor="let member of _teamData.members">
+                        <ion-col width-33 *ngFor="let member of teamData.members">
                             <span class="items">{{ member.firstname }}</span>
                         </ion-col>
                     </ion-row>
@@ -50,8 +50,8 @@
                     <ion-row style="flex-wrap: wrap;">
                         <!-- Display the icon for the sport -->
                         <ion-col width-50>
-                            <ion-img src="assets/sports/{{ setIconSports(_teamData.sport) }}" width="35" height="35" class="sports-img"></ion-img>
-                            <div class="items sports-label">{{ _teamData.sport }}</div>
+                            <ion-img src="assets/sports/{{ setIconSports(teamData.sport) }}" width="35" height="35" class="sports-img"></ion-img>
+                            <div class="items sports-label">{{ teamData.sport }}</div>
                         </ion-col>
 
                         <!-- Display the place of the tournament -->
@@ -73,12 +73,12 @@
             <ion-card-content no-padding>
                 <ion-list >
                     <!-- When we click on the name of the match -> go to detail pool -->
-                    <ion-item *ngFor="let match of _teamData.matches" (click)="goToPool(tournament, match.group_match_id)">
+                    <ion-item *ngFor="let match of teamData.matches" (click)="goToPool(tournament, match.group_match_id)">
                         <!-- Display a border green if the team win and display the score -->
                         <ion-row class="border-win" *ngIf="match.ownScore > match.team2Score">
                             <!-- Display the name of the team -->
                             <ion-col width-33 class="items">
-                                {{ _teamData.name }}
+                                {{ teamData.name }}
                             </ion-col>
 
                             <!-- Display the score -->
@@ -96,7 +96,7 @@
                         <ion-row class="border-lose" *ngIf="match.ownScore < match.team2Score">
                             <!-- Display the name of the team -->
                             <ion-col width-33 class="items">
-                                {{ _teamData.name }}
+                                {{ teamData.name }}
                             </ion-col>
 
                             <!-- Display the score -->
@@ -114,7 +114,7 @@
                         <ion-row class="border-draw" *ngIf="(match.team1Score == match.team2Score) && (match.start == '')">
                             <!-- Display the name of the team -->
                             <ion-col width-33 class="items">
-                                {{ _teamData.name }}
+                                {{ teamData.name }}
                             </ion-col>
 
                             <!-- Display the score -->
@@ -132,7 +132,7 @@
                         <ion-row class="border-inc" *ngIf="match.status == 'A venir' ">
                             <!-- Display the name of the team -->
                             <ion-col width-33 class="items">
-                                {{ _teamData.name }}
+                                {{ teamData.name }}
                             </ion-col>
 
                             <!-- Display time of the match -->

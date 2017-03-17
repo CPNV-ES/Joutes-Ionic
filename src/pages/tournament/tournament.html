@@ -11,7 +11,7 @@
         </button>
         <!-- Display the name of tournament -->
         <ion-title>
-            {{ _tournamentData.name }}
+            {{ tournamentData.name }}
         </ion-title>
     </ion-navbar>
 </ion-header>
@@ -27,11 +27,11 @@
         <ion-row style="flex-wrap: wrap;">
             <ion-col width-50>
                 <ion-icon name="grid" class="info"></ion-icon><br/>
-                <div class="items">{{ _tournamentData.type }}</div>
+                <div class="items">{{ tournamentData.type }}</div>
             </ion-col>
             <ion-col width-50>
                 <ion-icon name="pin" class="info"></ion-icon><br/>
-                <div class="items">{{ _tournamentData.place }}</div>
+                <div class="items">{{ tournamentData.place }}</div>
             </ion-col>
         </ion-row>
     </ion-grid>
@@ -41,7 +41,7 @@
         <ion-card-content no-padding>
             <ion-list>
                 <!-- When we click on the name of the team -> go to detail team -->
-                <ion-item *ngFor="let team of _tournamentData.teams" (click)="goToTeam(team)">
+                <ion-item *ngFor="let team of tournamentData.teams" (click)="goToTeam(team)">
                     <!-- Display the name of team -->
                     <div class="items">{{ team.name }}</div>
                 </ion-item>
@@ -58,25 +58,25 @@
                     <ion-row class="results">
                         <ion-col width-20><strong>1</strong></ion-col>
                         <!-- When we click on the name of the team -> go to detail team and display the classmate -->
-                        <ion-col width-80 class="items" *ngIf="_tournamentData.winner" (click)="goToTeam(_tournamentData.winner)">{{_tournamentData.winner.name}}</ion-col>
+                        <ion-col width-80 class="items" *ngIf="tournamentData.winner" (click)="goToTeam(tournamentData.winner)">{{tournamentData.winner.name}}</ion-col>
                         <!-- Display "En cours" if there is no winner -->
-                        <ion-col width-80 class="items" *ngIf="!_tournamentData.winner">En cours</ion-col>
+                        <ion-col width-80 class="items" *ngIf="!tournamentData.winner">En cours</ion-col>
                     </ion-row>
 
                     <ion-row class="results">
                         <ion-col width-20><strong>2</strong></ion-col>
                         <!-- When we click on the name of the team -> go to detail team and display the classmate -->
-                        <ion-col width-80 class="items" *ngIf="_tournamentData.second" (click)="goToTeam(_tournamentData.second)">{{_tournamentData.second.name}}</ion-col>
+                        <ion-col width-80 class="items" *ngIf="tournamentData.second" (click)="goToTeam(tournamentData.second)">{{tournamentData.second.name}}</ion-col>
                         <!-- Display "En cours" if there is no winner -->
-                        <ion-col width-80 class="items" *ngIf="!_tournamentData.second">En cours</ion-col>
+                        <ion-col width-80 class="items" *ngIf="!tournamentData.second">En cours</ion-col>
                     </ion-row>
 
                     <ion-row class="results">
                         <ion-col width-20><strong>3</strong></ion-col>
                         <!-- When we click on the name of the team -> go to detail team and display the classmate -->
-                        <ion-col width-80 class="items" *ngIf="_tournamentData.third" (click)="goToTeam(_tournamentData.third)">{{_tournamentData.third.name}}</ion-col>
+                        <ion-col width-80 class="items" *ngIf="tournamentData.third" (click)="goToTeam(tournamentData.third)">{{tournamentData.third.name}}</ion-col>
                         <!-- Display "En cours" if there is no winner -->
-                        <ion-col width-80 class="items" *ngIf="!_tournamentData.third">En cours</ion-col>
+                        <ion-col width-80 class="items" *ngIf="!tournamentData.third">En cours</ion-col>
                     </ion-row>
                 </ion-item>
             </ion-list>
@@ -88,7 +88,7 @@
         <ion-card-content no-padding>
             <!-- Add a slider to navigate between pools and eliminations -->
             <ion-slides [options]="{pager:true}">
-                <ion-slide *ngFor="let stage of _tournamentData.stages" class="items">
+                <ion-slide *ngFor="let stage of tournamentData.stages" class="items">
                     <ion-row>
                         <!-- Display the name of the stage -->
                         <ion-col width-100>

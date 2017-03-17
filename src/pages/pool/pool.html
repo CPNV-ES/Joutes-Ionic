@@ -11,7 +11,7 @@
         </button>
         <!-- Display the name of _tournament and the name of pool -->
         <ion-title>
-            {{ _tournament.name }} - {{ _poolData.name }}
+            {{ tournament.name }} - {{ poolData.name }}
         </ion-title>
     </ion-navbar>
 </ion-header>
@@ -28,12 +28,12 @@
             <ion-col width-50>
                 <ion-icon name="grid" class="info"></ion-icon>
                 <br/>
-                <div class="items">{{ _poolData.type }}</div>
+                <div class="items">{{ poolData.type }}</div>
             </ion-col>
             <ion-col width-50>
                 <ion-icon name="pin" class="info"></ion-icon>
                 <br/>
-                <div class="items">{{ _tournament.place }}</div>
+                <div class="items">{{ tournament.place }}</div>
             </ion-col>
         </ion-row>
     </ion-grid>
@@ -43,8 +43,8 @@
     <ion-card>
         <ion-card-content no-padding>
             <ion-list id="list-match">
-                <ion-item no-padding *ngFor="let match of _poolData.matches">
-                    <ion-row *ngIf="_poolData.type == 'Elimination' ">
+                <ion-item no-padding *ngFor="let match of poolData.matches">
+                    <ion-row *ngIf="poolData.type == 'Elimination' ">
                         <ion-col width-100 class="items pool-name" text-center>
                             {{ match.name }}
                         </ion-col>
@@ -69,15 +69,15 @@
     </ion-card>
 
     <!-- Display different text if the tournament is finished or not -->
-    <ion-col *ngIf="_finish" width-100><h2>Le <b>Classement final</b></h2></ion-col>
-    <ion-col *ngIf="!_finish" width-100><h2>Le <b>Classement actuel</b></h2></ion-col>
+    <ion-col *ngIf="finish" width-100><h2>Le <b>Classement final</b></h2></ion-col>
+    <ion-col *ngIf="!finish" width-100><h2>Le <b>Classement actuel</b></h2></ion-col>
     <ion-col width-100 no-padding>
         <div style="font-weight: 100; margin-left:11px;">Cliquez pour plus de détails</div>
     </ion-col>
     <ion-card>
         <ion-card-content no-padding padding-top padding-bottom>
             <!-- Display the information for elimination -->
-            <ion-list *ngIf="_poolData.type == 'Elimination' ">
+            <ion-list *ngIf="poolData.type == 'Elimination' ">
                 <ion-row class="border-table results-head">
                     <ion-col width-20>
                         <strong>#</strong>
@@ -88,9 +88,9 @@
                 </ion-row>
 
                 <!-- Display the classmate -->
-                <ion-item *ngIf="_finish">
+                <ion-item *ngIf="finish">
                     <ion-row class="results" (click)="goToTeam(team)"
-                             *ngFor="let team of _poolData.teams; let i = index;">
+                             *ngFor="let team of poolData.teams; let i = index;">
                         <ion-col width-20>
                             <strong>{{ i+1 }}</strong>
                         </ion-col>
@@ -101,7 +101,7 @@
                 </ion-item>
 
                 <!-- Display nothing if no matches are finished -->
-                <ion-item *ngIf="!_finish">
+                <ion-item *ngIf="!finish">
                     <ion-row class="results" >
                         <ion-col width-20>
 
@@ -114,7 +114,7 @@
             </ion-list>
 
             <!-- Display the information for pool-->
-            <ion-list *ngIf="_poolData.type == 'Poule' ">
+            <ion-list *ngIf="poolData.type == 'Poule' ">
                 <ion-row class="border-table results-head">
                     <ion-col width-10>
                         <strong>#</strong>
@@ -137,7 +137,7 @@
                 </ion-row>
 
                 <!-- Display the classmate for pool-->
-                <ion-row class="results" (click)="goToTeam(team)" *ngFor="let team of _poolData.teams; let i = index;">
+                <ion-row class="results" (click)="goToTeam(team)" *ngFor="let team of poolData.teams; let i = index;">
                     <ion-col width-10>
                         <strong>{{ i+1 }}</strong>
                     </ion-col>

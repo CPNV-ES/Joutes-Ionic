@@ -22,6 +22,10 @@ export class TournamentPage {
     private _tournament;
     private _tournamentData: any = {};
 
+    get tournamentData() {
+        return this._tournamentData
+    }
+
     constructor(private navCtrl: NavController, private tournamentProvider: TournamentService, private sharedDataProvider: SharedDataService) {
         this.loadData().subscribe();;
     }

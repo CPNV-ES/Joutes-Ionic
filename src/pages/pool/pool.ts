@@ -23,6 +23,18 @@ export class PoolPage {
     private _poolData: any = {};
     private _finish: boolean = true;
 
+    get tournament() {
+        return this._tournament
+    }
+
+    get poolData() {
+        return this._poolData
+    }
+
+    get finish() {
+        return this._finish
+    }
+
     constructor(private navCtrl: NavController, private poolProvider: PoolService, private sharedDataProvider: SharedDataService) {
         this.loadData().subscribe();
     }

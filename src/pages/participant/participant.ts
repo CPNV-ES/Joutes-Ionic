@@ -26,6 +26,18 @@ export class ParticipantPage {
     private _teamData: any = {};
     private _pool: any = {id: ''};
 
+    get event() {
+        return this._event
+    }
+
+    get participantData() {
+        return this._participantData
+    }
+
+    get teamData() {
+        return this._teamData
+    }
+
     constructor(private navCtrl: NavController, private teamProvider: TeamService, private participantProvider: ParticipantService, private sharedDataProvider: SharedDataService) {
         this.loadData().subscribe();
     }

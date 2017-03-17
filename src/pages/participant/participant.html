@@ -11,7 +11,7 @@
         </button>
         <!-- Display the last name and first name -->
         <ion-title>
-            {{ _participantData.lastname }} {{ _participantData.firstname }}
+            {{ participantData.lastname }} {{ participantData.firstname }}
         </ion-title>
     </ion-navbar>
 </ion-header>
@@ -23,11 +23,11 @@
     </ion-refresher>
 
     <!-- Display the detail for the _tournament's participant -->
-    <div *ngFor="let tournament of _participantData.tournament">
+    <div *ngFor="let tournament of participantData.tournament">
         <!-- Display the name of team and display a icon trophy if the team have a status "Vainqueur" -->
         <ion-col width-100>
-            <h2>Equipe <b>{{ _teamData.name }}</b>
-                <ion-icon name="trophy" class="color-star" *ngIf="_teamData.status == 'Vainqueur'"></ion-icon>
+            <h2>Equipe <b>{{ teamData.name }}</b>
+                <ion-icon name="trophy" class="color-star" *ngIf="teamData.status == 'Vainqueur'"></ion-icon>
             </h2>
         </ion-col>
         <!-- Display the name of members -->
@@ -35,7 +35,7 @@
             <ion-card-content no-padding>
                 <ion-grid text-center>
                     <ion-row style="flex-wrap: wrap;">
-                        <ion-col width-33 *ngFor="let member of _teamData.members">
+                        <ion-col width-33 *ngFor="let member of teamData.members">
                             <span class="items">{{ member.firstname }}</span>
                         </ion-col>
                     </ion-row>
@@ -98,7 +98,7 @@
     </div>
 
     <!-- Display the detail for the team's participant -->
-    <div *ngFor="let team of _participantData.team">
+    <div *ngFor="let team of participantData.team">
         <!-- Display the name of _tournament -->
         <ion-col width-100 class="no-padding-bottom"><h2>Liste des <b>Matchs</b></h2></ion-col>
         <ion-col width-100 no-padding>
@@ -109,12 +109,12 @@
             <ion-card-content no-padding>
                 <ion-list>
                     <!-- When we click on the name of the match -> go to detail _pool -->
-                    <ion-item *ngFor="let match of _teamData.matches" (click)="goToPool(match.group_match_id)">
+                    <ion-item *ngFor="let match of teamData.matches" (click)="goToPool(match.group_match_id)">
                         <!-- Display a border green if the team win and display the score -->
                         <ion-row class="border-win" *ngIf="match.ownScore > match.team2Score">
                             <!-- Display the name of the team -->
                             <ion-col width-33 class="items">
-                                {{ _teamData.name }}
+                                {{ teamData.name }}
                             </ion-col>
 
                             <!-- Display the score -->
@@ -132,7 +132,7 @@
                         <ion-row class="border-lose" *ngIf="match.ownScore < match.team2Score">
                             <!-- Display the name of the team -->
                             <ion-col width-33 class="items">
-                                {{ _teamData.name }}
+                                {{ teamData.name }}
                             </ion-col>
 
                             <!-- Display the score -->
@@ -150,7 +150,7 @@
                         <ion-row class="border-draw" *ngIf="(match.team1Score == match.team2Score) && (match.start == '')">
                             <!-- Display the name of the team -->
                             <ion-col width-33 class="items">
-                                {{ _teamData.name }}
+                                {{ teamData.name }}
                             </ion-col>
 
                             <!-- Display the score -->
@@ -168,7 +168,7 @@
                         <ion-row class="border-inc" *ngIf="match.status == 'A venir' ">
                             <!-- Display the name of the team -->
                             <ion-col width-33 class="items">
-                                {{ _teamData.name }}
+                                {{ teamData.name }}
                             </ion-col>
 
                             <!-- Display time of the match -->

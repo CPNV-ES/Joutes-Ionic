@@ -18,6 +18,14 @@ export class TeamPage {
     private _pool: any = {id: ''};
     private _teamData: any = {};
 
+    get event() {
+        return this._event
+    }
+
+    get teamData() {
+        return this._teamData
+    }
+
     constructor(private navCtrl: NavController, private sharedDataProvider: SharedDataService, private teamProvider: TeamService) {
         this.loadData().subscribe();
     }

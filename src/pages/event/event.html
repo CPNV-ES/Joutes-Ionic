@@ -8,13 +8,13 @@
     <!-- Display the _event name -->
     <ion-navbar no-border-bottom>
         <ion-title>
-            {{ _event.name }}
+            {{ event.name }}
         </ion-title>
     </ion-navbar>
 
     <!-- Content de different segments for a _event - Display the toolbar -->
     <ion-toolbar no-border-top>
-        <ion-segment [(ngModel)]="_eventContent">
+        <ion-segment [(ngModel)]="eventContent">
             <ion-segment-button value="teams" (click)="setSegment('teams')">
                 Équipes
             </ion-segment-button>
@@ -41,16 +41,16 @@
     </ion-refresher>
 
     <!-- Display the content according to the toolbar -->
-    <div [ngSwitch]="_eventContent">
+    <div [ngSwitch]="eventContent">
         <ion-list *ngSwitchCase="'teams'">
             <!-- Filter teams and display the list teams -->
             <ion-toolbar no-border-top>
-                <ion-searchbar color="primary" placeholder="Nom de l'équipe" [(ngModel)]="_searchTermTeam" (ionInput)="filterTeams()">
+                <ion-searchbar color="primary" placeholder="Nom de l'équipe" [(ngModel)]="searchTermTeam" (ionInput)="filterTeams()">
                 </ion-searchbar>
             </ion-toolbar>
 
             <!-- When we click on the name of the team -> go to detail team -->
-            <ion-item *ngFor="let team of _filteredTeams">
+            <ion-item *ngFor="let team of filteredTeams">
                 <div class="items" (click)="goToTeam(team)">{{team.name}} ({{team.sport}})</div>
                 <ion-icon item-right name="star" class="color-star" (click)="toggleFavoriteTeam(team)" *ngIf="team.favorite"></ion-icon><!-- When we click on the star -> add the team in favorite -->
                 <ion-icon item-right name="star-outline" (click)="toggleFavoriteTeam(team)" *ngIf="!team.favorite"></ion-icon><!-- When we click on the star -> remove the team in favorite -->
@@ -60,7 +60,7 @@
         <!-- Display the list tournaments -->
         <ion-list *ngSwitchCase="'tournaments'">
             <!-- When we click on the name of the _tournament -> go to detail _tournament -->
-            <ion-item *ngFor="let tournament of _tournaments">
+            <ion-item *ngFor="let tournament of tournaments">
                 <div class="items" (click)="goToTournament(tournament)">{{tournament.name}}</div>
             </ion-item>
         </ion-list>
@@ -68,12 +68,12 @@
         <ion-list *ngSwitchCase="'participants'">
             <!-- Filter participant and display the list participants -->
             <ion-toolbar no-border-top>
-                <ion-searchbar color="primary" placeholder="Nom du participant" [(ngModel)]="_searchTermParticipant" (ionInput)="filterParticipants()">
+                <ion-searchbar color="primary" placeholder="Nom du participant" [(ngModel)]="searchTermParticipant" (ionInput)="filterParticipants()">
                 </ion-searchbar>
             </ion-toolbar>
 
             <!-- When we click on the name of the _participant-> go to detail _participant -->
-            <ion-item *ngFor="let participant of _filteredParticipants">
+            <ion-item *ngFor="let participant of filteredParticipants">
                 <div class="items" (click)="goToParticipant(participant)">{{participant.lastname}} {{participant.firstname}}</div>
             </ion-item>
         </ion-list>
@@ -81,7 +81,7 @@
         <!-- Display the list results -->
         <ion-item-group *ngSwitchCase="'results'">
             <!-- Display the ranking for each _tournament -->
-            <div *ngFor="let tournament of _tournaments">
+            <div *ngFor="let tournament of tournaments">
                 <!-- When we click on the name of the _tournament -> go to detail _tournament -->
                 <ion-item-divider class="tournament-name items" (click)="goToTournament(tournament)"><b>{{tournament.name}}</b></ion-item-divider>
                 <!-- Display "En cours" if there is no winner -->

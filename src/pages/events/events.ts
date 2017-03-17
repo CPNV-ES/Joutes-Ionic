@@ -22,6 +22,22 @@ export class EventsPage {
     private _filteredEvents;
     private _searchTerm: string = '';
 
+    get events() {
+        return this._events;
+    }
+
+    get filteredEvents() {
+        return this._filteredEvents;
+    }
+
+    get searchTerm() {
+        return this._searchTerm;
+    }
+
+    set searchTerm(value) {
+        this._searchTerm = value;
+    }
+
     constructor(private navCtrl: NavController, private sharedDataProvider: SharedDataService,
                 private eventProvider: EventService) {
         this.loadData().subscribe();

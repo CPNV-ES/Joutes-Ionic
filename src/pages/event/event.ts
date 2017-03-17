@@ -33,6 +33,42 @@ export class EventPage {
     private _userFavoritesTeamsIds;
     private _eventContent;
 
+    get event() {
+        return this._event;
+    }
+
+    get eventContent() {
+        return this._eventContent;
+    }
+
+    set eventContent(value) {
+        this._eventContent = value;
+    }
+
+    get filteredParticipants() {
+        return this._filteredParticipants;
+    }
+
+    get filteredTeams() {
+        return this._filteredTeams;
+    }
+
+    get tournaments() {
+        return this._tournaments;
+    }
+
+    get searchTermTeam() {
+        return this._searchTermTeam;
+    }
+
+    set searchTermTeam(value) {
+        this._searchTermTeam = value;
+    }
+
+    get searchTermParticipant() {
+        return this._searchTermParticipant;
+    }
+
     constructor(private navCtrl: NavController,
                 private teamProvider: TeamService, private tournamentProvider: TournamentService,
                 private participantProvider: ParticipantService, private sharedDataProvider: SharedDataService) {
