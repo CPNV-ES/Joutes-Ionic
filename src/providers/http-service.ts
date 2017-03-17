@@ -45,8 +45,8 @@ export class HttpService {
     displayError() {
         if(!this.sharedDataProvider.httpError) {
             let alert = this.alertCtrl.create({
-                title: 'Pas de données',
-                subTitle: 'Aucune données n\'a pu être chargé, veuillez vérifier que vous êtes bien connecté au réseau dédié',
+                title: 'Attention',
+                subTitle: 'Certaine données n\'int pas pu être chargée, veuillez vérifier que vous êtes bien connecté au réseau dédié',
                 buttons: ['Ok']
             });
             alert.present();
