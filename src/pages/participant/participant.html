@@ -24,31 +24,31 @@
 
     <!-- Display the detail for the _tournament's participant -->
     <div *ngFor="let tournament of participantData.tournament">
-        <!-- Display the name of team and display a icon trophy if the team have a status "Vainqueur" -->
-        <ion-col width-100>
-            <h2>Equipe <b>{{ teamData.name }}</b>
-                <ion-icon name="trophy" class="color-star" *ngIf="teamData.status == 'Vainqueur'"></ion-icon>
-            </h2>
-        </ion-col>
-        <!-- Display the name of members -->
-        <ion-card>
-            <ion-card-content no-padding>
-                <ion-grid text-center>
-                    <ion-row style="flex-wrap: wrap;">
-                        <ion-col width-33 *ngFor="let member of teamData.members">
-                            <span class="items">{{ member.firstname }}</span>
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
-            </ion-card-content>
-        </ion-card>
-        <!-- Display the _tournament name -->
-        <ion-col width-100><h2>Participe à <b>{{ tournament.name }}</b></h2></ion-col>
-
         <!-- Display different content if the _tournament is not "Marche"-->
         <ion-col *ngIf="tournament.sport != 'Marche'" width-100 no-padding>
-            <div style="font-weight: 100; margin-left:11px;">Cliquez pour plus de détails</div>
+            <!-- Display the name of team and display a icon trophy if the team have a status "Vainqueur" -->
+            <ion-col width-100>
+                <h2>Equipe <b>{{ teamData.name }}</b>
+                    <ion-icon name="trophy" class="color-star" *ngIf="teamData.status == 'Vainqueur'"></ion-icon>
+                </h2>
+            </ion-col>
+            <!-- Display the name of members -->
+            <ion-card>
+                <ion-card-content no-padding>
+                    <ion-grid text-center>
+                        <ion-row style="flex-wrap: wrap;">
+                            <ion-col width-33 *ngFor="let member of teamData.members">
+                                <span class="items">{{ member.firstname }}</span>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card-content>
+            </ion-card>
         </ion-col>
+
+        <!-- Display the _tournament name -->
+        <ion-col width-100><h2>Participe à <b>{{ tournament.name }}</b></h2></ion-col>
+        <div style="font-weight: 100; margin-left:11px;">Cliquez pour plus de détails</div>
 
         <!-- When we click on the _tournament -> go to detail _tournament -->
         <ion-card *ngIf="tournament.sport != 'Marche'" (click)="goToTournament(tournament)">
