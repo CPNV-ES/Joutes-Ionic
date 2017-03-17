@@ -82,7 +82,7 @@
         <ion-item-group *ngSwitchCase="'results'">
             <!-- Display the ranking for each _tournament -->
             <div *ngFor="let tournament of tournaments">
-                <!-- When we click on the name of the _tournament -> go to detail _tournament -->
+                <!-- When we click on the name of the tournament -> go to detail tournament -->
                 <ion-item-divider class="tournament-name items" (click)="goToTournament(tournament)"><b>{{tournament.name}}</b></ion-item-divider>
                 <!-- Display "En cours" if there is no winner -->
                 <!-- When we click on the name of the team -> go to detail team -->
