@@ -9,6 +9,7 @@ export class SharedDataService {
     private _currentPool;
     private _currentParticipant;
     private _httpError: boolean = false;
+    private _IpChoice;
 
     constructor(private storage: Storage) {
     }
@@ -83,5 +84,15 @@ export class SharedDataService {
     // Set current favorite teams
     set currentEventFavoritesTeams(value) {
         this.storage.set('event' + this._currentEvent.id, value);
+    }
+
+    // Get current favorite teams
+    get IpChoice() {
+            return this._IpChoice;
+    }
+
+    // Set current favorite teams
+    set IpChoice(value) {
+        this._IpChoice = value;
     }
 }

@@ -14,6 +14,7 @@ import {TeamPage} from "../pages/team/team";
 import {EventPage} from "../pages/event/event";
 import {PoolPage} from "../pages/pool/pool";
 import {ParticipantPage} from "../pages/participant/participant";
+import {IpPage} from "../pages/ip/ip";
 import {HttpService} from "../providers/http-service";
 
 @NgModule({
@@ -24,7 +25,8 @@ import {HttpService} from "../providers/http-service";
         TeamPage,
         TournamentPage,
         PoolPage,
-        ParticipantPage
+        ParticipantPage,
+        IpPage
 
     ],
     imports: [
@@ -38,7 +40,8 @@ import {HttpService} from "../providers/http-service";
         TeamPage,
         TournamentPage,
         PoolPage,
-        ParticipantPage
+        ParticipantPage,
+        IpPage
     ],
     providers: [
         Storage,

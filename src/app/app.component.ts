@@ -4,6 +4,7 @@ import {StatusBar} from 'ionic-native';
 import {EventsPage} from '../pages/events/events';
 import {EventPage} from "../pages/event/event";
 import {SharedDataService} from '../providers/sharedData-service';
+import {IpPage} from "../pages/ip/ip";
 
 
 @Component({
@@ -27,7 +28,8 @@ export class MyApp {
         // the login page disables the left menu
         this.pages = [
             {title: 'Evènements', component: EventsPage, icon: 'person'},
-            {title: 'Listes', component: EventPage, icon: 'person'}
+            {title: 'Listes', component: EventPage, icon: 'person'},
+            {title: 'IPs', component: IpPage, icon: 'person'}
         ];
 
         platform.ready().then(() => {

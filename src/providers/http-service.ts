@@ -14,9 +14,11 @@ import {SharedDataService} from "./sharedData-service";
 @Injectable()
 export class HttpService {
 
-    serverUrl : string;
+    serverUrl : string = "https://markal.servehttp.com/Joutes/api";
 
     constructor(private http: Http, private alertCtrl: AlertController, private sharedDataProvider: SharedDataService) {
+        //Return the IP corresponding to the current choice
+
         //Raspberry address
         // this.serverUrl = "https://markal.servehttp.com/Joutes/api";
 
@@ -24,7 +26,7 @@ export class HttpService {
         //this.serverUrl = "http://192.168.0.51/Joutes/public/api";
 
         //LAN IP
-        this.serverUrl = "http://172.17.102.188/Joutes/public/api";
+        // this.serverUrl = "http://172.17.102.188/Joutes/public/api";
 
         //LAN IP REAL
         // this.serverUrl = "http://172.17.102.188/Joutes-real/Joutes/public/api";
@@ -32,6 +34,28 @@ export class HttpService {
 
     // Get the JSON, URI must have a / before
     getJson(uri) {
+        //Set the ip corresponding to the current choice
+        switch(this.sharedDataProvider.IpChoice) {
+            case "LANServer" :
+                this.serverUrl = "http://172.17.102.188/Joutes/public/api";
+                break;
+            case "LANServerReal" :
+                this.serverUrl = "http://172.17.102.188/Joutes-real/Joutes/public/api";
+                break;
+            case "WLANServer" :
+                this.serverUrl = "http://192.168.0.51/Joutes/public/api";
+                break;
+            case "WLANServerReal" :
+                this.serverUrl = "http://192.168.0.51/Joutes-real/Joutes/public/api";
+                break;
+            case "Internet" :
+                this.serverUrl = "https://markal.servehttp.com/Joutes/api";
+                break;
+            default:
+                this.serverUrl = "https://markal.servehttp.com/Joutes/api";
+                break;
+        }
+
         return this.http
             .get(this.serverUrl+uri)
             .map(res => res.json())
