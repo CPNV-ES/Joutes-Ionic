@@ -10,14 +10,13 @@
         <ion-title>
             IPs
         </ion-title>
+        <button ion-button menuToggle side="right">
+            <ion-icon name="menu" class="menu-button"></ion-icon>
+        </button>
     </ion-navbar>
 </ion-header>
 
 <ion-content>
-    <!-- Refresh the current page -->
-    <ion-refresher (ionRefresh)="refresh($event)">
-        <ion-refresher-content refreshingText="Chargement"></ion-refresher-content>
-    </ion-refresher>
     <ion-list radio-group [(ngModel)]="currentIpChoice">
         <ion-item>
             <ion-label>Données test</ion-label>

@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Storage} from '@ionic/storage';
+import {MenuController} from "ionic-angular";
 
 @Injectable()
 export class SharedDataService {
@@ -11,7 +12,7 @@ export class SharedDataService {
     private _httpError: boolean = false;
     private _IpChoice;
 
-    constructor(private storage: Storage) {
+    constructor(private storage: Storage, public menuCtrl: MenuController) {
     }
 
     // Get the error http
@@ -94,5 +95,10 @@ export class SharedDataService {
     // Set current favorite teams
     set IpChoice(value) {
         this._IpChoice = value;
+    }
+
+    // Function to display the menu
+    displayMenu() {
+        this.menuCtrl.open();
     }
 }

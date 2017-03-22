@@ -221,6 +221,10 @@ export class EventPage {
         this.navCtrl.push(ParticipantPage);
     }
 
+    displayMenu() {
+        this.sharedDataProvider.displayMenu();
+    }
+
     // Add a spinner when the view is loading
     ionViewDidLoad() {
         document.getElementById('spinnerContent').style.visibility = 'hidden';

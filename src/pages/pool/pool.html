@@ -6,12 +6,9 @@
 -->
 <ion-header>
     <ion-navbar>
-        <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-        </button>
         <!-- Display the name of _tournament and the name of pool -->
         <ion-title>
-            {{ tournament.name }} - {{ poolData.name }}
+            {{ tournament.name }} - {{ poolData.name }}<ion-icon name="menu" class="menu-button" (click)="displayMenu()"></ion-icon>
         </ion-title>
     </ion-navbar>
 </ion-header>

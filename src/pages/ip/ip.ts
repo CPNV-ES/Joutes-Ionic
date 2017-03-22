@@ -14,6 +14,10 @@ export class IpPage {
         return this._currentIpChoice;
     }
 
+    set currentIpChoice(value) {
+        this._currentIpChoice = value;
+    }
+
     constructor(private navCtrl: NavController, private sharedDataProvider: SharedDataService) {
         this._currentIpChoice = this.sharedDataProvider.IpChoice;
     }

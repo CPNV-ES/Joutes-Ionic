@@ -6,12 +6,9 @@
 -->
 <ion-header>
     <ion-navbar>
-        <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-        </button>
         <!-- Display the last name and first name -->
         <ion-title>
-            {{ participantData.lastname }} {{ participantData.firstname }}
+            {{ participantData.lastname }} {{ participantData.firstname }}<ion-icon name="menu" class="menu-button" (click)="displayMenu()"></ion-icon>
         </ion-title>
     </ion-navbar>
 </ion-header>

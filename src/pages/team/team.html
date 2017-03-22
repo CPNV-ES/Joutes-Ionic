@@ -1,11 +1,8 @@
 <ion-header>
     <ion-navbar>
-        <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-        </button>
         <!-- Display the name of _event -->
         <ion-title>
-            {{ event.name }}
+            {{ event.name }}<ion-icon name="menu" class="menu-button" (click)="displayMenu()"></ion-icon>
         </ion-title>
     </ion-navbar>
 </ion-header>

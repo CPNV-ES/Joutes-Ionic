@@ -2,8 +2,6 @@ import {Component, ViewChild} from '@angular/core';
 import {Platform, Nav} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {EventsPage} from '../pages/events/events';
-import {EventPage} from "../pages/event/event";
-import {SharedDataService} from '../providers/sharedData-service';
 import {IpPage} from "../pages/ip/ip";
 
 
@@ -21,14 +19,13 @@ export class MyApp {
 
     rootPage = EventsPage;
 
-    constructor(platform: Platform, sharedDataProvider: SharedDataService) {
+    constructor(platform: Platform) {
 
         // List of pages that can be navigated to from the left menu
         // the left menu only works after login
         // the login page disables the left menu
         this.pages = [
             {title: 'Evènements', component: EventsPage, icon: 'person'},
-            {title: 'Listes', component: EventPage, icon: 'person'},
             {title: 'IPs', component: IpPage, icon: 'person'}
         ];
 
