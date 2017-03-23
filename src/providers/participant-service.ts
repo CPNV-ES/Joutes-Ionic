@@ -24,6 +24,6 @@ export class ParticipantService {
     // Get the json for _participant
     getParticipant(eventId, participantId)
     {
-        return this.httpService.getJson(`/events/${eventId}/participant/${participantId}`);
+        return this.httpService.getJson(`/events/${eventId}/participants/${participantId}`);
     }
 }

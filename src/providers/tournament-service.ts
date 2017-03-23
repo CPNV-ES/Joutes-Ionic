@@ -24,6 +24,6 @@ export class TournamentService {
     // Get the json for _tournament
     getTournament(eventId, tournamentId)
     {
-        return this.httpService.getJson(`/events/${eventId}/tournament/${tournamentId}`);
+        return this.httpService.getJson(`/events/${eventId}/tournaments/${tournamentId}`);
     }
 }
