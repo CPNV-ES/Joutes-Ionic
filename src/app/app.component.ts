@@ -2,6 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {Platform, Nav} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {EventsPage} from '../pages/events/events';
+import {AboutPage} from '../pages/about/about';
 import {IpPage} from "../pages/ip/ip";
 
 
@@ -26,6 +27,7 @@ export class MyApp {
         // the login page disables the left menu
         this.pages = [
             {title: 'Evènements', component: EventsPage, icon: 'person'},
+            {title: 'A propos', component: AboutPage, icon: 'person'},
             {title: 'IPs', component: IpPage, icon: 'person'}
         ];
 
