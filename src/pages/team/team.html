@@ -13,7 +13,7 @@
         <ion-refresher-content refreshingText="Chargement"></ion-refresher-content>
     </ion-refresher>
 
-    <div *ngFor="let tournament of teamData.tournament">
+    <div>
         <!-- Display the name of the team and display a icon trophy if the team have a status "Vainqueur" -->
         <ion-col width-100>
             <h2>Equipe <b>{{ teamData.name }}</b>
@@ -45,7 +45,7 @@
             <ion-card-content no-padding>
                 <ion-grid text-center>
                     <ion-row style="flex-wrap: wrap;">
-                        <!-- Display the icon for the sport -->
+                        <!--Display the icon for the sport -->
                         <ion-col width-50>
                             <ion-img src="assets/sports/{{ setIconSports(teamData.sport) }}" width="35" height="35" class="sports-img"></ion-img>
                             <div class="items sports-label">{{ teamData.sport }}</div>
@@ -148,12 +148,3 @@
         </ion-card>
     </div>
 </ion-content>
-
-
-
-
-
-
-
-
-
