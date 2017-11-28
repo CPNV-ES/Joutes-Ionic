@@ -20,29 +20,32 @@
     </ion-refresher>
 
     <!-- Display the detail for the _tournament's participant -->
-    <div *ngFor="let tournament of participantData.tournament">
+    <div *ngFor="let tournament of participantData.tournaments">
         <!-- Display different content if the _tournament is not "Marche"-->
         <ion-col *ngIf="tournament.sport != 'Marche'" width-100 no-padding>
-            <!-- Display the name of team and display a icon trophy if the team have a status "Vainqueur" -->
-            <ion-col width-100>
-                <h2>Equipe <b>{{ teamData.name }}</b>
-                    <ion-icon name="trophy" class="color-star" *ngIf="teamData.status == 'Vainqueur'"></ion-icon>
-                </h2>
-            </ion-col>
-            <!-- Display the name of members -->
-            <ion-card>
-                <ion-card-content no-padding>
-                    <ion-grid text-center>
-                        <ion-row style="flex-wrap: wrap;">
-                            <ion-col width-33 *ngFor="let member of teamData.members">
-                                <span class="items">{{ member.firstname }}</span>
-                            </ion-col>
-                        </ion-row>
-                    </ion-grid>
-                </ion-card-content>
-            </ion-card>
+            <ng-container *ngFor="let teamData of teamsData;">
+                <ng-container ng-if="teamData.team.tournament.id == tournament.id">
+                    <!-- Display the name of team and display a icon trophy if the team have a status "Vainqueur" -->
+                    <ion-col width-100>
+                        <h2>Equipe <b>{{ teamData.team.name }}</b>
+                            <ion-icon name="trophy" class="color-star" *ngIf="teamData.team.status == 'Vainqueur'"></ion-icon>
+                        </h2>
+                    </ion-col>
+                    <!-- Display the name of members -->
+                    <ion-card>
+                        <ion-card-content no-padding>
+                            <ion-grid text-center>
+                                <ion-row style="flex-wrap: wrap;">
+                                    <ion-col width-33 *ngFor="let member of teamData.team.members">
+                                        <span class="items">{{ member.firstname }} {{ member.lastname }}</span>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-card-content>
+                    </ion-card>
+                </ng-container>
+            </ng-container>
         </ion-col>
-
         <!-- Display the _tournament name -->
         <ion-col width-100><h2>Participe à <b>{{ tournament.name }}</b></h2></ion-col>
         <div style="font-weight: 100; margin-left:11px;">Cliquez pour plus de détails</div>
