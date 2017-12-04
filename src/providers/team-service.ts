@@ -25,6 +25,5 @@ export class TeamService {
     getTeam(teamId, eventId)
     {
         return this.httpService.getJson(`/events/${eventId}/teams/${teamId}`);
-
     }
 }

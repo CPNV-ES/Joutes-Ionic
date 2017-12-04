@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {Storage} from '@ionic/storage';
-import {MenuController} from "ionic-angular";
+import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
+import { MenuController } from "ionic-angular";
 
 @Injectable()
 export class SharedDataService {
@@ -13,6 +13,14 @@ export class SharedDataService {
     private _IpChoice;
 
     constructor(private storage: Storage, public menuCtrl: MenuController) {
+        storage.get('IpChoice').then((ip) => {
+            if (ip == null) {
+                storage.set('IpChoice', 'LANServer');
+                this._IpChoice = 'LANServer';
+            } else {
+                this._IpChoice = ip;
+            }
+        });
     }
 
     // Get the error http
@@ -89,11 +97,12 @@ export class SharedDataService {
 
     // Get current favorite teams
     get IpChoice() {
-            return this._IpChoice;
+        return this._IpChoice != null ? this._IpChoice : this.storage.get('IpChoice').then((val) => { return val;});
     }
 
     // Set current favorite teams
     set IpChoice(value) {
+        this.storage.set('IpChoice', value);
         this._IpChoice = value;
     }
 

@@ -74,8 +74,10 @@ export class EventPage {
     }
 
     constructor(private navCtrl: NavController,
-                private teamProvider: TeamService, private tournamentProvider: TournamentService,
-                private participantProvider: ParticipantService, private sharedDataProvider: SharedDataService) {
+                private teamProvider: TeamService,
+                private tournamentProvider: TournamentService,
+                private participantProvider: ParticipantService,
+                private sharedDataProvider: SharedDataService) {
         this.loadData().subscribe();
         this._eventContent = "teams";
     }

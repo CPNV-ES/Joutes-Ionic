@@ -1,11 +1,11 @@
-import {Component} from '@angular/core';
-import {NavController, Refresher} from 'ionic-angular';
-import {EventService} from '../../providers/event-service';
-import {SharedDataService} from '../../providers/sharedData-service';
-import {EventPage} from "../event/event";
-import {Splashscreen} from "ionic-native";
-import {document} from "@angular/platform-browser/src/facade/browser";
-import {Observable} from "rxjs";
+import { Component } from '@angular/core';
+import { NavController, Refresher } from 'ionic-angular';
+import { EventService } from '../../providers/event-service';
+import { SharedDataService } from '../../providers/sharedData-service';
+import { EventPage } from "../event/event";
+import { Splashscreen } from "ionic-native";
+import { document } from "@angular/platform-browser/src/facade/browser";
+import { Observable } from "rxjs";
 
 /*
  Generated class for the Events page.
@@ -38,8 +38,9 @@ export class EventsPage {
         this._searchTerm = value;
     }
 
-    constructor(private navCtrl: NavController, private sharedDataProvider: SharedDataService,
-                private eventProvider: EventService) {
+    constructor(private navCtrl: NavController,
+        private sharedDataProvider: SharedDataService,
+        private eventProvider: EventService) {
         this.loadData().subscribe();
     }
 
@@ -60,9 +61,11 @@ export class EventsPage {
 
     // Filter events
     filterEvents() {
-        this._filteredEvents = this._events.filter((event) => {
-            return event.name.toLowerCase().indexOf(this._searchTerm.toLowerCase()) > -1;
-        });
+        if (this._events != null) {
+            this._filteredEvents = this._events.filter((event) => {
+                return event.name.toLowerCase().indexOf(this._searchTerm.toLowerCase()) > -1;
+            });
+        }
     }
 
     // Go to page detail _event

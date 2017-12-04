@@ -8,8 +8,11 @@
     <!-- Display the _event name -->
     <ion-navbar no-border-bottom>
         <ion-title>
-            {{ event.name }}<ion-icon name="menu" class="menu-button" (click)="displayMenu()"></ion-icon>
+            {{ event.name }}
         </ion-title>
+        <button ion-button menuToggle side="right">
+            <ion-icon name="menu" class="menu-button"></ion-icon>
+        </button>
     </ion-navbar>
 
     <!-- Content de different segments for a _event - Display the toolbar -->
