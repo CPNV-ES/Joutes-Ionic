@@ -38,7 +38,9 @@ export class TournamentPage {
         this._tournament = this.sharedDataProvider.currentTournament;
 
         // Get the _tournament
-        const o1 = this.tournamentProvider.getTournament(this._event.id, this._tournament.id).do(data => this._tournamentData = data);
+        const o1 = this.tournamentProvider.getTournament(this._event.id, this._tournament.id).do(data => {
+            this._tournamentData = data.tournament;
+        });
 
         return Observable.forkJoin(o1);
     }
