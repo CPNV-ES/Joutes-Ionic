@@ -48,6 +48,11 @@ export class TeamPage {
     const o1 = this.teamProvider.getTeam(this._team.id, this._event.id).do(data => {
       this._teamData = data.team;
       this._tournament = this._teamData.tournament;
+
+      // Removes the start_time sort
+      this._teamData.matches.sort(function (a, b) {
+          return (a === b) ? 0 : a ? 1 : -1;
+      });
     });
 
     return Observable.forkJoin(o1);
