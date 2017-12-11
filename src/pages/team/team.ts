@@ -18,6 +18,7 @@ export class TeamPage {
   private _tournament: any = {};
   private _pool: any = { id: '' };
   private _teamData: any = {};
+  private _matches: any = {};
 
   get event() {
     return this._event;
@@ -29,6 +30,10 @@ export class TeamPage {
 
   get tournament() {
     return this._tournament;
+  }
+
+  get matches() {
+      return this._matches;
   }
 
   constructor(private navCtrl: NavController,
@@ -49,10 +54,22 @@ export class TeamPage {
       this._teamData = data.team;
       this._tournament = this._teamData.tournament;
 
-      // Removes the start_time sort
-      this._teamData.matches.sort(function (a, b) {
-          return (a === b) ? 0 : a ? 1 : -1;
+      var futureMatches = [];
+      var finishedMatches = [];
+
+      this._teamData.matches.forEach(function(elem) {
+          if (elem.isFinished) {
+              finishedMatches.push(elem);
+          } else {
+              futureMatches.push(elem);
+          }
       });
+
+      this._matches["futureMatches"] = futureMatches;
+      this._matches["finishedMatches"] = finishedMatches;
+
+      console.log(this._matches);
+
     });
 
     return Observable.forkJoin(o1);
