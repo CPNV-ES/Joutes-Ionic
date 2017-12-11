@@ -33,7 +33,7 @@ export class TeamPage {
   }
 
   get matches() {
-      return this._matches;
+      return this._teamData.matches;
   }
 
   constructor(private navCtrl: NavController,
@@ -53,23 +53,7 @@ export class TeamPage {
     const o1 = this.teamProvider.getTeam(this._team.id, this._event.id).do(data => {
       this._teamData = data.team;
       this._tournament = this._teamData.tournament;
-
-      var futureMatches = [];
-      var finishedMatches = [];
-
-      this._teamData.matches.forEach(function(elem) {
-          if (elem.isFinished) {
-              finishedMatches.push(elem);
-          } else {
-              futureMatches.push(elem);
-          }
-      });
-
-      this._matches["futureMatches"] = futureMatches;
-      this._matches["finishedMatches"] = finishedMatches;
-
-      console.log(this._matches);
-
+      this._teamData.matches.sortBy(function(o){ return [ -o.idPool, o.isFinished, o.startTime ] });
     });
 
     return Observable.forkJoin(o1);
@@ -130,4 +114,5 @@ export class TeamPage {
   ionViewDidLoad() {
     document.getElementById('spinnerContent').style.visibility = 'hidden';
   }
+
 }
