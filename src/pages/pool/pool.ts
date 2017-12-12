@@ -27,7 +27,7 @@ export class PoolPage {
         return this._tournament
     }
 
-    get poolData() {
+    get pool() {
         return this._poolData
     }
 
@@ -50,7 +50,7 @@ export class PoolPage {
 
         // Get the _pool
         const o1 = this.poolProvider.getPool(this._event.id, this._tournament.id, this._pool.id).do(data => {
-            this._poolData = data;
+            this._poolData = data.pool;
             this.isFinished();
         });
         return Observable.forkJoin(o1);
@@ -65,7 +65,7 @@ export class PoolPage {
     isFinished() {
         var self = this;
         this._poolData.matches.forEach(function (match) {
-            if(match.status == 'A venir') {
+            if(!match.isFinished) {
                 self._finish = false;
             }
         });
@@ -76,7 +76,7 @@ export class PoolPage {
         // Add a spinner when the view is loaded
         document.getElementById('spinnerContent').style.visibility = 'visible';
 
-        this.sharedDataProvider.currentTeam = team;
+        this.sharedDataProvider.currentTeam = {id: team.team_id, name: team.team, sport: ''};
         this.navCtrl.push(TeamPage);
     }
 

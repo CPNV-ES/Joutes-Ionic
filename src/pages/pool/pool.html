@@ -8,7 +8,7 @@
     <ion-navbar>
         <!-- Display the name of _tournament and the name of pool -->
         <ion-title>
-            {{ tournament.name }} - {{ poolData.name }}<ion-icon name="menu" class="menu-button" (click)="displayMenu()"></ion-icon>
+            {{ tournament.name }} - {{ pool.name }}<ion-icon name="menu" class="menu-button" (click)="displayMenu()"></ion-icon>
         </ion-title>
     </ion-navbar>
 </ion-header>
@@ -25,7 +25,7 @@
             <ion-col width-50>
                 <ion-icon name="grid" class="info"></ion-icon>
                 <br/>
-                <div class="items">{{ poolData.type }}</div>
+                <div class="items">{{ pool.type }}</div>
             </ion-col>
             <ion-col width-50>
                 <ion-icon name="pin" class="info"></ion-icon>
@@ -40,24 +40,24 @@
     <ion-card>
         <ion-card-content no-padding>
             <ion-list id="list-match">
-                <ion-item no-padding *ngFor="let match of poolData.matches">
-                    <ion-row *ngIf="poolData.type == 'Elimination' ">
+                <ion-item no-padding *ngFor="let match of pool.matches">
+                    <ion-row *ngIf="pool.type == 'Elimination' ">
                         <ion-col width-100 class="items pool-name" text-center>
                             {{ match.name }}
                         </ion-col>
                     </ion-row>
                     <ion-row>
                         <ion-col width-33 class="items">
-                            {{ match.team1 }}
+                            {{ match.contender1Name }}
                         </ion-col>
-                        <ion-col width-33 class="items" text-center *ngIf="match.status == 'A venir'">
-                        <ion-note>{{ match.start }}</ion-note>
+                        <ion-col width-33 class="items" text-center *ngIf="!match.isFinished">
+                        <ion-note>{{ match.startTime }}</ion-note>
                         </ion-col>
-                        <ion-col width-33 class="items" text-center *ngIf="match.status != 'A venir' ">
-                            <ion-note>{{ match.team1Score }} - {{ match.team2Score }}</ion-note>
+                        <ion-col width-33 class="items" text-center *ngIf="match.isFinished">
+                            <ion-note>{{ match.scoreContender1 }} - {{ match.scoreContender2 }}</ion-note>
                         </ion-col>
                         <ion-col width-33 class="items" text-right>
-                            {{ match.team2 }}
+                            {{ match.contender2Name }}
                         </ion-col>
                     </ion-row>
                 </ion-item>
@@ -68,13 +68,13 @@
     <!-- Display different text if the tournament is finished or not -->
     <ion-col *ngIf="finish" width-100><h2>Le <b>Classement final</b></h2></ion-col>
     <ion-col *ngIf="!finish" width-100><h2>Le <b>Classement actuel</b></h2></ion-col>
-    <ion-col width-100 no-padding>
+    <!-- <ion-col width-100 no-padding>
         <div style="font-weight: 100; margin-left:11px;">Cliquez pour plus de détails</div>
-    </ion-col>
+    </ion-col> -->
     <ion-card>
         <ion-card-content no-padding padding-top padding-bottom>
             <!-- Display the information for elimination -->
-            <ion-list *ngIf="poolData.type == 'Elimination' ">
+            <!-- <ion-list *ngIf="pool.type == 'Elimination'">
                 <ion-row class="border-table results-head">
                     <ion-col width-20>
                         <strong>#</strong>
@@ -82,12 +82,12 @@
                     <ion-col width-80>
                         <strong>Equipes</strong>
                     </ion-col>
-                </ion-row>
+                </ion-row> -->
 
                 <!-- Display the classmate -->
-                <ion-item *ngIf="finish">
+                <!-- <ion-item *ngIf="finish">
                     <ion-row class="results" (click)="goToTeam(team)"
-                             *ngFor="let team of poolData.teams; let i = index;">
+                             *ngFor="let team of pool.teams; let i = index;">
                         <ion-col width-20>
                             <strong>{{ i+1 }}</strong>
                         </ion-col>
@@ -95,10 +95,10 @@
                             {{ team.name }}
                         </ion-col>
                     </ion-row>
-                </ion-item>
+                </ion-item> -->
 
                 <!-- Display nothing if no matches are finished -->
-                <ion-item *ngIf="!finish">
+                <!-- <ion-item *ngIf="!finish">
                     <ion-row class="results" >
                         <ion-col width-20>
 
@@ -108,15 +108,15 @@
                         </ion-col>
                     </ion-row>
                 </ion-item>
-            </ion-list>
+            </ion-list> -->
 
             <!-- Display the information for pool-->
-            <ion-list *ngIf="poolData.type == 'Poule' ">
+            <ion-list>
                 <ion-row class="border-table results-head">
                     <ion-col width-10>
                         <strong>#</strong>
                     </ion-col>
-                    <ion-col width-50>
+                    <ion-col width-40>
                         <strong>Equipes</strong>
                     </ion-col>
                     <ion-col width-10 text-center>
@@ -129,29 +129,35 @@
                         <strong>P</strong>
                     </ion-col>
                     <ion-col width-10 text-center>
+                        <strong>E</strong>
+                    </ion-col>
+                    <ion-col width-10 text-center>
                         <strong>+/-</strong>
                     </ion-col>
                 </ion-row>
 
                 <!-- Display the classmate for pool-->
-                <ion-row class="results" (click)="goToTeam(team)" *ngFor="let team of poolData.teams; let i = index;">
+                <ion-row class="results" (click)="goToTeam(team)" *ngFor="let team of pool.ranking; let i = index;">
                     <ion-col width-10>
                         <strong>{{ i+1 }}</strong>
                     </ion-col>
-                    <ion-col width-50 class="items">
-                        {{ team.name }}
+                    <ion-col width-40 class="items">
+                        {{ team.team }}
                     </ion-col>
                     <ion-col width-10 text-center class="items">
-                        {{ team.points }}
+                        {{ team.score }}
                     </ion-col>
                     <ion-col width-10 text-center class="items">
-                        {{ team.matchesWin }}
+                        {{ team.W }}
                     </ion-col>
                     <ion-col width-10 text-center class="items">
-                        {{ team.matchesLost }}
+                        {{ team.L }}
                     </ion-col>
                     <ion-col width-10 text-center class="items">
-                        {{ team.goalsFor - team.goalsAgainst }}
+                        {{ team.D }}
+                    </ion-col>
+                    <ion-col width-10 text-center class="items">
+                        {{ team["+-"] }}
                     </ion-col>
                 </ion-row>
             </ion-list>
