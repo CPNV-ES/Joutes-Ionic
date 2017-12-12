@@ -18,6 +18,7 @@ export class TeamPage {
   private _tournament: any = {};
   private _pool: any = { id: '' };
   private _teamData: any = {};
+  private _matches: any = {};
 
   get event() {
     return this._event;
@@ -29,6 +30,10 @@ export class TeamPage {
 
   get tournament() {
     return this._tournament;
+  }
+
+  get matches() {
+      return this._teamData.matches;
   }
 
   constructor(private navCtrl: NavController,
@@ -48,6 +53,7 @@ export class TeamPage {
     const o1 = this.teamProvider.getTeam(this._team.id, this._event.id).do(data => {
       this._teamData = data.team;
       this._tournament = this._teamData.tournament;
+      this._teamData.matches.sortBy(function(o){ return [ -o.idPool, o.isFinished, o.startTime ] });
     });
 
     return Observable.forkJoin(o1);
@@ -108,4 +114,5 @@ export class TeamPage {
   ionViewDidLoad() {
     document.getElementById('spinnerContent').style.visibility = 'hidden';
   }
+
 }
