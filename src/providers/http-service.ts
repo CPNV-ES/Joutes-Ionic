@@ -52,7 +52,7 @@ export class HttpService {
                 this._serverUrl = "https://markal.servehttp.com/Joutes/api";
                 break;
             default:
-                this._serverUrl = "https://markal.servehttp.com/Joutes/api";
+                this._serverUrl = "http://joutes.api/api";
                 break;
         }
 
