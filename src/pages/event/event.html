@@ -10,9 +10,11 @@
         <ion-title>
             {{ event.name }}
         </ion-title>
-        <button ion-button menuToggle side="right">
-            <ion-icon name="menu" class="menu-button"></ion-icon>
-        </button>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="displayMenu()">
+                <ion-icon name="menu" class="menu-button"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
 
     <!-- Content de different segments for a _event - Display the toolbar -->

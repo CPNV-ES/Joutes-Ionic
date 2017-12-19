@@ -2,8 +2,13 @@
     <ion-navbar>
         <!-- Display the name of _event -->
         <ion-title>
-            {{ event.name }}<ion-icon name="menu" class="menu-button" (click)="displayMenu()"></ion-icon>
+            {{ event.name }}
         </ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="displayMenu()">
+                <ion-icon name="menu" class="menu-button"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 
@@ -26,8 +31,8 @@
             <ion-card-content no-padding>
                 <ion-grid text-center>
                     <ion-row style="flex-wrap: wrap;">
-                        <ion-col width-33 *ngFor="let member of teamData.members">
-                            <span class="items">{{ member.firstname }}</span>
+                        <ion-col width-50 *ngFor="let member of teamData.members">
+                            <span class="items">{{ member.lastname }} {{ member.firstname }}</span>
                         </ion-col>
                     </ion-row>
                 </ion-grid>

@@ -23,7 +23,7 @@ export class ParticipantPage {
     private _event;
     private _participant;
     private _participantData: any = {};
-    private _teamsData: any = [];
+    private _teamData: any = {};
     private _pool: any = {id: ''};
 
     get event() {
@@ -34,8 +34,8 @@ export class ParticipantPage {
         return this._participantData
     }
 
-    get teamsData() {
-        return this._teamsData
+    get teamData() {
+        return this._teamData
     }
 
     constructor(private navCtrl: NavController, private teamProvider: TeamService, private participantProvider: ParticipantService, private sharedDataProvider: SharedDataService) {
@@ -53,7 +53,7 @@ export class ParticipantPage {
         const o1 = this.participantProvider.getParticipant(this._event.id, this._participant.id).do(data => {
             this._participantData = data.participant;
             this.getTeamInfos();
-                console.log("participant", data);
+            // console.log("participant", data);
         });
         return Observable.forkJoin(o1);
     }
@@ -69,10 +69,10 @@ export class ParticipantPage {
             for(let i = 0; i < this.participantData.teams.length; i++)
             {
                 this.teamProvider.getTeam(this._participantData.teams[i].id, this._event.id).subscribe(data => {
-                    this._teamsData.push(data);
+                    this._teamData = data.team;
                 });
             }
-            console.log("team data", this._teamsData);
+            console.log("team data", this._teamData);
         }
     }
 

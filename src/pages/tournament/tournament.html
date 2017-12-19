@@ -8,8 +8,13 @@
     <ion-navbar>
         <!-- Display the name of tournament -->
         <ion-title>
-            {{ tournamentData.name }}<ion-icon name="menu" class="menu-button" (click)="displayMenu()"></ion-icon>
+            {{ tournamentData.name }}
         </ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="displayMenu()">
+                <ion-icon name="menu" class="menu-button"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 
