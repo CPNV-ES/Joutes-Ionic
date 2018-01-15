@@ -3,7 +3,6 @@ import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 import {Observable} from "rxjs";
 import {AlertController} from "ionic-angular";
-import {HttpService} from "./http-service";
 import {SharedDataService} from "./sharedData-service";
 
 /*
@@ -47,11 +46,8 @@ export class DataService {
                 this._serverUrl = "https://markal.servehttp.com/Joutes/api";
                 break;
             default:
-<<<<<<< Updated upstream:src/providers/data-service.ts
-                this._serverUrl = "https://markal.servehttp.com/Joutes/api";
-=======
                 this._serverUrl = "http://joute.api/api";
->>>>>>> Stashed changes:src/providers/http-service.ts
+
                 break;
         }
     }

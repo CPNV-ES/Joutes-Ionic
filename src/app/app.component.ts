@@ -5,7 +5,7 @@ import {EventsPage} from '../pages/events/events';
 import {AboutPage} from '../pages/about/about';
 import {IpPage} from "../pages/ip/ip";
 import { StorageService } from '../providers/storage-service';
-import { HttpService } from '../providers/http-service';
+
 
 
 @Component({

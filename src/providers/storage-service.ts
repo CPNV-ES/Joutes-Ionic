@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Rx';
-import {HttpService} from "./http-service";
+import { DataService } from './data-service';
 
 /**
  * 
@@ -17,12 +17,12 @@ export class StorageService {
         "/event",
         "/"
     ]
-    constructor(private httpService: HttpService) {
+    constructor(private dataProvider: DataService) {
         
     }
     start()
     {
-        Observable.interval(60 * this.refreshFrequency).subscribe(x => {
+        Observable.interval(1000 * this.refreshFrequency).subscribe(x => {
             console.log("test storage");
         });
     }
