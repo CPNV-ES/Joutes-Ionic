@@ -17,6 +17,7 @@ import {ParticipantPage} from "../pages/participant/participant";
 import {IpPage} from "../pages/ip/ip";
 import {DataService} from "../providers/data-service";
 import {AboutPage} from "../pages/about/about";
+import {StorageService} from "../providers/storage-service";
 
 @NgModule({
     declarations: [
@@ -54,8 +55,8 @@ import {AboutPage} from "../pages/about/about";
         TeamService,
         TournamentService,
         PoolService,
-        ParticipantService
+        ParticipantService,
+        StorageService
     ]
 })
-export class AppModule {
-}
+export class AppModule {}
