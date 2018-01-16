@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
-import {HttpService} from "./http-service";
+import {DataService} from "./data-service";
 
 
 
@@ -13,12 +13,12 @@ import {HttpService} from "./http-service";
 @Injectable()
 export class EventService
 {
-    constructor(private httpService: HttpService) {
-        this.httpService = httpService;
+    constructor(private dataService: DataService) {
+        this.dataService = dataService;
     }
 
     // Get the json for events
     getEvents() {
-        return this.httpService.getJson('/events');
+        return this.dataService.getJson('/events');
     }
 }

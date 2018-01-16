@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
-import {HttpService} from "./http-service";
+import {DataService} from "./data-service";
 
 /*
  Generated class for the TeamService provider.
@@ -11,19 +11,19 @@ import {HttpService} from "./http-service";
 @Injectable()
 export class TeamService {
 
-    constructor(private httpService: HttpService) {
-        this.httpService = httpService;
+    constructor(private dataService: DataService) {
+        this.dataService = dataService;
     }
 
     // Get the json for teams by _event
     getTeamsByEvent(eventId): any
     {
-        return this.httpService.getJson(`/events/${eventId}/teams`);
+        return this.dataService.getJson(`/events/${eventId}/teams`);
     }
 
     // Get the json for team
     getTeam(teamId, eventId)
     {
-        return this.httpService.getJson(`/events/${eventId}/teams/${teamId}`);
+        return this.dataService.getJson(`/events/${eventId}/teams/${teamId}`);
     }
 }

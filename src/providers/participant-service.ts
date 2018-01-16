@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
-import {HttpService} from "./http-service";
+import {DataService} from "./data-service";
 
 /*
  Generated class for the ParticipantService provider.
@@ -11,19 +11,19 @@ import {HttpService} from "./http-service";
 @Injectable()
 export class ParticipantService {
 
-    constructor(private httpService: HttpService) {
-        this.httpService = httpService;
+    constructor(private dataService: DataService) {
+        this.dataService = dataService;
     }
 
     // Get the json for participants by _event
     getParticipantsByEvent(eventId): any
     {
-        return this.httpService.getJson(`/events/${eventId}/participants`);
+        return this.dataService.getJson(`/events/${eventId}/participants`);
     }
 
     // Get the json for _participant
     getParticipant(eventId, participantId)
     {
-        return this.httpService.getJson(`/events/${eventId}/participants/${participantId}`);
+        return this.dataService.getJson(`/events/${eventId}/participants/${participantId}`);
     }
 }
