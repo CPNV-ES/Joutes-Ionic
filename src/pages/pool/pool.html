@@ -41,7 +41,8 @@
     </ion-grid>
 
     <!-- Display the results for matches -->
-    <ion-col width-100><h2>Matchs et <b>Résultats</b></h2></ion-col>
+    <ion-col width-100>
+        <h2>Matchs et <b>Résultats</b></h2></ion-col>
     <ion-card>
         <ion-card-content no-padding>
             <ion-list id="list-match">
@@ -56,7 +57,7 @@
                             {{ match.contender1Name }}
                         </ion-col>
                         <ion-col width-33 class="items" text-center *ngIf="!match.isFinished">
-                        <ion-note>{{ match.startTime }}</ion-note>
+                            <ion-note>{{ match.startTime }}</ion-note>
                         </ion-col>
                         <ion-col width-33 class="items" text-center *ngIf="match.isFinished">
                             <ion-note>{{ match.scoreContender1 }} - {{ match.scoreContender2 }}</ion-note>
@@ -71,8 +72,10 @@
     </ion-card>
 
     <!-- Display different text if the tournament is finished or not -->
-    <ion-col *ngIf="finish" width-100><h2>Le <b>Classement final</b></h2></ion-col>
-    <ion-col *ngIf="!finish" width-100><h2>Le <b>Classement actuel</b></h2></ion-col>
+    <ion-col *ngIf="finish" width-100>
+        <h2>Le <b>Classement final</b></h2></ion-col>
+    <ion-col *ngIf="!finish" width-100>
+        <h2>Le <b>Classement actuel</b></h2></ion-col>
     <!-- <ion-col width-100 no-padding>
         <div style="font-weight: 100; margin-left:11px;">Cliquez pour plus de détails</div>
     </ion-col> -->
@@ -89,8 +92,8 @@
                     </ion-col>
                 </ion-row> -->
 
-                <!-- Display the classmate -->
-                <!-- <ion-item *ngIf="finish">
+            <!-- Display the classmate -->
+            <!-- <ion-item *ngIf="finish">
                     <ion-row class="results" (click)="goToTeam(team)"
                              *ngFor="let team of pool.teams; let i = index;">
                         <ion-col width-20>
@@ -102,8 +105,8 @@
                     </ion-row>
                 </ion-item> -->
 
-                <!-- Display nothing if no matches are finished -->
-                <!-- <ion-item *ngIf="!finish">
+            <!-- Display nothing if no matches are finished -->
+            <!-- <ion-item *ngIf="!finish">
                     <ion-row class="results" >
                         <ion-col width-20>
 
