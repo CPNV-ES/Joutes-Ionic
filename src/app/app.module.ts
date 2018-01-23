@@ -17,6 +17,7 @@ import {ParticipantPage} from "../pages/participant/participant";
 import {IpPage} from "../pages/ip/ip";
 import {DataService} from "../providers/data-service";
 import {AboutPage} from "../pages/about/about";
+import {SearchPage} from "../pages/search/search";
 
 @NgModule({
     declarations: [
@@ -28,7 +29,8 @@ import {AboutPage} from "../pages/about/about";
         PoolPage,
         ParticipantPage,
         AboutPage,
-        IpPage
+        IpPage,
+        SearchPage
 
     ],
     imports: [
@@ -44,7 +46,8 @@ import {AboutPage} from "../pages/about/about";
         PoolPage,
         ParticipantPage,
         AboutPage,
-        IpPage
+        IpPage,
+        SearchPage
     ],
     providers: [
         Storage,

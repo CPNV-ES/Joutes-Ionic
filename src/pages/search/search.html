@@ -1,0 +1,61 @@
+<!--
+Generated template for the SearchPage page.
+
+See http://ionicframework.com/docs/v2/components/#navigation for more info on
+Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar no-border-bottom>
+        <ion-title>Global Search</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="displayMenu()">
+                <ion-icon name="menu" class="menu-button"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+    <ion-toolbar>
+        <ion-searchbar color="primary" placeholder="Search..." [(ngModel)]="searchTerm" (ionInput)="filterAll()"></ion-searchbar>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+    <!-- Refresh the current page -->
+    <ion-refresher (ionRefresh)="refresh($event)">
+        <ion-refresher-content refreshingText="Chargement"></ion-refresher-content>
+    </ion-refresher>
+    <ion-item-divider class="separation items"><b>Teams</b></ion-item-divider>
+    <!-- When we click on the name of the team -> go to detail team -->
+    <ion-grid class="no-margin-padding">
+        <ion-item *ngFor="let team of filteredTeams">
+            <div class="items" (click)="goToTeam(team)">
+                {{team.name}}
+                <ion-note item-right>
+                    ({{team.sport}})
+                </ion-note>
+            </div>
+        </ion-item>
+    </ion-grid>
+
+    <ion-item-divider class="separation items"><b>Participants</b></ion-item-divider>
+    <!-- When we click on the name of the _participant-> go to detail _participant -->
+    <ion-grid class="no-margin-padding">
+        <ion-item *ngFor="let participant of filteredParticipants">
+            <div class="items" (click)="goToParticipant(participant)">
+                {{participant.lastname}} {{participant.firstname}}
+                <ion-note item-right *ngIf="participant.sports && participant.sports.length > 0">
+                    <!-- Might be to much functionaliy in the view. Could port to the controller. -->
+                    - ({{participant.sports.join(", ")}})
+                </ion-note>
+            </div>
+        </ion-item>
+    </ion-grid>
+
+    <ion-item-divider class="separation items"><b>Tournaments</b></ion-item-divider>
+    <!-- When we click on the name of the _tournament -> go to detail _tournament -->
+    <ion-grid class="no-margin-padding">
+        <ion-item *ngFor="let tournament of filteredTournaments">
+            <div class="items" (click)="goToTournament(tournament)">{{tournament.name}}</div>
+        </ion-item>
+    </ion-grid>
+</ion-content>

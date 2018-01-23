@@ -1,11 +1,12 @@
-import {Component} from '@angular/core';
-import {NavController, Refresher} from 'ionic-angular';
-import {SharedDataService} from '../../providers/sharedData-service';
-import {TournamentService} from '../../providers/tournament-service';
-import {TeamPage} from "../team/team";
-import {PoolPage} from "../pool/pool";
-import {Observable} from "rxjs";
-import {KeysPipe} from "../../pipes/KeysPipe";
+import { Component } from '@angular/core';
+import { NavController, Refresher } from 'ionic-angular';
+import { SharedDataService } from '../../providers/sharedData-service';
+import { TournamentService } from '../../providers/tournament-service';
+import { TeamPage } from "../team/team";
+import { PoolPage } from "../pool/pool";
+import { SearchPage } from "../search/search";
+import { Observable } from "rxjs";
+import { KeysPipe } from "../../pipes/KeysPipe";
 
 /*
  Generated class for the Tournament page.
@@ -24,21 +25,18 @@ export class TournamentPage {
     private _tournamentData: any = {};
     private _poolsData: any = [];
     private _currentStage;
-    private _sliderOptions = {pager:true, initialSlide:0 };
+    private _sliderOptions = { pager: true, initialSlide: 0 };
 
     get tournamentData() {
         return this._tournamentData
     }
-    get poolsData()
-    {
+    get poolsData() {
         return this._poolsData;
     }
-    get currentStage()
-    {
+    get currentStage() {
         return this._currentStage;
     }
-    get sliderOptions()
-    {
+    get sliderOptions() {
         return this._sliderOptions;
     }
 
@@ -56,9 +54,9 @@ export class TournamentPage {
         // Get the _tournament
         const o1 = this.tournamentProvider.getTournament(this._event.id, this._tournament.id).do(data => {
             this._tournamentData = data.tournament;
-            if(this.tournamentData.pools.length > 0 )this._poolsData = this.sortByStage(this.tournamentData.pools);
+            if (this.tournamentData.pools.length > 0) this._poolsData = this.sortByStage(this.tournamentData.pools);
 
-            console.log("sliderOptions",this.sliderOptions);
+            console.log("sliderOptions", this.sliderOptions);
         });
 
         return Observable.forkJoin(o1);
@@ -90,18 +88,17 @@ export class TournamentPage {
     displayMenu() {
         this.sharedDataProvider.displayMenu();
     }
-    sortByStage(pools)
-    {
+
+    sortByStage(pools) {
         let poolPerStage = [];
         //sort by finished
-        pools.sortBy(function(o){ return [o.id,o.isFinished, o.stage];});
+        pools.sortBy(function(o) { return [o.id, o.isFinished, o.stage]; });
         console.log(pools);
         let poolStage = [];
         let stageId = pools[0].stage;
         let stageIdx;
-        for(let pool of pools)
-        {
-            if(stageId != pool.stage) {
+        for (let pool of pools) {
+            if (stageId != pool.stage) {
                 poolPerStage.push(poolStage);
                 poolStage = [];
                 stageId = pool.stage;
@@ -112,17 +109,19 @@ export class TournamentPage {
 
         return poolPerStage;
     }
-    getCurrentStage(stages)
-    {
+
+    getCurrentStage(stages) {
         //loop on each stage then on each pool
-        for(let i = 0; i < stages.length; i++)
-        {
-            for(let pool of stages[i])
-            {
-                if(pool.isFinished == 0 ) return i;
+        for (let i = 0; i < stages.length; i++) {
+            for (let pool of stages[i]) {
+                if (pool.isFinished == 0) return i;
             }
         }
         return 0;
+    }
+
+    goToSearch() {
+        this.navCtrl.push(SearchPage);
     }
 
     // Add a spinner when the view is loading
