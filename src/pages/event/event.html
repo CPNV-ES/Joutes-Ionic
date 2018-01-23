@@ -11,6 +11,11 @@
             {{ event.name }}
         </ion-title>
         <ion-buttons end>
+            <button ion-button icon-only (click)="goToSearch()">
+                <ion-icon name="search"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-buttons end>
             <button ion-button icon-only (click)="displayMenu()">
                 <ion-icon name="menu" class="menu-button"></ion-icon>
             </button>
@@ -48,14 +53,8 @@
     <!-- Display the content according to the toolbar -->
     <div [ngSwitch]="eventContent">
         <ion-list *ngSwitchCase="'teams'">
-            <!-- Filter teams and display the list teams -->
-            <ion-toolbar no-border-top>
-                <ion-searchbar color="primary" placeholder="Nom de l'équipe" [(ngModel)]="searchTermTeam" (ionInput)="filterTeams()">
-                </ion-searchbar>
-            </ion-toolbar>
-
             <!-- When we click on the name of the team -> go to detail team -->
-            <ion-item *ngFor="let team of filteredTeams">
+            <ion-item *ngFor="let team of teams">
                 <div class="items" (click)="goToTeam(team)">
                     {{team.name}}
                     <ion-note item-right>
@@ -78,14 +77,8 @@
         </ion-list>
 
         <ion-list *ngSwitchCase="'participants'">
-            <!-- Filter participant and display the list participants -->
-            <ion-toolbar no-border-top>
-                <ion-searchbar color="primary" placeholder="Nom du participant" [(ngModel)]="searchTermParticipant" (ionInput)="filterParticipants()">
-                </ion-searchbar>
-            </ion-toolbar>
-
             <!-- When we click on the name of the _participant-> go to detail _participant -->
-            <ion-item *ngFor="let participant of filteredParticipants">
+            <ion-item *ngFor="let participant of participants">
                 <div class="items" (click)="goToParticipant(participant)">
                     {{participant.lastname}} {{participant.firstname}}
                     <ion-note item-right *ngIf="participant.sports && participant.sports.length > 0">

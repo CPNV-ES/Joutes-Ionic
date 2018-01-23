@@ -6,6 +6,7 @@ import { TournamentPage } from "../tournament/tournament";
 import { TeamPage } from "../team/team";
 import { TeamService } from "../../providers/team-service";
 import { PoolPage } from "../pool/pool";
+import { SearchPage } from "../search/search";
 import { Observable } from "rxjs";
 
 /*
@@ -126,6 +127,10 @@ export class ParticipantPage {
 
     displayMenu() {
         this.sharedDataProvider.displayMenu();
+    }
+
+    goToSearch() {
+        this.navCtrl.push(SearchPage);
     }
 
     // Add a spinner when the view is loading
