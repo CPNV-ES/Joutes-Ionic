@@ -140,7 +140,11 @@ export class SearchPage {
 
     // Sort participants
     sortParticipants() {
-        this._filteredParticipants.sort((a, b) => a.lastname.localeCompare(b.lastname));
+        this._filteredParticipants.sort((a, b) => {
+            var fullnameA = a.lastname + " " + a.firstname;
+            var fullnameB = b.lastname + " " + b.firstname;
+            return fullnameA.localeCompare(fullnameB);
+        });
     }
 
     // Go to page detail team

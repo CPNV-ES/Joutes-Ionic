@@ -110,7 +110,11 @@ export class TeamPage {
 
     // Sort members
     sortMembers() {
-        this._teamData.members.sort((a, b) =>  a.lastname.localeCompare(b.lastname));
+        this._teamData.members.sort((a, b) => {
+            var fullnameA = a.lastname + " " + a.firstname;
+            var fullnameB = b.lastname + " " + b.firstname;
+            return fullnameA.localeCompare(fullnameB);
+        });
     }
 
     displayMenu() {
