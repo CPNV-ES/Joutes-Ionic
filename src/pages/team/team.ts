@@ -55,6 +55,7 @@ export class TeamPage {
             this._teamData = data.team;
             this._tournament = this._teamData.tournament;
             this._teamData.matches.sortBy(function(o) { return [-o.idPool, o.isFinished, o.startTime] });
+            this.sortMembers();
         });
 
         return Observable.forkJoin(o1);
@@ -105,6 +106,11 @@ export class TeamPage {
             default:
                 return 'default.png'
         }
+    }
+
+    // Sort members
+    sortMembers() {
+        this._teamData.members.sort((a, b) =>  a.lastname.localeCompare(b.lastname));
     }
 
     displayMenu() {

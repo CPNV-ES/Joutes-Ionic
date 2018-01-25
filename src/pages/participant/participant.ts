@@ -69,6 +69,7 @@ export class ParticipantPage {
             for (let i = 0; i < this.participantData.teams.length; i++) {
                 this.teamProvider.getTeam(this._participantData.teams[i].id, this._event.id).subscribe(data => {
                     this._teamData = data.team;
+                    this.sortMembers();
                 });
             }
         }
@@ -123,6 +124,11 @@ export class ParticipantPage {
             default:
                 return 'default.png'
         }
+    }
+
+    // Sort members
+    sortMembers() {
+        this._teamData.members.sort((a, b) =>  a.lastname.localeCompare(b.lastname));
     }
 
     displayMenu() {

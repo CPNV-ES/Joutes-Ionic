@@ -71,18 +71,21 @@ export class SearchPage {
         const o1 = this.teamProvider.getTeamsByEvent(this._event.id).do(data => {
             this._teams = data.teams;
             this._filteredTeams = data.teams;
+            this.sortTeams();
         });
 
         // Get participants by _event
         const o2 = this.participantProvider.getParticipantsByEvent(this._event.id).do(data => {
             this._participants = data.participants;
             this._filteredParticipants = this._participants;
+            this.sortParticipants();
         });
 
         // Get tournaments by _event
         const o3 = this.tournamentProvider.getTournamentsByEvent(this._event.id).do(data => {
             this._tournaments = data.tournaments;
             this._filteredTournaments = this._tournaments;
+            this.sortTournaments();
         });
 
         return Observable.forkJoin(o1, o2, o3);
@@ -105,6 +108,7 @@ export class SearchPage {
         this._filteredTeams = this._teams.filter((team) => {
             return team.name.toLowerCase().indexOf(this._searchTerm.toLowerCase()) > -1;
         });
+        this.sortTeams();
     }
 
     // Filter participants
@@ -113,13 +117,30 @@ export class SearchPage {
             var participantFullName = participant.lastname + ' ' + participant.firstname;
             return participantFullName.toLowerCase().indexOf(this._searchTerm.toLowerCase()) > -1;
         });
+        this.sortParticipants();
     }
 
-    //Filter tournaments
+    // Filter tournaments
     filterTournaments() {
         this._filteredTournaments = this._tournaments.filter((tournament) => {
             return tournament.name.toLowerCase().indexOf(this._searchTerm.toLowerCase()) > -1;
         });
+        this.sortTournaments();
+    }
+
+    // Sort teams
+    sortTeams() {
+        this._filteredTeams.sort((a, b) =>  a.name.localeCompare(b.name));
+    }
+
+    // Sort tournaments
+    sortTournaments() {
+        this._filteredTournaments.sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    // Sort participants
+    sortParticipants() {
+        this._filteredParticipants.sort((a, b) => a.lastname.localeCompare(b.lastname));
     }
 
     // Go to page detail team

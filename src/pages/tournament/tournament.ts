@@ -55,6 +55,7 @@ export class TournamentPage {
         const o1 = this.tournamentProvider.getTournament(this._event.id, this._tournament.id).do(data => {
             this._tournamentData = data.tournament;
             if (this.tournamentData.pools.length > 0) this._poolsData = this.sortByStage(this.tournamentData.pools);
+            this.sortTeams();
 
             console.log("sliderOptions", this.sliderOptions);
         });
@@ -118,6 +119,11 @@ export class TournamentPage {
             }
         }
         return 0;
+    }
+
+    // Sort teams
+    sortTeams() {
+        this._tournamentData.teams.sort((a, b) =>  a.name.localeCompare(b.name));
     }
 
     goToSearch() {
