@@ -26,7 +26,13 @@ export class DataService {
             return Observable.of(JSON.parse('{"events":[{"id":1,"name":"JOUTES FALSE","img":null}]}'));
         });
     }
-
+    getApiJson(uri, callback)
+    {
+     
+        this.getUrl();
+       
+        return this.sendRequest(uri);
+    }
     getUrl() {
         //Set the ip corresponding to the current choice
         switch(this.sharedDataProvider.IpChoice) {
@@ -54,10 +60,11 @@ export class DataService {
 
     sendRequest(uri, callback = null) {
         console.log(this._serverUrl+uri);
-
+        
         return this.http
                 .get(this._serverUrl+uri)
                 .map(res => {
+                 
                     return res.json();
                 })
                 .catch(e => {
