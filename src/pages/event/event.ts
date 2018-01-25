@@ -78,6 +78,7 @@ export class EventPage {
             // Get teams by _event
             this.teamProvider.getTeamsByEvent(this._event.id).subscribe(data => {
                 this._teams = data.teams;
+                this.sortTeams();
                 this.filterTeams();
             });
         }).catch(e => {
@@ -87,11 +88,13 @@ export class EventPage {
         // Get tournaments by _event
         const o2 = this.tournamentProvider.getTournamentsByEvent(this._event.id).do(data => {
             this._tournaments = data.tournaments;
+            this.sortTournaments();
         });
 
         // Get participants by _event
         const o3 = this.participantProvider.getParticipantsByEvent(this._event.id).do(data => {
             this._participants = data.participants;
+            this.sortParticipants();
         });
         return Observable.forkJoin(o1, o2, o3);
     }
@@ -189,6 +192,25 @@ export class EventPage {
 
         this.sharedDataProvider.currentParticipant = participant;
         this.navCtrl.push(ParticipantPage);
+    }
+
+    // Sort teams
+    sortTeams() {
+        this._teams.sort((a, b) =>  a.name.localeCompare(b.name));
+    }
+
+    // Sort tournaments
+    sortTournaments() {
+        this._tournaments.sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    // Sort participants
+    sortParticipants() {
+        this._participants.sort((a, b) => {
+            var fullnameA = a.lastname + " " + a.firstname;
+            var fullnameB = b.lastname + " " + b.firstname;
+            return fullnameA.localeCompare(fullnameB);
+        });
     }
 
     displayMenu() {

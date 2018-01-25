@@ -65,7 +65,15 @@ export class EventsPage {
             this._filteredEvents = this._events.filter((event) => {
                 return event.name.toLowerCase().indexOf(this._searchTerm.toLowerCase()) > -1;
             });
+            this.sortEvents();
         }
+    }
+
+    // Sort events
+    sortEvents() {
+        this._filteredEvents.sort((a, b) => {
+            a.name.localeCompare(b.name);
+        });
     }
 
     // Go to page detail _event
