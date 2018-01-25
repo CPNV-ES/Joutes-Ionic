@@ -71,12 +71,14 @@ class Tree
                     key : 'tournaments',
                     children : [
                         {
-                            url: ''
+                            url: '{idTournament}',
+                            key : 'tournaments',
+                            children: []
                         }
                     ]
                 },
                 {
-                    url: '{}',
+                    url: '{asf}',
                     key : 'teams',
                     children : []
                 }
