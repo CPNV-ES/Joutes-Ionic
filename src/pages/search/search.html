@@ -24,7 +24,7 @@ Ionic pages and navigation.
     <ion-refresher (ionRefresh)="refresh($event)">
         <ion-refresher-content refreshingText="Chargement"></ion-refresher-content>
     </ion-refresher>
-    <ion-item-divider class="separation items"><b>Teams</b></ion-item-divider>
+    <ion-item-divider class="separation items"><b>Équipes</b></ion-item-divider>
     <!-- When we click on the name of the team -> go to detail team -->
     <ion-grid class="no-margin-padding">
         <ion-item *ngFor="let team of filteredTeams">
@@ -51,7 +51,7 @@ Ionic pages and navigation.
         </ion-item>
     </ion-grid>
 
-    <ion-item-divider class="separation items"><b>Tournaments</b></ion-item-divider>
+    <ion-item-divider class="separation items"><b>Tournois</b></ion-item-divider>
     <!-- When we click on the name of the _tournament -> go to detail _tournament -->
     <ion-grid class="no-margin-padding">
         <ion-item *ngFor="let tournament of filteredTournaments">
