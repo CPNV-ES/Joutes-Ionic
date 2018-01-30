@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Rx';
 import { DataService } from './data-service';
-import localForage  from "localforage"; //because it doesnt work otherwise
+import localForage from "localforage";
+import { take } from 'rxjs/operator/take';
 
 /**
  * 
@@ -29,9 +30,9 @@ export class StorageService {
     }
     start()
     {
-       let tree = new Tree(this._dataProvider);
+        let tree = new Tree(this._dataProvider);
        
-   
+        console.log("test");
 
         // Observable.interval(500 * this.refreshFrequency).subscribe(x => {
         //     this.getEvents().subscribe( data => {
@@ -72,15 +73,25 @@ class Tree
                     children : [
                         {
                             url: '{idTournament}',
-                            key : 'tournaments',
+                            key : 'tournament',
                             children: []
                         }
                     ]
                 },
                 {
-                    url: '{asf}',
+                    url: '{idEvent}/teams',
                     key : 'teams',
                     children : []
+                },
+                {
+                    url: '{idEvent}/participants',
+                    key : 'teams',
+                    children : [{
+                            url: '{idTournament}',
+                            key : 'team',
+                            children: []
+                    
+                    }]
                 }
             ]
         }
@@ -89,10 +100,11 @@ class Tree
     {
         this._dataProvider = dataProvider;
         this._rootNode = this.build(this._treeObject);
+        this._rootNode.browse();
     }
     build(object)
     {
-        
+      
         let currentNode = new Node(this._dataProvider, object.url, object.key);
 
         for(let i = 0; i < object.children.length; i++)
@@ -123,21 +135,19 @@ class Node
     {
         this._children.push(node);
     }
-    browse(parentUrl='', parentId = '')
+    browse( parentId = '', parentUrl='',)
     {
-
-        let url = this.buildUrl(parentUrl, parentId);
-       
+        let url = this.buildUrl(parentId, parentUrl);
         this.callApi(url).subscribe(apiData => {
-        
+           
             let data = apiData[0][this._key];
-          
+            this.save(url,  apiData[0])
             for(let i = 0 ; i < data.length ; i++)
             {
                 for(let j = 0; j < this._children.length; j++)
                 {
                     let child = this._children[j];
-                    child.browse(url ,data[i].id);
+                    child.browse(data[i].id, url);
                 }
                 
             }
@@ -152,18 +162,27 @@ class Node
     //replace {something} by id
     replaceId(uri, id)
     {
-       return uri.replace(/\{\w+\}/g, id);
+       return uri.replace(/{\w+}/g, id);
     }
     buildUrl(parentId, parentUrl)
     {
+    
         let url = this._url;
         if(parentId != '') {
             url = this.replaceId(this._url, parentId)
         }
         if(parentUrl != '')
         {
-            url = parentUrl +  url ; 
+            url = parentUrl +'/'  +  url ; 
         }
-       return url + '/';
+        console.log("build URL",url);
+        return url ;
+    }
+    save(url, content)
+    {
+        localForage.setItem(url, content, function (error) {
+            if(error) console.error(error);
+            console.log("",url,content);
+        })
     }
 }

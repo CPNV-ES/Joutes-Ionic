@@ -4,6 +4,8 @@ import 'rxjs/add/operator/map';
 import {Observable} from "rxjs";
 import {AlertController} from "ionic-angular";
 import {SharedDataService} from "./sharedData-service";
+import localForage from "localforage";
+
 
 /*
  Generated class for the DataService provider.
@@ -19,16 +21,17 @@ export class DataService {
     constructor(private http: Http, private alertCtrl: AlertController, private sharedDataProvider: SharedDataService) { }
 
     // Get the JSON, URI must have a / before
-    getJson(uri) {
+     getJson(uri) {
         this.getUrl();
-        return this.sendRequest(uri, function() {
+        return this.sendRequest(uri, async function() {
             // FOR Ilias: Need to change "JSON.parse('{"events":[{"id":1,"name":"JOUTES FALSE","img":null}]}')"" with the get from localForage
-            return Observable.of(JSON.parse('{"events":[{"id":1,"name":"JOUTES FALSE","img":null}]}'));
+            let data = await localForage.getItem(uri)
+            console.log("DATA-SERVICE",data, uri)
+            return data;
         });
     }
     getApiJson(uri, callback)
     {
-     
         this.getUrl();
        
         return this.sendRequest(uri);
@@ -72,6 +75,7 @@ export class DataService {
                         this.displayError();
                         return Observable.throw(e)
                     } else {
+                     
                         return callback();
                     }
                 });

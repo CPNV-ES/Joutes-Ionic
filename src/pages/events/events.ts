@@ -49,6 +49,7 @@ export class EventsPage {
         // Get events
         const o1 = this.eventProvider.getEvents().do(data => {
             this._events = data.events;
+            console.log("EVENT",data );
             this._filteredEvents = data.events
         }, this.filterEvents)
         return Observable.forkJoin(o1);
