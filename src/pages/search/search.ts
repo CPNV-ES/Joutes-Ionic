@@ -25,9 +25,9 @@ export class SearchPage {
     private _teams;
     private _participants;
     private _tournaments;
-    private _filteredTeams;
-    private _filteredParticipants;
-    private _filteredTournaments;
+    private _filteredTeams: any = [];
+    private _filteredParticipants: any = [];
+    private _filteredTournaments: any = [];
     private _searchTerm: string = '';
 
     get event() {
