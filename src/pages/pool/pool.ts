@@ -51,7 +51,7 @@ export class PoolPage {
 
         // Get the _pool
         const o1 = this.poolProvider.getPool(this._event.id, this._tournament.id, this._pool.id).do(data => {
-            this._poolData = data.pool;
+            this._poolData = data["pool"];
             this.isFinished();
         });
         return Observable.forkJoin(o1);

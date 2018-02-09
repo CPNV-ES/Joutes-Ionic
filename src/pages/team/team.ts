@@ -52,7 +52,7 @@ export class TeamPage {
 
         // Get the team and tournament
         const o1 = this.teamProvider.getTeam(this._team.id, this._event.id).do(data => {
-            this._teamData = data.team;
+            this._teamData = data["team"];
             this._tournament = this._teamData.tournament;
             this._teamData.matches.sortBy(function(o) { return [-o.idPool, o.isFinished, o.startTime] });
             this.sortMembers();

@@ -52,7 +52,7 @@ export class ParticipantPage {
 
         // Get the _participant
         const o1 = this.participantProvider.getParticipant(this._event.id, this._participant.id).do(data => {
-            this._participantData = data.participant;
+            this._participantData = data["participant"];
             this.getTeamInfos();
         });
         return Observable.forkJoin(o1);
@@ -68,7 +68,7 @@ export class ParticipantPage {
         if (this._participantData.teams.length > 0) {
             for (let i = 0; i < this.participantData.teams.length; i++) {
                 this.teamProvider.getTeam(this._participantData.teams[i].id, this._event.id).subscribe(data => {
-                    this._teamData = data.team;
+                    this._teamData = data["team"];
                     this.sortMembers();
                 });
             }

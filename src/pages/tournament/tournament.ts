@@ -53,7 +53,7 @@ export class TournamentPage {
 
         // Get the _tournament
         const o1 = this.tournamentProvider.getTournament(this._event.id, this._tournament.id).do(data => {
-            this._tournamentData = data.tournament;
+            this._tournamentData = data["tournament"];
             if (this.tournamentData.pools.length > 0) this._poolsData = this.sortByStage(this.tournamentData.pools);
             this.sortTeams();
 
