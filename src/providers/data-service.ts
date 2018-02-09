@@ -24,9 +24,8 @@ export class DataService {
      getJson(uri) {
         this.getUrl();
         return this.sendRequest(uri, async function() {
-            // FOR Ilias: Need to change "JSON.parse('{"events":[{"id":1,"name":"JOUTES FALSE","img":null}]}')"" with the get from localForage
+            //get stored data
             let data = await localForage.getItem(uri)
-            console.log("DATA-SERVICE",data, uri)
             return data;
         });
     }
@@ -62,13 +61,18 @@ export class DataService {
     }
 
     sendRequest(uri, callback = null) {
-        console.log(this._serverUrl+uri);
+        // console.log(this._serverUrl+uri);
         
         return this.http
                 .get(this._serverUrl+uri)
                 .map(res => {
-                 
-                    return res.json();
+                    let resJson = res.json();
+                    
+                    localForage.setItem(uri, resJson, function (error) {
+                            if(error) console.error(error);
+                    })
+                    
+                    return resJson;
                 })
                 .catch(e => {
                     if (callback == null) {
