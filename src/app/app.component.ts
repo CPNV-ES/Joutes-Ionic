@@ -4,6 +4,8 @@ import {StatusBar} from 'ionic-native';
 import {EventsPage} from '../pages/events/events';
 import {AboutPage} from '../pages/about/about';
 import {IpPage} from "../pages/ip/ip";
+import { StorageService } from '../providers/storage-service';
+
 
 
 @Component({
@@ -13,6 +15,7 @@ import {IpPage} from "../pages/ip/ip";
 export class MyApp {
 
     pages: Array<{title: string, component: any, icon: string}>;
+    storage : StorageService;
 
     // the root nav is a child of the root app component
     // @ViewChild(Nav) gets a reference to the app's root nav
@@ -20,7 +23,7 @@ export class MyApp {
 
     rootPage = EventsPage;
 
-    constructor(platform: Platform) {
+    constructor(platform: Platform,  storageProvider: StorageService) {
 
         // List of pages that can be navigated to from the left menu
         // the left menu only works after login
@@ -38,7 +41,7 @@ export class MyApp {
             // Splashscreen.hide();
         });
 
-
+        storageProvider.start();
     }
 
     openPage(page) {

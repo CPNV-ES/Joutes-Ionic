@@ -3,8 +3,9 @@ import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 import {Observable} from "rxjs";
 import {AlertController} from "ionic-angular";
-import {HttpService} from "./http-service";
 import {SharedDataService} from "./sharedData-service";
+import localForage from "localforage";
+
 
 /*
  Generated class for the DataService provider.
@@ -20,19 +21,25 @@ export class DataService {
     constructor(private http: Http, private alertCtrl: AlertController, private sharedDataProvider: SharedDataService) { }
 
     // Get the JSON, URI must have a / before
-    getJson(uri) {
+     getJson(uri) {
         this.getUrl();
-        return this.sendRequest(uri, function() {
-            // FOR Ilias: Need to change "JSON.parse('{"events":[{"id":1,"name":"JOUTES FALSE","img":null}]}')"" with the get from localForage
-            return Observable.of(JSON.parse('{"events":[{"id":1,"name":"JOUTES FALSE","img":null}]}'));
+        return this.sendRequest(uri, async function() {
+            //get stored data
+            let data = await localForage.getItem(uri)
+            return data;
         });
     }
-
+    getApiJson(uri, callback)
+    {
+        this.getUrl();
+       
+        return this.sendRequest(uri);
+    }
     getUrl() {
         //Set the ip corresponding to the current choice
         switch(this.sharedDataProvider.IpChoice) {
             case "LANServer" :
-                this._serverUrl = "http://joutes.api/api";
+                this._serverUrl = "http://joute.api/api";
                 break;
             case "LANServerReal" :
                 this._serverUrl = "http://172.17.102.188/Joutes-real/Joutes/public/api";
@@ -47,24 +54,32 @@ export class DataService {
                 this._serverUrl = "https://markal.servehttp.com/Joutes/api";
                 break;
             default:
-                this._serverUrl = "https://markal.servehttp.com/Joutes/api";
+                this._serverUrl = "http://joute.api/api";
+
                 break;
         }
     }
 
     sendRequest(uri, callback = null) {
-        console.log(this._serverUrl+uri);
-
+        // console.log(this._serverUrl+uri);
+        
         return this.http
                 .get(this._serverUrl+uri)
                 .map(res => {
-                    return res.json();
+                    let resJson = res.json();
+                    
+                    localForage.setItem(uri, resJson, function (error) {
+                            if(error) console.error(error);
+                    })
+                    
+                    return resJson;
                 })
                 .catch(e => {
                     if (callback == null) {
                         this.displayError();
                         return Observable.throw(e)
                     } else {
+                     
                         return callback();
                     }
                 });

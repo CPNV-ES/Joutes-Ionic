@@ -18,6 +18,7 @@ import {IpPage} from "../pages/ip/ip";
 import {DataService} from "../providers/data-service";
 import {AboutPage} from "../pages/about/about";
 import {SearchPage} from "../pages/search/search";
+import {StorageService} from "../providers/storage-service";
 
 @NgModule({
     declarations: [
@@ -57,8 +58,8 @@ import {SearchPage} from "../pages/search/search";
         TeamService,
         TournamentService,
         PoolService,
-        ParticipantService
+        ParticipantService,
+        StorageService
     ]
 })
-export class AppModule {
-}
+export class AppModule {}
