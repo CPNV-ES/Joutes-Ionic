@@ -113,10 +113,11 @@
                                 <ion-col width-50 no-padding>
                                      Pool {{ pool.name }}
                                 </ion-col>
+                           
 
                                 <!-- Display the number of match played on the total of matches to be played -->
                                 <ion-col width-50 text-right no-padding>
-                                    <ion-note><ion-img class="status-icon" src="assets/{{ pool.isFinished == 1 ? 'finished.png': 'nFinished.png'}}" width="20" height="20"></ion-img></ion-note>
+                                    <ion-note><img class="status-icon" src="{{(pool.isFinished == 1 ? '/assets/finished.png': '/assets/nFinished.png')}}" width="20" height="20" /></ion-note>
                                 </ion-col>
                             </ion-row>
                         </ion-item>
