@@ -20,6 +20,13 @@
     "@ionic-native/splash-screen": "^4.5.3",
     "@ionic-native/status-bar": "^4.3.2",
     "@ionic/storage": "2.1.3",
+    "android-versions": "^1.3.0",
+    "cordova-android": "6.3.0",
+    "cordova-plugin-device": "^2.0.1",
+    "cordova-plugin-ionic-keyboard": "^2.0.5",
+    "cordova-plugin-ionic-webview": "^1.1.16",
+    "cordova-plugin-splashscreen": "~4.0.3",
+    "cordova-plugin-whitelist": "^1.3.3",
     "ionic-angular": "3.9.2",
     "ionicons": "3.0.0",
     "localforage": "^1.5.6",
@@ -44,7 +51,14 @@
   "description": "Joutes-Ionic",
   "cordova": {
     "plugins": {
-      "cordova-plugin-splashscreen": {}
-    }
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-ionic-keyboard": {}
+    },
+    "platforms": [
+      "android"
+    ]
   }
 }
