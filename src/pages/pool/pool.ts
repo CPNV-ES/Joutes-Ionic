@@ -74,9 +74,6 @@ export class PoolPage {
 
     // Go to page detail team
     goToTeam(team) {
-        // Add a spinner when the view is loaded
-        document.getElementById('spinnerContent').style.visibility = 'visible';
-
         this.sharedDataProvider.currentTeam = { id: team.team_id, name: team.team, sport: '' };
         this.navCtrl.push(TeamPage);
     }
@@ -88,10 +85,4 @@ export class PoolPage {
     goToSearch() {
         this.navCtrl.push(SearchPage);
     }
-
-    // Add a spinner when the view is loading
-    ionViewDidLoad() {
-        document.getElementById('spinnerContent').style.visibility = 'hidden';
-    }
-
 }

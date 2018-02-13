@@ -1811,7 +1811,7 @@ localforage-cordovasqlitedriver@~1.5.0:
     "@types/localforage" "0.0.30"
     localforage ">=1.4.0"
 
-localforage@>=1.4.0:
+localforage@>=1.4.0, localforage@^1.5.6:
   version "1.5.6"
   resolved "https://registry.yarnpkg.com/localforage/-/localforage-1.5.6.tgz#d034d15e5372ee97c64173e9a9aeb96815f5dd06"
   dependencies:

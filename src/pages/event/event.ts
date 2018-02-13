@@ -169,27 +169,18 @@ export class EventPage {
 
     // Go to page detail team
     goToTeam(team) {
-        // Add a spinner when the view is loaded
-        document.getElementById('spinnerContent').style.visibility = 'visible';
-
         this.sharedDataProvider.currentTeam = team;
         this.navCtrl.push(TeamPage);
     }
 
     // Go to page detail _tournament
     goToTournament(tournament) {
-        // Add a spinner when the view is loaded
-        document.getElementById('spinnerContent').style.visibility = 'visible';
-
         this.sharedDataProvider.currentTournament = tournament;
         this.navCtrl.push(TournamentPage);
     }
 
     // Go to page detail _participant
     goToParticipant(participant) {
-        // Add a spinner when the view is loaded
-        document.getElementById('spinnerContent').style.visibility = 'visible';
-
         this.sharedDataProvider.currentParticipant = participant;
         this.navCtrl.push(ParticipantPage);
     }
@@ -219,10 +210,5 @@ export class EventPage {
 
     goToSearch() {
         this.navCtrl.push(SearchPage);
-    }
-
-    // Add a spinner when the view is loading
-    ionViewDidLoad() {
-        document.getElementById('spinnerContent').style.visibility = 'hidden';
     }
 }
