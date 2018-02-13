@@ -1,0 +1,7 @@
+ion-img {
+    display: inline-block;
+    min-width: 20px;
+    min-height: 20px;
+    contain: strict;
+    background-color: transparent;
+  }
