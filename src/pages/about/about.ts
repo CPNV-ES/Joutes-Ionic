@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component } from "@angular/core";
+import { SharedDataService } from "../../providers/sharedData-service";
 
 /*
   Generated class for the About page.
@@ -8,14 +8,13 @@ import { NavController } from 'ionic-angular';
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-about',
-  templateUrl: 'about.html'
+    selector: "page-about",
+    templateUrl: "about.html"
 })
 export class AboutPage {
+    constructor(public sharedDataProvider: SharedDataService) {}
 
-  constructor(public navCtrl: NavController) {}
-
-  ionViewDidLoad() {
-  }
-
+    displayMenu() {
+        this.sharedDataProvider.displayMenu();
+    }
 }

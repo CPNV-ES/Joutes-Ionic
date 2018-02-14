@@ -1,13 +1,11 @@
-import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
-import {SharedDataService} from "../../providers/sharedData-service";
+import { Component } from "@angular/core";
+import { SharedDataService } from "../../providers/sharedData-service";
 
 @Component({
-    selector: 'page-ip',
-    templateUrl: 'ip.html'
+    selector: "page-ip",
+    templateUrl: "ip.html"
 })
 export class IpPage {
-
     private _currentIpChoice;
 
     get currentIpChoice() {
@@ -18,7 +16,7 @@ export class IpPage {
         this._currentIpChoice = value;
     }
 
-    constructor(private navCtrl: NavController, private sharedDataProvider: SharedDataService) {
+    constructor(private sharedDataProvider: SharedDataService) {
         this._currentIpChoice = this.sharedDataProvider.IpChoice;
     }
 
@@ -27,6 +25,7 @@ export class IpPage {
         this._currentIpChoice = this.sharedDataProvider.IpChoice;
     }
 
-    ionViewDidLoad() {
+    displayMenu() {
+        this.sharedDataProvider.displayMenu();
     }
 }

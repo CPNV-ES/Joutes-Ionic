@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicStorageModule } from '@ionic/storage';
 import { IonicApp, IonicModule } from 'ionic-angular';
-import { MyApp } from './app.component';
+import { JoutesCPNV } from './app.component';
 import { EventsPage } from '../pages/events/events';
 import { TournamentPage } from '../pages/tournament/tournament';
 import { EventService } from '../providers/event-service';
@@ -26,7 +26,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 @NgModule({
     declarations: [
-        MyApp,
+        JoutesCPNV,
         EventsPage,
         EventPage,
         TeamPage,
@@ -41,12 +41,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     imports: [
         BrowserModule,
         HttpClientModule,
-        IonicModule.forRoot(MyApp),
+        IonicModule.forRoot(JoutesCPNV),
         IonicStorageModule.forRoot()
     ],
     bootstrap: [IonicApp],
     entryComponents: [
-        MyApp,
+        JoutesCPNV,
         EventsPage,
         EventPage,
         TeamPage,
