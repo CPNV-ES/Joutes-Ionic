@@ -9,9 +9,11 @@
         <ion-title>
             IPs
         </ion-title>
-        <button ion-button menuToggle side="right">
-            <ion-icon name="menu" class="menu-button"></ion-icon>
-        </button>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="displayMenu()">
+                <ion-icon name="menu" class="menu-button"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 

@@ -88,11 +88,7 @@ export class StorageService {
             const rootNode = Resource.build(this._treeObject, this._dataProvider);
             rootNode.browse();
         });
-       
-        
     }
-
-
     apiCall(uri)
     {
         const o1 = this._dataProvider.getApiJson(uri).do();
@@ -140,15 +136,12 @@ class Resource
         let url = this.buildUrl(parentId, parentUrl);
         const browseNext = (data) =>
         {
-        
             for(let j = 0; j < this._children.length; j++)
             {
-            
-         
                 let child   = this._children[j];
                 let key     = child._key
                 
-                // Monkey patch because events/ID/tournaments/ID/pools to list the pools doesnt exist yet
+                // patch because events/ID/tournaments/ID/pools (to list the pools) doesnt exist yet
                 if(child._stagedColumn != undefined) {
                     for(let k = 0 ; k < data[key].length; k++) child.browse( data[key][k].id, url); 
                 }

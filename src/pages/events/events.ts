@@ -3,8 +3,7 @@ import { NavController, Refresher } from 'ionic-angular';
 import { EventService } from '../../providers/event-service';
 import { SharedDataService } from '../../providers/sharedData-service';
 import { EventPage } from "../event/event";
-import { Splashscreen } from "ionic-native";
-import { document } from "@angular/platform-browser/src/facade/browser";
+import { SplashScreen } from '@ionic-native/splash-screen';
 import { Observable } from "rxjs";
 
 /*
@@ -78,16 +77,12 @@ export class EventsPage {
 
     // Go to page detail _event
     goToEvent(event) {
-        // Add a spinner when the view is loaded
-        document.getElementById('spinnerContent').style.visibility = 'visible';
-
         this.sharedDataProvider.currentEvent = event;
         this.navCtrl.push(EventPage);
     }
 
     // Load the splashscreen and add a spinner when the view is loading
     ionViewDidLoad() {
-        Splashscreen.hide();
-        document.getElementById('spinnerContent').style.visibility = 'hidden';
+        // Splashscreen.hide();
     }
 }

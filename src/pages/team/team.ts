@@ -68,9 +68,6 @@ export class TeamPage {
 
     // Go to page detail _pool
     goToPool(tournament, pool_id) {
-        // Add a spinner when the view is loaded
-        document.getElementById('spinnerContent').style.visibility = 'visible';
-
         this.sharedDataProvider.currentTournament = tournament;
         this._pool.id = pool_id;
         this.sharedDataProvider.currentPool = this._pool;
@@ -79,9 +76,6 @@ export class TeamPage {
 
     // Go to page detail tournament
     goToTournament(tournament) {
-        // Add a spinner when the view is loaded
-        document.getElementById('spinnerContent').style.visibility = 'visible';
-
         this.sharedDataProvider.currentTournament = tournament;
         this.navCtrl.push(TournamentPage);
     }
@@ -124,10 +118,4 @@ export class TeamPage {
     goToSearch() {
         this.navCtrl.push(SearchPage);
     }
-
-    // Add a spinner when the view is loading
-    ionViewDidLoad() {
-        document.getElementById('spinnerContent').style.visibility = 'hidden';
-    }
-
 }
