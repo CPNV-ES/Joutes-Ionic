@@ -24,7 +24,7 @@ export class ParticipantPage {
     private _event;
     private _participant;
     private _participantData: any = {};
-    private _teamData: any = {};
+    private _teamData: any = [];
     private _pool: any = { id: '' };
 
     get event() {
@@ -68,7 +68,7 @@ export class ParticipantPage {
         if (this._participantData.teams.length > 0) {
             for (let i = 0; i < this.participantData.teams.length; i++) {
                 this.teamProvider.getTeam(this._participantData.teams[i].id, this._event.id).subscribe(data => {
-                    this._teamData = data["team"];
+                    this._teamData.push(data["team"])
                     this.sortMembers();
                 });
             }
@@ -119,9 +119,10 @@ export class ParticipantPage {
 
     // Sort members
     sortMembers() {
-        this._teamData.members.sort((a, b) => {
-            var fullnameA = a.lastname + " " + a.firstname;
-            var fullnameB = b.lastname + " " + b.firstname;
+        for(let team of this._teamData)
+            team.members.sort((a, b) => {
+                var fullnameA = a.lastname + " " + a.firstname;
+                var fullnameB = b.lastname + " " + b.firstname;
             return fullnameA.localeCompare(fullnameB);
         });
     }
