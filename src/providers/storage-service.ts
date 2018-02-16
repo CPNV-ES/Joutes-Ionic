@@ -5,10 +5,10 @@ import localForage from "localforage";
 import { take } from 'rxjs/operator/take';
 
 /**
- * 
+ *
  *  Generated class for the Storager provider.
- * 
- *  Send Request every 10 minutes 
+ *
+ *  Send Request every 10 minutes
  */
 
 @Injectable()
@@ -16,19 +16,14 @@ export class StorageService {
     private _dataProvider
     public refreshFrequency = 10; //minutes
 
-    private eventsId : number[]; //because app has been designed to handle multiple events (sport event )
-    private tournamentsId : number[];
-    private teamsId : number[];
-    private participantsId : number[];
-    private listUri : string[];
-    private _treeObject = 
+    private _treeObject =
         {
             url : '/events',
             key : 'events',
             children : [{
                 url : '/{idEvent}',
                 key : 'event',
-                children : 
+                children :
                 [
                     {
                         url : '/tournaments',
@@ -57,7 +52,7 @@ export class StorageService {
                                 key : 'team',
                                 children : []
                             }
-    
+
                         ]
                     },
                     {
@@ -68,7 +63,7 @@ export class StorageService {
                                 url : '/{idParticipant}',
                                 key : 'participant',
                                 children : []
-                        
+
                             }
                         ]
                     }
@@ -76,11 +71,11 @@ export class StorageService {
             }]
         }
 
-   
+
 
     constructor(private dataProvider: DataService) {
         this._dataProvider = dataProvider;
-        
+
     }
     start()
     {
@@ -127,12 +122,12 @@ class Resource
             let childObj = this.build( child, dataProvider)
             currentNode.addChild( childObj);
         }
-        
+
         return currentNode;
     }
 
     browse( parentId = '', parentUrl='',)
-    { 
+    {
         let url = this.buildUrl(parentId, parentUrl);
         const browseNext = (data) =>
         {
@@ -140,23 +135,23 @@ class Resource
             {
                 let child   = this._children[j];
                 let key     = child._key
-                
+
                 // patch because events/ID/tournaments/ID/pools (to list the pools) doesnt exist yet
                 if(child._stagedColumn != undefined) {
-                    for(let k = 0 ; k < data[key].length; k++) child.browse( data[key][k].id, url); 
+                    for(let k = 0 ; k < data[key].length; k++) child.browse( data[key][k].id, url);
                 }
-                else  child.browse(data.id, url);   
+                else  child.browse(data.id, url);
             }
         }
 
         this.callApi(url).subscribe(apiData => {
-           
+
             let data = (this._stagedColumn == undefined) ?  apiData[0][this._key] : apiData[0][this._stagedColumn];
 
             this.save(url,  apiData[0])
 
             if(data.length > 0){
-              
+
                 for(let i = 0 ; i < data.length ; i++)
                 {
                     browseNext(data[i])
@@ -164,7 +159,7 @@ class Resource
             }
             else{
                 browseNext(data);
-            }  
+            }
         });
     }
 
@@ -181,14 +176,14 @@ class Resource
     }
     buildUrl(parentId, parentUrl)
     {
-    
+
         let url = this._url;
         if(parentId != '') {
             url = this.replaceId(this._url, parentId)
         }
         if(parentUrl != '')
         {
-            url = parentUrl +  url ; 
+            url = parentUrl +  url ;
         }
         return url ;
     }

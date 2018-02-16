@@ -19,7 +19,6 @@ export class TeamPage {
     private _tournament: any = {};
     private _pool: any = { id: '' };
     private _teamData: any = {};
-    private _matches: any = {};
 
     get event() {
         return this._event;

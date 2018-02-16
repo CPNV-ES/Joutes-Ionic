@@ -3,7 +3,6 @@ import { NavController, Refresher } from 'ionic-angular';
 import { EventService } from '../../providers/event-service';
 import { SharedDataService } from '../../providers/sharedData-service';
 import { EventPage } from "../event/event";
-import { SplashScreen } from '@ionic-native/splash-screen';
 import { Observable } from "rxjs";
 
 /*

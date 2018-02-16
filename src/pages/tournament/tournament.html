@@ -95,8 +95,7 @@
         <ion-card-content no-padding>
 
             <!-- Add a slider to navigate between pools and eliminations -->
-            <!-- [options]="sliderOptions" -->
-            <ion-slides>
+            <ion-slides pager>
                 <ion-slide *ngFor="let stage of poolsData" class="items">
                     <ion-row>
                         <!-- Display the name of the stage -->
@@ -113,7 +112,7 @@
                                 <ion-col width-50 no-padding>
                                      Pool {{ pool.name }}
                                 </ion-col>
-                           
+
 
                                 <!-- Display the number of match played on the total of matches to be played -->
                                 <ion-col width-50 text-right no-padding>

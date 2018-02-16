@@ -6,7 +6,6 @@ import { TeamPage } from "../team/team";
 import { PoolPage } from "../pool/pool";
 import { SearchPage } from "../search/search";
 import { Observable } from "rxjs";
-import { KeysPipe } from "../../pipes/KeysPipe";
 
 /*
  Generated class for the Tournament page.
@@ -25,7 +24,6 @@ export class TournamentPage {
     private _tournamentData: any = {};
     private _poolsData: any = [];
     private _currentStage;
-    private _sliderOptions = { pager: true, initialSlide: 0 };
 
     get tournamentData() {
         return this._tournamentData
@@ -35,9 +33,6 @@ export class TournamentPage {
     }
     get currentStage() {
         return this._currentStage;
-    }
-    get sliderOptions() {
-        return this._sliderOptions;
     }
 
     constructor(private navCtrl: NavController, private tournamentProvider: TournamentService, private sharedDataProvider: SharedDataService) {
@@ -56,8 +51,6 @@ export class TournamentPage {
             this._tournamentData = data["tournament"];
             if (this.tournamentData.pools.length > 0) this._poolsData = this.sortByStage(this.tournamentData.pools);
             this.sortTeams();
-
-            console.log("sliderOptions", this.sliderOptions);
         });
 
         return Observable.forkJoin(o1);
@@ -88,10 +81,8 @@ export class TournamentPage {
         let poolPerStage = [];
         //sort by finished
         pools.sortBy(function(o) { return [o.id, o.isFinished, o.stage]; });
-        console.log(pools);
         let poolStage = [];
         let stageId = pools[0].stage;
-        let stageIdx;
         for (let pool of pools) {
             if (stageId != pool.stage) {
                 poolPerStage.push(poolStage);
@@ -100,7 +91,7 @@ export class TournamentPage {
             }
             poolStage.push(pool);
         }
-        this._sliderOptions.initialSlide = this.getCurrentStage(poolPerStage);
+        //this.initialSlide = this.getCurrentStage(poolPerStage);
 
         return poolPerStage;
     }

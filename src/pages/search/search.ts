@@ -104,7 +104,6 @@ export class SearchPage {
 
     // Filter teams
     filterTeams() {
-        var self = this;
         this._filteredTeams = this._teams.filter((team) => {
             return team.name.toLowerCase().indexOf(this._searchTerm.toLowerCase()) > -1;
         });

@@ -29,7 +29,7 @@ export class DataService {
             return data;
         });
     }
-    getApiJson(uri, callback) {
+    getApiJson(uri) {
         this.getUrl();
 
         return this.sendRequest(uri);
