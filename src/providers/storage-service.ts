@@ -20,7 +20,6 @@ export class StorageService {
     private tournamentsId : number[];
     private teamsId : number[];
     private participantsId : number[];
-    private listUri : string[];
     private _treeObject = 
         {
             url : '/events',
