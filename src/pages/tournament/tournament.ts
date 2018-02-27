@@ -23,16 +23,12 @@ export class TournamentPage {
     private _tournament;
     private _tournamentData: any = {};
     private _poolsData: any = [];
-    private _currentStage;
 
     get tournamentData() {
         return this._tournamentData
     }
     get poolsData() {
         return this._poolsData;
-    }
-    get currentStage() {
-        return this._currentStage;
     }
 
     constructor(private navCtrl: NavController, private tournamentProvider: TournamentService, private sharedDataProvider: SharedDataService) {
@@ -91,7 +87,6 @@ export class TournamentPage {
             }
             poolStage.push(pool);
         }
-        //this.initialSlide = this.getCurrentStage(poolPerStage);
 
         return poolPerStage;
     }
