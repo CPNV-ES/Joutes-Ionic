@@ -31,7 +31,7 @@ export class JoutesCPNV {
             // Here you can do any higher level native things you might need.
         });
 
-        storageProvider.start();
+        storageProvider;
     }
 
     openPage(page) {

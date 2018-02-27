@@ -13,9 +13,7 @@ import { take } from 'rxjs/operator/take';
 
 @Injectable()
 export class StorageService {
-    private _dataProvider
     public refreshFrequency = 10; //minutes
-
     private _treeObject =
         {
             url : '/events',
@@ -73,60 +71,47 @@ export class StorageService {
 
 
 
-    constructor(private dataProvider: DataService) {
-        this._dataProvider = dataProvider;
-
+    constructor(private dataProvider : DataService) {
+        this.start(dataProvider)
     }
-    start()
+    start(dataProvider)
     {
         Observable.interval(1000 * 60 * this.refreshFrequency).subscribe(x => {
-            const rootNode = Resource.build(this._treeObject, this._dataProvider);
+            console.log(this._treeObject)
+            const rootNode = new Resource(this._treeObject, dataProvider);
             rootNode.browse();
         });
     }
-    apiCall(uri)
-    {
-        const o1 = this._dataProvider.getApiJson(uri).do();
-        return Observable.forkJoin(o1);
-    }
 }
-
-
-
 @Injectable()
 class Resource
 {
     private _url : string;
     private _children = [];
-    private _dataProvider;
     private _key : string;
     private _stagedColumn : string;
+    private _dataProvider
 
-    constructor(dataProvider : DataService, url: string, key : string, stagedColumn : string)
+    constructor(subtree, private dataProvider : DataService)
     {
-        this._url               = url;
-        this._dataProvider      = dataProvider;
-        this._key               = key;
-        this._stagedColumn      = stagedColumn;
+        this._url               = subtree.url
+        this._key               = subtree.key
+        this._stagedColumn      = subtree.stagedColumn
+        this._dataProvider      = dataProvider
+
+        for(let i = 0; i < subtree.children.length; i++)
+        {
+            const child = new Resource(subtree.children[i], this._dataProvider);
+            this.addChild(child)
+        }
+         
     }
     addChild(node : Resource)
     {
         this._children.push(node);
     }
-    static build(resource, dataProvider)
-    {
-        let currentNode = new Resource(dataProvider, resource.url, resource.key, resource.stagedColumn);
-        for(let i = 0; i < resource.children.length; i++)
-        {
-            let child   = resource.children[i];
-            let childObj = this.build( child, dataProvider)
-            currentNode.addChild( childObj);
-        }
 
-        return currentNode;
-    }
-
-    browse( parentId = '', parentUrl='',)
+    browse( parentId = '', parentUrl='')
     {
         let url = this.buildUrl(parentId, parentUrl);
         const browseNext = (data) =>
