@@ -60,7 +60,7 @@ export class DataService {
     }
 
     sendRequest(uri, callback = null) {
-        console.log(this._serverUrl+uri);
+        console.log("GET", this._serverUrl+uri);
 
         return this.http
             .get(this._serverUrl + uri)
@@ -89,11 +89,16 @@ export class DataService {
         if (!this.sharedDataProvider.httpError) {
             let alert = this.alertCtrl.create({
                 title: 'Attention',
-                subTitle: 'Certaine données n\'ont pas pu être chargées, veuillez vérifier que vous êtes bien connecté au réseau dédié',
+                subTitle: 'Certaine données n\'ont pas pu être chargées, veuillez vérifier que vous êtes bien connecté au réseau dédié.',
                 buttons: ['Ok']
             });
             alert.present();
             this.sharedDataProvider.httpError = true;
         }
+    }
+
+    putJson(uri, json) {
+        console.log("PUT", this._serverUrl+uri)
+        this.http.put(this._serverUrl+uri, JSON.stringify(json))
     }
 }

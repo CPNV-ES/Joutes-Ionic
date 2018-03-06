@@ -84,4 +84,5 @@
     <plugin name="cordova-plugin-splashscreen" spec="~4.0.3" />
     <allow-navigation href="http://172.17.100.144:8100" />
     <engine name="android" spec="~6.3.0" />
+    <plugin name="cordova-plugin-local-notification" spec="^0.9.0-beta.2" />
 </widget>

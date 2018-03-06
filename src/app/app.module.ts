@@ -23,6 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { LocalNotifications } from "@ionic-native/local-notifications";
+import { NotificationService } from '../providers/notification-service';
 
 @NgModule({
     declarations: [
@@ -60,6 +62,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     providers: [
         StatusBar,
         SplashScreen,
+        LocalNotifications,
         SharedDataService,
         DataService,
         EventService,
@@ -67,7 +70,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
         TournamentService,
         PoolService,
         ParticipantService,
-        StorageService
+        StorageService,
+        NotificationService
     ]
 })
 export class AppModule { }

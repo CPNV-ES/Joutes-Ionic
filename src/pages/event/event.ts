@@ -9,6 +9,7 @@ import { ParticipantService } from "../../providers/participant-service";
 import { ParticipantPage } from "../participant/participant";
 import { SearchPage } from "../search/search";
 import { Observable } from "rxjs";
+import { NotificationService } from "../../providers/notification-service";
 
 
 /*
@@ -58,6 +59,7 @@ export class EventPage {
         private teamProvider: TeamService,
         private tournamentProvider: TournamentService,
         private participantProvider: ParticipantService,
+        private notificationProvider: NotificationService,
         private sharedDataProvider: SharedDataService) {
         this.loadData().subscribe();
         this._eventContent = "teams";
@@ -106,24 +108,25 @@ export class EventPage {
 
     // Filter teams
     filterTeams() {
-        var self = this;
+        var self = this
         // Put the favorites in front of the array
-        var temp = [];
+        var temp = []
 
         this._teams.forEach(function(team) {
             // If we have no favorite, do nothing
             if (self._userFavoritesTeamsIds) {
                 // Add the favorite in front of the array
                 if (self._userFavoritesTeamsIds.indexOf(team.id.toString()) != -1) {
-                    team.favorite = true;
-                    temp.unshift(team);
+                    team.favorite = true
+                    self.initializeNotifications(team).subscribe()
+                    temp.unshift(team)
                 }
                 // If it's not a favorite add it at the end
                 else {
-                    team.favorite = false;
+                    team.favorite = false
                     temp.push(team)
                 }
-                self._teams = temp;
+                self._teams = temp
             }
         });
     }
@@ -146,17 +149,21 @@ export class EventPage {
                 }
                 // Set favorite teams
                 else {
-                    this._userFavoritesTeamsIds.push(team.id);
+                    this._userFavoritesTeamsIds.push(team.id.toString());
                     team.favorite = true;
                 }
             }
             //If val contain nothing, set the first one
             else {
-                this._userFavoritesTeamsIds = [team.id];
+                this._userFavoritesTeamsIds = [team.id.toString()];
                 team.favorite = true;
             }
             // Set the current favorite teams
             this.sharedDataProvider.currentEventFavoritesTeams = this._userFavoritesTeamsIds.toString();
+
+            // Update the displayed list
+            this.sortTeams();
+            this.filterTeams();
         }).catch(e => {
             console.log(e);
         });
@@ -202,6 +209,29 @@ export class EventPage {
             var fullnameB = b.lastname + " " + b.firstname;
             return fullnameA.localeCompare(fullnameB);
         });
+    }
+
+    initializeNotifications(team) {
+        const o1 = this.teamProvider.getTeam(team.id, this._event.id).do(data => {
+            let members = data["team"].members
+            members.forEach(member => {
+                this.loadNotifications(member.id).subscribe(data => {
+                    console.log("DATA", data)
+                    let notification = data["notification"]
+                    if (notification != null) {
+                        this.notificationProvider.createNotification(notification.id, notification.title, notification.description)
+                        this.notificationProvider.viewedNotification(notification.id)
+                    }
+
+                })
+            });
+        })
+        return Observable.forkJoin(o1)
+    }
+
+    loadNotifications(participantId) {
+        const o1 = this.notificationProvider.getNotificationsByParticipant(participantId)
+        return Observable.forkJoin(o1)
     }
 
     displayMenu() {
