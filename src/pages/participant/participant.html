@@ -89,11 +89,11 @@
 
                     <!-- Display the name of team and display a icon trophy if the team have a status "Vainqueur" -->
                     <ion-col width-100>
-                        <h3>
+                        <h2>
                             Equipe
                             <b>{{ team.name }}</b>
                             <ion-icon name="trophy" class="color-star" *ngIf="teamData.status == 'Vainqueur'"></ion-icon>
-                        </h3>
+                        </h2>
                     </ion-col>
                     <!-- Display the name of members -->
                     <ion-card>
@@ -112,9 +112,9 @@
                     <!-- <div *ngFor="let team of participantData.teams"> -->
                     <!-- Display the name of _tournament -->
                     <ion-col width-100 class="no-padding-bottom">
-                        <h3>Liste des
+                        <h2>Liste des
                             <b>Matchs</b>
-                        </h3>
+                        </h2>
                     </ion-col>
                     <ion-col width-100 no-padding>
                         <div style="font-weight: 100; margin-left:11px;">Cliquez pour plus de détails</div>
@@ -201,6 +201,7 @@
                             </ion-list>
                         </ion-card-content>
                     </ion-card>
+
                 </ng-container>
             </ng-container>
         </ion-col>
