@@ -20,20 +20,12 @@
 <ion-content>
     <ion-list radio-group [(ngModel)]="currentIpChoice">
         <ion-item>
-            <ion-label>Données test</ion-label>
+            <ion-label>Données local</ion-label>
             <ion-radio value="LANServer" (click)="setIP('LANServer')"></ion-radio>
         </ion-item>
         <ion-item>
-            <ion-label>Données 1ère</ion-label>
-            <ion-radio value="LANServerReal" (click)="setIP('LANServerReal')"></ion-radio>
-        </ion-item>
-        <ion-item>
-            <ion-label>Wifi données test</ion-label>
-            <ion-radio value="WLANServer" (click)="setIP('WLANServer')"></ion-radio>
-        </ion-item>
-        <ion-item>
-            <ion-label>Wifi données 1ère</ion-label>
-            <ion-radio value="WLANServerReal" (click)="setIP('WLANServerReal')"></ion-radio>
+            <ion-label>Données serveur Ilias</ion-label>
+            <ion-radio value="RemoteServer" (click)="setIP('RemoteServer')"></ion-radio>
         </ion-item>
         <ion-item>
             <ion-label>Internet (Par défaut)</ion-label>

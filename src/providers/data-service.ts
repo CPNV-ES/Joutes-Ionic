@@ -40,21 +40,14 @@ export class DataService {
             case "LANServer":
                 this._serverUrl = "http://joutes.api/api";
                 break;
-            case "LANServerReal":
-                this._serverUrl = "http://172.17.102.188/Joutes-real/Joutes/public/api";
-                break;
-            case "WLANServer":
-                this._serverUrl = "http://192.168.0.51/Joutes/public/api";
-                break;
-            case "WLANServerReal":
-                this._serverUrl = "http://192.168.0.51/Joutes-real/Joutes/public/api";
+            case "RemoteServer":
+                this._serverUrl = "http://192.168.42.50/api";
                 break;
             case "Internet":
                 this._serverUrl = "https://markal.servehttp.com/Joutes/api";
                 break;
             default:
                 this._serverUrl = "http://joutes.api/api";
-
                 break;
         }
     }
@@ -99,6 +92,6 @@ export class DataService {
 
     putJson(uri, json) {
         console.log("PUT", this._serverUrl+uri)
-        this.http.put(this._serverUrl+uri, JSON.stringify(json))
+        return this.http.put(this._serverUrl+uri, json, {headers:{"Content-Type":"application/x-www-form-urlencoded"}})
     }
 }

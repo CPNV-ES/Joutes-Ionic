@@ -28,7 +28,7 @@ export class NotificationService {
     }
 
     public viewedNotification(notificationId) {
-        this.dataService.putJson(`/notifications/${notificationId}`, {viewed: true})
+        return this.dataService.putJson(`/notifications/${notificationId}`, {viewed: true})
     }
 
 }

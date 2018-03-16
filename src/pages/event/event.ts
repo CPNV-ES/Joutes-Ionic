@@ -215,14 +215,12 @@ export class EventPage {
         const o1 = this.teamProvider.getTeam(team.id, this._event.id).do(data => {
             let members = data["team"].members
             members.forEach(member => {
+                var self = this
                 this.loadNotifications(member.id).subscribe(data => {
-                    console.log("DATA", data)
-                    let notification = data["notification"]
-                    if (notification != null) {
-                        this.notificationProvider.createNotification(notification.id, notification.title, notification.description)
-                        this.notificationProvider.viewedNotification(notification.id)
-                    }
-
+                    data[0]["notifications"].forEach(function(notif) {
+                        self.notificationProvider.createNotification(notif.id, notif.title, notif.description)
+                        self.notificationProvider.viewedNotification(notif.id).subscribe()
+                    })
                 })
             });
         })
