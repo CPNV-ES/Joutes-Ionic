@@ -59,7 +59,7 @@
                     </ion-row>
                     <ion-row>
                         <ion-col width-33 class="items">
-                            {{ match.contender1Name }}
+                            {{ (match.contender1Name == null) ? "---" : match.contender1Name }}
                         </ion-col>
                         <ion-col width-33 class="items" text-center *ngIf="!match.isFinished">
                             <ion-note>{{ match.startTime }}</ion-note>
@@ -68,7 +68,7 @@
                             <ion-note>{{ match.scoreContender1 }} - {{ match.scoreContender2 }}</ion-note>
                         </ion-col>
                         <ion-col width-33 class="items" text-right>
-                            {{ match.contender2Name }}
+                            {{ (match.contender2Name == null) ? "---" : match.contender2Name }}
                         </ion-col>
                     </ion-row>
                 </ion-item>
