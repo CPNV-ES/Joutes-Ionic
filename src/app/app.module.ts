@@ -18,6 +18,7 @@ import { IpPage } from "../pages/ip/ip";
 import { DataService } from "../providers/data-service";
 import { AboutPage } from "../pages/about/about";
 import { SearchPage } from "../pages/search/search";
+import { OfflinePage } from "../pages/offline/offline";
 import { StorageService } from "../providers/storage-service";
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
@@ -35,7 +36,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
         ParticipantPage,
         AboutPage,
         IpPage,
-        SearchPage
+        SearchPage,
+        OfflinePage
 
     ],
     imports: [
@@ -55,7 +57,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
         ParticipantPage,
         AboutPage,
         IpPage,
-        SearchPage
+        SearchPage,
+        OfflinePage
     ],
     providers: [
         StatusBar,
