@@ -27,7 +27,7 @@ export class OfflinePage {
   download() {
     let alert = this.alertCtrl.create({
       title: "Confirmation de téléchargement",
-      message: "Etes-vous sûr?",
+      message: "Cette opération va prendre un certain temps et bloquera la navigation dans l'application. Etes-vous sûr ?",
       buttons: [
         {
           text: "Annuler",

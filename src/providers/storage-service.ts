@@ -76,12 +76,10 @@ export class StorageService {
 
     start(dataProvider)
     {
-            console.log("Offline mode start")
             const rootNode = new Resource(this._treeObject, dataProvider);
             rootNode.browse();
     }
 }
-@Injectable()
 class Resource
 {
     private _url : string;
