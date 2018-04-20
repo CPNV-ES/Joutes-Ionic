@@ -4,15 +4,27 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header >
+<ion-header>
     <!-- Display the _event name -->
     <ion-navbar no-border-bottom>
         <ion-title>
             {{ event.name }}
         </ion-title>
-        <button ion-button menuToggle side="right">
-            <ion-icon name="menu" class="menu-button"></ion-icon>
-        </button>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="goToSearch()">
+                <ion-icon name="search"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="goToOffline()">
+                <ion-icon name="cloud-download"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="displayMenu()">
+                <ion-icon name="menu" class="menu-button"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
 
     <!-- Content de different segments for a _event - Display the toolbar -->
@@ -46,17 +58,18 @@
     <!-- Display the content according to the toolbar -->
     <div [ngSwitch]="eventContent">
         <ion-list *ngSwitchCase="'teams'">
-            <!-- Filter teams and display the list teams -->
-            <ion-toolbar no-border-top>
-                <ion-searchbar color="primary" placeholder="Nom de l'équipe" [(ngModel)]="searchTermTeam" (ionInput)="filterTeams()">
-                </ion-searchbar>
-            </ion-toolbar>
-
             <!-- When we click on the name of the team -> go to detail team -->
-            <ion-item *ngFor="let team of filteredTeams">
-                <div class="items" (click)="goToTeam(team)">{{team.name}} ({{team.sport}})</div>
-                <ion-icon item-right name="star" class="color-star" (click)="toggleFavoriteTeam(team)" *ngIf="team.favorite"></ion-icon><!-- When we click on the star -> add the team in favorite -->
-                <ion-icon item-right name="star-outline" (click)="toggleFavoriteTeam(team)" *ngIf="!team.favorite"></ion-icon><!-- When we click on the star -> remove the team in favorite -->
+            <ion-item *ngFor="let team of teams">
+                <div class="items" (click)="goToTeam(team)">
+                    {{team.name}}
+                    <ion-note item-right>
+                        ({{team.sport}})
+                    </ion-note>
+                </div>
+                <!-- When we click on the star -> add the team in favorite -->
+                <ion-icon item-right name="star" class="color-star" (click)="toggleFavoriteTeam(team)" *ngIf="team.favorite"></ion-icon>
+                <!-- When we click on the star -> remove the team in favorite -->
+                <ion-icon item-right name="star-outline" (click)="toggleFavoriteTeam(team)" *ngIf="!team.favorite"></ion-icon>
             </ion-item>
         </ion-list>
 
@@ -69,15 +82,15 @@
         </ion-list>
 
         <ion-list *ngSwitchCase="'participants'">
-            <!-- Filter participant and display the list participants -->
-            <ion-toolbar no-border-top>
-                <ion-searchbar color="primary" placeholder="Nom du participant" [(ngModel)]="searchTermParticipant" (ionInput)="filterParticipants()">
-                </ion-searchbar>
-            </ion-toolbar>
-
             <!-- When we click on the name of the _participant-> go to detail _participant -->
-            <ion-item *ngFor="let participant of filteredParticipants">
-                <div class="items" (click)="goToParticipant(participant)">{{participant.lastname}} {{participant.firstname}}</div>
+            <ion-item *ngFor="let participant of participants">
+                <div class="items" (click)="goToParticipant(participant)">
+                    {{participant.lastname}} {{participant.firstname}}
+                    <ion-note item-right *ngIf="participant.sports && participant.sports.length > 0">
+                        <!-- Might be to much functionaliy in the view. Could port to the controller. -->
+                        - ({{participant.sports.join(", ")}})
+                    </ion-note>
+                </div>
             </ion-item>
         </ion-list>
 

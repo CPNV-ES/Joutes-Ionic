@@ -8,8 +8,18 @@
     <ion-navbar>
         <!-- Display the last name and first name -->
         <ion-title>
-            {{ participantData.lastname }} {{ participantData.firstname }}<ion-icon name="menu" class="menu-button" (click)="displayMenu()"></ion-icon>
+            {{ participantData.lastname }} {{ participantData.firstname }}
         </ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="goToSearch()">
+                <ion-icon name="search"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="displayMenu()">
+                <ion-icon name="menu" class="menu-button"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 
@@ -21,33 +31,12 @@
 
     <!-- Display the detail for the _tournament's participant -->
     <div *ngFor="let tournament of participantData.tournaments">
-        <!-- Display different content if the _tournament is not "Marche"-->
-        <ion-col *ngIf="tournament.sport != 'Marche'" width-100 no-padding>
-            <ng-container *ngFor="let teamData of teamsData;">
-                <ng-container ng-if="teamData.team.tournament.id == tournament.id">
-                    <!-- Display the name of team and display a icon trophy if the team have a status "Vainqueur" -->
-                    <ion-col width-100>
-                        <h2>Equipe <b>{{ teamData.team.name }}</b>
-                            <ion-icon name="trophy" class="color-star" *ngIf="teamData.team.status == 'Vainqueur'"></ion-icon>
-                        </h2>
-                    </ion-col>
-                    <!-- Display the name of members -->
-                    <ion-card>
-                        <ion-card-content no-padding>
-                            <ion-grid text-center>
-                                <ion-row style="flex-wrap: wrap;">
-                                    <ion-col width-33 *ngFor="let member of teamData.team.members">
-                                        <span class="items">{{ member.firstname }} {{ member.lastname }}</span>
-                                    </ion-col>
-                                </ion-row>
-                            </ion-grid>
-                        </ion-card-content>
-                    </ion-card>
-                </ng-container>
-            </ng-container>
-        </ion-col>
         <!-- Display the _tournament name -->
-        <ion-col width-100><h2>Participe à <b>{{ tournament.name }}</b></h2></ion-col>
+        <ion-col width-100>
+            <h2>Participe à
+                <b>{{ tournament.name }}</b>
+            </h2>
+        </ion-col>
         <div style="font-weight: 100; margin-left:11px;">Cliquez pour plus de détails</div>
 
         <!-- When we click on the _tournament -> go to detail _tournament -->
@@ -57,8 +46,7 @@
                     <ion-row style="flex-wrap: wrap;">
                         <!-- Display the logo for the sport and the name of the sport -->
                         <ion-col width-50>
-                            <ion-img src="assets/sports/{{ setIconSports(tournament.sport) }}" width="35" height="35"
-                                     class="sports-img"></ion-img>
+                            <img src="assets/sports/{{ setIconSports(tournament.sport) }}" width="35" height="35" class="sports-img" />
                             <div class="items sports-label">{{ tournament.sport }}</div>
                         </ion-col>
 
@@ -80,8 +68,7 @@
                     <ion-row style="flex-wrap: wrap;">
                         <!-- Display the logo for the sport and the name of the sport -->
                         <ion-col width-50>
-                            <ion-img src="assets/sports/{{ setIconSports(tournament.sport) }}" width="35" height="35"
-                                     class="sports-img"></ion-img>
+                            <ion-img src="assets/sports/{{ setIconSports(tournament.sport) }}" width="35" height="35" class="sports-img"></ion-img>
                             <div class="items sports-label">{{ tournament.sport }}</div>
                         </ion-col>
 
@@ -95,95 +82,129 @@
                 </ion-grid>
             </ion-card-content>
         </ion-card>
-    </div>
+        <!-- Display different content if the _tournament is not "Marche"-->
+        <ion-col *ngIf="tournament.sport != 'Marche'" width-100 no-padding>
+            <ng-container *ngFor="let team of teamData">
+                <ng-container *ngIf="team.tournament.id == tournament.id">
 
-    <!-- Display the detail for the team's participant -->
-    <div *ngFor="let team of participantData.team">
-        <!-- Display the name of _tournament -->
-        <ion-col width-100 class="no-padding-bottom"><h2>Liste des <b>Matchs</b></h2></ion-col>
-        <ion-col width-100 no-padding>
-            <div style="font-weight: 100; margin-left:11px;">Cliquez pour plus de détails</div>
+                    <!-- Display the name of team and display a icon trophy if the team have a status "Vainqueur" -->
+                    <ion-col width-100>
+                        <h2>
+                            Equipe
+                            <b>{{ team.name }}</b>
+                            <ion-icon name="trophy" class="color-star" *ngIf="teamData.status == 'Vainqueur'"></ion-icon>
+                        </h2>
+                    </ion-col>
+                    <!-- Display the name of members -->
+                    <ion-card>
+                        <ion-card-content no-padding>
+                            <ion-grid text-center>
+                                <ion-row style="flex-wrap: wrap;">
+                                    <ion-col width-50 *ngFor="let member of team.members">
+                                        <span class="items">{{ member.lastname }} {{ member.firstname }}</span>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-card-content>
+                    </ion-card>
+
+                    <!-- Display the detail for the team's participant -->
+                    <!-- <div *ngFor="let team of participantData.teams"> -->
+                    <!-- Display the name of _tournament -->
+                    <ion-col width-100 class="no-padding-bottom">
+                        <h2>Liste des
+                            <b>Matchs</b>
+                        </h2>
+                    </ion-col>
+                    <ion-col width-100 no-padding>
+                        <div style="font-weight: 100; margin-left:11px;">Cliquez pour plus de détails</div>
+                    </ion-col>
+
+                    <ion-card>
+                        <ion-card-content no-padding>
+                            <ion-list>
+                                <!-- When we click on the name of the match -> go to detail _pool -->
+                                <ion-item *ngFor="let match of team.matches" (click)="goToPool(match.idPool)">
+
+                                    <!-- Display a border green if the team win and display the score -->
+                                    <ion-row class="border-win" *ngIf="match.ownScore > match.opponentScore">
+                                        <!-- Display the name of the team -->
+                                        <ion-col width-33 class="items">
+                                            {{ match.ownName }}
+                                        </ion-col>
+
+                                        <!-- Display the score -->
+                                        <ion-col text-center class="score">
+                                            <ion-note class="items">{{ match.ownScore }} - {{ match.opponentScore }}</ion-note>
+                                        </ion-col>
+
+                                        <!-- Display the name of second team -->
+                                        <ion-col width-33 class="items" text-right>
+                                            {{ match.opponentName }}
+                                        </ion-col>
+                                    </ion-row>
+
+                                    <!-- Display a border red if the team lose and display the score -->
+                                    <ion-row class="border-lose" *ngIf="match.ownScore < match.opponentScore">
+                                        <!-- Display the name of the team -->
+                                        <ion-col width-33 class="items">
+                                            {{ match.ownName }}
+                                        </ion-col>
+
+                                        <!-- Display the score -->
+                                        <ion-col text-center>
+                                            <ion-note class="items">{{ match.ownScore }} - {{ match.opponentScore }}</ion-note>
+                                        </ion-col>
+
+                                        <!-- Display the name of the second team -->
+                                        <ion-col width-33 class="items" text-right>
+                                            {{ match.opponentName }}
+                                        </ion-col>
+                                    </ion-row>
+
+                                    <!-- Display a border orange if teams have tied and display the score -->
+                                    <ion-row class="border-draw" *ngIf="match.ownScore == match.opponentScore && match.isFinished">
+                                        <!-- Display the name of the team -->
+                                        <ion-col width-33 class="items">
+                                            {{ match.ownName }}
+                                        </ion-col>
+
+                                        <!-- Display the score -->
+                                        <ion-col text-center>
+                                            <ion-note class="items">{{ match.ownScore }} - {{ match.opponentScore }}</ion-note>
+                                        </ion-col>
+
+                                        <!-- Display the name of the second team -->
+                                        <ion-col width-33 class="items" text-right>
+                                            {{ match.opponentName }}
+                                        </ion-col>
+                                    </ion-row>
+
+                                    <!-- Display a border grey if the match didn't begin -->
+                                    <ion-row class="border-inc" *ngIf="!match.isFinished">
+                                        <!-- Display the name of the team -->
+                                        <ion-col width-33 class="items">
+                                            {{ match.ownName }}
+                                        </ion-col>
+
+                                        <!-- Display time of the match -->
+                                        <ion-col text-center class="start">
+                                            <ion-note class="items">{{ match.startTime }}</ion-note>
+                                        </ion-col>
+
+                                        <!-- Display the name of the second team -->
+                                        <ion-col width-33 class="items" text-right>
+                                            {{ match.opponentName }}
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-item>
+                            </ion-list>
+                        </ion-card-content>
+                    </ion-card>
+
+                </ng-container>
+            </ng-container>
         </ion-col>
-
-        <ion-card>
-            <ion-card-content no-padding>
-                <ion-list>
-                    <!-- When we click on the name of the match -> go to detail _pool -->
-                    <ion-item *ngFor="let match of teamData.matches" (click)="goToPool(match.group_match_id)">
-                        <!-- Display a border green if the team win and display the score -->
-                        <ion-row class="border-win" *ngIf="match.ownScore > match.team2Score">
-                            <!-- Display the name of the team -->
-                            <ion-col width-33 class="items">
-                                {{ teamData.name }}
-                            </ion-col>
-
-                            <!-- Display the score -->
-                            <ion-col text-center class="score">
-                                <ion-note class="items">{{ match.ownScore }} - {{ match.team2Score }}</ion-note>
-                            </ion-col>
-
-                            <!-- Display the name of second team -->
-                            <ion-col width-33 class="items" text-right>
-                                {{ match.team2 }}
-                            </ion-col>
-                        </ion-row>
-
-                        <!-- Display a border red if the team lose and display the score -->
-                        <ion-row class="border-lose" *ngIf="match.ownScore < match.team2Score">
-                            <!-- Display the name of the team -->
-                            <ion-col width-33 class="items">
-                                {{ teamData.name }}
-                            </ion-col>
-
-                            <!-- Display the score -->
-                            <ion-col text-center>
-                                <ion-note class="items">{{ match.ownScore }} - {{ match.team2Score }}</ion-note>
-                            </ion-col>
-
-                            <!-- Display the name of the second team -->
-                            <ion-col width-33 class="items" text-right>
-                                {{ match.team2 }}
-                            </ion-col>
-                        </ion-row>
-
-                        <!-- Display a border orange if teams have tied and display the score -->
-                        <ion-row class="border-draw" *ngIf="(match.team1Score == match.team2Score) && (match.start == '')">
-                            <!-- Display the name of the team -->
-                            <ion-col width-33 class="items">
-                                {{ teamData.name }}
-                            </ion-col>
-
-                            <!-- Display the score -->
-                            <ion-col text-center>
-                                <ion-note class="items">{{ match.ownScore }} - {{ match.team2Score }}</ion-note>
-                            </ion-col>
-
-                            <!-- Display the name of the second team -->
-                            <ion-col width-33 class="items" text-right>
-                                {{ match.team2 }}
-                            </ion-col>
-                        </ion-row>
-
-                        <!-- Display a border grey if the match didn't begin -->
-                        <ion-row class="border-inc" *ngIf="match.status == 'A venir' ">
-                            <!-- Display the name of the team -->
-                            <ion-col width-33 class="items">
-                                {{ teamData.name }}
-                            </ion-col>
-
-                            <!-- Display time of the match -->
-                            <ion-col text-center class="start">
-                                <ion-note class="items">{{ match.start }}</ion-note>
-                            </ion-col>
-
-                            <!-- Display the name of the second team -->
-                            <ion-col width-33 class="items" text-right>
-                                {{ match.team2 }}
-                            </ion-col>
-                        </ion-row>
-                    </ion-item>
-                </ion-list>
-            </ion-card-content>
-        </ion-card>
     </div>
+    <!-- </div> -->
 </ion-content>

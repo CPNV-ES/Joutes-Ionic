@@ -1,13 +1,62 @@
-1.	Installer node.js
-	a.	Ouvrez cmd (Menu démarrer -> tapez cmd -> cmd) et vérifiez que l'installation s'est bien pass�e avec les commandes suivante : node -v , npm -v
-2.	Toujours dans cmd, tapez la commande suivante : npm install -g cordova ionic
-3.	Installez le jdk java
-4.	Installez le sdk android
-	a.	Dézipper l'archive dans C : et renommer le dossier Android
-	b.	Se rendre dans le dossier et exécutez SDK Manager et installez les versions 7.2.2 (API 25) et 7.0 (API 24)
-	c.	Allez ensuite dans Menu démarrer -> Modifier les variables d'environnement pour votre compte -> Variables système -> PATH -> ajouter les lignes suivantes : C:\Android\platform-tools, C:\Android\tools
+# Joute-Ionic
 
+## Requis
 
-## Journal de bord
-Here is the link for the logbook :
-https://docs.google.com/spreadsheets/d/17s8O6ulCaf7gAuumSLen6n7O51o1AJygQuiUOwbDzpM/edit?usp=sharing
+* nodejs: v8.9.4
+
+## Installation
+
+```sh
+# Install cordava and ionic
+npm i -g cordova ionic
+
+# Clone the project
+git clone https://github.com/CPNV-ES/Joutes-Ionic.git
+
+## The following commands are to be executed in the project folder
+# Install dependencies
+npm i
+
+# Build default folder
+ionic serve
+
+# Reinstall cordova plugins
+ionic state restore --plugins
+
+# Configure platforms (add android platform)
+ionic platform add android
+```
+
+You will need to change the IP/URL address for the API server in the "\src\providers\data-service.ts" file so that it corresponds to the one you are using.
+
+## Run project
+
+```sh
+ionic serve --lab
+```
+
+You should have dev environment on [http://127.0.0.1:8100/ionic-lab](http://127.0.0.1:8100/ionic-lab)
+
+## API setup
+
+Download and extract the project from the following link : [https://github.com/LogLauncher/Joutes/releases/tag/v1.1](https://github.com/LogLauncher/Joutes/releases/tag/v1.1)
+
+Next just follow the steps in the projects readme to get it up and running. **Do not** clone the menchend git in the installation guide.
+
+## Build solutions
+
+First build ressources
+
+```sh
+ionic cordova resources
+```
+
+Then build
+
+```sh
+ionic cordova build android
+# or
+ionic cordova build ios
+```
+
+Look [official documentation](https://ionicframework.com/docs/cli/cordova/build/) for troubleshooting

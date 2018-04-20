@@ -1,12 +1,13 @@
-import {Component} from '@angular/core';
-import {NavController, Refresher} from 'ionic-angular';
-import {ParticipantService} from "../../providers/participant-service";
-import {SharedDataService} from "../../providers/sharedData-service";
-import {TournamentPage} from "../tournament/tournament";
-import {TeamPage} from "../team/team";
-import {TeamService} from "../../providers/team-service";
-import {PoolPage} from "../pool/pool";
-import {Observable} from "rxjs";
+import { Component } from '@angular/core';
+import { NavController, Refresher } from 'ionic-angular';
+import { ParticipantService } from "../../providers/participant-service";
+import { SharedDataService } from "../../providers/sharedData-service";
+import { TournamentPage } from "../tournament/tournament";
+import { TeamPage } from "../team/team";
+import { TeamService } from "../../providers/team-service";
+import { PoolPage } from "../pool/pool";
+import { SearchPage } from "../search/search";
+import { Observable } from "rxjs";
 
 /*
  Generated class for the Participant page.
@@ -23,8 +24,8 @@ export class ParticipantPage {
     private _event;
     private _participant;
     private _participantData: any = {};
-    private _teamsData: any = [];
-    private _pool: any = {id: ''};
+    private _teamData: any = [];
+    private _pool: any = { id: '' };
 
     get event() {
         return this._event
@@ -34,8 +35,8 @@ export class ParticipantPage {
         return this._participantData
     }
 
-    get teamsData() {
-        return this._teamsData
+    get teamData() {
+        return this._teamData
     }
 
     constructor(private navCtrl: NavController, private teamProvider: TeamService, private participantProvider: ParticipantService, private sharedDataProvider: SharedDataService) {
@@ -51,9 +52,8 @@ export class ParticipantPage {
 
         // Get the _participant
         const o1 = this.participantProvider.getParticipant(this._event.id, this._participant.id).do(data => {
-            this._participantData = data.participant;
+            this._participantData = data["participant"];
             this.getTeamInfos();
-                console.log("participant", data);
         });
         return Observable.forkJoin(o1);
     }
@@ -65,51 +65,39 @@ export class ParticipantPage {
 
     // Get infos for the team
     getTeamInfos() {
-        if(this._participantData.teams.length > 0) {
-            for(let i = 0; i < this.participantData.teams.length; i++)
-            {
+        if (this._participantData.teams.length > 0) {
+            for (let i = 0; i < this.participantData.teams.length; i++) {
                 this.teamProvider.getTeam(this._participantData.teams[i].id, this._event.id).subscribe(data => {
-                    this._teamsData.push(data);
+                    this._teamData.push(data["team"])
+                    this.sortMembers();
                 });
             }
-            console.log("team data", this._teamsData);
         }
     }
 
     // Go the page detail _tournament
     goToTournament(tournament) {
-        // Add a spinner when the view is loaded
-        document.getElementById('spinnerContent').style.visibility = 'visible';
-
         this.sharedDataProvider.currentTournament = tournament;
         this.navCtrl.push(TournamentPage);
     }
 
     // Go to page detail team
     goToTeam(team) {
-        // Add a spinner when the view is loaded
-        document.getElementById('spinnerContent').style.visibility = 'visible';
-
         this.sharedDataProvider.currentTeam = team;
         this.navCtrl.push(TeamPage);
     }
 
     // Go to page detail _pool
     goToPool(pool_id) {
-        // Add a spinner when the view is loaded
-        document.getElementById('spinnerContent').style.visibility = 'visible';
-
-        this.sharedDataProvider.currentTournament = this._participantData.tournament[0];
+        this.sharedDataProvider.currentTournament = this._participantData.tournaments[0];
         this._pool.id = pool_id;
         this.sharedDataProvider.currentPool = this._pool;
         this.navCtrl.push(PoolPage);
     }
 
     // Set different icons for the sport
-    setIconSports(sport)
-    {
-        switch (sport)
-        {
+    setIconSports(sport) {
+        switch (sport) {
             case 'Badminton':
                 return 'badminton.png';
             case 'Basketball':
@@ -129,12 +117,21 @@ export class ParticipantPage {
         }
     }
 
+    // Sort members
+    sortMembers() {
+        for(let team of this._teamData)
+            team.members.sort((a, b) => {
+                var fullnameA = a.lastname + " " + a.firstname;
+                var fullnameB = b.lastname + " " + b.firstname;
+            return fullnameA.localeCompare(fullnameB);
+        });
+    }
+
     displayMenu() {
         this.sharedDataProvider.displayMenu();
     }
 
-    // Add a spinner when the view is loading
-    ionViewDidLoad() {
-        document.getElementById('spinnerContent').style.visibility = 'hidden';
+    goToSearch() {
+        this.navCtrl.push(SearchPage);
     }
 }

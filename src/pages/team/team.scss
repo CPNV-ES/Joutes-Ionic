@@ -33,4 +33,11 @@ page-team {
     border-left: 5px solid #ff9800;
   }
 
+  ion-card {
+      word-wrap: normal;
+  }
+  ion-col[text-right] {
+      direction: rtl;
+  }
+
 }

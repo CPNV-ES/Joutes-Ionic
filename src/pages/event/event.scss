@@ -1,26 +1,26 @@
 page-event {
-  .segment-md .segment-button {
-    font-size: 1.18rem;
-  }
+    .segment-md .segment-button {
+        font-size: 1.18rem;
+    }
 
-  .header-md::after{
-    background-image: none;
-  }
+    .header-md::after {
+        background-image: none;
+    }
 
-  .tournament-name {
-    background-color: #42A5F5;
-  }
+    .tournament-name {
+        background-color: #42A5F5;
+    }
 
-  .ranking {
-    background-color: white;
-  }
+    .ranking {
+        background-color: white;
+    }
 
-  .no-margin-padding {
-    padding: 0px;
-    margin: 0px;
-  }
+    .no-margin-padding {
+        padding: 0;
+        margin: 0;
+    }
 
-  b{
-    color: white;
-  }
+    b {
+        color: white;
+    }
 }

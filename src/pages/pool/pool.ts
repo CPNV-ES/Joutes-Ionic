@@ -1,9 +1,10 @@
-import {Component} from '@angular/core';
-import {NavController, Refresher} from 'ionic-angular';
-import {PoolService} from "../../providers/pool-service";
-import {SharedDataService} from "../../providers/sharedData-service";
-import {TeamPage} from "../team/team";
-import {Observable} from "rxjs";
+import { Component } from '@angular/core';
+import { NavController, Refresher } from 'ionic-angular';
+import { PoolService } from "../../providers/pool-service";
+import { SharedDataService } from "../../providers/sharedData-service";
+import { TeamPage } from "../team/team";
+import { SearchPage } from "../search/search";
+import { Observable } from "rxjs";
 
 /*
  Generated class for the Pool page.
@@ -50,7 +51,7 @@ export class PoolPage {
 
         // Get the _pool
         const o1 = this.poolProvider.getPool(this._event.id, this._tournament.id, this._pool.id).do(data => {
-            this._poolData = data.pool;
+            this._poolData = data["pool"];
             this.isFinished();
         });
         return Observable.forkJoin(o1);
@@ -64,8 +65,8 @@ export class PoolPage {
     // Verify if the match is finished
     isFinished() {
         var self = this;
-        this._poolData.matches.forEach(function (match) {
-            if(!match.isFinished) {
+        this._poolData.matches.forEach(function(match) {
+            if (!match.isFinished) {
                 self._finish = false;
             }
         });
@@ -73,10 +74,7 @@ export class PoolPage {
 
     // Go to page detail team
     goToTeam(team) {
-        // Add a spinner when the view is loaded
-        document.getElementById('spinnerContent').style.visibility = 'visible';
-
-        this.sharedDataProvider.currentTeam = {id: team.team_id, name: team.team, sport: ''};
+        this.sharedDataProvider.currentTeam = { id: team.team_id, name: team.team, sport: '' };
         this.navCtrl.push(TeamPage);
     }
 
@@ -84,9 +82,7 @@ export class PoolPage {
         this.sharedDataProvider.displayMenu();
     }
 
-    // Add a spinner when the view is loading
-    ionViewDidLoad() {
-        document.getElementById('spinnerContent').style.visibility = 'hidden';
+    goToSearch() {
+        this.navCtrl.push(SearchPage);
     }
-
 }

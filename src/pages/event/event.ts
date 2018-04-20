@@ -1,13 +1,15 @@
-import {Component} from '@angular/core';
-import {NavController, Refresher} from 'ionic-angular';
-import {TeamService} from "../../providers/team-service";
-import {TournamentService} from "../../providers/tournament-service";
-import {SharedDataService} from '../../providers/sharedData-service';
-import {TeamPage} from "../team/team";
-import {TournamentPage} from "../tournament/tournament";
-import {ParticipantService} from "../../providers/participant-service";
-import {ParticipantPage} from "../participant/participant";
-import {Observable} from "rxjs";
+import { Component } from '@angular/core';
+import { NavController, Refresher } from 'ionic-angular';
+import { TeamService } from "../../providers/team-service";
+import { TournamentService } from "../../providers/tournament-service";
+import { SharedDataService } from '../../providers/sharedData-service';
+import { TeamPage } from "../team/team";
+import { TournamentPage } from "../tournament/tournament";
+import { ParticipantService } from "../../providers/participant-service";
+import { ParticipantPage } from "../participant/participant";
+import { SearchPage } from "../search/search";
+import { OfflinePage } from "../offline/offline";
+import { Observable } from "rxjs";
 
 
 /*
@@ -25,10 +27,6 @@ export class EventPage {
     private _teams;
     private _tournaments;
     private _participants;
-    private _filteredParticipants;
-    private _filteredTeams;
-    private _searchTermTeam: string = '';
-    private _searchTermParticipant: string = '';
     private _userFavoritesTeamsPromise;
     private _userFavoritesTeamsIds;
     private _eventContent;
@@ -45,39 +43,23 @@ export class EventPage {
         this._eventContent = value;
     }
 
-    get filteredParticipants() {
-        return this._filteredParticipants;
+    get participants() {
+        return this._participants;
     }
 
-    get filteredTeams() {
-        return this._filteredTeams;
+    get teams() {
+        return this._teams;
     }
 
     get tournaments() {
         return this._tournaments;
     }
 
-    get searchTermTeam() {
-        return this._searchTermTeam;
-    }
-
-    set searchTermTeam(value) {
-        this._searchTermTeam = value;
-    }
-
-    get searchTermParticipant() {
-        return this._searchTermParticipant;
-    }
-
-    set searchTermParticipant(value) {
-        this._searchTermParticipant = value;
-    }
-
     constructor(private navCtrl: NavController,
-                private teamProvider: TeamService,
-                private tournamentProvider: TournamentService,
-                private participantProvider: ParticipantService,
-                private sharedDataProvider: SharedDataService) {
+        private teamProvider: TeamService,
+        private tournamentProvider: TournamentService,
+        private participantProvider: ParticipantService,
+        private sharedDataProvider: SharedDataService) {
         this.loadData().subscribe();
         this._eventContent = "teams";
     }
@@ -97,7 +79,7 @@ export class EventPage {
             // Get teams by _event
             this.teamProvider.getTeamsByEvent(this._event.id).subscribe(data => {
                 this._teams = data.teams;
-                this._filteredTeams = data.teams;
+                this.sortTeams();
                 this.filterTeams();
             });
         }).catch(e => {
@@ -107,12 +89,13 @@ export class EventPage {
         // Get tournaments by _event
         const o2 = this.tournamentProvider.getTournamentsByEvent(this._event.id).do(data => {
             this._tournaments = data.tournaments;
+            this.sortTournaments();
         });
 
         // Get participants by _event
         const o3 = this.participantProvider.getParticipantsByEvent(this._event.id).do(data => {
             this._participants = data.participants;
-            this._filteredParticipants = this._participants;
+            this.sortParticipants();
         });
         return Observable.forkJoin(o1, o2, o3);
     }
@@ -125,13 +108,10 @@ export class EventPage {
     // Filter teams
     filterTeams() {
         var self = this;
-        this._filteredTeams = this._teams.filter((team) => {
-            return team.name.toLowerCase().indexOf(this._searchTermTeam.toLowerCase()) > -1;
-        });
         // Put the favorites in front of the array
         var temp = [];
 
-        this._filteredTeams.forEach(function (team) {
+        this._teams.forEach(function(team) {
             // If we have no favorite, do nothing
             if (self._userFavoritesTeamsIds) {
                 // Add the favorite in front of the array
@@ -144,16 +124,8 @@ export class EventPage {
                     team.favorite = false;
                     temp.push(team)
                 }
-                self._filteredTeams = temp;
+                self._teams = temp;
             }
-        });
-    }
-
-    // Filter participants
-    filterParticipants() {
-        this._filteredParticipants = this._participants.filter((participant) => {
-            var participantFullName = participant.lastname + ' ' + participant.firstname;
-            return participantFullName.toLowerCase().indexOf(this._searchTermParticipant.toLowerCase()) > -1;
         });
     }
 
@@ -198,37 +170,50 @@ export class EventPage {
 
     // Go to page detail team
     goToTeam(team) {
-        // Add a spinner when the view is loaded
-        document.getElementById('spinnerContent').style.visibility = 'visible';
-
         this.sharedDataProvider.currentTeam = team;
         this.navCtrl.push(TeamPage);
     }
 
     // Go to page detail _tournament
     goToTournament(tournament) {
-        // Add a spinner when the view is loaded
-        document.getElementById('spinnerContent').style.visibility = 'visible';
-
         this.sharedDataProvider.currentTournament = tournament;
         this.navCtrl.push(TournamentPage);
     }
 
     // Go to page detail _participant
     goToParticipant(participant) {
-        // Add a spinner when the view is loaded
-        document.getElementById('spinnerContent').style.visibility = 'visible';
-
         this.sharedDataProvider.currentParticipant = participant;
         this.navCtrl.push(ParticipantPage);
+    }
+
+    // Sort teams
+    sortTeams() {
+        this._teams.sort((a, b) =>  a.name.localeCompare(b.name));
+    }
+
+    // Sort tournaments
+    sortTournaments() {
+        this._tournaments.sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    // Sort participants
+    sortParticipants() {
+        this._participants.sort((a, b) => {
+            var fullnameA = a.lastname + " " + a.firstname;
+            var fullnameB = b.lastname + " " + b.firstname;
+            return fullnameA.localeCompare(fullnameB);
+        });
     }
 
     displayMenu() {
         this.sharedDataProvider.displayMenu();
     }
 
-    // Add a spinner when the view is loading
-    ionViewDidLoad() {
-        document.getElementById('spinnerContent').style.visibility = 'hidden';
+    goToSearch() {
+        this.navCtrl.push(SearchPage);
+    }
+
+    goToOffline() {
+        this.navCtrl.push(OfflinePage);
     }
 }

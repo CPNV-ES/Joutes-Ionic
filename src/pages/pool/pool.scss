@@ -1,37 +1,40 @@
 page-pool {
-  .results
-  {
-    padding-top:10px;
-    padding-left:13px;
-    padding-right:13px;
-  }
+    .results {
+        padding-top: 10px;
+        padding-left: 13px;
+        padding-right: 13px;
+    }
 
-  .results-head
-  {
-    padding-bottom:5px;
-    padding-left:13px;
-    padding-right:13px;
-  }
-  .card-content-ios {
-    font-size: 1.3rem;
-  }
+    .results-head {
+        padding-bottom: 5px;
+        padding-left: 13px;
+        padding-right: 13px;
+    }
 
-  .pool-name
-  {
-    background: repeating-linear-gradient( -55deg, #f7f7f7, #f7f7f7 5px, #fff 5px, #fff 10px );
-    color: color($colors, secondary);
-    text-transform: uppercase;
-    font-weight: bold;
-  }
+    .card-content-ios {
+        font-size: 1.3rem;
+    }
 
-  .label-md, .label-ios
-  {
-    margin:0px;
-  }
+    .pool-name {
+        background: repeating-linear-gradient(-55deg, #f7f7f7, #f7f7f7 5px, #fff 5px, #fff 10px);
+        color: color($colors, secondary);
+        text-transform: uppercase;
+        font-weight: bold;
+    }
 
-  #list-match
-  {
-    padding-bottom:13px;
-  }
+    .label-ios,
+    .label-md {
+        margin: 0;
+    }
 
+    #list-match {
+        padding-bottom: 13px;
+    }
+
+    ion-card {
+        word-wrap: normal;
+    }
+    ion-col[text-right] {
+        direction: rtl;
+    }
 }
