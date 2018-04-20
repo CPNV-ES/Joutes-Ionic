@@ -8,6 +8,7 @@ import { TournamentPage } from "../tournament/tournament";
 import { ParticipantService } from "../../providers/participant-service";
 import { ParticipantPage } from "../participant/participant";
 import { SearchPage } from "../search/search";
+import { OfflinePage } from "../offline/offline";
 import { Observable } from "rxjs";
 
 
@@ -210,5 +211,9 @@ export class EventPage {
 
     goToSearch() {
         this.navCtrl.push(SearchPage);
+    }
+
+    goToOffline() {
+        this.navCtrl.push(OfflinePage);
     }
 }

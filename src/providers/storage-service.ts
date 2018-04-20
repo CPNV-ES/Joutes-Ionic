@@ -72,18 +72,14 @@ export class StorageService {
 
 
     constructor(private dataProvider : DataService) {
-        this.start(dataProvider)
     }
+
     start(dataProvider)
     {
-        Observable.interval(1000 * 60 * this.refreshFrequency).subscribe(x => {
-            console.log(this._treeObject)
             const rootNode = new Resource(this._treeObject, dataProvider);
             rootNode.browse();
-        });
     }
 }
-@Injectable()
 class Resource
 {
     private _url : string;
@@ -114,21 +110,26 @@ class Resource
     browse( parentId = '', parentUrl='')
     {
         let url = this.buildUrl(parentId, parentUrl);
-        const browseNext = (data) =>
+        const  browseNext =  (data) =>
         {
             for(let j = 0; j < this._children.length; j++)
             {
+                
                 let child   = this._children[j];
                 let key     = child._key
 
                 // patch because events/ID/tournaments/ID/pools (to list the pools) doesnt exist yet
                 if(child._stagedColumn != undefined) {
-                    for(let k = 0 ; k < data[key].length; k++) child.browse( data[key][k].id, url);
+                    for(let k = 0 ; k < data[key].length; k++) {                       
+                        child.browse( data[key][k].id, url);
+                    }
                 }
-                else  child.browse(data.id, url);
+                else {
+                    
+                    child.browse(data.id, url); 
+                }  
             }
         }
-
         this.callApi(url).subscribe(apiData => {
 
             let data = (this._stagedColumn == undefined) ?  apiData[0][this._key] : apiData[0][this._stagedColumn];
