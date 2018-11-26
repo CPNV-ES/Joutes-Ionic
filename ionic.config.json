@@ -1,6 +1,5 @@
 {
   "name": "Joutes-Ionic",
-  "app_id": "",
   "integrations": {
     "cordova": {}
   },
