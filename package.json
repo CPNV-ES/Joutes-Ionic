@@ -1,7 +1,6 @@
 {
     "name": "Joutes-CPNV",
-    "author":
-        "Malorie Genoud, Stéphane Martignier, Quentin Girard, Ilias Goujgali, Struan Forsyth",
+    "author": "Malorie Genoud, Stéphane Martignier, Quentin Girard, Ilias Goujgali, Struan Forsyth",
     "homepage": "http://cpnv.ch/",
     "private": true,
     "scripts": {
@@ -38,6 +37,7 @@
     },
     "devDependencies": {
         "@ionic/app-scripts": "3.1.7",
+        "@ionic/lab": "1.0.14",
         "typescript": "~2.4.2"
     },
     "cordovaPlugins": [
@@ -58,6 +58,8 @@
             "cordova-plugin-ionic-webview": {},
             "cordova-plugin-ionic-keyboard": {}
         },
-        "platforms": ["android"]
+        "platforms": [
+            "android"
+        ]
     }
 }

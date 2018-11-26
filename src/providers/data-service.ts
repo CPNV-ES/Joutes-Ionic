@@ -41,7 +41,7 @@ export class DataService {
                 this._serverUrl = "http://joutes.api/api";
                 break;
             case "LANServerReal":
-                this._serverUrl = "http://172.17.102.188/Joutes-real/Joutes/public/api";
+                this._serverUrl = "http://172.17.102.188/Joutes-real/Joutes/public/api"; //
                 break;
             case "WLANServer":
                 this._serverUrl = "http://192.168.0.51/Joutes/public/api";
@@ -50,7 +50,7 @@ export class DataService {
                 this._serverUrl = "http://192.168.0.51/Joutes-real/Joutes/public/api";
                 break;
             case "Internet":
-                this._serverUrl = "https://markal.servehttp.com/Joutes/api";
+                this._serverUrl = "http://joutes.mycpnv.ch/api"; //https://markal.servehttp.com/Joutes/api
                 break;
             default:
                 this._serverUrl = "http://joutes.api/api";
