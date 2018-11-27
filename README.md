@@ -21,10 +21,10 @@ npm i
 ionic serve
 
 # Reinstall cordova plugins
-ionic state restore --plugins
+ionic cordova prepare
 
 # Configure platforms (add android platform)
-ionic platform add android
+ionic cordova platform add android
 ```
 
 You will need to change the IP/URL address for the API server in the "\src\providers\data-service.ts" file so that it corresponds to the one you are using.
