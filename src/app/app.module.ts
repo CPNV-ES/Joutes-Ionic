@@ -26,6 +26,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SettingsPage } from '../pages/settings/settings'
 import { EndpointsPage } from '../pages/endpoints/endpoints'
+import { CreateEndpointPage } from '../pages/create-endpoint/create-endpoint'
 
 @NgModule({
     declarations: [
@@ -41,7 +42,8 @@ import { EndpointsPage } from '../pages/endpoints/endpoints'
         SearchPage,
         OfflinePage,
         SettingsPage,
-        EndpointsPage
+        EndpointsPage,
+        CreateEndpointPage
 
     ],
     imports: [
@@ -64,7 +66,8 @@ import { EndpointsPage } from '../pages/endpoints/endpoints'
         SearchPage,
         OfflinePage,
         SettingsPage,
-        EndpointsPage
+        EndpointsPage,
+        CreateEndpointPage
     ],
     providers: [
         StatusBar,
