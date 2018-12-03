@@ -27,6 +27,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { SettingsPage } from '../pages/settings/settings'
 import { EndpointsPage } from '../pages/endpoints/endpoints'
 import { CreateEndpointPage } from '../pages/create-endpoint/create-endpoint'
+import { EndpointProvider } from '../providers/endpoint/endpoint';
 
 @NgModule({
     declarations: [
@@ -79,7 +80,8 @@ import { CreateEndpointPage } from '../pages/create-endpoint/create-endpoint'
         TournamentService,
         PoolService,
         ParticipantService,
-        StorageService
+        StorageService,
+        EndpointProvider
     ]
 })
 export class AppModule { }
