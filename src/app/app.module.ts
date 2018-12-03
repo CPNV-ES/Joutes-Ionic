@@ -24,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { SettingsPage } from '../pages/settings/settings'
 
 @NgModule({
     declarations: [
@@ -37,7 +38,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
         AboutPage,
         IpPage,
         SearchPage,
-        OfflinePage
+        OfflinePage,
+        SettingsPage
 
     ],
     imports: [
@@ -58,7 +60,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
         AboutPage,
         IpPage,
         SearchPage,
-        OfflinePage
+        OfflinePage,
+        SettingsPage
     ],
     providers: [
         StatusBar,
