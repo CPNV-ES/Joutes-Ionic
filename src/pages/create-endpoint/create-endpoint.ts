@@ -19,15 +19,20 @@ export class CreateEndpointPage {
     })
   }
 
-  createEndpoint() {
+  async createEndpoint() {
     if (this.endpointForm.valid) {
       // Validation ok
       try {
-        this.endpointProvider.create(new Endpoint(this.endpointForm.value.name, this.endpointForm.value.address))
+        await this.endpointProvider.create(new Endpoint(this.endpointForm.value.name, this.endpointForm.value.address))
+        // Return to the previous page
+        this.navCtrl.pop()
       } catch (error) {
         // Todo: Good error notif
         console.error(error)
       }
+    } else {
+      // Todo: Good error notif
+      console.error('Validation error')
     }
   }
 }
