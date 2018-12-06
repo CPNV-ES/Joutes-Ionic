@@ -24,6 +24,7 @@
 
     <ion-item-group>
       <ion-item-divider class="separation"><b>Points d'accès personnels</b></ion-item-divider>
+      <ion-item *ngFor="let endpoint of this.endpointProvider.getAll()" value="endpoint.name">{{ endpoint.name }}</ion-item>
     </ion-item-group>
   </ion-content>
 </ion-content>
