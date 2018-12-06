@@ -10,7 +10,7 @@ export class EndpointProvider {
 
   constructor(private storage: Storage) {
     // Todo: track error
-    this.getAll()
+    this.syncEndpoints()
   }
 
   create(endpoint: Endpoint){
@@ -22,9 +22,12 @@ export class EndpointProvider {
     return this.storage.set(this.keyName,this.endpoints)
   }
 
-  async getAll() {
-    this.endpoints = await this.storage.get(this.keyName)
+  getAll() {
     return this.endpoints
+  }
+
+  async syncEndpoints() {
+    this.endpoints = await this.storage.get(this.keyName)
   }
 
 }
