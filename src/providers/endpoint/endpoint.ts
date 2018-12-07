@@ -9,7 +9,6 @@ export class EndpointProvider {
   private keyName: string = 'endpoints'
 
   constructor(private storage: Storage) {
-    // Todo: track error
     this.syncEndpoints()
   }
 
