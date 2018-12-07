@@ -24,6 +24,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { SettingsPage } from '../pages/settings/settings'
+import { EndpointsPage } from '../pages/endpoints/endpoints'
+import { CreateEndpointPage } from '../pages/create-endpoint/create-endpoint'
+import { EndpointProvider } from '../providers/endpoint/endpoint';
 
 @NgModule({
     declarations: [
@@ -37,7 +41,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
         AboutPage,
         IpPage,
         SearchPage,
-        OfflinePage
+        OfflinePage,
+        SettingsPage,
+        EndpointsPage,
+        CreateEndpointPage
 
     ],
     imports: [
@@ -58,7 +65,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
         AboutPage,
         IpPage,
         SearchPage,
-        OfflinePage
+        OfflinePage,
+        SettingsPage,
+        EndpointsPage,
+        CreateEndpointPage
     ],
     providers: [
         StatusBar,
@@ -70,7 +80,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
         TournamentService,
         PoolService,
         ParticipantService,
-        StorageService
+        StorageService,
+        EndpointProvider
     ]
 })
 export class AppModule { }
