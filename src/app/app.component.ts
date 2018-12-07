@@ -3,6 +3,7 @@ import { Platform, Nav } from "ionic-angular";
 import { EventsPage } from "../pages/events/events";
 import { AboutPage } from "../pages/about/about";
 import { IpPage } from "../pages/ip/ip";
+import { LoginPage } from "../pages/login/login";
 import { StorageService } from "../providers/storage-service";
 
 @Component({
@@ -23,7 +24,8 @@ export class JoutesCPNV {
         this.pages = [
             { title: "Evènements", component: EventsPage, navRoot: true },
             { title: "A propos", component: AboutPage, navRoot: false },
-            { title: "IPs", component: IpPage, navRoot: false }
+            { title: "IPs", component: IpPage, navRoot: false },
+            { title: "Login", component: LoginPage, navRoot: false }
         ];
 
         platform.ready().then(() => {
