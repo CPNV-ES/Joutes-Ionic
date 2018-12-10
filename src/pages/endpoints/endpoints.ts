@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { CreateEndpointPage } from '../create-endpoint/create-endpoint';
 import { EndpointProvider } from '../../providers/endpoint';
 import { Endpoint } from '../../models/endpoint';
+import { ToastCustom } from '../../components/toast-custom/toast-custom';
 
 @Component({
   selector: 'page-endpoints',
@@ -10,11 +11,38 @@ import { Endpoint } from '../../models/endpoint';
 })
 export class EndpointsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public endpointProvider: EndpointProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public endpointProvider: EndpointProvider, private toastCustom: ToastCustom, private alertCtrl: AlertController) {
   }
 
   openCreateEndpoint() {
     this.navCtrl.push(CreateEndpointPage)
+  }
+
+  deleteEndpoint(endpoint: Endpoint) {
+    try {
+      this.endpointProvider.delete(endpoint)
+    } catch (error) {
+      this.toastCustom.showToast(error,10000,this.toastCustom.TYPE_ERROR,true)
+    }
+  }
+
+  private showConfirm(endpoint: Endpoint) {
+    let confirm = this.alertCtrl.create({
+      title: 'Confirmation de suppression',
+      message: `Voulez-vous vraiment supprimer le point d'accès '${endpoint.name}' ?`,
+      buttons: [
+        {
+          text: 'Ne pas supprimer'
+        },
+        {
+          text: 'Supprimer',
+          handler: () => {
+            this.deleteEndpoint(endpoint)
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
 }
