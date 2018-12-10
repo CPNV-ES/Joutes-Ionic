@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { CreateEndpointPage } from '../create-endpoint/create-endpoint';
-import { EndpointProvider } from '../../providers/endpoint/endpoint';
+import { EndpointProvider } from '../../providers/endpoint';
+import { Endpoint } from '../../models/endpoint';
 
 @Component({
   selector: 'page-endpoints',

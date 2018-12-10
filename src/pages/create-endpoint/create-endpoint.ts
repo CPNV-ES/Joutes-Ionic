@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Endpoint } from '../../models/endpoint'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { EndpointProvider } from '../../providers/endpoint/endpoint';
+import { EndpointProvider } from '../../providers/endpoint';
 import { ToastCustom } from '../../components/toast-custom/toast-custom'
 
 @Component({

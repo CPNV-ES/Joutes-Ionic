@@ -27,7 +27,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { SettingsPage } from '../pages/settings/settings'
 import { EndpointsPage } from '../pages/endpoints/endpoints'
 import { CreateEndpointPage } from '../pages/create-endpoint/create-endpoint'
-import { EndpointProvider } from '../providers/endpoint/endpoint';
+import { EndpointProvider } from '../providers/endpoint';
 import { ToastCustom } from '../components/toast-custom/toast-custom';
 
 @NgModule({
