@@ -29,6 +29,7 @@ import { EndpointsPage } from '../pages/endpoints/endpoints'
 import { CreateEndpointPage } from '../pages/create-endpoint/create-endpoint'
 import { EndpointProvider } from '../providers/endpoint';
 import { ToastCustom } from '../components/toast-custom/toast-custom';
+import { EditEndpointPage } from '../pages/edit-endpoint/edit-endpoint';
 
 @NgModule({
     declarations: [
@@ -45,7 +46,8 @@ import { ToastCustom } from '../components/toast-custom/toast-custom';
         OfflinePage,
         SettingsPage,
         EndpointsPage,
-        CreateEndpointPage
+        CreateEndpointPage,
+        EditEndpointPage
 
     ],
     imports: [
@@ -69,7 +71,8 @@ import { ToastCustom } from '../components/toast-custom/toast-custom';
         OfflinePage,
         SettingsPage,
         EndpointsPage,
-        CreateEndpointPage
+        CreateEndpointPage,
+        EditEndpointPage
     ],
     providers: [
         StatusBar,
