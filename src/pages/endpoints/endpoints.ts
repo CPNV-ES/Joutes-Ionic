@@ -4,6 +4,7 @@ import { CreateEndpointPage } from '../create-endpoint/create-endpoint';
 import { EndpointProvider } from '../../providers/endpoint';
 import { Endpoint } from '../../models/endpoint';
 import { ToastCustom } from '../../components/toast-custom/toast-custom';
+import { EditEndpointPage } from '../edit-endpoint/edit-endpoint';
 
 @Component({
   selector: 'page-endpoints',
@@ -14,16 +15,20 @@ export class EndpointsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public endpointProvider: EndpointProvider, private toastCustom: ToastCustom, private alertCtrl: AlertController) {
   }
 
-  openCreateEndpoint() {
+  private openCreateEndpoint() {
     this.navCtrl.push(CreateEndpointPage)
   }
 
-  deleteEndpoint(endpoint: Endpoint) {
+  private deleteEndpoint(endpoint: Endpoint) {
     try {
       this.endpointProvider.delete(endpoint)
     } catch (error) {
       this.toastCustom.showToast(error,10000,this.toastCustom.TYPE_ERROR,true)
     }
+  }
+
+  private openEditPage(endpoint: Endpoint) {
+    this.navCtrl.push(EditEndpointPage, {'endpoint': endpoint})
   }
 
   private showConfirm(endpoint: Endpoint) {
