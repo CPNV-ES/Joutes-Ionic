@@ -1,12 +1,30 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Edit endpoint</ion-title>
+    <ion-title>Edit '{{ endpoint.name }}'</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <form [formGroup]="endpointForm" (ngSubmit)="saveEndpoint()">
+    <ion-list>
 
+      <ion-item>
+        <ion-label floating>Nom</ion-label>
+        <ion-input type="text" formControlName="name" value="{{ endpoint.name }}"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Adresse</ion-label>
+        <ion-input type="text" formControlName="address" value="{{ endpoint.address }}"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <button ion-button type="submit">Enregister</button>
+      </ion-item>
+
+    </ion-list>
+  </form>
 </ion-content>
