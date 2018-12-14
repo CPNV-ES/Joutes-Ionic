@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { IonicStorageModule } from '@ionic/storage';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { JoutesCPNV } from './app.component';
+import { InAppBrowser } from '@ionic-native/in-app-browser'
+
 import { EventsPage } from '../pages/events/events';
 import { TournamentPage } from '../pages/tournament/tournament';
 import { EventService } from '../providers/event-service';
@@ -24,6 +26,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { LoginPage } from '../pages/login/login';
+import { LoginService } from '../providers/login-service';
+import { SettingsPage } from '../pages/settings/settings'
+import { EndpointsPage } from '../pages/endpoints/endpoints'
+import { CreateEndpointPage } from '../pages/create-endpoint/create-endpoint'
+import { EndpointProvider } from '../providers/endpoint';
+import { ToastCustom } from '../components/toast-custom/toast-custom';
+import { EditEndpointPage } from '../pages/edit-endpoint/edit-endpoint';
 
 @NgModule({
     declarations: [
@@ -37,7 +47,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
         AboutPage,
         IpPage,
         SearchPage,
-        OfflinePage
+        OfflinePage,
+        LoginPage,
+        OfflinePage,
+        SettingsPage,
+        EndpointsPage,
+        CreateEndpointPage,
+        EditEndpointPage
 
     ],
     imports: [
@@ -58,7 +74,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
         AboutPage,
         IpPage,
         SearchPage,
-        OfflinePage
+        OfflinePage,
+        SettingsPage,
+        EndpointsPage,
+        CreateEndpointPage,
+        LoginPage,
+        EditEndpointPage
     ],
     providers: [
         StatusBar,
@@ -70,7 +91,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
         TournamentService,
         PoolService,
         ParticipantService,
-        StorageService
+        EndpointProvider,
+        ToastCustom,
+        StorageService,
+        InAppBrowser,
+        LoginService
     ]
 })
 export class AppModule { }

@@ -15,4 +15,6 @@ You must have git flow
 * `git flow release finish vX.X.X`
 * Enter version number when it asks
 * `git push`
+* `git checkout master`
+* `git push`
 * `git push --tags`
