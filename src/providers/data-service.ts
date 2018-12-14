@@ -38,7 +38,7 @@ export class DataService {
         //Set the ip corresponding to the current choice
         switch (this.sharedDataProvider.IpChoice) {
             case "LANServer":
-                this._serverUrl = "http://joutes.api/api";
+                this._serverUrl = "http://joutes.mycpnv.ch/api";
                 break;
             case "LANServerReal":
                 this._serverUrl = "http://172.17.102.188/Joutes-real/Joutes/public/api"; //
@@ -53,10 +53,14 @@ export class DataService {
                 this._serverUrl = "http://joutes.mycpnv.ch/api"; //https://markal.servehttp.com/Joutes/api
                 break;
             default:
-                this._serverUrl = "http://joutes.api/api";
+                this._serverUrl = "http://joutes.mycpnv.ch/api";
 
                 break;
         }
+    }
+
+    getServeUrl(){
+        return this._serverUrl
     }
 
     sendRequest(uri, callback = null) {
