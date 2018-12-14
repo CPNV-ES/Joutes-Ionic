@@ -31,8 +31,9 @@ import { LoginService } from '../providers/login-service';
 import { SettingsPage } from '../pages/settings/settings'
 import { EndpointsPage } from '../pages/endpoints/endpoints'
 import { CreateEndpointPage } from '../pages/create-endpoint/create-endpoint'
-import { EndpointProvider } from '../providers/endpoint/endpoint';
+import { EndpointProvider } from '../providers/endpoint';
 import { ToastCustom } from '../components/toast-custom/toast-custom';
+import { EditEndpointPage } from '../pages/edit-endpoint/edit-endpoint';
 
 @NgModule({
     declarations: [
@@ -47,11 +48,12 @@ import { ToastCustom } from '../components/toast-custom/toast-custom';
         IpPage,
         SearchPage,
         OfflinePage,
-        LoginPage
+        LoginPage,
         OfflinePage,
         SettingsPage,
         EndpointsPage,
-        CreateEndpointPage
+        CreateEndpointPage,
+        EditEndpointPage
 
     ],
     imports: [
@@ -75,8 +77,9 @@ import { ToastCustom } from '../components/toast-custom/toast-custom';
         OfflinePage,
         SettingsPage,
         EndpointsPage,
-        CreateEndpointPage
-        LoginPage
+        CreateEndpointPage,
+        LoginPage,
+        EditEndpointPage
     ],
     providers: [
         StatusBar,
@@ -89,7 +92,7 @@ import { ToastCustom } from '../components/toast-custom/toast-custom';
         PoolService,
         ParticipantService,
         EndpointProvider,
-        ToastCustom
+        ToastCustom,
         StorageService,
         InAppBrowser,
         LoginService
