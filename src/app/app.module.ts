@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { IonicStorageModule } from '@ionic/storage';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { JoutesCPNV } from './app.component';
+import { InAppBrowser } from '@ionic-native/in-app-browser'
+
 import { EventsPage } from '../pages/events/events';
 import { TournamentPage } from '../pages/tournament/tournament';
 import { EventService } from '../providers/event-service';
@@ -25,6 +27,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
+import { LoginService } from '../providers/login-service';
 
 @NgModule({
     declarations: [
@@ -73,7 +76,9 @@ import { LoginPage } from '../pages/login/login';
         TournamentService,
         PoolService,
         ParticipantService,
-        StorageService
+        StorageService,
+        InAppBrowser,
+        LoginService
     ]
 })
 export class AppModule { }
