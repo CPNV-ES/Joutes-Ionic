@@ -29,12 +29,18 @@ export class EditEndpointPage {
       if (this.endpointForm.dirty) {
         // Values has changed
         try {
-          let endpoint: Endpoint = new Endpoint(this.endpointForm.value.name, this.endpointForm.value.address)
-          await this.endpointProvider.update(this.endpoint, endpoint)
-          // Display succes in a toast
-          this.toastCustom.showToast(`Les modifications du point d'accès '${endpoint.name}' ont été enregistées avec succès.`,3000,this.toastCustom.TYPE_SUCCESS,false)
-          // Return to the previous page
-          this.navCtrl.pop()
+          // Check if name already exists
+          if (!this.endpointProvider.isNameNotExists(this.endpointForm.value.name) && this.endpointForm.value.name != this.endpoint.name) {
+            // The name already exists
+            this.toastCustom.showToast(`Le nom du point d'accès '${this.endpointForm.value.name}' existe déjà.`,10000,this.toastCustom.TYPE_ERROR,true)
+          } else {
+            let endpoint: Endpoint = new Endpoint(this.endpointForm.value.name, this.endpointForm.value.address)
+            await this.endpointProvider.update(this.endpoint, endpoint)
+            // Display succes in a toast
+            this.toastCustom.showToast(`Les modifications du point d'accès '${endpoint.name}' ont été enregistées avec succès.`,3000,this.toastCustom.TYPE_SUCCESS,false)
+            // Return to the previous page
+            this.navCtrl.pop()
+          }
         } catch (error) {
           // Display error in a toast
           this.toastCustom.showToast(error,10000,this.toastCustom.TYPE_ERROR,true)
