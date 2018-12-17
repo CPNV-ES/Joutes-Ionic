@@ -21,7 +21,7 @@ export class EndpointProvider {
     return this.storage.set(this.keyName,this.endpoints)
   }
 
-  async update(oldEndpoint, newEndpoint) {
+  async update(oldEndpoint: Endpoint, newEndpoint: Endpoint) {
     let index = this.endpoints.indexOf(oldEndpoint)
     if (index > -1) {
       this.endpoints[index] = newEndpoint
