@@ -14,6 +14,7 @@ export class CreateEndpointPage {
   private endpointForm: FormGroup
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private endpointProvider: EndpointProvider, private toastCustom: ToastCustom) {
+    // Construct the the form group
     this.endpointForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
       address: ['', Validators.compose([Validators.required])]

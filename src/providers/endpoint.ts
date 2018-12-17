@@ -12,7 +12,7 @@ export class EndpointProvider {
     this.syncEndpoints(false)
   }
 
-  create(endpoint: Endpoint){
+  create(endpoint: Endpoint) {
     if (this.endpoints != null) {
       this.endpoints.push(endpoint)
     } else {
