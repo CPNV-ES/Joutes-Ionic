@@ -4,6 +4,7 @@ import { Endpoint } from '../../models/endpoint'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EndpointProvider } from '../../providers/endpoint';
 import { ToastCustom } from '../../components/toast-custom/toast-custom'
+import { EndpointNameValidator } from '../../validators/endpoint-name'
 
 @Component({
   selector: 'page-create-endpoint',
@@ -25,12 +26,19 @@ export class CreateEndpointPage {
     if (this.endpointForm.valid) {
       // Validation ok
       try {
-        let endpoint: Endpoint = new Endpoint(this.endpointForm.value.name, this.endpointForm.value.address)
-        await this.endpointProvider.create(endpoint)
-        // Display succes in a toast
-        this.toastCustom.showToast(`Le point d'accès '${endpoint.name}' a été ajouté avec succès.`,3000,this.toastCustom.TYPE_SUCCESS,false)
-        // Return to the previous page
-        this.navCtrl.pop()
+        // Check if name already exists
+        if (this.endpointProvider.isNameNotExists(this.endpointForm.value.name)) {
+          // The name doesn't exists
+          let endpoint: Endpoint = new Endpoint(this.endpointForm.value.name, this.endpointForm.value.address)
+          await this.endpointProvider.create(endpoint)
+          // Display succes in a toast
+          this.toastCustom.showToast(`Le point d'accès '${endpoint.name}' a été ajouté avec succès.`,3000,this.toastCustom.TYPE_SUCCESS,false)
+          // Return to the previous page
+          this.navCtrl.pop()
+        } else {
+          // The name already exists
+          this.toastCustom.showToast(`Le nom du point d'accès '${this.endpointForm.value.name}' existe déjà.`,10000,this.toastCustom.TYPE_ERROR,true)
+        }
       } catch (error) {
         // Display error in a toast
         this.toastCustom.showToast(error,10000,this.toastCustom.TYPE_ERROR,true)

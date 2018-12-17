@@ -41,6 +41,11 @@ export class EndpointProvider {
     return this.endpoints
   }
 
+  isNameNotExists(name: string) {
+    // Check if every name value are not equal
+    return this.endpoints.every(endpoint => endpoint.name.toLowerCase() !== name.toLowerCase())
+  }
+
   private async syncEndpoints(save: boolean) {
     if (save) {
       await this.storage.set(this.keyName, this.endpoints)
