@@ -14,6 +14,7 @@ export class CreateEndpointPage {
   private endpointForm: FormGroup
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private endpointProvider: EndpointProvider, private toastCustom: ToastCustom) {
+    // Construct the the form group
     this.endpointForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
       address: ['', Validators.compose([Validators.required])]
@@ -24,15 +25,29 @@ export class CreateEndpointPage {
     if (this.endpointForm.valid) {
       // Validation ok
       try {
-        let endpoint: Endpoint = new Endpoint(this.endpointForm.value.name, this.endpointForm.value.address)
-        await this.endpointProvider.create(endpoint)
-        // Display succes in a toast
-        this.toastCustom.showToast(`Le point d'accès '${endpoint.name}' a été ajouté avec succès.`,3000,this.toastCustom.TYPE_SUCCESS,false)
-        // Return to the previous page
-        this.navCtrl.pop()
+        // Check if name already exists
+        if (this.endpointProvider.isNameNotExists(this.endpointForm.value.name)) {
+          // The name doesn't exists
+          let endpoint: Endpoint = new Endpoint(this.endpointForm.value.name, this.endpointForm.value.address)
+          // Check if the endpoint is valid
+          if (await this.endpointProvider.isEndpointValid(endpoint)) {
+            // Create the endpoint
+            await this.endpointProvider.create(endpoint)
+            // Display succes in a toast
+            this.toastCustom.showToast(`Le point d'accès '${endpoint.name}' a été ajouté avec succès.`,3000,this.toastCustom.TYPE_SUCCESS,false)
+            // Return to the previous page
+            this.navCtrl.pop()
+          } else {
+            // The name already exists
+            this.toastCustom.showToast(`Le point d'accès '${this.endpointForm.value.name}' n'est pas valide.`,10000,this.toastCustom.TYPE_ERROR,true)
+          }
+        } else {
+          // The name already exists
+          this.toastCustom.showToast(`Le nom du point d'accès '${this.endpointForm.value.name}' existe déjà.`,10000,this.toastCustom.TYPE_ERROR,true)
+        }
       } catch (error) {
         // Display error in a toast
-        this.toastCustom.showToast(error,10000,this.toastCustom.TYPE_ERROR,true)
+        this.toastCustom.showToast(error.message,10000,this.toastCustom.TYPE_ERROR,true)
       }
     } else {
       // Display error in a toast
