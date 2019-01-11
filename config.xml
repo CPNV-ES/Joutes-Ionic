@@ -4,7 +4,7 @@
     <description>Cette application est destinée à consulter les informations pour les Joutes sportives du Centre professionnel du Nord vaudois
             (CPNV).</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://172.17.101.124:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -86,5 +86,6 @@
     <plugin name="cordova-plugin-splashscreen" spec="~4.0.3" />
     <allow-navigation href="http://172.17.100.144:8100" />
     <plugin name="cordova-plugin-inappbrowser" spec="3.0.0" />
+    <allow-navigation href="http://172.17.101.124:8100" sessionid="c85bd30e" />
     <engine name="android" spec="6.3.0" />
 </widget>
