@@ -49,7 +49,7 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content (swipe)="swipEvent($event)">
     <!-- Refresh the current page -->
     <ion-refresher (ionRefresh)="refresh($event)">
         <ion-refresher-content refreshingText="Chargement"></ion-refresher-content>

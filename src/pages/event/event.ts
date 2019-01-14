@@ -30,6 +30,7 @@ export class EventPage {
     private _userFavoritesTeamsPromise;
     private _userFavoritesTeamsIds;
     private _eventContent;
+    private _eventParts;
 
     get event() {
         return this._event;
@@ -61,7 +62,8 @@ export class EventPage {
         private participantProvider: ParticipantService,
         private sharedDataProvider: SharedDataService) {
         this.loadData().subscribe();
-        this._eventContent = "teams";
+        this._eventParts = ["teams", "tournaments", "participants", "results"]
+        this._eventContent = this._eventParts[0];
     }
 
     loadData() {
@@ -111,7 +113,7 @@ export class EventPage {
         // Put the favorites in front of the array
         var temp = [];
 
-        this._teams.forEach(function(team) {
+        this._teams.forEach(function (team) {
             // If we have no favorite, do nothing
             if (self._userFavoritesTeamsIds) {
                 // Add the favorite in front of the array
@@ -188,7 +190,7 @@ export class EventPage {
 
     // Sort teams
     sortTeams() {
-        this._teams.sort((a, b) =>  a.name.localeCompare(b.name));
+        this._teams.sort((a, b) => a.name.localeCompare(b.name));
     }
 
     // Sort tournaments
@@ -215,5 +217,17 @@ export class EventPage {
 
     goToOffline() {
         this.navCtrl.push(OfflinePage);
+    }
+
+    swipEvent(e) {
+        let currentID = this._eventParts.indexOf(this._eventContent)
+        if (e.direction == '2' && currentID + 1 < this._eventParts.length){
+            // Right swip
+            this._eventContent = this._eventParts[currentID + 1]
+        }
+        else if (e.direction == '4' && currentID - 1 > -1) {
+            // Left swip
+            this._eventContent = this._eventParts[currentID - 1]
+        }
     }
 }
