@@ -43,6 +43,25 @@ export class EndpointProvider {
     return this.endpoints
   }
 
+  // Filter endpoints by type
+  private getAllByType(type: number) {
+    if (type === Endpoint.TYPE_CURRENT || type === Endpoint.TYPE_OFFICIAL || type === Endpoint.TYPE_MANUAL) {
+        return this.endpoints.filter(endpoint => endpoint.type === type)
+    } else {
+      return []
+    }
+  }
+
+  // Get all official for view
+  getAllOfficial() {
+    return this.getAllByType(Endpoint.TYPE_OFFICIAL)
+  }
+
+  // Get all manual for view
+  getAllManual() {
+    return this.getAllByType(Endpoint.TYPE_MANUAL)
+  }
+
   isNameNotExists(name: string) {
     // Check if every name value are not equal
     return this.endpoints.every(endpoint => endpoint.name.toLowerCase() !== name.toLowerCase())
