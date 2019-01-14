@@ -3,7 +3,6 @@ import { Endpoint } from '../models/endpoint';
 import { Storage } from '@ionic/storage';
 import { HttpClient } from '@angular/common/http';
 import { GLOBAL } from '../app/app.const';
-import { global } from '@angular/core/src/util';
 
 @Injectable()
 export class EndpointProvider {
