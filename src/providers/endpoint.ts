@@ -11,7 +11,11 @@ export class EndpointProvider {
   private keyName: string = 'endpoints'
 
   constructor(private storage: Storage, private httpClient: HttpClient) {
-    this.syncEndpoints(false)
+    this.syncEndpoints(false).then(data => {
+      if (this.isNameNotExists(GLOBAL.apiDefault.name)) {
+        this.create(GLOBAL.apiDefault)
+      }
+    })
   }
 
   create(endpoint: Endpoint) {
