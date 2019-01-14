@@ -28,7 +28,7 @@ export class CreateEndpointPage {
         // Check if name already exists
         if (this.endpointProvider.isNameNotExists(this.endpointForm.value.name)) {
           // The name doesn't exists
-          let endpoint: Endpoint = new Endpoint(this.endpointForm.value.name, this.endpointForm.value.address)
+          let endpoint: Endpoint = new Endpoint(this.endpointForm.value.name, this.endpointForm.value.address, Endpoint.TYPE_MANUAL)
           // Check if the endpoint is valid
           if (await this.endpointProvider.isEndpointValid(endpoint)) {
             // Create the endpoint

@@ -34,7 +34,7 @@ export class EditEndpointPage {
             // The name already exists
             this.toastCustom.showToast(`Le nom du point d'accès '${this.endpointForm.value.name}' existe déjà.`,10000,this.toastCustom.TYPE_ERROR,true)
           } else {
-            let endpoint: Endpoint = new Endpoint(this.endpointForm.value.name, this.endpointForm.value.address)
+            let endpoint: Endpoint = new Endpoint(this.endpointForm.value.name, this.endpointForm.value.address, Endpoint.TYPE_MANUAL)
             // Check if the endpoint is valid
             if (await this.endpointProvider.isEndpointValid(endpoint)) {
               // Save
