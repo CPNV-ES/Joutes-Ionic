@@ -31,5 +31,9 @@
         <ion-item *ngFor="let event of filteredEvents" (click)="goToEvent(event)">
             <div class="items">{{event.name}}</div><!-- Display the name events -->
         </ion-item>
+        <ion-item *ngIf="filteredEvents == null">
+            <p>Il n'y a pas d'événement !</p><!-- No event -->
+            <p>Essayer de rafraichir la page en la faisant défiler vers le bas ou vérifiez votre connexion internet ou votre point d'accès.</p>
+        </ion-item>
     </ion-list>
 </ion-content>

@@ -39,7 +39,13 @@ export class EventsPage {
     constructor(private navCtrl: NavController,
         private sharedDataProvider: SharedDataService,
         private eventProvider: EventService) {
-        this.loadData().subscribe();
+        this.loadData().subscribe(() => {
+            if (this._filteredEvents != null && this._filteredEvents.length == 1) {
+                console.log(this._filteredEvents[0])
+                this.goToEvent(this._filteredEvents[0])
+            }
+        });
+
     }
 
     loadData() {
