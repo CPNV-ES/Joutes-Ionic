@@ -22,8 +22,6 @@
       <ion-item-divider class="separation"><b>Points d'accès officiels</b></ion-item-divider>
       <ion-item *ngFor="let endpoint of this.endpointProvider.getAllOfficial()" value="endpoint.name">
         {{ endpoint.name }}
-        <ion-icon name="create" item-right (click)="openEditPage(endpoint)"></ion-icon>
-        <ion-icon name="trash" item-right (click)="showConfirm(endpoint)"></ion-icon>
       </ion-item>
     </ion-item-group>
 
