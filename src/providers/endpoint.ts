@@ -66,6 +66,11 @@ export class EndpointProvider {
     return this.getAllByType(Endpoint.TYPE_MANUAL)
   }
 
+  // Get current endpoint
+  getAllCurrent() {
+    return this.getAllByType(Endpoint.TYPE_CURRENT)
+  }
+
   isNameNotExists(name: string) {
     // Check if every name value are not equal
     return this.endpoints.every(endpoint => endpoint.name.toLowerCase() !== name.toLowerCase())

@@ -16,6 +16,9 @@
   <ion-content>
     <ion-item-group>
       <ion-item-divider class="separation"><b>Points d'accès en cours</b></ion-item-divider>
+      <ion-item *ngFor="let endpoint of this.endpointProvider.getAllCurrent()" value="endpoint.name">
+        {{ endpoint.name }}
+      </ion-item>
     </ion-item-group>
 
     <ion-item-group>
