@@ -50,7 +50,7 @@ export class EditEndpointPage {
           }
         } catch (error) {
           // Display error in a toast
-          this.toastCustom.showToast(error,10000,this.toastCustom.TYPE_ERROR,true)
+          this.toastCustom.showToast(error.message,10000,this.toastCustom.TYPE_ERROR,true)
         }
       } else {
         // Display info in a toast
