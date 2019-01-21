@@ -73,12 +73,14 @@ export class EndpointProvider {
     return this.getAllByType(Endpoint.TYPE_MANUAL)
   }
 
-  // Get all current endpoint or just first
-  getAllCurrent(justFirst: Boolean = false) {
-    if (justFirst) {
-      return this.getAllByType(Endpoint.TYPE_CURRENT)[0]
-    }
+  // Get all current endpoint
+  getAllCurrent() {
     return this.getAllByType(Endpoint.TYPE_CURRENT)
+  }
+
+  // Get the first current endpoint
+  getCurrent() {
+    return this.getAllCurrent()[0]
   }
 
   isNameNotExists(name: string) {
