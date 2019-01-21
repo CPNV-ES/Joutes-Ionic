@@ -23,7 +23,7 @@
 
     <ion-item-group>
       <ion-item-divider class="separation"><b>Points d'accès officiels</b></ion-item-divider>
-      <ion-item *ngFor="let endpoint of this.endpointProvider.getAllOfficial()" value="endpoint.name">
+      <ion-item *ngFor="let endpoint of this.endpointProvider.getAllOfficial()" (click)="changeCurrentEndpoint(endpoint)" value="endpoint.name">
         {{ endpoint.name }}
       </ion-item>
     </ion-item-group>
@@ -31,7 +31,7 @@
     <ion-item-group>
       <ion-item-divider class="separation"><b>Points d'accès personnels</b></ion-item-divider>
       <ion-item *ngFor="let endpoint of this.endpointProvider.getAllManual()" value="endpoint.name">
-        {{ endpoint.name }}
+        <div (click)="changeCurrentEndpoint(endpoint)">{{ endpoint.name }}</div>
         <ion-icon name="create" item-right (click)="openEditPage(endpoint)"></ion-icon>
         <ion-icon name="trash" item-right (click)="showConfirm(endpoint)"></ion-icon>
       </ion-item>

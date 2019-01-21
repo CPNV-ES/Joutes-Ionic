@@ -56,6 +56,13 @@ export class EndpointProvider {
     }
   }
 
+  // Change current endpoint
+  async changeCurrent(endpoint: Endpoint) {
+    this.endpoints = this.endpoints.filter(endpoint => endpoint.type === Endpoint.TYPE_CURRENT ? false : true)
+    let currentEndpoint: Endpoint = new Endpoint(endpoint.name,endpoint.address,Endpoint.TYPE_CURRENT)
+    await this.create(currentEndpoint)
+  }
+
   // Get all official for view
   getAllOfficial() {
     return this.getAllByType(Endpoint.TYPE_OFFICIAL)
@@ -72,8 +79,12 @@ export class EndpointProvider {
   }
 
   isNameNotExists(name: string) {
-    // Check if every name value are not equal
-    return this.endpoints.every(endpoint => endpoint.name.toLowerCase() !== name.toLowerCase())
+    // Check if the array is empty
+    if (this.endpoints && this.endpoints.length) {
+      // Check if every name value are not equal
+      return this.endpoints.every(endpoint => endpoint.name.toLowerCase() !== name.toLowerCase())
+    }
+    return true
   }
 
   // Check if the endpoint is valid

@@ -50,4 +50,12 @@ export class EndpointsPage {
     confirm.present();
   }
 
+  private changeCurrentEndpoint(endpoint: Endpoint) {
+    try {
+      this.endpointProvider.changeCurrent(endpoint)
+    } catch (error) {
+      this.toastCustom.showToast(error,10000,this.toastCustom.TYPE_ERROR,true)
+    }
+  }
+
 }
