@@ -12,8 +12,15 @@ export class EndpointProvider {
 
   constructor(private storage: Storage, private httpClient: HttpClient) {
     this.syncEndpoints(false).then(data => {
+      // Check if the default api exists
       if (this.isNameNotExists(GLOBAL.apiDefault.name)) {
+        // If not: add
         this.create(GLOBAL.apiDefault)
+      }
+      // Check if we have a current target
+      if (!(this.getAllCurrent() && this.getAllCurrent().length)) {
+        // if not: add
+        this.create(new Endpoint(GLOBAL.apiDefault.name,GLOBAL.apiDefault.address,Endpoint.TYPE_CURRENT))
       }
     })
   }
