@@ -12,9 +12,10 @@ import { Observable } from "rxjs";
 @Injectable()
 export class LoginService {
 
-  private _userlogged = false;
-  private _teams 
-  private _user;
+  private _userlogged = false
+  private _teams
+  private _user
+
 
   constructor(private dataService: DataService, private http: HttpClient) {
     this.dataService = dataService;
@@ -26,15 +27,36 @@ export class LoginService {
   }
 
   // check if user is already logged
-  checkIfLogged() {
-    const o1 = this.dataService.getApiJson("/profil").do(data => {
-      console.log(data)
-      this._teams = data["teams"]
-      this._user = data["user"]
-    })
-    //console.log(`user ${this._user} teams ${this._teams}`)
-    Observable.forkJoin(o1).subscribe()
+  async checkIfLogged() {
+    const o1 = this.dataService.getJson("/profil")
+
+    let data = await Observable.forkJoin(o1).toPromise()
+
+    // Set variables
+    this._user = data[0]["user"]
+    this._teams = data[0]["teams"]
     
+    //Check result
+    if(this._user != null && this._user != "null"){
+      this._userlogged = true
+      return true
+    }
+    else{
+      this._userlogged = false
+      return false
+    }
+  }
+
+  getUser(){
+    return this._user
+  }
+
+  getTeams(){
+    return this._teams
+  }
+
+  userLogged(){
+    return this._userlogged
   }
 
 }
