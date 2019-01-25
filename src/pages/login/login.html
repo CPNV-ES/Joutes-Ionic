@@ -15,10 +15,26 @@
 
 <ion-content padding>
 
-  <h1>Connexion</h1>
-  <p>Pour activer toutes les fonctionnalités de l'application, il faut se logguer au site des joutes.</p>
-  <p>Veuillez cliquer sur le bouton pour vous logguer</p>
-  <button ion-button (click)="openwebbrowse()">Connexion</button>
-  <button ion-button (click)="disconnect()">DEV Deconnexion</button>
+  <div *ngIf="loginProvider.userLogged() == false">
+
+    <h1>Connexion</h1>
+    <p>Pour activer toutes les fonctionnalités de l'application, il faut se logguer au site des joutes.</p>
+    <p>Veuillez cliquer sur le bouton pour vous logguer</p>
+  
+    <button ion-button (click)="openwebbrowse()">Connexion</button>
+
+  </div>
+  <div *ngIf="loginProvider.userLogged() == true">
+      <h1>Déja connecté</h1>
+      <p>Vous êtes déja connecté au joutes</p>
+      <h2>Vos informations</h2>
+      <p>Prénom : {{ loginProvider.getUser().first_name }}</p>
+      <p>Nom : {{ loginProvider.getUser().last_name }}</p>
+      <p>Email : {{ loginProvider.getUser().email }}</p>
+      <p>Role : {{ loginProvider.getUser().role }}</p>
+      <div *ngIf="loginProvider.getTeams() != null">
+          <p>Equipes : {{ loginProvider.getTeams() }}</p>
+      </div>
+  </div>
 
 </ion-content>
