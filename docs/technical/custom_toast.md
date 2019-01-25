@@ -1,10 +1,12 @@
 # Joutes Ionic
 
-Author : Benjamin Delacombaz
+Authors : 
+* Benjamin Delacombaz
+* Kevin Jordil
 
-Last modification : 10.12.2018
+Last modification : 18.01.2019
 
-Version : 0.0.1
+Version : 0.0.2
 
 ## Custom toast
 
@@ -50,6 +52,13 @@ Import the component in your page.
 ```typescript
 import { ToastCustom } from '../../components/toast-custom/toast-custom'
 ```
+
+Add the `ToastCustom` in the constructor.
+```typescript
+constructor(private toastCustom: ToastCustom) {
+}
+```
+
 
 After that, you can use the custom toast component.
 
