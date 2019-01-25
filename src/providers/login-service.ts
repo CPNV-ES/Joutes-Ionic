@@ -33,11 +33,22 @@ export class LoginService {
     let data = await Observable.forkJoin(o1).toPromise()
 
     // Set variables
-    this._user = data[0]["user"]
-    this._teams = data[0]["teams"]
+    if (data[0]["user"] == "null"){
+      this._user = null
+    }
+    else{
+      this._user = data[0]["user"]
+    }
+
+    if (data[0]["teams"] == "null"){
+      this._teams = null
+    }
+    else{
+      this._teams = data[0]["teams"]
+    }
     
     //Check result
-    if(this._user != null && this._user != "null"){
+    if(this._user != null){
       this._userlogged = true
       return true
     }
