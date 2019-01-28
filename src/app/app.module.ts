@@ -34,6 +34,7 @@ import { CreateEndpointPage } from '../pages/create-endpoint/create-endpoint'
 import { EndpointProvider } from '../providers/endpoint';
 import { ToastCustom } from '../components/toast-custom/toast-custom';
 import { EditEndpointPage } from '../pages/edit-endpoint/edit-endpoint';
+import { EventProvider } from '../providers/event/event';
 
 @NgModule({
     declarations: [
@@ -95,7 +96,9 @@ import { EditEndpointPage } from '../pages/edit-endpoint/edit-endpoint';
         ToastCustom,
         StorageService,
         InAppBrowser,
-        LoginService
+        LoginService,
+        EventProvider,
+        
     ]
 })
 export class AppModule { }
