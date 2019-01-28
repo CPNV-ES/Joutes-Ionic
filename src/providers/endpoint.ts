@@ -11,17 +11,9 @@ export class EndpointProvider {
   private keyName: string = 'endpoints'
 
   constructor(private storage: Storage, private httpClient: HttpClient) {
+    // console.log('EndpointProvider')
     this.syncEndpoints(false).then(data => {
-      // Check if the default api exists
-      if (this.isNameNotExists(GLOBAL.apiDefault.name)) {
-        // If not: add
-        this.create(GLOBAL.apiDefault)
-      }
-      // Check if we have a current target
-      if (!(this.getAllCurrent() && this.getAllCurrent().length)) {
-        // if not: add
-        this.create(new Endpoint(GLOBAL.apiDefault.name,GLOBAL.apiDefault.address,Endpoint.TYPE_CURRENT))
-      }
+      this.initialize()
     })
   }
 
@@ -113,12 +105,25 @@ export class EndpointProvider {
     return false
   }
 
-  private async syncEndpoints(save: boolean) {
+  async syncEndpoints(save: boolean) {
     if (save) {
       await this.storage.set(this.keyName, this.endpoints)
     } else {
       this.endpoints = await this.storage.get(this.keyName)
     }
+    this.initialize()
   }
 
+  initialize() {
+    // Check if the default api exists
+    if (this.isNameNotExists(GLOBAL.apiDefault.name)) {
+      // If not: add
+      this.create(GLOBAL.apiDefault)
+    }
+    // Check if we have a current target
+    if (!(this.getAllCurrent() && this.getAllCurrent().length)) {
+      // if not: add
+      this.create(new Endpoint(GLOBAL.apiDefault.name,GLOBAL.apiDefault.address,Endpoint.TYPE_CURRENT))
+    }
+  }
 }
