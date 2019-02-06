@@ -126,4 +126,15 @@ export class EndpointProvider {
       this.create(new Endpoint(GLOBAL.apiDefault.name,GLOBAL.apiDefault.address,Endpoint.TYPE_CURRENT))
     }
   }
+
+  // Not good
+  async isReady() {
+    try {
+      await this.syncEndpoints(false)
+      this.initialize()
+      return true
+    } catch(error) {
+      return false
+    }
+  }
 }

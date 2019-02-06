@@ -28,7 +28,7 @@
 
     <ion-list>
         <!-- When we click on the name of the _event -> go to detail _event -->
-        <ion-item *ngFor="let event of filteredEvents" (click)="goToEvent(event)">
+        <ion-item *ngFor="let event of events" (click)="goToEvent(event)">
             <div class="items">{{event.name}}</div><!-- Display the name events -->
         </ion-item>
     </ion-list>
