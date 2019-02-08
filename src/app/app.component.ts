@@ -1,5 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
-import { Platform, Nav } from "ionic-angular";
+import { Platform, Nav, Events } from "ionic-angular";
 import { EventsPage } from "../pages/events/events";
 import { AboutPage } from "../pages/about/about";
 import { IpPage } from "../pages/ip/ip";
