@@ -87,4 +87,5 @@
     <allow-navigation href="http://172.17.100.144:8100" />
     <plugin name="cordova-plugin-inappbrowser" spec="3.0.0" />
     <engine name="android" spec="6.3.0" />
+    <plugin name="cordova-plugin-network-information" spec="2.0.1" />
 </widget>
