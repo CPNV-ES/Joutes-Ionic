@@ -20,7 +20,7 @@ export class EventsPage {
     // Get data
     async getData() {
         try {
-            this.events = await this.eventProvider.getAll()
+            this.events = await this.eventProvider.getAll(false)
         } catch (error) {
             console.error(error.message)
         }

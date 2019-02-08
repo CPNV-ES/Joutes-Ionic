@@ -37,6 +37,7 @@ export class EventProvider {
       data = await this.getAllFromAPI()
       // Test if events exists
       if (data != null && 'events' in data) {
+        // Get the events part
         data = data.events
         // Save in the local storage
         this.setLocalData(data)
