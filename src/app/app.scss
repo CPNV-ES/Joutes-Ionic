@@ -183,3 +183,20 @@ ion-label{
     //background-color: #4CAF50;
     background-color: map-get($colors, successCustom);
 }
+
+.offlineState {
+  color: map-get($colors, danger);
+}
+
+.endpointState {
+  position: relative;
+  width: 44px;
+  height: 32px;
+  margin-left: 6px;
+  margin-right: 6px;
+  padding-left: 2px;
+  padding-right: 2px; 
+  ion-icon {
+    position: absolute;
+  }
+}

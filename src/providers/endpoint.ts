@@ -9,6 +9,7 @@ export class EndpointProvider {
 
   private endpoints: Array<Endpoint> = []
   private keyName: string = 'endpoints'
+  private online: boolean
 
   constructor(private storage: Storage, private httpClient: HttpClient) {
     // console.log('EndpointProvider')
@@ -114,7 +115,7 @@ export class EndpointProvider {
     this.initialize()
   }
 
-  initialize() {
+  async initialize() {
     // Check if the default api exists
     if (this.isNameNotExists(GLOBAL.apiDefault.name)) {
       // If not: add
@@ -125,16 +126,31 @@ export class EndpointProvider {
       // if not: add
       this.create(new Endpoint(GLOBAL.apiDefault.name,GLOBAL.apiDefault.address,Endpoint.TYPE_CURRENT))
     }
+
+    // Test if the endpoint is valid
+    try {
+      if (!await this.isEndpointValid(this.getCurrent())) {
+        this.online = false
+      } else {
+        this.online = true
+      }
+    } catch(error) {
+      this.online = false
+    }
   }
 
   // Not good
   async isReady() {
     try {
       await this.syncEndpoints(false)
-      this.initialize()
+      await this.initialize()
       return true
     } catch(error) {
       return false
     }
+  }
+
+  isOnline() {
+    return this.online;
   }
 }

@@ -3,6 +3,8 @@ import { NavController, Refresher } from 'ionic-angular';
 import { SharedDataService } from '../../providers/sharedData-service';
 import { EventPage } from "../event/event";
 import { EventProvider } from '../../providers/event';
+import { ToastCustom } from '../../components/toast-custom/toast-custom';
+import { EndpointProvider } from '../../providers/endpoint';
 
 @Component({
     selector: 'page-events',
@@ -11,18 +13,16 @@ import { EventProvider } from '../../providers/event';
 export class EventsPage {
     private events: Array<Event> = []
 
-    constructor(private navCtrl: NavController,
-        private sharedDataProvider: SharedDataService,
-        private eventProvider: EventProvider) {
+    constructor(private toastCustom: ToastCustom, private navCtrl: NavController, private sharedDataProvider: SharedDataService, private eventProvider: EventProvider, private endpointProvider: EndpointProvider) {
         this.getData()
     }
 
     // Get data
     async getData() {
         try {
-            this.events = await this.eventProvider.getAll(false)
+            this.events = await this.eventProvider.getAll()
         } catch (error) {
-            console.error(error.message)
+            this.toastCustom.showToast(error.message, 10000, this.toastCustom.TYPE_ERROR, true)
         }
     }
 

@@ -10,6 +10,12 @@
         <button ion-button menuToggle side="right">
             <ion-icon name="menu" class="menu-button"></ion-icon>
         </button>
+        <ion-buttons end>
+            <button ion-button icon-only side="right" class="endpointState">
+                    <ion-icon name="globe"></ion-icon>
+                    <ion-icon *ngIf="!endpointProvider.isOnline()" name="close" class="offlineState"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
 
 

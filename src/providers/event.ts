@@ -29,11 +29,11 @@ export class EventProvider {
     }
   }
 
-  async getAll(isOnline: boolean) {
+  async getAll() {
     let data: any = []
 
     // Take the good provider
-    if (isOnline) {
+    if (this.endpointProvider.isOnline()) {
       data = await this.getAllFromAPI()
       // Test if events exists
       if (data != null && 'events' in data) {
