@@ -174,14 +174,12 @@ ion-label{
   float: right;
 }
 
-.toastError div
-{
+.toastError div {
     //background-color: #F44336;
     background-color: map-get($colors, danger);
 }
 
-.toastSuccess div
-{
+.toastSuccess div {
     //background-color: #4CAF50;
     background-color: map-get($colors, successCustom);
 }
