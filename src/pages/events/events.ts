@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, Refresher } from 'ionic-angular';
 import { SharedDataService } from '../../providers/sharedData-service';
 import { EventPage } from "../event/event";
@@ -10,11 +10,15 @@ import { EndpointProvider } from '../../providers/endpoint';
     selector: 'page-events',
     templateUrl: 'events.html'
 })
-export class EventsPage {
+export class EventsPage implements OnInit {
     private events: Array<Event> = []
 
     constructor(private toastCustom: ToastCustom, private navCtrl: NavController, private sharedDataProvider: SharedDataService, private eventProvider: EventProvider, private endpointProvider: EndpointProvider) {
-        this.getData()
+    
+    }
+
+    async ngOnInit() {
+        await this.getData()
     }
 
     // Get data

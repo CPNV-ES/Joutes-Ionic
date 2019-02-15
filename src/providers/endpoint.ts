@@ -1,21 +1,22 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Endpoint } from '../models/endpoint';
 import { Storage } from '@ionic/storage';
 import { HttpClient } from '@angular/common/http';
 import { GLOBAL } from '../app/app.const';
 
 @Injectable()
-export class EndpointProvider {
+export class EndpointProvider implements OnInit {
 
   private endpoints: Array<Endpoint> = []
   private keyName: string = 'endpoints'
   private online: boolean
 
   constructor(private storage: Storage, private httpClient: HttpClient) {
-    // console.log('EndpointProvider')
-    this.syncEndpoints(false).then(data => {
-      this.initialize()
-    })
+    
+  }
+
+  async ngOnInit() {
+    await this.isReady()
   }
 
   create(endpoint: Endpoint) {

@@ -16,6 +16,7 @@ export class EventProvider {
   
   // Get data from api
   private async getAllFromAPI() {
+    console.log('vive l\'api')
     if (await this.endpointProvider.isReady())
     {
       return this.http.get(`${this.endpointProvider.getCurrent().address}/events`).toPromise()
@@ -24,6 +25,7 @@ export class EventProvider {
 
   // Get data from local storage
   private async getAllFromLocal() {
+    console.log('vive le local')
     if (await this.endpointProvider.isReady()) {
       return this.storage.get(this.keyName)
     }
@@ -31,23 +33,25 @@ export class EventProvider {
 
   async getAll() {
     let data: any = []
-
-    // Take the good provider
-    if (this.endpointProvider.isOnline()) {
-      data = await this.getAllFromAPI()
-      // Test if events exists
-      if (data != null && 'events' in data) {
-        // Get the events part
-        data = data.events
-        // Save in the local storage
-        this.setLocalData(data)
+    // Wait for the endpoint provider
+    if (await this.endpointProvider.isReady()) {
+      // Take the good provider
+      if (this.endpointProvider.isOnline()) {
+        data = await this.getAllFromAPI()
+        // Test if events exists
+        if (data != null && 'events' in data) {
+          // Get the events part
+          data = data.events
+          // Save in the local storage
+          this.setLocalData(data)
+        } else {
+          data = []
+        }
       } else {
-        data = []
+        data = await this.getAllFromLocal()
       }
-    } else {
-      data = await this.getAllFromLocal()
-    }
-    return data
+      return data
+      }
   }
 
   private setLocalData(events: Array<Event>) {
