@@ -6,7 +6,6 @@ import { InAppBrowser } from '@ionic-native/in-app-browser'
 
 import { EventsPage } from '../pages/events/events';
 import { TournamentPage } from '../pages/tournament/tournament';
-import { EventService } from '../providers/event-service';
 import { TeamService } from "../providers/team-service";
 import { TournamentService } from "../providers/tournament-service";
 import { PoolService } from "../providers/pool-service";
@@ -34,6 +33,7 @@ import { CreateEndpointPage } from '../pages/create-endpoint/create-endpoint'
 import { EndpointProvider } from '../providers/endpoint';
 import { ToastCustom } from '../components/toast-custom/toast-custom';
 import { EditEndpointPage } from '../pages/edit-endpoint/edit-endpoint';
+import { EventProvider } from '../providers/event';
 
 @NgModule({
     declarations: [
@@ -86,7 +86,6 @@ import { EditEndpointPage } from '../pages/edit-endpoint/edit-endpoint';
         SplashScreen,
         SharedDataService,
         DataService,
-        EventService,
         TeamService,
         TournamentService,
         PoolService,
@@ -95,7 +94,9 @@ import { EditEndpointPage } from '../pages/edit-endpoint/edit-endpoint';
         ToastCustom,
         StorageService,
         InAppBrowser,
-        LoginService
+        LoginService,
+        EventProvider,
+        
     ]
 })
 export class AppModule { }

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
-import { Platform, Nav } from "ionic-angular";
+import { Platform, Nav, Events } from "ionic-angular";
 import { EventsPage } from "../pages/events/events";
 import { AboutPage } from "../pages/about/about";
 import { IpPage } from "../pages/ip/ip";
@@ -25,8 +25,8 @@ export class JoutesCPNV {
         this.pages = [
             { title: "Evènements", component: EventsPage, navRoot: true, mustlogged: false },
             { title: "A propos", component: AboutPage, navRoot: false, mustlogged: false },
-            { title: "Connexion", component: LoginPage, navRoot: false, mustlogged: false },
-            { title: 'Settings', component: SettingsPage, navRoot: false, mustlogged: false },
+            { title: "Identification", component: LoginPage, navRoot: false, mustlogged: false },
+            { title: 'Paramètres', component: SettingsPage, navRoot: false, mustlogged: false },
             { title: "IPs", component: IpPage, navRoot: false, mustlogged: false },
         ];
 
