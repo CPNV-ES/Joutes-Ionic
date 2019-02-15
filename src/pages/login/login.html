@@ -7,7 +7,10 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Connexion</ion-title>
+    <ion-title>Identification</ion-title>
+    <button ion-button menuToggle side="left">
+      <ion-icon name="menu" class="menu-button"></ion-icon>
+    </button>
   </ion-navbar>
 
 </ion-header>
@@ -16,25 +19,29 @@
 <ion-content padding>
 
   <div *ngIf="loginProvider.userLogged() == false">
-
-    <h1>Connexion</h1>
-    <p>Pour activer toutes les fonctionnalités de l'application, il faut se logguer au site des joutes.</p>
-    <p>Veuillez cliquer sur le bouton pour vous logguer</p>
-  
+    <ion-item text-justify>
+      Pour activer toutes les fonctionnalités de l'application, il faut se logguer au site des joutes.<br /><br />
+      Veuillez cliquer sur le bouton pour vous logguer
+    </ion-item>
     <button ion-button (click)="openwebbrowse()">Connexion</button>
+
+
+
 
   </div>
   <div *ngIf="loginProvider.userLogged() == true">
-      <h1>Déja connecté</h1>
-      <p>Vous êtes déja connecté au joutes</p>
+    <ion-item text-justify>
+      Vous êtes déja connecté au joutes<br /><br />
       <h2>Vos informations</h2>
-      <p>Prénom : {{ loginProvider.getUser().first_name }}</p>
-      <p>Nom : {{ loginProvider.getUser().last_name }}</p>
-      <p>Email : {{ loginProvider.getUser().email }}</p>
-      <p>Role : {{ loginProvider.getUser().role }}</p>
+      Prénom : {{ loginProvider.getUser().first_name }}<br />
+      Nom : {{ loginProvider.getUser().last_name }}<br />
+      Email : {{ loginProvider.getUser().email }}<br />
+      Role : {{ loginProvider.getUser().role }}<br />
+
       <div *ngIf="loginProvider.getTeams() != null">
-          <p>Equipes : {{ loginProvider.getTeams() }}</p>
+        Equipes : {{ loginProvider.getTeams() }}
       </div>
+    </ion-item>
   </div>
 
 </ion-content>
