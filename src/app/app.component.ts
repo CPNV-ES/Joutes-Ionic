@@ -24,10 +24,10 @@ export class JoutesCPNV {
         // List of pages that can be navigated to from the left menu
         this.pages = [
             { title: "Evènements", component: EventsPage, navRoot: true, mustlogged: false },
-            { title: "A propos", component: AboutPage, navRoot: false, mustlogged: false },
-            { title: "Identification", component: LoginPage, navRoot: false, mustlogged: false },
-            { title: 'Paramètres', component: SettingsPage, navRoot: false, mustlogged: false },
-            { title: "IPs", component: IpPage, navRoot: false, mustlogged: false },
+            { title: "A propos", component: AboutPage, navRoot: true, mustlogged: false },
+            { title: "Identification", component: LoginPage, navRoot: true, mustlogged: false },
+            { title: 'Paramètres', component: SettingsPage, navRoot: true, mustlogged: false },
+            { title: "IPs", component: IpPage, navRoot: true, mustlogged: false },
         ];
 
         platform.ready().then(() => {
