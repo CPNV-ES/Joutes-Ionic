@@ -16,19 +16,12 @@ export class EventProvider {
   
   // Get data from api
   private async getAllFromAPI() {
-    console.log('vive l\'api')
-    if (await this.endpointProvider.isReady())
-    {
-      return this.http.get(`${this.endpointProvider.getCurrent().address}/events`).toPromise()
-    }
+    return this.http.get(`${this.endpointProvider.getCurrent().address}/events`).toPromise()
   }
 
   // Get data from local storage
   private async getAllFromLocal() {
-    console.log('vive le local')
-    if (await this.endpointProvider.isReady()) {
-      return this.storage.get(this.keyName)
-    }
+    return this.storage.get(this.keyName)
   }
 
   async getAll() {
@@ -51,7 +44,7 @@ export class EventProvider {
         data = await this.getAllFromLocal()
       }
       return data
-      }
+    }
   }
 
   private setLocalData(events: Array<Event>) {

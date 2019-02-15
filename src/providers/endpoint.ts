@@ -107,7 +107,7 @@ export class EndpointProvider implements OnInit {
     return false
   }
 
-  async syncEndpoints(save: boolean) {
+  private async syncEndpoints(save: boolean) {
     if (save) {
       // The localstorage must be sync
       await this.storage.set(this.keyName, this.endpoints)
@@ -118,7 +118,7 @@ export class EndpointProvider implements OnInit {
     this.initialize()
   }
 
-  async initialize() {
+  private async initialize() {
     // Check if the default api exists
     if (this.isNameNotExists(GLOBAL.apiDefault.name)) {
       // If not: add
