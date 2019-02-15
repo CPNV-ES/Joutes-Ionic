@@ -12,6 +12,7 @@ import { EndpointProvider } from '../../providers/endpoint';
 })
 export class EventsPage implements OnInit {
     private events: Array<Event> = []
+    private ready: boolean = false
 
     constructor(private toastCustom: ToastCustom, private navCtrl: NavController, private sharedDataProvider: SharedDataService, private eventProvider: EventProvider, private endpointProvider: EndpointProvider) {
     
@@ -19,6 +20,10 @@ export class EventsPage implements OnInit {
 
     async ngOnInit() {
         await this.getData()
+        this.ready = true
+        if (this.events != null && this.events.length == 1) {
+            this.goToEvent(this.events[0])
+        }
     }
 
     // Get data

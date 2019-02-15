@@ -20,11 +20,11 @@
     </ion-refresher>
 
     <ion-list>
-        <!-- When we click on the name of the _event -> go to detail _event -->
+        <!-- When we click on the name of the event -> go to detail event -->
         <ion-item *ngFor="let event of events" (click)="goToEvent(event)">
             <div class="items">{{event.name}}</div><!-- Display the name events -->
         </ion-item>
-        <ion-item *ngIf="filteredEvents == null">
+        <ion-item *ngIf="events.length <= 0 && ready">
             <p>Il n'y a pas d'événement !</p><!-- No event -->
             <p>Essayer de rafraichir la page en la faisant défiler vers le bas ou vérifiez votre connexion internet ou votre point d'accès.</p>
         </ion-item>
