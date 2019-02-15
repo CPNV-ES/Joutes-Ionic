@@ -12,7 +12,7 @@ export class EndpointProvider implements OnInit {
   private online: boolean
 
   constructor(private storage: Storage, private httpClient: HttpClient) {
-    
+
   }
 
   async ngOnInit() {
@@ -109,8 +109,10 @@ export class EndpointProvider implements OnInit {
 
   async syncEndpoints(save: boolean) {
     if (save) {
+      // The localstorage must be sync
       await this.storage.set(this.keyName, this.endpoints)
     } else {
+      // The loca array must be sync
       this.endpoints = await this.storage.get(this.keyName)
     }
     this.initialize()
@@ -128,19 +130,10 @@ export class EndpointProvider implements OnInit {
       this.create(new Endpoint(GLOBAL.apiDefault.name,GLOBAL.apiDefault.address,Endpoint.TYPE_CURRENT))
     }
 
-    // Test if the endpoint is valid
-    try {
-      if (!await this.isEndpointValid(this.getCurrent())) {
-        this.online = false
-      } else {
-        this.online = true
-      }
-    } catch(error) {
-      this.online = false
-    }
+    await this.getOnlineState()
   }
 
-  // Not good
+  // Sync and initialize and return true when it's finished
   async isReady() {
     try {
       await this.syncEndpoints(false)
@@ -151,7 +144,22 @@ export class EndpointProvider implements OnInit {
     }
   }
 
+  // Get the state of the connection
   isOnline() {
     return this.online;
+  }
+
+  // Change online state
+  async getOnlineState() {
+    // Test if the endpoint is valid
+    try {
+      if (!await this.isEndpointValid(this.getCurrent())) {
+        this.online = false
+      } else {
+        this.online = true
+      }
+    } catch(error) {
+      this.online = false
+    }
   }
 }
