@@ -10,7 +10,10 @@
         <ion-title>
             {{ event.name }}
         </ion-title>
-        <ion-buttons end>
+        <button ion-button menuToggle side="left">
+            <ion-icon name="menu" class="menu-button"></ion-icon>
+        </button>
+        <ion-buttons end side="right">
             <button ion-button icon-only (click)="goToSearch()">
                 <ion-icon name="search"></ion-icon>
             </button>
@@ -20,33 +23,7 @@
                 <ion-icon name="cloud-download"></ion-icon>
             </button>
         </ion-buttons>
-        <ion-buttons end>
-            <button ion-button icon-only (click)="displayMenu()">
-                <ion-icon name="menu" class="menu-button"></ion-icon>
-            </button>
-        </ion-buttons>
     </ion-navbar>
-
-    <!-- Content de different segments for a _event - Display the toolbar -->
-    <ion-toolbar no-border-top>
-        <ion-segment [(ngModel)]="eventContent">
-            <ion-segment-button value="teams" (click)="setSegment('teams')">
-                Équipes
-            </ion-segment-button>
-
-            <ion-segment-button value="tournaments" (click)="setSegment('tournaments')">
-                Tournois
-            </ion-segment-button>
-
-            <ion-segment-button value="participants" (click)="setSegment('participants')">
-                Participants
-            </ion-segment-button>
-
-            <ion-segment-button value="results" (click)="setSegment('results')">
-                Résultats
-            </ion-segment-button>
-        </ion-segment>
-    </ion-toolbar>
 </ion-header>
 
 <ion-content (swipe)="swipEvent($event)">
@@ -67,9 +44,11 @@
                     </ion-note>
                 </div>
                 <!-- When we click on the star -> add the team in favorite -->
-                <ion-icon item-right name="star" class="color-star" (click)="toggleFavoriteTeam(team)" *ngIf="team.favorite"></ion-icon>
+                <ion-icon item-right name="star" class="color-star" (click)="toggleFavoriteTeam(team)"
+                    *ngIf="team.favorite"></ion-icon>
                 <!-- When we click on the star -> remove the team in favorite -->
-                <ion-icon item-right name="star-outline" (click)="toggleFavoriteTeam(team)" *ngIf="!team.favorite"></ion-icon>
+                <ion-icon item-right name="star-outline" (click)="toggleFavoriteTeam(team)" *ngIf="!team.favorite">
+                </ion-icon>
             </ion-item>
         </ion-list>
 
@@ -99,14 +78,16 @@
             <!-- Display the ranking for each _tournament -->
             <div *ngFor="let tournament of tournaments">
                 <!-- When we click on the name of the tournament -> go to detail tournament -->
-                <ion-item-divider class="tournament-name items" (click)="goToTournament(tournament)"><b>{{tournament.name}}</b></ion-item-divider>
+                <ion-item-divider class="tournament-name items" (click)="goToTournament(tournament)">
+                    <b>{{tournament.name}}</b></ion-item-divider>
                 <!-- Display "En cours" if there is no winner -->
                 <ion-grid class="no-margin-padding">
                     <ion-item class="ranking">
                         <ion-row class="items">
                             <ion-col class="items" width-25> 1er</ion-col>
                             <!-- When we click on the name of the team -> go to detail team and display the result -->
-                            <ion-col class="items" width-75 *ngIf="tournament.winner.id" (click)="goToTeam(tournament.winner)">{{tournament.winner.name}}</ion-col>
+                            <ion-col class="items" width-75 *ngIf="tournament.winner.id"
+                                (click)="goToTeam(tournament.winner)">{{tournament.winner.name}}</ion-col>
                             <ion-col class="items" width-75 *ngIf="!tournament.winner.id">En cours</ion-col>
                         </ion-row>
                     </ion-item>
@@ -115,7 +96,8 @@
                         <ion-row class="items">
                             <ion-col class="items" width-25> 2ème</ion-col>
                             <!-- When we click on the name of the team -> go to detail team and display the result -->
-                            <ion-col class="items" width-75 *ngIf="tournament.second.id" (click)="goToTeam(tournament.second)">{{tournament.second.name}}</ion-col>
+                            <ion-col class="items" width-75 *ngIf="tournament.second.id"
+                                (click)="goToTeam(tournament.second)">{{tournament.second.name}}</ion-col>
                             <ion-col class="items" width-75 *ngIf="!tournament.second.id">En cours</ion-col>
                         </ion-row>
                     </ion-item>
@@ -124,7 +106,8 @@
                         <ion-row class="items">
                             <ion-col class="items" width-25> 3ème</ion-col>
                             <!-- When we click on the name of the team -> go to detail team and display the result -->
-                            <ion-col class="items" width-75 *ngIf="tournament.third.id" (click)="goToTeam(tournament.third)">{{tournament.third.name}}</ion-col>
+                            <ion-col class="items" width-75 *ngIf="tournament.third.id"
+                                (click)="goToTeam(tournament.third)">{{tournament.third.name}}</ion-col>
                             <ion-col class="items" width-75 *ngIf="!tournament.third.id">En cours</ion-col>
                         </ion-row>
                     </ion-item>
@@ -133,3 +116,26 @@
         </ion-item-group>
     </div>
 </ion-content>
+
+<ion-footer>
+    <!-- Content de different segments for a _event - Display the toolbar -->
+    <ion-toolbar no-border-bottom>
+        <ion-segment [(ngModel)]="eventContent">
+            <ion-segment-button value="teams" (click)="setSegment('teams')">
+                Équipes
+            </ion-segment-button>
+
+            <ion-segment-button value="tournaments" (click)="setSegment('tournaments')">
+                Tournois
+            </ion-segment-button>
+
+            <ion-segment-button value="participants" (click)="setSegment('participants')">
+                Participants
+            </ion-segment-button>
+
+            <ion-segment-button value="results" (click)="setSegment('results')">
+                Résultats
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+</ion-footer>
