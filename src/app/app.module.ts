@@ -6,7 +6,6 @@ import { InAppBrowser } from '@ionic-native/in-app-browser'
 
 import { EventsPage } from '../pages/events/events';
 import { TournamentPage } from '../pages/tournament/tournament';
-import { EventService } from '../providers/event-service';
 import { TeamService } from "../providers/team-service";
 import { TournamentService } from "../providers/tournament-service";
 import { PoolService } from "../providers/pool-service";
@@ -87,7 +86,6 @@ import { EventProvider } from '../providers/event';
         SplashScreen,
         SharedDataService,
         DataService,
-        EventService,
         TeamService,
         TournamentService,
         PoolService,

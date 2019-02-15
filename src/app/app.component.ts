@@ -25,8 +25,8 @@ export class JoutesCPNV {
         this.pages = [
             { title: "Evènements", component: EventsPage, navRoot: true },
             { title: "A propos", component: AboutPage, navRoot: false },
-            { title: "Login", component: LoginPage, navRoot: false },
-            { title: 'Settings', component: SettingsPage, navRoot: false },
+            { title: "Identification", component: LoginPage, navRoot: false },
+            { title: 'Paramètres', component: SettingsPage, navRoot: false },
             { title: "IPs", component: IpPage, navRoot: false },
         ];
 
