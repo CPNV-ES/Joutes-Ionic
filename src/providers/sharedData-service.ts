@@ -105,9 +105,4 @@ export class SharedDataService {
         this.storage.set('IpChoice', value);
         this._IpChoice = value;
     }
-
-    // Function to display the menu
-    displayMenu() {
-        this.menuCtrl.open();
-    }
 }
