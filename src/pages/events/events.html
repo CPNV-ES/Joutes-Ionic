@@ -1,13 +1,13 @@
 <ion-header>
     <ion-navbar>
         <ion-title>Evènements</ion-title>
-        <button ion-button menuToggle side="right">
+        <button ion-button menuToggle side="left">
             <ion-icon name="menu" class="menu-button"></ion-icon>
         </button>
         <ion-buttons end>
-            <button ion-button icon-only side="right" class="endpointState">
+            <button *ngIf="!endpointProvider.isOnline()" ion-button icon-only side="right" class="endpointState">
+                    <ion-icon name="warning"></ion-icon>
                     <ion-icon name="globe"></ion-icon>
-                    <ion-icon *ngIf="!endpointProvider.isOnline()" name="close" class="offlineState"></ion-icon>
             </button>
         </ion-buttons>
     </ion-navbar>

@@ -47,7 +47,7 @@ export class EventsPage implements OnInit {
     // Go to page detail _event
     goToEvent(event) {
         this.sharedDataProvider.currentEvent = event;
-        this.navCtrl.push(EventPage);
+        this.navCtrl.setRoot(EventPage)
     }
 
     async showLoader() {

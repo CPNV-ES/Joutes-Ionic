@@ -110,10 +110,6 @@ export class TeamPage {
         });
     }
 
-    displayMenu() {
-        this.sharedDataProvider.displayMenu();
-    }
-
     goToSearch() {
         this.navCtrl.push(SearchPage);
     }

@@ -24,8 +24,4 @@ export class IpPage {
         this.sharedDataProvider.IpChoice = ip;
         this._currentIpChoice = this.sharedDataProvider.IpChoice;
     }
-
-    displayMenu() {
-        this.sharedDataProvider.displayMenu();
-    }
 }

@@ -163,8 +163,4 @@ export class SearchPage {
         this.sharedDataProvider.currentTournament = tournament;
         this.navCtrl.push(TournamentPage);
     }
-
-    displayMenu() {
-        this.sharedDataProvider.displayMenu();
-    }
 }

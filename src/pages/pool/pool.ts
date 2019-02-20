@@ -78,10 +78,6 @@ export class PoolPage {
         this.navCtrl.push(TeamPage);
     }
 
-    displayMenu() {
-        this.sharedDataProvider.displayMenu();
-    }
-
     goToSearch() {
         this.navCtrl.push(SearchPage);
     }

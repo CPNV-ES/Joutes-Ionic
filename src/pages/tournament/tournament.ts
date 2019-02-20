@@ -69,10 +69,6 @@ export class TournamentPage {
         this.navCtrl.push(TeamPage);
     }
 
-    displayMenu() {
-        this.sharedDataProvider.displayMenu();
-    }
-
     sortByStage(pools) {
         let poolPerStage = [];
         //sort by finished

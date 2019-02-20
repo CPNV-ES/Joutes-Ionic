@@ -7,14 +7,9 @@ Ionic pages and navigation.
 <ion-header>
     <ion-navbar no-border-bottom>
         <ion-title>Recherche Globale</ion-title>
-        <ion-buttons end>
-            <button ion-button icon-only (click)="displayMenu()">
-                <ion-icon name="menu" class="menu-button"></ion-icon>
-            </button>
-        </ion-buttons>
     </ion-navbar>
     <ion-toolbar>
-        <ion-searchbar color="primary" placeholder="Search..." [(ngModel)]="searchTerm" (ionInput)="filterAll()"></ion-searchbar>
+        <ion-searchbar color="primary" placeholder="Recherche..." [(ngModel)]="searchTerm" (ionInput)="filterAll()"></ion-searchbar>
     </ion-toolbar>
 </ion-header>
 
