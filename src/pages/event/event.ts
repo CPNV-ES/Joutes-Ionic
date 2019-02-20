@@ -10,6 +10,7 @@ import { ParticipantPage } from "../participant/participant";
 import { SearchPage } from "../search/search";
 import { OfflinePage } from "../offline/offline";
 import { Observable } from "rxjs";
+import { EndpointProvider } from '../../providers/endpoint';
 
 
 /*
@@ -31,6 +32,7 @@ export class EventPage {
     private _userFavoritesTeamsIds;
     private _eventContent;
     private _eventParts;
+    private _connected;
 
     get event() {
         return this._event;
@@ -60,7 +62,8 @@ export class EventPage {
         private teamProvider: TeamService,
         private tournamentProvider: TournamentService,
         private participantProvider: ParticipantService,
-        private sharedDataProvider: SharedDataService) {
+        private sharedDataProvider: SharedDataService,
+        private endpointProvider: EndpointProvider) {
         this.loadData().subscribe();
         this._eventParts = ["teams", "tournaments", "participants", "results"]
         this._eventContent = this._eventParts[0];
@@ -207,16 +210,8 @@ export class EventPage {
         });
     }
 
-    displayMenu() {
-        this.sharedDataProvider.displayMenu();
-    }
-
     goToSearch() {
         this.navCtrl.push(SearchPage);
-    }
-
-    goToOffline() {
-        this.navCtrl.push(OfflinePage);
     }
 
     swipEvent(e) {
