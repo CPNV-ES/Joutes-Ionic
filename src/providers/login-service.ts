@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DataService } from "./data-service";
 import { Observable } from "rxjs";
+import { RoutesProvider } from './routes';
 
 /*
   Generated class for the LoginServiceProvider provider.
@@ -17,13 +18,13 @@ export class LoginService {
   private _user
 
 
-  constructor(private dataService: DataService, private http: HttpClient) {
+  constructor(private dataService: DataService, private http: HttpClient, private routes: RoutesProvider) {
     this.dataService = dataService;
   }
 
   // Get the Login url of the current endpoints
-  getLoginUrl() {
-    return this.dataService.getServeUrl() + "/login"
+  async getLoginUrl() {
+    return await this.routes.get("login.index")
   }
 
   // check if user is already logged
