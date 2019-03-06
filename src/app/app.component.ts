@@ -11,7 +11,7 @@ import { SettingsPage } from '../pages/settings/settings'
     templateUrl: "app.template.html"
 })
 export class JoutesCPNV {
-    pages: Array<{ title: string; component: any; navRoot: boolean, mustlogged: boolean }>;
+    pages: Array<{ title: string; component: any; navRoot: boolean, icon: string }>;
     storage: StorageService;
 
     // the root nav is a child of the root app component
@@ -23,11 +23,10 @@ export class JoutesCPNV {
     constructor(platform: Platform, storageProvider: StorageService) {
         // List of pages that can be navigated to from the left menu
         this.pages = [
-            { title: "Evènements", component: EventsPage, navRoot: true, mustlogged: false },
-            { title: "A propos", component: AboutPage, navRoot: true, mustlogged: false },
-            { title: "Identification", component: LoginPage, navRoot: true, mustlogged: false },
-            { title: 'Paramètres', component: SettingsPage, navRoot: true, mustlogged: false },
-            { title: "IPs", component: IpPage, navRoot: true, mustlogged: false },
+            { title: "Evènements", component: EventsPage, navRoot: true, icon: "basketball" },
+            { title: "Identification", component: LoginPage, navRoot: true, icon: "key" },
+            { title: 'Paramètres', component: SettingsPage, navRoot: true, icon: "settings" },
+            { title: "A propos", component: AboutPage, navRoot: true, icon: "information-circle" },
         ];
 
         platform.ready().then(() => {
