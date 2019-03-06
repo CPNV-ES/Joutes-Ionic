@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Event } from '../models/event'
 import { EndpointProvider } from './endpoint';
 import { Storage } from '@ionic/storage';
+import { RoutesProvider } from './routes';
 
 @Injectable()
 export class EventProvider {
@@ -10,13 +11,13 @@ export class EventProvider {
   private events: Array<Event> = []
   private keyName: string = 'events'
 
-  constructor(private http: HttpClient, private endpointProvider: EndpointProvider, private storage: Storage) {
+  constructor(private http: HttpClient, private endpointProvider: EndpointProvider, private storage: Storage, private routes: RoutesProvider) {
     
   }
   
   // Get data from api
   private async getAllFromAPI() {
-    return this.http.get(`${this.endpointProvider.getCurrent().address}/events`).toPromise()
+    return this.http.get(await this.routes.get("events.index")).toPromise()
   }
 
   // Get data from local storage
