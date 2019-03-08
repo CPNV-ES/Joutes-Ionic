@@ -4,6 +4,7 @@ import { Endpoint } from '../../models/endpoint'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EndpointProvider } from '../../providers/endpoint';
 import { ToastCustom } from '../../components/toast-custom/toast-custom'
+import { ErrorCustomProvider } from '../../providers/error-custom';
 
 @Component({
   selector: 'page-create-endpoint',
@@ -47,7 +48,7 @@ export class CreateEndpointPage {
         }
       } catch (error) {
         // Display error in a toast
-        this.toastCustom.showToast(error.message,10000,this.toastCustom.TYPE_ERROR,true)
+        this.toastCustom.showToast(ErrorCustomProvider.getBetterMessage(error),10000,this.toastCustom.TYPE_ERROR,true)
       }
     } else {
       // Display error in a toast
