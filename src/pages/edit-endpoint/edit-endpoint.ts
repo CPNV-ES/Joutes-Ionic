@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Endpoint } from '../../models/endpoint';
 import { EndpointProvider } from '../../providers/endpoint';
 import { ToastCustom } from '../../components/toast-custom/toast-custom';
+import { ErrorCustomProvider } from '../../providers/error-custom';
 
 @Component({
   selector: 'page-edit-endpoint',
@@ -50,7 +51,7 @@ export class EditEndpointPage {
           }
         } catch (error) {
           // Display error in a toast
-          this.toastCustom.showToast(error.message,10000,this.toastCustom.TYPE_ERROR,true)
+          this.toastCustom.showToast(ErrorCustomProvider.getBetterMessage(error),10000,this.toastCustom.TYPE_ERROR,true)
         }
       } else {
         // Display info in a toast

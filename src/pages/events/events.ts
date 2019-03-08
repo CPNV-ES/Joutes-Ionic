@@ -7,6 +7,7 @@ import { ToastCustom } from '../../components/toast-custom/toast-custom';
 import { EndpointProvider } from '../../providers/endpoint';
 import { StorageService } from '../../providers/storage-service';
 import { DataService } from '../../providers/data-service';
+import { ErrorCustomProvider } from '../../providers/error-custom';
 
 @Component({
     selector: 'page-events',
@@ -37,7 +38,7 @@ export class EventsPage implements OnInit {
             this.events = await this.eventProvider.getAll()
             await this.storageProvider.start(this.dataProvider);
         } catch (error) {
-            this.toastCustom.showToast(error.message, 10000, this.toastCustom.TYPE_ERROR, true)
+            this.toastCustom.showToast(ErrorCustomProvider.getBetterMessage(error), 10000, this.toastCustom.TYPE_ERROR, true)
         }
     }
 
