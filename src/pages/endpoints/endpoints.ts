@@ -52,7 +52,9 @@ export class EndpointsPage {
 
   private async changeCurrentEndpoint(endpoint: Endpoint) {
     try {
-      await this.endpointProvider.changeCurrent(endpoint)
+      if (await this.endpointProvider.isEndpointValid(endpoint)) {
+        await this.endpointProvider.changeCurrent(endpoint)
+      }
     } catch (error) {
       this.toastCustom.showToast(error.message,10000,this.toastCustom.TYPE_ERROR,true)
     }
