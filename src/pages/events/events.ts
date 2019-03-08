@@ -5,6 +5,8 @@ import { EventPage } from "../event/event";
 import { EventProvider } from '../../providers/event';
 import { ToastCustom } from '../../components/toast-custom/toast-custom';
 import { EndpointProvider } from '../../providers/endpoint';
+import { StorageService } from '../../providers/storage-service';
+import { DataService } from '../../providers/data-service';
 
 @Component({
     selector: 'page-events',
@@ -15,7 +17,7 @@ export class EventsPage implements OnInit {
     private ready: boolean = false
     private loader: Loading
 
-    constructor(private loadingCtrl: LoadingController, private toastCustom: ToastCustom, private navCtrl: NavController, private sharedDataProvider: SharedDataService, private eventProvider: EventProvider, private endpointProvider: EndpointProvider) {
+    constructor(private storageProvider: StorageService, private dataProvider: DataService, private loadingCtrl: LoadingController, private toastCustom: ToastCustom, private navCtrl: NavController, private sharedDataProvider: SharedDataService, private eventProvider: EventProvider, private endpointProvider: EndpointProvider) {
     
     }
 
@@ -33,6 +35,7 @@ export class EventsPage implements OnInit {
     async getData() {
         try {
             this.events = await this.eventProvider.getAll()
+            await this.storageProvider.start(this.dataProvider);
         } catch (error) {
             this.toastCustom.showToast(error.message, 10000, this.toastCustom.TYPE_ERROR, true)
         }
