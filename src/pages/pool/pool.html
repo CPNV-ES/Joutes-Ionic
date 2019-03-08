@@ -29,58 +29,56 @@
         <ion-row style="flex-wrap: wrap;">
             <ion-col width-50>
                 <ion-icon name="grid" class="info"></ion-icon>
-                <br/>
+                <br />
                 <div class="items">{{ pool.type }}</div>
             </ion-col>
             <ion-col width-50>
                 <ion-icon name="pin" class="info"></ion-icon>
-                <br/>
+                <br />
                 <div class="items">{{ tournament.place }}</div>
             </ion-col>
         </ion-row>
     </ion-grid>
 
     <!-- Display the results for matches -->
-    <ion-col width-100>
-        <h2>Matchs et <b>Résultats</b></h2></ion-col>
-    <ion-card>
-        <ion-card-content no-padding>
-            <ion-list id="list-match">
-                <ion-item no-padding *ngFor="let match of pool.matches">
-                    <ion-row *ngIf="pool.type == 'Elimination' ">
-                        <ion-col width-100 class="items pool-name" text-center>
-                            {{ match.name }}
-                        </ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col width-33 class="items">
-                            {{ match.contender1Name }}
-                        </ion-col>
-                        <ion-col width-33 class="items" text-center *ngIf="!match.isFinished">
-                            <ion-note>{{ match.startTime }}</ion-note>
-                        </ion-col>
-                        <ion-col width-33 class="items" text-center *ngIf="match.isFinished">
-                            <ion-note>{{ match.scoreContender1 }} - {{ match.scoreContender2 }}</ion-note>
-                        </ion-col>
-                        <ion-col width-33 class="items" text-right>
-                            {{ match.contender2Name }}
-                        </ion-col>
-                    </ion-row>
-                </ion-item>
-            </ion-list>
-        </ion-card-content>
-    </ion-card>
+    <ion-item-divider class="separation items"><b>Matchs et résultats</b></ion-item-divider>
+    <ion-list id="list-match">
+        <ion-item no-padding *ngFor="let match of pool.matches">
+            <ion-row *ngIf="pool.type == 'Elimination' ">
+                <ion-col width-100 class="items pool-name" text-center>
+                    {{ match.name }}
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col width-33 class="items">
+                    {{ match.contender1Name }}
+                </ion-col>
+                <ion-col width-33 class="items" text-center *ngIf="!match.isFinished">
+                    <ion-note>{{ match.startTime }}</ion-note>
+                </ion-col>
+                <ion-col width-33 class="items" text-center *ngIf="match.isFinished">
+                    <ion-note>{{ match.scoreContender1 }} - {{ match.scoreContender2 }}</ion-note>
+                </ion-col>
+                <ion-col width-33 class="items" text-right>
+                    {{ match.contender2Name }}
+                </ion-col>
+            </ion-row>
+        </ion-item>
+    </ion-list>
 
     <!-- Display different text if the tournament is finished or not -->
     <ion-col *ngIf="finish" width-100>
-        <h2>Le <b>Classement final</b></h2></ion-col>
+        <ion-item-divider class="separation items"><b>Classement final</b></ion-item-divider>
+    </ion-col>
     <ion-col *ngIf="!finish" width-100>
-        <h2>Le <b>Classement actuel</b></h2></ion-col>
+        <ion-item-divider class="separation items"><b>Classement actuel</b></ion-item-divider>
+    </ion-col>
     <!-- <ion-col width-100 no-padding>
         <div style="font-weight: 100; margin-left:11px;">Cliquez pour plus de détails</div>
     </ion-col> -->
-    <ion-card>
-        <ion-card-content no-padding padding-top padding-bottom>
+
+
+
             <!-- Display the information for elimination -->
             <!-- <ion-list *ngIf="pool.type == 'Elimination'">
                 <ion-row class="border-table results-head">
@@ -169,6 +167,4 @@
                     </ion-col>
                 </ion-row>
             </ion-list>
-        </ion-card-content>
-    </ion-card>
 </ion-content>
