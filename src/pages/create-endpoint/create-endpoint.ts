@@ -4,6 +4,7 @@ import { Endpoint } from '../../models/endpoint'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EndpointProvider } from '../../providers/endpoint';
 import { ToastCustom } from '../../components/toast-custom/toast-custom'
+import { ErrorCustomProvider } from '../../providers/error-custom';
 
 @Component({
   selector: 'page-create-endpoint',
@@ -28,7 +29,7 @@ export class CreateEndpointPage {
         // Check if name already exists
         if (this.endpointProvider.isNameNotExists(this.endpointForm.value.name)) {
           // The name doesn't exists
-          let endpoint: Endpoint = new Endpoint(this.endpointForm.value.name, this.endpointForm.value.address)
+          let endpoint: Endpoint = new Endpoint(this.endpointForm.value.name, this.endpointForm.value.address, Endpoint.TYPE_MANUAL)
           // Check if the endpoint is valid
           if (await this.endpointProvider.isEndpointValid(endpoint)) {
             // Create the endpoint
@@ -47,7 +48,7 @@ export class CreateEndpointPage {
         }
       } catch (error) {
         // Display error in a toast
-        this.toastCustom.showToast(error.message,10000,this.toastCustom.TYPE_ERROR,true)
+        this.toastCustom.showToast(ErrorCustomProvider.getBetterMessage(error),10000,this.toastCustom.TYPE_ERROR,true)
       }
     } else {
       // Display error in a toast

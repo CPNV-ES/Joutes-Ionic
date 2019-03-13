@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Joutes-CPNV</name>
-    <description>Cette application est destinée à consulter les informations pour les Joutes sportives du Centre professionnel du Nord vaudois
-            (CPNV).</description>
+<widget id="ch.cpnv.joutes" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Joutes</name>
+    <description>Cette application est destinée à consulter les informations pour les Joutes sportives</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
     <content src="index.html" />
     <access origin="*" />
@@ -86,5 +85,5 @@
     <plugin name="cordova-plugin-splashscreen" spec="~4.0.3" />
     <allow-navigation href="http://172.17.100.144:8100" />
     <plugin name="cordova-plugin-inappbrowser" spec="3.0.0" />
-    <engine name="android" spec="6.3.0" />
+    <engine name="android" spec="7.1.4" />
 </widget>

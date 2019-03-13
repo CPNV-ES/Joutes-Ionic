@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { Observable } from "rxjs";
 import { AlertController } from "ionic-angular";
 import { SharedDataService } from "./sharedData-service";
 import localForage from "localforage";
+import { EndpointProvider } from './endpoint';
 
 
 /*
@@ -14,12 +15,15 @@ import localForage from "localforage";
  for more info on providers and Angular 2 DI.
  */
 @Injectable()
-export class DataService {
+export class DataService implements OnInit {
 
     private _serverUrl: string;
 
-    constructor(private http: HttpClient, private alertCtrl: AlertController, private sharedDataProvider: SharedDataService) { }
+    constructor(private endpointProvider: EndpointProvider, private http: HttpClient, private alertCtrl: AlertController, private sharedDataProvider: SharedDataService) { }
 
+    async ngOnInit() {
+        await this.endpointProvider.isReady()
+    }
     // Get the JSON, URI must have a / before
     getJson(uri) {
         this.getUrl();
@@ -35,28 +39,7 @@ export class DataService {
         return this.sendRequest(uri);
     }
     getUrl() {
-        //Set the ip corresponding to the current choice
-        switch (this.sharedDataProvider.IpChoice) {
-            case "LANServer":
-                this._serverUrl = "http://joutes.mycpnv.ch/api";
-                break;
-            case "LANServerReal":
-                this._serverUrl = "http://172.17.102.188/Joutes-real/Joutes/public/api"; //
-                break;
-            case "WLANServer":
-                this._serverUrl = "http://192.168.0.51/Joutes/public/api";
-                break;
-            case "WLANServerReal":
-                this._serverUrl = "http://192.168.0.51/Joutes-real/Joutes/public/api";
-                break;
-            case "Internet":
-                this._serverUrl = "http://joutes.mycpnv.ch/api"; //https://markal.servehttp.com/Joutes/api
-                break;
-            default:
-                this._serverUrl = "http://joutes.mycpnv.ch/api";
-
-                break;
-        }
+        this._serverUrl = this.endpointProvider.getCurrent().address
     }
 
     getServeUrl(){

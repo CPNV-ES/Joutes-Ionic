@@ -5,6 +5,7 @@ import { EndpointProvider } from '../../providers/endpoint';
 import { Endpoint } from '../../models/endpoint';
 import { ToastCustom } from '../../components/toast-custom/toast-custom';
 import { EditEndpointPage } from '../edit-endpoint/edit-endpoint';
+import { ErrorCustomProvider } from '../../providers/error-custom';
 
 @Component({
   selector: 'page-endpoints',
@@ -23,7 +24,7 @@ export class EndpointsPage {
     try {
       this.endpointProvider.delete(endpoint)
     } catch (error) {
-      this.toastCustom.showToast(error,10000,this.toastCustom.TYPE_ERROR,true)
+      this.toastCustom.showToast(ErrorCustomProvider.getBetterMessage(error),10000,this.toastCustom.TYPE_ERROR,true)
     }
   }
 
@@ -48,6 +49,16 @@ export class EndpointsPage {
       ]
     });
     confirm.present();
+  }
+
+  private async changeCurrentEndpoint(endpoint: Endpoint) {
+    try {
+      if (await this.endpointProvider.isEndpointValid(endpoint)) {
+        await this.endpointProvider.changeCurrent(endpoint)
+      }
+    } catch (error) {
+      this.toastCustom.showToast(ErrorCustomProvider.getBetterMessage(error),10000,this.toastCustom.TYPE_ERROR,true)
+    }
   }
 
 }

@@ -127,10 +127,6 @@ export class ParticipantPage {
         });
     }
 
-    displayMenu() {
-        this.sharedDataProvider.displayMenu();
-    }
-
     goToSearch() {
         this.navCtrl.push(SearchPage);
     }

@@ -3,32 +3,37 @@
   <ion-navbar>
     <ion-title>Points d'accès</ion-title>
     <ion-buttons end>
-        <button ion-button icon-only (click)="openCreateEndpoint()">
-            <ion-icon name="add"></ion-icon>
-        </button>
+      <button ion-button icon-only (click)="openCreateEndpoint()">
+        <ion-icon name="add"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-  <ion-content>
-    <ion-item-group>
-      <ion-item-divider class="separation"><b>Points d'accès en cours</b></ion-item-divider>
-    </ion-item-group>
+<ion-content>
+  <ion-item-group>
+    <ion-item-divider class="separation"><b>Points d'accès en cours</b></ion-item-divider>
+    <ion-item *ngFor="let endpoint of this.endpointProvider.getAllCurrent()" value="endpoint.name">
+      {{ endpoint.name }}
+    </ion-item>
+  </ion-item-group>
 
-    <ion-item-group>
-      <ion-item-divider class="separation"><b>Points d'accès officiels</b></ion-item-divider>
-    </ion-item-group>
+  <ion-item-group>
+    <ion-item-divider class="separation"><b>Points d'accès officiels</b></ion-item-divider>
+    <ion-item *ngFor="let endpoint of this.endpointProvider.getAllOfficial()" (click)="changeCurrentEndpoint(endpoint)"
+      value="endpoint.name">
+      {{ endpoint.name }}
+    </ion-item>
+  </ion-item-group>
 
-    <ion-item-group>
-      <ion-item-divider class="separation"><b>Points d'accès personnels</b></ion-item-divider>
-      <ion-item *ngFor="let endpoint of this.endpointProvider.getAll()" value="endpoint.name">
-        {{ endpoint.name }}
-        <ion-icon name="create" item-right (click)="openEditPage(endpoint)"></ion-icon>
-        <ion-icon name="trash" item-right (click)="showConfirm(endpoint)"></ion-icon>
-      </ion-item>
-    </ion-item-group>
-  </ion-content>
+  <ion-item-group>
+    <ion-item-divider class="separation"><b>Points d'accès personnels</b></ion-item-divider>
+    <ion-item *ngFor="let endpoint of this.endpointProvider.getAllManual()" value="endpoint.name">
+      <div (click)="changeCurrentEndpoint(endpoint)">{{ endpoint.name }}</div>
+      <ion-icon name="create" item-right (click)="openEditPage(endpoint)"></ion-icon>
+      <ion-icon name="trash" item-right (click)="showConfirm(endpoint)"></ion-icon>
+    </ion-item>
+  </ion-item-group>
 </ion-content>

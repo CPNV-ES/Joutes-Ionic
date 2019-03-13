@@ -1,93 +1,62 @@
-import { Component } from '@angular/core';
-import { NavController, Refresher } from 'ionic-angular';
-import { EventService } from '../../providers/event-service';
+import { Component, OnInit } from '@angular/core';
+import { NavController, Refresher, LoadingController, Loading } from 'ionic-angular';
 import { SharedDataService } from '../../providers/sharedData-service';
 import { EventPage } from "../event/event";
-import { Observable } from "rxjs";
+import { EventProvider } from '../../providers/event';
+import { ToastCustom } from '../../components/toast-custom/toast-custom';
+import { EndpointProvider } from '../../providers/endpoint';
+import { StorageService } from '../../providers/storage-service';
+import { DataService } from '../../providers/data-service';
+import { ErrorCustomProvider } from '../../providers/error-custom';
 
-/*
- Generated class for the Events page.
-
- See http://ionicframework.com/docs/v2/components/#navigation for more info on
- Ionic pages and navigation.
- */
 @Component({
     selector: 'page-events',
     templateUrl: 'events.html'
 })
-export class EventsPage {
-    private _events;
-    private _filteredEvents;
-    private _searchTerm: string = '';
+export class EventsPage implements OnInit {
+    private events: Array<Event> = []
+    private ready: boolean = false
+    private loader: Loading
 
-    get events() {
-        return this._events;
+    constructor(private storageProvider: StorageService, private dataProvider: DataService, private loadingCtrl: LoadingController, private toastCustom: ToastCustom, private navCtrl: NavController, private sharedDataProvider: SharedDataService, private eventProvider: EventProvider, private endpointProvider: EndpointProvider) {
+    
     }
 
-    get filteredEvents() {
-        return this._filteredEvents;
-    }
-
-    get searchTerm() {
-        return this._searchTerm;
-    }
-
-    set searchTerm(value) {
-        this._searchTerm = value;
-    }
-
-    constructor(private navCtrl: NavController,
-        private sharedDataProvider: SharedDataService,
-        private eventProvider: EventService) {
-        this.loadData().subscribe(() => {
-            if (this._filteredEvents != null && this._filteredEvents.length == 1) {
-                console.log(this._filteredEvents[0])
-                this.goToEvent(this._filteredEvents[0])
-            }
-        });
-
-    }
-
-    loadData() {
-        this.sharedDataProvider.httpError = false;
-        // Get events
-        const o1 = this.eventProvider.getEvents().do(data => {
-            this._events = data["events"];
-            this._filteredEvents = data["events"];
-        }, this.filterEvents)
-        return Observable.forkJoin(o1);
-    }
-
-    // Refresh the current page
-    refresh(refresher: Refresher) {
-        this.loadData().subscribe(null, () => refresher.complete(), () => refresher.complete());
-    }
-
-    // Filter events
-    filterEvents() {
-        if (this._events != null) {
-            this._filteredEvents = this._events.filter((event) => {
-                return event.name.toLowerCase().indexOf(this._searchTerm.toLowerCase()) > -1;
-            });
-            this.sortEvents();
+    async ngOnInit() {
+        this.showLoader()
+        await this.getData()
+        this.loader.dismiss()
+        this.ready = true
+        if (this.events != null && this.events.length == 1) {
+            this.goToEvent(this.events[0])
         }
     }
 
-    // Sort events
-    sortEvents() {
-        this._filteredEvents.sort((a, b) => {
-            a.name.localeCompare(b.name);
-        });
+    // Get data
+    async getData() {
+        try {
+            this.events = await this.eventProvider.getAll()
+        } catch (error) {
+            this.toastCustom.showToast(ErrorCustomProvider.getBetterMessage(error), 10000, this.toastCustom.TYPE_ERROR, true)
+        }
+    }
+
+    // Refresh the current page
+    async refresh(refresher: Refresher) {
+        await this.getData()
+        refresher.complete()
     }
 
     // Go to page detail _event
     goToEvent(event) {
         this.sharedDataProvider.currentEvent = event;
-        this.navCtrl.push(EventPage);
+        this.navCtrl.setRoot(EventPage)
     }
 
-    // Load the splashscreen and add a spinner when the view is loading
-    ionViewDidLoad() {
-        // Splashscreen.hide();
+    async showLoader() {
+        this.loader = this.loadingCtrl.create({
+           content: "Veuillez patienter...<br/>Chargement des données en cours.",
+         });
+         this.loader.present()
     }
 }

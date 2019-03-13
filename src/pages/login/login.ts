@@ -1,5 +1,5 @@
 import { LoginService } from './../../providers/login-service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
 import { ToastCustom } from '../../components/toast-custom/toast-custom'
@@ -15,15 +15,17 @@ import { ToastCustom } from '../../components/toast-custom/toast-custom'
   selector: 'page-login',
   templateUrl: 'login.html',
 })
-export class LoginPage {
+export class LoginPage implements OnInit {
 
   url: string
   loginUrlDomain: string
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private inAppBrowser: InAppBrowser, public loginProvider: LoginService, private toastCustom: ToastCustom) {
-    this.url = this.loginProvider.getLoginUrl()    
-    loginProvider.checkIfLogged()
+  }
 
+  async ngOnInit(){
+    this.url = await this.loginProvider.getLoginUrl() 
+    this.loginProvider.checkIfLogged()
   }
 
   openwebbrowse() {

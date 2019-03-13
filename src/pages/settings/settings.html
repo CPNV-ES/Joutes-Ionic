@@ -1,12 +1,19 @@
 <ion-header>
-
+  
   <ion-navbar>
     <ion-title>Paramètres</ion-title>
+    <button ion-button menuToggle side="left">
+      <ion-icon name="menu" class="menu-button"></ion-icon>
+    </button>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-  <button ion-button (click)="openEndpoints()">Points d'accès</button>
+<ion-content>
+  <ion-list>
+    <ion-item><button ion-button (click)="openEndpoints()">Points d'accès</button></ion-item>
+    <ion-item><button ion-button (click)="downloadData()">Télécharger les données</button></ion-item>
+  </ion-list>
+  
 </ion-content>

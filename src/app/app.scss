@@ -163,7 +163,7 @@ ion-label{
 }
 
 .ion-md-star-outline:before, .ion-ios-star-outline:before {
-  color: color($colors, success);
+  color: color($colors, primary);
 }
 
 .item-md ion-note {
@@ -174,14 +174,48 @@ ion-label{
   float: right;
 }
 
-.toastError div
-{
+.toastError div {
     //background-color: #F44336;
     background-color: map-get($colors, danger);
 }
 
-.toastSuccess div
-{
+.toastSuccess div {
     //background-color: #4CAF50;
     background-color: map-get($colors, successCustom);
 }
+
+.offlineState {
+  color: map-get($colors, danger);
+}
+
+.endpointState {
+  position: relative;
+  width: 44px;
+  height: 32px;
+  margin-left: 6px;
+  margin-right: 6px;
+  padding-left: 2px;
+  padding-right: 2px; 
+  ion-icon {
+    position: absolute;
+  }
+}
+
+.separation {
+  background-color: map-get($colors, primary);
+  b {
+    color: white;
+  }
+}
+
+.no-margin-padding {
+  padding: 0;
+  margin: 0;
+}
+
+.iconMenu{
+  font-size: 25px;
+  color: map-get($colors, primary);
+  margin-right: 10px;
+}
+

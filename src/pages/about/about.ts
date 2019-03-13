@@ -13,8 +13,4 @@ import { SharedDataService } from "../../providers/sharedData-service";
 })
 export class AboutPage {
     constructor(public sharedDataProvider: SharedDataService) {}
-
-    displayMenu() {
-        this.sharedDataProvider.displayMenu();
-    }
 }

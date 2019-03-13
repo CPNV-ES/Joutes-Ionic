@@ -1,6 +1,6 @@
 page-tournament {
 
-  .results
+  /* .results
   {
     padding-top:10px;
   }
@@ -12,11 +12,16 @@ page-tournament {
   .swiper-container-horizontal > .swiper-pagination {
     bottom:5px;
   }
+  */
   .status-icon
   {
     height: 20px;
     width: 20px;
     margin-left:auto;
+  }
+
+  .list{
+    display: inline;
   }
 
 }
