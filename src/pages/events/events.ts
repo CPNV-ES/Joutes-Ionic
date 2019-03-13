@@ -36,7 +36,6 @@ export class EventsPage implements OnInit {
     async getData() {
         try {
             this.events = await this.eventProvider.getAll()
-            await this.storageProvider.start(this.dataProvider);
         } catch (error) {
             this.toastCustom.showToast(ErrorCustomProvider.getBetterMessage(error), 10000, this.toastCustom.TYPE_ERROR, true)
         }
